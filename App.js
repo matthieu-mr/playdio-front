@@ -10,6 +10,8 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import HomeScreen from './screens/HomeScreen'
 import Playlist from './screens/Playlist'
 import Search from './screens/Search'
+import {AuthSession} from 'expo'
+console.log(AuthSession.getRedirectUrl())
 
 
 var BottomNavigator = createBottomTabNavigator({
