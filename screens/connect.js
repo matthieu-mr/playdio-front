@@ -28,6 +28,11 @@ export default function connect({navigation}) {
       type="solid"
       onPress={()=>navigation.navigate("SignUp")}
       />
+            <Button
+      title="continuer vers la Home"
+      type="solid"
+      onPress={()=>navigation.navigate("Home")}
+      />
     </View>
   );
 }
