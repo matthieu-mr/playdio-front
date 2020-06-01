@@ -1,11 +1,12 @@
-console.disableYellowBox = true; 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Radio from './components/Radio';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text> welcome homescreen</Text>
+      <Radio></Radio>
     </View>
   );
 }
