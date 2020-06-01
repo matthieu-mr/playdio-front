@@ -16,7 +16,33 @@ var BottomNavigator = createBottomTabNavigator({
   Home: HomeScreen,
   Playlist: Playlist,
   Search:Search
-});
+},
+defaultNavigationOptions: ({ navigation }) => ({ // creation des icônes
+    tabBarIcon: ({ tintColor }) => {
+    var iconName;
+    if (navigation.state.routeName == 'Home') {
+    iconName = 'ios-information-circle';
+    } else if (navigation.state.routeName == 'gallery') {
+    iconName = 'ios-photos';
+    }else if (navigation.state.routeName == 'snap') {
+    iconName = 'ios-camera';
+    }
+    return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+    }),
+        tabBarOptions: {
+            activeTintColor: '#009788',        
+            inactiveTintColor: '#FFFFFF',
+                style: {
+                    backgroundColor: '#111224',
+    }
+    },
+    
+  );
+
+
+
+);
 
 export default Navigation = createAppContainer(BottomNavigator);
 
