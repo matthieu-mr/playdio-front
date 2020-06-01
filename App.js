@@ -2,7 +2,7 @@ console.disableYellowBox = true;
 import React from 'react';
 import { View, Button } from 'react-native';
 import {createAppContainer } from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+
 
 // library icon
 import { Ionicons } from '@expo/vector-icons';
@@ -12,12 +12,21 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 // Ajout des modules de navigation 
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
+import {createStackNavigator} from 'react-navigation-stack';
 
 import HomeScreen from './screens/HomeScreen'
 import Playlist from './screens/Playlist'
 import Search from './screens/Search'
+import Connect from './screens/connect'
+import SignUp from './screens/signUp'
 
+import {createStore, combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+import Login from './reducers/login'
 
+/* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+const store = createStore(combineReducers({Login}))
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
   Home: HomeScreen,
@@ -55,8 +64,19 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
   );
 
   
+StackNavigator = createStackNavigator({
+  Connect:Connect,
+  SignUp:SignUp,
+  BottomNavigator:BottomNavigator
+})
 
+const Navigation = createAppContainer(StackNavigator)
 
-
-export default Navigation = createAppContainer(BottomNavigator);
+export default function App(){
+  return(
+    <Provider store={store}>
+      <Navigation/>
+    </Provider>
+  )
+} ;
 
