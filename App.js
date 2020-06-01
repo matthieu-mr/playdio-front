@@ -12,11 +12,11 @@ import Playlist from './screens/Playlist'
 import Search from './screens/Search'
 
 
-var StackNavigator = createStackNavigator({
+var BottomNavigator = createBottomTabNavigator({
   Home: HomeScreen,
   Playlist: Playlist,
   Search:Search
 });
 
-export default Navigation = createAppContainer(StackNavigator);
+export default Navigation = createAppContainer(BottomNavigator);
 
