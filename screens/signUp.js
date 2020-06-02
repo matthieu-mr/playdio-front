@@ -16,7 +16,7 @@ function connectSignUp() {
   const [password,setPassword]=useState()
   async function signUp(email,firstName,lastName,password){
     console.log(email,firstName,lastName,password)
-  var userCreate = await fetch('http://192.168.1.43:3000/sign-up',{
+  var userCreate = await fetch('https://playdio-backend.herokuapp.com/sign-up',{
   method:"POST",
   headers: {'Content-Type':'application/x-www-form-urlencoded'},
   body:`email=${email}&firstName=${firstName}&lastName=${lastName}&password=${password}`
