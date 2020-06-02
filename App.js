@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Ajout des modules de navigation 
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+
 import {createStackNavigator} from 'react-navigation-stack';
 
 import HomeScreen from './screens/HomeScreen'
