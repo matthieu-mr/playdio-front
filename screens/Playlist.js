@@ -1,4 +1,3 @@
-console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView } from 'react-native';
 
