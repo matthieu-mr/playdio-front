@@ -1,8 +1,8 @@
 console.disableYellowBox = true; 
 import React,{useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {ImageBackground} from 'react-native';
 
-import {Button,Input} from 'react-native-elements'
+import {Button,Input,Text} from 'react-native-elements'
 
 
 export default function connect({navigation}) {
@@ -21,8 +21,16 @@ export default function connect({navigation}) {
 
 
   return (
-    <View style={{flex: 1}}>
+    <ImageBackground style={{flex: 1}}>
+      <Text  h1>Playdio</Text>
+      <Button
+      title="Spotify"
+      type="solid"
+      /><Button
+      title="deezer"
+      type="solid"
       
+      />
       <Button
       title="Sign up with email"
       type="solid"
@@ -33,7 +41,7 @@ export default function connect({navigation}) {
       type="solid"
       onPress={()=>navigation.navigate("Home")}
       />
-    </View>
+    </ImageBackground>
   );
 }
 
