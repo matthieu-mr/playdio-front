@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
-import { Avatar, Badge, Icon, withBadge,Card,ListItem } from 'react-native-elements'
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem } from 'react-native-elements'
+import ListItemSwap, { Separator } from './components/Swype';
 
-import Constants from 'expo-constants';
-import { FlatList, RectButton } from 'react-native-gesture-handler';
 
 //  To toggle LTR/RTL uncomment the next line
 // I18nManager.allowRTL(true);
@@ -30,10 +29,22 @@ export default function Playlist(props) {
     {name:"Moimeme",url:"https://randomuser.me/api/portraits/men/38.jpg"},
   ]
 
-  useEffect(() => {
- 
-    // console.log(listTest);
-    }, []);
+const quotes = [
+  { id: '0', text: 'It’s just a flesh wound.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
+  { id: '1', text: 'That is my least vulnerable spot.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
+  {id: '2',text: 'This building has to be at least…. three times bigger than this!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+  { id: '3', text: 'I am serious. And don’t call me Shirley.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+  { id: '4', text: 'Yeah, but I shoot with this hand.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+  { id: '5', text: 'I’m just one stomach flu away from my goal weight.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
+  {id: '6',text:'I’m about to do to you what Limp Bizkit did to music in the late ’90s.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+  {id: '7',text:'Martini. Gin, not vodka. Obviously. Stirred for 10 seconds while glancing at an unopened bottle of vermouth.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+  { id: '8',text:'Greater good?’ I am your wife! I’m the greatest good you’re ever gonna get!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+  { id: '9', text:'I feel comfortable using legal jargon in everyday life. [Someone catcalls her.] I object!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"
+  },
+  {id: '10',text:'We get the warhead and we hold the world ransom for…. One million dollars.',
+},
+];
+
 
   /* ====> boucle avatar */
   let avatarList = listTest.map ((item,i)=>{
@@ -63,44 +74,19 @@ export default function Playlist(props) {
       );
   })
   
+  let alertId =(id)=>{
+
+    console.log("recu fonction",id)
+  }
 
 
+  const [idget, setidget]= useState() ; 
 
+  useEffect(() => {
+    console.log("change",idget);
+    }, [idget]);
 
-
-  //////// partie swype
-  const Row = ({ item }) => (
-    <RectButton style={styles.rectButton} onPress={() => alert(item.from)}>
-      <ListItem
-          leftAvatar={{ source: { uri: item.url } }}
-          title={item.name}
-          subtitle={item.name}
-          bottomDivider
-          chevron
-        onPress={() => {
-            alert("mon");
-          }} />
-    </RectButton>
-  );
-
-
-  const SwipeableRow = ({ item, index }) => {
-    if (index % 2 === 0) {
-      return (
-        <AppleStyleSwipeableRow>
-          <Row item={item} />
-        </AppleStyleSwipeableRow>
-      );
-    } else {
-      return (
-        <GmailStyleSwipeableRow>
-          <Row item={item} />
-        </GmailStyleSwipeableRow>
-      );
-    }
-  };
-
-
+ 
 
   return (
 
@@ -114,18 +100,25 @@ export default function Playlist(props) {
           </ScrollView>
 
     {/* liste des musiques */}
-          <ScrollView >
-    {/*           <FlatList
-              data={listTest}
-              ItemSeparatorComponent={() => <View style={styles.separator} />}
-              renderItem={({ item, index }) => (
-                <SwipeableRow item={item} index={index} />
-              )}
-              keyExtractor={(item, index) => `message ${index}`}
-            /> */}
+         
+            <FlatList
+                data={quotes}
+                keyExtractor={item => item.id}
+                renderItem={({ item}) => (
+                  <ListItemSwap
+                    {...item}
+          
+                    onSwipeFromLeft={() => alert('swiped from left!')}
+                    onSwipeFromRight={() => {alert('pressed right!');setidget(item.id)  }}
 
-            {musicList}
-          </ScrollView>
+                  />
+                )}
+                ItemSeparatorComponent={() => <Separator />}
+              />
+
+    {/*{musicList} */}
+          
+
     </SafeAreaView>
 
   );
@@ -164,3 +157,4 @@ const styles = StyleSheet.create({
   },
   
 });
+
