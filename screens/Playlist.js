@@ -2,8 +2,14 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,ListItem } from 'react-native-elements'
 
-
 import Constants from 'expo-constants';
+import { FlatList, RectButton } from 'react-native-gesture-handler';
+
+//  To toggle LTR/RTL uncomment the next line
+// I18nManager.allowRTL(true);
+
+import AppleStyleSwipeableRow from './components/AppleStyleSwipeableRow';
+import GmailStyleSwipeableRow from './components/GmailStyleSwipeableRow';
 
 export default function App(props) {
 /* const [listUser,setListUser]=useEffect() ;  */
@@ -29,19 +35,22 @@ let listTest = [
     // console.log(listTest);
     }, []);
 
-
+/* ====> boucle avatar */
 let avatarList = listTest.map ((item,i)=>{
-
   return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
 })
 
-let musicList = listTest.map ((item,i)=>{
-  console.log("recup des items",item.name) ; 
- 
- return (
+const LeftAction =()=> {
+  <View>
+    <Text> test</Text>
+  </View>
+}
 
-      <ListItem
-        key={i}
+
+/* Boucle music  */
+const Row = ({ item }) => (
+  <RectButton style={styles.rectButton} onPress={() => alert(item.from)}>
+    <ListItem
         leftAvatar={{ source: { uri: item.url } }}
         title={item.name}
         subtitle={item.name}
@@ -49,16 +58,30 @@ let musicList = listTest.map ((item,i)=>{
         chevron
        onPress={() => {
           alert("mon");
-        }} 
+        }} />
+  </RectButton>
+);
 
 
-        />
+const SwipeableRow = ({ item, index }) => {
+  if (index % 2 === 0) {
+    return (
+      <AppleStyleSwipeableRow>
+        <Row item={item} />
+      </AppleStyleSwipeableRow>
+    );
+  } else {
+    return (
+      <GmailStyleSwipeableRow>
+        <Row item={item} />
+      </GmailStyleSwipeableRow>
+    );
+  }
+};
 
-  );
-})
+
 
   return (
-
 
     <SafeAreaView style={styles.container}>
       <Text> Mussssiiiiiiccc</Text>
@@ -69,10 +92,16 @@ let musicList = listTest.map ((item,i)=>{
             </View>
           </ScrollView>
 
-
     {/* liste des musiques */}
           <ScrollView >
-                {musicList}
+          <FlatList
+              data={listTest}
+              ItemSeparatorComponent={() => <View style={styles.separator} />}
+              renderItem={({ item, index }) => (
+                <SwipeableRow item={item} index={index} />
+              )}
+              keyExtractor={(item, index) => `message ${index}`}
+            />
           </ScrollView>
     </SafeAreaView>
 

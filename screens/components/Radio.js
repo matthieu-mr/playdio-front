@@ -1,19 +1,49 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { Card, Badge } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Card } from 'react-native-elements';
+import { Badge } from 'native-base';
 
-export default function Radio() {
+export default function Radio(props) {
+
+  // BADGES
+  var badgeList = props.musicType.map((type,i) => {
+    return (
+      <Badge
+        key={i}
+        style={{ backgroundColor:'#00838F', padding:0, marginRight:3}}
+      >
+        <Text style={{color: "white", fontSize:10, marginLeft:3, marginRight:3, marginBottom:0, marginTop:5, padding:0}}>{type}</Text>
+      </Badge>
+    )
+  })
+
+  // CALLBACK & CARDS
   return (
-    <View style={{height:100, width:200}}>
-        <Card 
-            image={require('../../assets/radio_template.jpg')}>
-            <Text>Radio Gaga</Text>
-        </Card>
-        <Badge 
-            containerStyle={{flex:1, justifyContent:'flex-start', marginTop:10}}
-            value={<Text style={{color:"white", marginLeft:15, marginRight:15, marginTop:10, marginBottom:10}}>rock</Text>}
-            status="primary">
-        </Badge>
+    <View style={{flex:1, justifyContent:"center"}}>
+      <Card 
+          containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
+          image={props.img}
+          imageProps={{ style: {width: 150, height: 100} }}
+          >
+          <Text style={{width:150, height:50, fontSize:15, color:"#383838"}}>{props.radioName}</Text>
+      </Card>
+      <View style={{flex:1, flexDirection:"row", justifyContent:"flex-start", marginTop:7, marginLeft:20, marginBottom:20}}>
+        {badgeList}
+      </View>
     </View>
   );
 }
+
+/*
+ var badgeList = props.musicType.map((type,i) => {
+    return (
+      <Badge
+        key={i}
+        containerStyle={{marginLeft:1, marginRight:1}}
+        value={type}
+        textStyle={{fontSize:7, marginLeft:3, marginRight:3}}
+        status="info">
+      </Badge>
+    )
+  })
+*/
