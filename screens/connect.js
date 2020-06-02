@@ -1,51 +1,44 @@
 console.disableYellowBox = true; 
-import React from 'react';
-import {ImageBackground,StyleSheet} from 'react-native';
+import React,{useState,useEffect} from 'react';
+import {ImageBackground,StyleSheet,View} from 'react-native';
 
 import {Button,Text,Icon,} from 'react-native-elements'
 
-import * as Font from 'expo-font';
-
-export default async function connect({navigation}) {
 
 
-  await loadAsync({
-    // Load a font `Montserrat` from a static resource
-    PermanentMarker: require('../assets/fonts/PermanentMarker-Regular.ttf'),
-  
-    // Any string can be used as the fontFamily name. Here we use an object to provide more control
-    'PermanentMarker': {
-      uri: require('../assets/fonts/PermanentMarker-Regular.ttf'),
-      fontDisplay: FontDisplay.FALLBACK,
-    },
-  });
-  
-  // Use the font with the fontFamily property
-  
-  /* return<Text style={{ fontFamily: 'PermanentMarker' }} /> */
+import police from '../screens/components/font'
 
+export default  function connect({navigation}) {
 
-  return (
+const [font,setFont]= useState(false)
+
+useEffect( ()=>{
+  police()
+  setFont(true);
+},[])
+
+  if(font ==true){
+    return (
     <ImageBackground source={require('../assets/image_connection.jpg')} style={styles.container}>
       <Text style={styles.title} >Playdio</Text>
       <Text style={styles.text}>Connect with your favorite platform to enjoy your friends your entire library</Text>
       <Button
-
-      icon={<Icon
       iconRight
+      icon={<Icon
       name="spotify"
-      size={30}
+      size={40}
       color="#1DB954"
       type='font-awesome'
-      iconStyle={{marginRight:30}}
+      iconStyle={{marginleft:1000}}
       />}
+      
       color="#000"
       buttonStyle={styles.button}
       color="fff"
       title="Sign up with Spotify"
       titleStyle={
         {color:"black",
-      fontSize:20}
+        fontSize:20}
       }
       
       /><Button
@@ -54,7 +47,7 @@ export default async function connect({navigation}) {
       type="solid"
       titleStyle={
         {color:"black",
-      fontSize:20}
+        fontSize:20}
       }
       />
       <Text style={styles.connectEmail}>Or do it later</Text>
@@ -76,6 +69,12 @@ export default async function connect({navigation}) {
       />
     </ImageBackground>
   );
+  }else{
+    return(
+      <View></View>
+    )
+  }
+  
 }
 const styles = StyleSheet.create({
   container: {
@@ -86,14 +85,17 @@ const styles = StyleSheet.create({
     marginBottom:100,
     marginLeft:100,
     color:"#fff",
-    fontSize:70
+    fontSize:70,
+    fontFamily:"PermanentMarker"
   },
   text:{
     color:"#fff",
     marginLeft:30,
     marginRight:30,
     fontSize:20,
-    marginBottom:35
+    marginBottom:35,
+    fontFamily:"Roboto"
+
   },
   connectEmail:{
     color:"#fff",
@@ -108,6 +110,7 @@ const styles = StyleSheet.create({
     marginRight:30,
     marginLeft:30,
     borderRadius:5,
+    height:50
   } 
   
 });
