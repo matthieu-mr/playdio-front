@@ -41,7 +41,7 @@ const [font,setFont]= useState(false)
       size={40}
       color="#1DB954"
       type='font-awesome'
-      iconStyle={{marginleft:1000}}
+      iconStyle={{marginLeft:1000}}
       />}
       
       color="#000"

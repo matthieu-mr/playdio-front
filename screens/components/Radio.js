@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Badge } from 'native-base';
 
@@ -20,13 +20,15 @@ export default function Radio(props) {
   // CALLBACK & CARDS
   return (
     <View style={{flex:1, justifyContent:"center"}}>
-      <Card 
-          containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
-          image={props.img}
-          imageProps={{ style: {width: 150, height: 100} }}
-          >
-          <Text style={{width:150, height:50, fontSize:15, color:"#383838"}}>{props.radioName}</Text>
-      </Card>
+      <TouchableOpacity onPress={() => props.navigation.navigate('Playlist')}>
+        <Card 
+            containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
+            image={props.img}
+            imageProps={{ style: {width: 150, height: 100} }}
+            >
+            <Text style={{width:150, height:50, fontSize:15, color:"#383838"}}>{props.radioName}</Text>
+        </Card>
+      </TouchableOpacity>
       <View style={{flex:1, flexDirection:"row", justifyContent:"flex-start", marginTop:7, marginLeft:20, marginBottom:20}}>
         {badgeList}
       </View>
