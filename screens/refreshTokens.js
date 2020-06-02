@@ -1,6 +1,11 @@
-export const refreshTokens = async () => {
+import * as AuthSession from 'expo-auth-session';
+import spotifyCredentials from '../screens/secrets'
+import getTokens from '../screens/getTokens'
+import refreshTokens from '../screens/refreshTokens'
+
+const refreshTokens = async () => {
   try {
-    const credentials = await getSpotifyCredentials() //we wrote this function above
+    const credentials = spotifyCredentials() //we wrote this function above
     const credsB64 = btoa(`${credentials.clientId}:${credentials.clientSecret}`);
     const refreshToken = await getUserData('refreshToken');
     const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -19,7 +24,7 @@ export const refreshTokens = async () => {
         access_token: newAccessToken,
         refresh_token: newRefreshToken,
         expires_in: expiresIn,
-      } = responseJson;
+      } = responseJson;}
 
       const expirationTime = new Date().getTime() + expiresIn * 1000;
       await setUserData('accessToken', newAccessToken);
@@ -31,3 +36,4 @@ export const refreshTokens = async () => {
     console.error(err)
   }
 }
+export default refreshTokens

@@ -1,10 +1,12 @@
-
+import * as AuthSession from 'expo-auth-session';
 import { encode as btoa } from 'base-64';
+import spotifyCredentials from '../screens/secrets';
+import getAuthorizationCode from '../screens/getAuthorizationCode';
 
 const getTokens = async () => {
   try {
     const authorizationCode = await getAuthorizationCode() //we wrote this function above
-    const credentials = await getSpotifyCredentials() //we wrote this function above (could also run this outside of the functions and store the credentials in local scope)
+    const credentials = spotifyCredentials() //we wrote this function above (could also run this outside of the functions and store the credentials in local scope)
     const credsB64 = btoa(`${credentials.clientId}:${credentials.clientSecret}`);
     const response = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
@@ -32,3 +34,5 @@ const getTokens = async () => {
     console.error(err);
   }
 }
+
+export default getTokens
