@@ -48,6 +48,29 @@ const LeftAction =()=> {
 
 
 /* Boucle music  */
+let musicList = listTest.map ((item,i)=>{
+    console.log("recup des items",item.name) ;
+    return (
+      <ListItem
+      key={i}
+      leftAvatar={{ source: { uri: item.url } }}
+      title={item.name}
+      subtitle={item.name}
+      bottomDivider
+      chevron
+      onPress={() => {
+      alert("mon");
+      }}
+      />
+    );
+  })
+  
+
+
+
+
+
+//////// partie swype
 const Row = ({ item }) => (
   <RectButton style={styles.rectButton} onPress={() => alert(item.from)}>
     <ListItem
@@ -94,14 +117,16 @@ const SwipeableRow = ({ item, index }) => {
 
     {/* liste des musiques */}
           <ScrollView >
-          <FlatList
+{/*           <FlatList
               data={listTest}
               ItemSeparatorComponent={() => <View style={styles.separator} />}
               renderItem={({ item, index }) => (
                 <SwipeableRow item={item} index={index} />
               )}
               keyExtractor={(item, index) => `message ${index}`}
-            />
+            /> */}
+
+            {musicList}
           </ScrollView>
     </SafeAreaView>
 
