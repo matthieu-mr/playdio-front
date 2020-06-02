@@ -33,17 +33,3 @@ export default function Radio(props) {
     </View>
   );
 }
-
-/*
- var badgeList = props.musicType.map((type,i) => {
-    return (
-      <Badge
-        key={i}
-        containerStyle={{marginLeft:1, marginRight:1}}
-        value={type}
-        textStyle={{fontSize:7, marginLeft:3, marginRight:3}}
-        status="info">
-      </Badge>
-    )
-  })
-*/

@@ -26,6 +26,7 @@ export default function App() {
   return (
     <View style={{flex:1, alignItems:"center", justifyContent:"flex-start"}}>
       <ScrollView>
+        
         <View style={{height:25}}></View>
         <View style={{flex:1, flexDirection:"row", justifyContent:"space-between"}}>
           <Text style={{color:"#383838", fontSize:18, width:"73%", marginLeft:20}}>Discover</Text>
