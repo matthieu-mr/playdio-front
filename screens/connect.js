@@ -6,7 +6,7 @@ import {Button,Input} from 'react-native-elements';
 import * as AuthSession from 'expo-auth-session';
 
 import getAuthorizationCode from '../screens/getAuthorizationCode';
-import { WebView } from 'react-native-webview';
+import getTokens from '../screens/getTokens';
 
 export default function connect({navigation}) {
 
@@ -23,7 +23,7 @@ export default function connect({navigation}) {
             <Button
       title="continuer vers la Home"
       type="solid"
-      onPress={()=>{navigation.navigate("Home"); console.log("button"); getAuthorizationCode()}}
+      onPress={()=>{navigation.navigate("Home"); getAuthorizationCode()}}
       />
     </View>
   );

@@ -5,8 +5,7 @@ import refreshTokens from '../screens/refreshTokens'
 
 const refreshTokens = async () => {
   try {
-    const credentials = spotifyCredentials() //we wrote this function above
-    const credsB64 = btoa(`${credentials.clientId}:${credentials.clientSecret}`);
+    const credsB64 = btoa(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
     const refreshToken = await getUserData('refreshToken');
     const response = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',

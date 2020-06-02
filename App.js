@@ -27,13 +27,6 @@ import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import Login from './reducers/login'
 
-// console.log(AuthSession.getRedirectUrl());
-// console.log(spotifyCredentials);
-
-// Ajout de l'authentification Spotify
-
-
-
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 const store = createStore(combineReducers({Login}))
