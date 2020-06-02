@@ -4,20 +4,27 @@ import {ImageBackground,StyleSheet,View} from 'react-native';
 
 import {Button,Text,Icon,} from 'react-native-elements'
 
+import * as Font from 'expo-font';
 
-
-import police from '../screens/components/font'
+/* import police from '../screens/components/font' */
 
 export default  function connect({navigation}) {
 
 const [font,setFont]= useState(false)
 
-useEffect( ()=>{
+/* useEffect( ()=>{
+  async function police (){
+    await Font.loadAsync({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),                         
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),                         
+    });
+    
+    }
   police()
   setFont(true);
 },[])
-
-  if(font ==true){
+ */
+  /* if(font ==true){ */
     return (
     <ImageBackground source={require('../assets/image_connection.jpg')} style={styles.container}>
       <Text style={styles.title} >Playdio</Text>
@@ -69,11 +76,11 @@ useEffect( ()=>{
       />
     </ImageBackground>
   );
-  }else{
+/*   }else{
     return(
       <View></View>
     )
-  }
+  } */
   
 }
 const styles = StyleSheet.create({
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
     marginLeft:100,
     color:"#fff",
     fontSize:70,
-    fontFamily:"PermanentMarker"
+    /* fontFamily:"PermanentMarker" */
   },
   text:{
     color:"#fff",
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
     marginRight:30,
     fontSize:20,
     marginBottom:35,
-    fontFamily:"Roboto"
+    /* fontFamily:"Roboto" */
 
   },
   connectEmail:{
