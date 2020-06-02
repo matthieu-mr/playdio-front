@@ -14,17 +14,10 @@
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/material-bottom-tabs": "^5.2.9",
     "@react-navigation/native": "^5.5.0",
-<<<<<<< HEAD
-    "expo": "^37.0.0",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
-    "react-entypo": "^1.3.0",
-=======
     "expo": "~37.0.3",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
->>>>>>> e8480b5b99c1cb0b06d8dfc735a54c91274b97f6
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-elements": "^2.0.1",
     "react-native-gesture-handler": "~1.6.0",
@@ -41,11 +34,7 @@
     "react-navigation-tabs": "^2.8.13",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
-<<<<<<< HEAD
-    "expo-av": "~8.1.0"
-=======
     "expo-font": "~8.1.0"
->>>>>>> 741edfcc9f64e4dc88133cc311ecfc7c9388eaea
   },
   "devDependencies": {
     "babel-preset-expo": "^8.1.0",
