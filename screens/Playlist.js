@@ -2,7 +2,7 @@ console.disableYellowBox = true;
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,ListItem } from 'react-native-elements'
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 
 import Constants from 'expo-constants';
 
@@ -41,8 +41,6 @@ let musicList = listTest.map ((item,i)=>{
  
  return (
 
-
-
       <ListItem
         key={i}
         leftAvatar={{ source: { uri: item.url } }}
@@ -50,50 +48,15 @@ let musicList = listTest.map ((item,i)=>{
         subtitle={item.name}
         bottomDivider
         chevron
-/*         onPress={() => {
-          alert('You tapped the button!');
- 
-        }} */
-        onSwipeLeft={(gestureState) => {
-          alert('You swipped the button!');
- 
-        }}
+       onPress={() => {
+          alert("mon");
+        }} 
+
 
         />
 
   );
 })
-
-const [gestureName, gestureState]=useState()
-
-
-useEffect(() => {
-  // console.log(listTest);
-  let onSwipe=(gestureName, gestureState) =>{
-    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    this.setState({gestureName: gestureName});
-  
-    switch (gestureName) {
-      case SWIPE_UP:
-        this.setState({backgroundColor: 'red'});
-        break;
-      case SWIPE_DOWN:
-        this.setState({backgroundColor: 'green'});
-        break;
-      case SWIPE_LEFT:
-        this.setState({backgroundColor: 'blue'});
-        break;
-      case SWIPE_RIGHT:
-        this.setState({backgroundColor: 'yellow'});
-        break;
-    }
-  }
-  }, []);
-
-
-
-
-
 
   return (
 
