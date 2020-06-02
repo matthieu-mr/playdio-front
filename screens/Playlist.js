@@ -1,12 +1,17 @@
-console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView } from 'react-native';
-
-import { Avatar, Badge, Icon, withBadge } from 'react-native-elements'
+import { Avatar, Badge, Icon, withBadge,Card,ListItem } from 'react-native-elements'
 
 import Constants from 'expo-constants';
+import { FlatList, RectButton } from 'react-native-gesture-handler';
 
-export default function App() {
+//  To toggle LTR/RTL uncomment the next line
+// I18nManager.allowRTL(true);
+
+import AppleStyleSwipeableRow from './components/AppleStyleSwipeableRow';
+import GmailStyleSwipeableRow from './components/GmailStyleSwipeableRow';
+
+export default function App(props) {
 /* const [listUser,setListUser]=useEffect() ;  */
 
 
@@ -30,36 +35,73 @@ let listTest = [
     // console.log(listTest);
     }, []);
 
-
-{/*  <Avatar rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg',}} size="large" /> */}
-{/*  
-   <View style={styles.avatar}>
-     {avatarList}
-    </View>
-*/}
-
-
-
-
+/* ====> boucle avatar */
 let avatarList = listTest.map ((item,i)=>{
-  console.log("recup des items",item.url) ; 
-  
   return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
 })
 
+const LeftAction =()=> {
+  <View>
+    <Text> test</Text>
+  </View>
+}
+
+
+/* Boucle music  */
+const Row = ({ item }) => (
+  <RectButton style={styles.rectButton} onPress={() => alert(item.from)}>
+    <ListItem
+        leftAvatar={{ source: { uri: item.url } }}
+        title={item.name}
+        subtitle={item.name}
+        bottomDivider
+        chevron
+       onPress={() => {
+          alert("mon");
+        }} />
+  </RectButton>
+);
+
+
+const SwipeableRow = ({ item, index }) => {
+  if (index % 2 === 0) {
+    return (
+      <AppleStyleSwipeableRow>
+        <Row item={item} />
+      </AppleStyleSwipeableRow>
+    );
+  } else {
+    return (
+      <GmailStyleSwipeableRow>
+        <Row item={item} />
+      </GmailStyleSwipeableRow>
+    );
+  }
+};
+
+
+
   return (
 
-
     <SafeAreaView style={styles.container}>
+      <Text> Mussssiiiiiiccc</Text>
+      {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
             <View style={styles.avatar}>
               {avatarList}
             </View>
           </ScrollView>
-          <ScrollView style={styles.scrollView} >
-            <View style={styles.avatar}>
-              {avatarList}
-            </View>
+
+    {/* liste des musiques */}
+          <ScrollView >
+          <FlatList
+              data={listTest}
+              ItemSeparatorComponent={() => <View style={styles.separator} />}
+              renderItem={({ item, index }) => (
+                <SwipeableRow item={item} index={index} />
+              )}
+              keyExtractor={(item, index) => `message ${index}`}
+            />
           </ScrollView>
     </SafeAreaView>
 
@@ -69,22 +111,32 @@ let avatarList = listTest.map ((item,i)=>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: Constants.statusBarHeight,
+    backgroundColor: '#fff',   
   },
   scrollView: {
-    backgroundColor: 'pink',
+    marginBottom:15,
     marginHorizontal: 20,
-    marginTop:15
   },
-  text: {
-    fontSize: 42,
+
+  scrollViewscrollViewMusic: {
+    marginHorizontal: 20,
+    width:100,
+    flex: 1, marginLeft: 0, marginRight: 0
   },
+
   avatar: {
     flex: 1,
     flexDirection:"row",
+    padding:10,
+    marginLeft:10,
+    marginRight:10,
+  },
+  card: {
+    flex: 1,
+    flexDirection:"row",
+    padding:10,
+    marginLeft:10,
+    marginRight:10,
   },
   
 });
