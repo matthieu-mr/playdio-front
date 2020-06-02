@@ -1,12 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Radio from './components/Radio';
 
 export default function App() {
+
+  var radioNameList = ["Radio Gaga", "Radio ZZ", "Radio F"];
+  var radioList = radioNameList.map(function(name, i) {
+    return <Radio radioName={name} key={i}/>;
+  })   
+
   return (
     <View style={styles.container}>
       <Text> welcome homescreen</Text>
-      <Radio></Radio>
+      <ScrollView horizontal={true}>
+        {radioList}
+      </ScrollView>
     </View>
   );
 }
