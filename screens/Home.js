@@ -11,7 +11,7 @@ export default function Home(props) {
   })
 
   // MY RADIOS
-  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:[]}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"]}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"]}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"]}];
+  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:["addRadio"], url:["/addRadio"]}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"]}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"]}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"]}];
   var myRadioList = myRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation}/>;
   })
