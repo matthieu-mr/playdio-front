@@ -24,7 +24,7 @@ import Playlist from './screens/Playlist';
 import Search from './screens/Search';
 import Play from './screens/Play';
 import AddRadio1 from './screens/CreateRadioStep1'
-
+import AddRadio2 from './screens/CreateRadioStep2'
 
 
 import {createStore, combineReducers} from 'redux';
@@ -81,6 +81,7 @@ StackNavigator = createStackNavigator({
   Playlist: Playlist,
   Play:Play,
  AddRadio : AddRadio1,
+ AddRadio2 : AddRadio2,
   BottomNavigator:BottomNavigator
 }, 
 { 
