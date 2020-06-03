@@ -56,23 +56,6 @@ const quotes = [
       <Text> test</Text>
     </View>
   }
-
-
-  /* Boucle music  */
-  let musicList = listTest.map ((item,i)=>{
-      console.log("recup des items",item.name) ;
-      return (
-        <ListItem
-        key={i}
-        leftAvatar={{ source: { uri: item.url } }}
-        title={item.name}
-        subtitle={item.name}
-        bottomDivider
-        chevron
-        onPress={() => props.navigation.navigate('Play')}
-        />
-      );
-  })
   
   /*  gestion des mouvements */
 
@@ -89,7 +72,7 @@ const quotes = [
   return (
 
     <SafeAreaView style={styles.container}>
-      <Text> Mussssiiiiiiccc</Text>
+      <Text> Playlist</Text>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
             <View style={styles.avatar}>
