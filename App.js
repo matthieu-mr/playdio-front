@@ -23,6 +23,9 @@ import Home from './screens/Home';
 import Playlist from './screens/Playlist';
 import Search from './screens/Search';
 import Play from './screens/Play';
+import AddRadio1 from './screens/CreateRadioStep1'
+
+
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
@@ -35,7 +38,8 @@ const store = createStore(combineReducers({Login}))
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
   Home: Home,
   Playlist: Playlist,
-  Search:Search
+  Search: Search,
+  'Play (Test)': Play
   },
   {
   defaultNavigationOptions: ({ navigation }) => ({ // creation des icônes
@@ -49,8 +53,12 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
       iconName = 'radio';
       return <MaterialCommunityIcons name="radio" size={24} color={tintColor} />
 
-      }else if (navigation.state.routeName == 'Search') {
+      } else if (navigation.state.routeName == 'Search') {
       iconName = 'ios-search';
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+
+      } else if (navigation.state.routeName == 'Play (Test)') {
+      iconName = 'ios-play';
       return <Ionicons name={iconName} size={25} color={tintColor} />;
       }
    // return <Ionicons name={iconName} size={25} color={tintColor} />;
@@ -72,6 +80,7 @@ StackNavigator = createStackNavigator({
   SignUp:SignUp,
   Playlist: Playlist,
   Play:Play,
+ AddRadio : AddRadio1,
   BottomNavigator:BottomNavigator
 }, 
 { 

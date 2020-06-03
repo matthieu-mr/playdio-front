@@ -51,11 +51,6 @@ const quotes = [
     return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
   })
 
-  const LeftAction =()=> {
-    <View>
-      <Text> test</Text>
-    </View>
-  }
   
   /*  gestion des mouvements */
 
