@@ -8,7 +8,7 @@ import {Button,Text,Icon,} from 'react-native-elements'
 
 import police from '../screens/components/font'
 
-  
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 
@@ -87,36 +87,36 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title:{
-    marginTop:120,
-    marginBottom:100,
-    marginLeft:100,
+    marginTop:hp('15%'),
+    marginBottom:hp('15%'),
+    marginLeft:wp('25%'),
     color:"#fff",
-    fontSize:70,
+    fontSize:wp('15%'),
     /* fontFamily:fontPermanentMarker */
   },
   text:{
     color:"#fff",
-    marginLeft:30,
-    marginRight:30,
-    fontSize:20,
-    marginBottom:35,
+    marginLeft:wp('7%'),
+    marginRight:wp('7%'),
+    fontSize:wp('4%'),
+    marginBottom:hp('2%'),
     /* fontFamily:fontRoboto */
 
   },
   connectEmail:{
     color:"#fff",
-    marginRight:30,
-    fontSize:20,
-    marginBottom:10,
-    marginLeft:30,
+    marginRight:wp('7%'),
+    fontSize:wp('4%'),
+    marginBottom:hp('2%'),
+    marginLeft:wp('7%'),
   },
   button:{
     backgroundColor: "#fff",
-    marginBottom:30,
-    marginRight:30,
-    marginLeft:30,
-    borderRadius:5,
-    height:50
+    marginBottom:hp('5%'),
+    marginRight:wp('7%'),
+    marginLeft:wp('7%'),
+    borderRadius:wp('2%'),
+    height:hp('6.5%')
   } 
   
 });
