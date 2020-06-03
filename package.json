@@ -11,7 +11,9 @@
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/material-bottom-tabs": "^5.2.9",
     "@react-navigation/native": "^5.5.0",
+    "base-64": "^0.1.0",
     "expo": "~37.0.3",
+    "expo-auth-session": "~1.2.1",
     "expo-av": "~8.1.0",
     "expo-font": "~8.1.0",
     "native-base": "^2.13.12",
@@ -35,7 +37,9 @@
     "react-navigation-stack": "^2.5.1",
     "react-navigation-tabs": "^2.8.13",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "spotify-web-api-js": "^1.4.0",
+    "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.1.0",
