@@ -11,17 +11,18 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Ajout des modules de navigation 
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-
 import {createStackNavigator} from 'react-navigation-stack';
 
-import HomeScreen from './screens/HomeScreen'
-import Playlist from './screens/Playlist'
-import Search from './screens/Search'
+
 import * as AuthSession from 'expo-auth-session';
 import spotifyCredentials from './screens/secrets';
 
 import Connect from './screens/connect'
 import SignUp from './screens/signUp'
+import Home from './screens/Home';
+import Playlist from './screens/Playlist';
+import Search from './screens/Search';
+import Play from './screens/Play';
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
@@ -32,10 +33,9 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 const store = createStore(combineReducers({Login}))
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
-  Home: HomeScreen,
+  Home: Home,
   Playlist: Playlist,
   Search:Search
-  
   },
   {
   defaultNavigationOptions: ({ navigation }) => ({ // creation des icônes
@@ -70,6 +70,8 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
 StackNavigator = createStackNavigator({
   Connect:Connect,
   SignUp:SignUp,
+  Playlist: Playlist,
+  Play:Play,
   BottomNavigator:BottomNavigator
 }, 
 { 

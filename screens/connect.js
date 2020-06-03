@@ -9,22 +9,39 @@ import getTokens from '../screens/getTokens';
 import getUserPlaylists from '../screens/getUserPlaylists';
 
 
+/* import * as Font from 'expo-font'; */
+
 import police from '../screens/components/font'
 
-export default  function connect({navigation}) {
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const [font,setFont]= useState(false)
+
+
+export default  function connect({navigation}) {
+  var fontPermanentMarker =''
+  var fontRoboto =''
+  const [font,setFont]= useState(false)
 
 useEffect( ()=>{
   police()
   setFont(true);
+    if(font ==true){ 
+    fontPermanentMarker = 'PermanentMarker'
+    fontRoboto = 'Roboto'
+  }
 },[])
 
-  if(font ==true){
+
+
     return (
     <ImageBackground source={require('../assets/image_connection.jpg')} style={styles.container}>
       <Text style={styles.title} >Playdio</Text>
       <Text style={styles.text}>Connect with your favorite platform to enjoy your friends your entire library</Text>
+      <Button 
+      title="continuer vers la Home"
+      type="solid"
+      onPress={()=>navigation.navigate("Home")}
+      />
       <Button
       iconRight
       icon={<Icon
@@ -32,7 +49,7 @@ useEffect( ()=>{
       size={40}
       color="#1DB954"
       type='font-awesome'
-      iconStyle={{marginleft:1000}}
+      
       />}
       
       color="#000"
@@ -66,55 +83,45 @@ useEffect( ()=>{
       }
       onPress={()=>navigation.navigate("SignUp")}
       />
-      <Button 
-      title="continuer vers la Home"
-      type="solid"
-      onPress={()=>{navigation.navigate("Home"); getUserPlaylists()}}
-      />
     </ImageBackground>
   );
-  }else{
-    return(
-      <View></View>
-    )
-  }
-  
+
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   title:{
-    marginTop: 120,
-    marginBottom:100,
-    marginLeft:100,
+    marginTop:hp('15%'),
+    marginBottom:hp('15%'),
+    marginLeft:wp('25%'),
     color:"#fff",
-    fontSize:70,
-    fontFamily:"PermanentMarker"
+    fontSize:wp('15%'),
+    /* fontFamily:fontPermanentMarker */
   },
   text:{
     color:"#fff",
-    marginLeft:30,
-    marginRight:30,
-    fontSize:20,
-    marginBottom:35,
-    fontFamily:"Roboto"
+    marginLeft:wp('7%'),
+    marginRight:wp('7%'),
+    fontSize:wp('4%'),
+    marginBottom:hp('2%'),
+    /* fontFamily:fontRoboto */
 
   },
   connectEmail:{
     color:"#fff",
-    marginRight:30,
-    fontSize:20,
-    marginBottom:10,
-    marginLeft:30,
+    marginRight:wp('7%'),
+    fontSize:wp('4%'),
+    marginBottom:hp('2%'),
+    marginLeft:wp('7%'),
   },
   button:{
     backgroundColor: "#fff",
-    marginBottom:30,
-    marginRight:30,
-    marginLeft:30,
-    borderRadius:5,
-    height:50
+    marginBottom:hp('5%'),
+    marginRight:wp('7%'),
+    marginLeft:wp('7%'),
+    borderRadius:wp('2%'),
+    height:hp('6.5%')
   } 
   
 });
