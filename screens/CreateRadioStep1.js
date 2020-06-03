@@ -30,7 +30,7 @@ console.log(radioName)
 
                 {/*  "#c2185b" */}
         
-                    <ScrollView>
+                  
                     <View style={styles.input}> 
                     <Text> Create Your New Radio</Text>
                     
@@ -42,8 +42,7 @@ console.log(radioName)
                         />
                
                     </View>
-                    </ScrollView>
-
+               
             
 
                     <View style={styles.paramPlaylist}> 
@@ -82,7 +81,7 @@ console.log(radioName)
                         <View style={styles.button}>
                         <Button 
                             title="Press me"
-                            onPress={() => alert('Simple Button pressed')}
+                            onPress={()=>props.navigation.navigate("AddRadio2")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}

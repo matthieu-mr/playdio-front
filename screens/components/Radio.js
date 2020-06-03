@@ -23,19 +23,21 @@ export default function Radio(props) {
         console.log("mon url",urlLien); 
 
   return (
-    <View style={{flex:1, justifyContent:"center"}}>
-      <TouchableOpacity onPress={(urlLien) => props.navigation.navigate(props.url)      }>
-        <Card 
-            containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
-            image={props.img}
-            imageProps={{ style: {width: 150, height: 100} }}
-            >
-            <Text style={{width:150, height:50, fontSize:15, color:"#383838"}}>{props.radioName}</Text>
-        </Card>
-      </TouchableOpacity>
-      <View style={{flex:1, flexDirection:"row", justifyContent:"flex-start", marginTop:7, marginLeft:20, marginBottom:20}}>
-        {badgeList}
-      </View>
-    </View>
+    <TouchableOpacity onPress={(urlLien) => props.navigation.navigate(props.url)      }>
+        <View style={{flex:1, justifyContent:"center"}}>
+          
+            <Card 
+                containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
+                image={props.img}
+                imageProps={{ style: {width: 150, height: 100} }}
+                >
+                <Text style={{width:150, height:50, fontSize:15, color:"#383838"}}>{props.radioName}</Text>
+            </Card>
+        
+          <View style={{flex:1, flexDirection:"row", justifyContent:"flex-start", marginTop:7, marginLeft:20, marginBottom:20}}>
+            {badgeList}
+          </View>
+        </View>
+    </TouchableOpacity>
   );
 }
