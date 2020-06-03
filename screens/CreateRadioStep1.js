@@ -13,7 +13,7 @@ const [radioName, setRadioName] = useState()
 
 console.log(radioName);
 
-input.current.focus(backgroundColor="blue");
+
 
 
   return (
@@ -25,6 +25,7 @@ input.current.focus(backgroundColor="blue");
         <Input
             //placeholder='INPUT WITH ERROR MESSAGE'
             errorStyle={{ color: 'red' }}
+            style={styles.input}
             errorMessage='ENTER A VALID ERROR HERE'
             onChangeText={value => setRadioName(value)}
            
@@ -49,7 +50,7 @@ input.current.focus(backgroundColor="blue");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',   
+    backgroundColor: '#512da8',   
   },
   form:{
       marginTop:wp('40%'),
@@ -63,7 +64,10 @@ const styles = StyleSheet.create({
     marginLeft:wp('7%'),
     borderRadius:wp('2%'),
     height:hp('6.5%')
-  } 
+  },
+  input:{
+      backgroundColor:"#512da8"
+  }
 
   
 });
