@@ -67,7 +67,7 @@ const quotes = [
   return (
 
     <SafeAreaView style={styles.container}>
-      <Text> Mussssiiiiiiccc</Text>
+      <Text> Playlist</Text>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
             <View style={styles.avatar}>
