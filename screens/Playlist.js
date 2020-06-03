@@ -74,19 +74,17 @@ const quotes = [
       );
   })
   
-  let alertId =(id)=>{
+  /*  gestion des mouvements */
 
-    console.log("recu fonction",id)
-  }
+  const [idDel, setIdDel]= useState() ; 
+  const [ idAdd, setIdAdd] = useState() ;
+  
 
 
-  const [idget, setidget]= useState() ; 
-
+  /* futures fonction de gestion */
   useEffect(() => {
-    console.log("change",idget);
-    }, [idget]);
-
- 
+    console.log("change",idDel);
+    }, [idAdd]);
 
   return (
 
@@ -100,17 +98,15 @@ const quotes = [
           </ScrollView>
 
     {/* liste des musiques */}
-         
             <FlatList
                 data={quotes}
                 keyExtractor={item => item.id}
                 renderItem={({ item}) => (
                   <ListItemSwap
                     {...item}
-          
-                    onSwipeFromLeft={() => alert('swiped from left!')}
-                    onSwipeFromRight={() => {alert('pressed right!');setidget(item.id)  }}
-
+                    onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
+                    onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+                    
                   />
                 )}
                 ItemSeparatorComponent={() => <Separator />}
