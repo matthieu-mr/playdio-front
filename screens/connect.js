@@ -4,27 +4,30 @@ import {ImageBackground,StyleSheet,View} from 'react-native';
 
 import {Button,Text,Icon,} from 'react-native-elements'
 
-import * as Font from 'expo-font';
+/* import * as Font from 'expo-font'; */
 
-/* import police from '../screens/components/font' */
+import police from '../screens/components/font'
+
+  
+
+
 
 export default  function connect({navigation}) {
+  var fontPermanentMarker =''
+  var fontRoboto =''
+  const [font,setFont]= useState(false)
 
-const [font,setFont]= useState(false)
-
-/* useEffect( ()=>{
-  async function police (){
-    await Font.loadAsync({
-    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),                         
-    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),                         
-    });
-    
-    }
+useEffect( ()=>{
   police()
   setFont(true);
+    if(font ==true){ 
+    fontPermanentMarker = 'PermanentMarker'
+    fontRoboto = 'Roboto'
+  }
 },[])
- */
-  /* if(font ==true){ */
+
+
+
     return (
     <ImageBackground source={require('../assets/image_connection.jpg')} style={styles.container}>
       <Text style={styles.title} >Playdio</Text>
@@ -41,7 +44,7 @@ const [font,setFont]= useState(false)
       size={40}
       color="#1DB954"
       type='font-awesome'
-      iconStyle={{marginleft:1000}}
+      
       />}
       
       color="#000"
@@ -77,12 +80,7 @@ const [font,setFont]= useState(false)
 
     </ImageBackground>
   );
-/*   }else{
-    return(
-      <View></View>
-    )
-  } */
-  
+
 }
 const styles = StyleSheet.create({
   container: {
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
     marginLeft:100,
     color:"#fff",
     fontSize:70,
-    /* fontFamily:"PermanentMarker" */
+    /* fontFamily:fontPermanentMarker */
   },
   text:{
     color:"#fff",
@@ -102,7 +100,7 @@ const styles = StyleSheet.create({
     marginRight:30,
     fontSize:20,
     marginBottom:35,
-    /* fontFamily:"Roboto" */
+    /* fontFamily:fontRoboto */
 
   },
   connectEmail:{
