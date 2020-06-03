@@ -5,6 +5,7 @@ import ListItemSwap, { Separator } from './components/Swype';
 
 import police from '../screens/components/font'
 
+import TextField from 'react-native-md-textinput';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 function CreateRadio1(props) {
@@ -24,7 +25,6 @@ console.log(radioName);
         <View style={styles.form}>
         <Input
             //placeholder='INPUT WITH ERROR MESSAGE'
-            errorStyle={{ color: 'red' }}
             style={styles.input}
             errorMessage='ENTER A VALID ERROR HERE'
             onChangeText={value => setRadioName(value)}
