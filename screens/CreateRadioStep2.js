@@ -4870,7 +4870,7 @@ const quotes = [
 
 let infoplaylist = playslistTrack[0].items // recuperation de la liste de stracks
 
-let playslistTrackList =[{}] ;
+let playslistTrackList =[] ;
  let playlist = infoplaylist.map ((info,i)=>{ // Boucle sur le nombre de track
       let nameTrack = playslistTrack[0].items[i].track.name
       let artistName = playslistTrack[0].items[i].track.artists[0].name
