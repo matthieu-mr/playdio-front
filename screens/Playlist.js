@@ -51,28 +51,6 @@ const quotes = [
     return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
   })
 
-  const LeftAction =()=> {
-    <View>
-      <Text> test</Text>
-    </View>
-  }
-
-
-  /* Boucle music  */
-  let musicList = listTest.map ((item,i)=>{
-      console.log("recup des items",item.name) ;
-      return (
-        <ListItem
-        key={i}
-        leftAvatar={{ source: { uri: item.url } }}
-        title={item.name}
-        subtitle={item.name}
-        bottomDivider
-        chevron
-        onPress={() => props.navigation.navigate('Play')}
-        />
-      );
-  })
   
   /*  gestion des mouvements */
 
