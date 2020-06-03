@@ -17,10 +17,14 @@ export default function Radio(props) {
     )
   })
 
-  // CALLBACK & CARDS
+  // CALLBACK & CARDS & Playlist 
+  let urlLien = props.url[0]
+  let conv = urlLien.toString() 
+        console.log("mon url",urlLien); 
+
   return (
     <View style={{flex:1, justifyContent:"center"}}>
-      <TouchableOpacity onPress={() => props.navigation.navigate('Playlist')}>
+      <TouchableOpacity onPress={(urlLien) => props.navigation.navigate(props.url)      }>
         <Card 
             containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
             image={props.img}

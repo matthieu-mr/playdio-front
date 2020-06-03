@@ -23,6 +23,9 @@ import Home from './screens/Home';
 import Playlist from './screens/Playlist';
 import Search from './screens/Search';
 import Play from './screens/Play';
+import AddRadio1 from './screens/CreateRadioStep1'
+
+
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
@@ -72,6 +75,7 @@ StackNavigator = createStackNavigator({
   SignUp:SignUp,
   Playlist: Playlist,
   Play:Play,
+ AddRadio : AddRadio1,
   BottomNavigator:BottomNavigator
 }, 
 { 
