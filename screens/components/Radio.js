@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Badge } from 'native-base';
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 export default function Radio(props) {
 
   // BADGES
@@ -10,9 +12,9 @@ export default function Radio(props) {
     return (
       <Badge
         key={i}
-        style={{ backgroundColor:'#00838F', padding:0, marginRight:3}}
+        style={{ backgroundColor:'#00838F', padding:hp('0%'), marginRight:wp('1%')}}
       >
-        <Text style={{color: "white", fontSize:10, marginLeft:3, marginRight:3, marginBottom:0, marginTop:5, padding:0}}>{type}</Text>
+        <Text style={{color: "white", fontSize:hp('2%'), marginLeft:wp('1%'), marginRight:wp('1%'), marginBottom:hp('0%'), marginTop:hp('0.8%'), padding:hp('0%')}}>{type}</Text>
       </Badge>
     )
   })
@@ -22,14 +24,14 @@ export default function Radio(props) {
     <View style={{flex:1, justifyContent:"center"}}>
       <TouchableOpacity onPress={() => props.navigation.navigate('Playlist')}>
         <Card 
-            containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
+            containerStyle={{width:wp('45%'), height:hp('25%'), marginLeft:wp('7%'), marginRight:wp('0%'), marginTop:hp('3%'), marginBottom:hp('0%'), borderRadius:hp('1%'), elevation:hp('3%'), shadowOffset: { width:wp('3%'), height:hp('3%') }, shadowColor: "grey", shadowOpacity: 1, shadowRadius:hp('7%')}}
             image={props.img}
-            imageProps={{ style: {width: 150, height: 100} }}
+            imageProps={{ style: {width:wp('45%'), height:hp('18%')} }}
             >
-            <Text style={{width:150, height:50, fontSize:15, color:"#383838"}}>{props.radioName}</Text>
+            <Text style={{width:wp('45%'), height:hp('7%'), fontSize:hp('2.3%'), color:"#383838"}}>{props.radioName}</Text>
         </Card>
       </TouchableOpacity>
-      <View style={{flex:1, flexDirection:"row", justifyContent:"flex-start", marginTop:7, marginLeft:20, marginBottom:20}}>
+      <View style={{flex:1, flexDirection:"row", justifyContent:"flex-start", marginTop:hp('1%'), marginLeft:wp('7%'), marginBottom:hp('7%')}}>
         {badgeList}
       </View>
     </View>
