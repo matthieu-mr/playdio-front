@@ -20,11 +20,13 @@ const getAuthorizationCode = async () => {
         '&redirect_uri=' +
         encodeURIComponent(redirectUrl),
     })
+    console.log(result)
+    return result.params.code
+    
   } catch (err) {
     console.error(err)
   }
-  console.log(code)
-  return result.params.code
+  
 
 }
 
