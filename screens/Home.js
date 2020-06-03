@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Radio from './components/Radio';
-
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Home(props) {
 
@@ -26,29 +25,29 @@ export default function Home(props) {
 
   //CALLBACK
   return (
-    <View style={{flex:1, alignItems:"center", justifyContent:"flex-start"}}>
+    <View style={styles.homeView}>
       <ScrollView>
 
-        <View style={{height:hp('6%')}}></View>
-        <View style={{flex:1, flexDirection:"row", justifyContent:"space-between"}}>
-          <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%')}}>Discover</Text>
-          <Text style={{color:"#00838F", fontSize:hp('2%'), width:wp('25%'), marginTop:hp('1.5%')}}>See all</Text>
+        <View style={styles.header}></View>
+        <View style={styles.categories}>
+          <Text style={styles.categoryTitle}>Discover</Text>
+          <Text style={styles.categoryLink}>See all</Text>
         </View>
         <ScrollView horizontal={true}>
           {discoverRadioList}
         </ScrollView>
 
-        <View style={{flex:1, flexDirection:"row", justifyContent:"space-between"}}>
-          <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%')}}>My radios</Text>
-          <Text style={{color:"#00838F", fontSize:hp('2%'), width:wp('25%'), marginTop:hp('1.5%')}}>See all</Text>
+        <View style={styles.categories}>
+          <Text style={styles.categoryTitle}>My radios</Text>
+          <Text style={styles.categoryLink}>See all</Text>
         </View>
         <ScrollView horizontal={true}>
           {myRadioList}
         </ScrollView>
 
-        <View style={{flex:1, flexDirection:"row", justifyContent:"space-between"}}>
-          <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%')}}>Radios of my community</Text>
-          <Text style={{color:"#00838F", fontSize:hp('2%'), width:wp('25%'), marginTop:hp('1.5%')}}>See all</Text>
+        <View style={styles.categories}>
+          <Text style={styles.categoryTitle}>Radios of my community</Text>
+          <Text style={styles.categoryLink}>See all</Text>
         </View>
         <ScrollView horizontal={true}>
           {communityRadioList}
@@ -58,3 +57,32 @@ export default function Home(props) {
     </View>
   );
 }
+
+// STYLES
+const styles = StyleSheet.create({
+  homeView: {
+    flex:1, 
+    alignItems:"center", 
+    justifyContent:"flex-start"
+  },
+  header: {
+    height:hp('6%')
+  },
+  categories: {
+    flex:1, 
+    flexDirection:"row", 
+    justifyContent:"space-between"
+  },
+  categoryTitle: {
+    color:"#383838", 
+    fontSize:hp('3%'), 
+    width:wp('75%'), 
+    marginLeft:wp('7%')
+  },
+  categoryLink: {
+    color:"#00838F", 
+    fontSize:hp('2%'), 
+    width:wp('25%'), 
+    marginTop:hp('1.5%')
+  }
+})
