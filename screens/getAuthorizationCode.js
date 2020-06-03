@@ -10,7 +10,7 @@ const scopes = scopesArr.join(' ');
 const getAuthorizationCode = async () => {
  try {
     const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
-    var result = await AuthSession.startAsync({
+    const result = await AuthSession.startAsync({
       authUrl:
         'https://accounts.spotify.com/authorize' +
         '?response_type=code' +
@@ -20,11 +20,10 @@ const getAuthorizationCode = async () => {
         '&redirect_uri=' +
         encodeURIComponent(redirectUrl),
     })
-    
   } catch (err) {
     console.error(err)
   }
-  
+  console.log(code)
   return result.params.code
 
 }

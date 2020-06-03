@@ -1,7 +1,8 @@
 import SpotifyWebAPI from 'spotify-web-api-js';
+import refreshTokens from '../screens/refreshTokens'
 var Spotify = require('spotify-web-api-js');
 
-export const getValidSPObj = async () => {
+const getValidSPObj = async () => {
   const tokenExpirationTime = await getUserData('expirationTime');
   if (new Date().getTime() > tokenExpirationTime) {
     // access token has expired, so we need to use the refresh token
@@ -12,3 +13,5 @@ export const getValidSPObj = async () => {
   await sp.setAccessToken(accessToken);
   return sp;
 }
+
+export default getValidSPObj

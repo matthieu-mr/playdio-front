@@ -71,6 +71,9 @@ StackNavigator = createStackNavigator({
   Connect:Connect,
   SignUp:SignUp,
   BottomNavigator:BottomNavigator
+}, 
+{ 
+  headerMode: 'none' 
 })
 
 const Navigation = createAppContainer(StackNavigator)

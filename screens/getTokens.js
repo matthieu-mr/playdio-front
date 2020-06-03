@@ -24,6 +24,7 @@ const getTokens = async () => {
       refresh_token: refreshToken,
       expires_in: expiresIn,
     } = responseJson;
+    console.log(responseJson)
 
     const expirationTime = new Date().getTime() + expiresIn * 1000;
     await setUserData('accessToken', accessToken);
