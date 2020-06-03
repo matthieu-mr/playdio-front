@@ -5,11 +5,11 @@ import ListItemSwap, { Separator } from './components/Swype';
 
 import police from '../screens/components/font';
 
-import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-material-textfield';
+import { TextField } from 'react-native-material-textfield';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-function CreateRadio1(props) {
+function CreateRadio2(props) {
 
 const [radioName, setRadioName] = useState()
 const [isPrivate, setIsPrivate] = useState(false) ; 
@@ -36,7 +36,8 @@ console.log(radioName)
                     
                     <TextField
                         label={'Playlist Name'}
-                        tintColor="#26a69a"
+                        highlightColor="#c2185b"
+ 
                         onChangeText={ (value) => setRadioName(value) }
                        
                         />
@@ -138,6 +139,6 @@ const styles = StyleSheet.create({
   
 });
 
-export default CreateRadio1
+export default CreateRadio2
 
 
