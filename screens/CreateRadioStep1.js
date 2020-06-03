@@ -1,73 +1,140 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
-import { Input } from 'react-native-elements'
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch} from 'react-native';
+import { ListItem,Button } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 
-import police from '../screens/components/font'
+import police from '../screens/components/font';
 
-import TextField from 'react-native-md-textinput';
+import { TextField } from 'react-native-material-textfield';
+
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 function CreateRadio1(props) {
 
 const [radioName, setRadioName] = useState()
+const [isPrivate, setIsPrivate] = useState(false) ; 
+const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
+const [send, setSender] = useState(false);
 
-console.log(radioName);
 
-
-
+console.log(radioName)
 
   return (
+<View style={styles.container}>
 
-    <SafeAreaView>
-          <ScrollView >
-          <Text> Create Your New Radio</Text>
-        <View style={styles.form}>
-        <Input
-            //placeholder='INPUT WITH ERROR MESSAGE'
-            style={styles.input}
-            errorMessage='ENTER A VALID ERROR HERE'
-            onChangeText={value => setRadioName(value)}
-           
-              />
+
+    <View style={styles.form}>
+
+        <SafeAreaView >
+            <ScrollView >
+
+                {/*  "#c2185b" */}
         
-        
-        </View>
+                    <ScrollView>
+                    <View style={styles.input}> 
+                    <Text> Create Your New Radio</Text>
+                    
+                    <TextField
+                        label={'Playlist Name'}
+                        highlightColor="#c2185b"
+ 
+                        onChangeText={ (value) => setRadioName(value) }
+                       
+                        />
+               
+                    </View>
+                    </ScrollView>
 
-        <View> 
+            
+
+                    <View style={styles.paramPlaylist}> 
+                    <ListItem
+                        title="private"
+                        subtitle="ajout en private"
+                        //leftAvatar={{ source: { uri: item.avatar_url } }}
+                        rightIcon={
+                            <Switch
+                            value={isPrivate}
+                            onValueChange={() => {
+                                setIsPrivate(!isPrivate);
+                            }}
+                        />
+                        }
+                        />
+                        
+                        <ListItem 
+                        title="private"
+                        subtitle="ajout en private"
+                        //leftAvatar={{ source: { uri: item.avatar_url } }}
+                        rightIcon={
+                            <Switch
+                                value={isPlayingOnly}
+                                onValueChange={() => {
+                                    setIsPlayingOnly(!isPlayingOnly);
+                                }}
+                            />}
+                        />
+
+                    </View>
 
 
+         
+ 
+                        <View style={styles.button}>
+                        <Button 
+                            title="Press me"
+                            onPress={() => alert('Simple Button pressed')}
+                            buttonStyle={{
+                                backgroundColor:"#00838F",
+                            }}
+                        />
+                        </View>
+  
+             
+            </ScrollView>
+        </SafeAreaView>
 
-        </View>
-
-          </ScrollView>
-    </SafeAreaView>
-
+ </View>
+ </View>
   );
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#512da8',   
-  },
-  form:{
-      marginTop:wp('40%'),
-      marginRight:wp('10%'),
-      marginLeft:wp('10%'),
-  },
-    button:{
-    backgroundColor: "#fff",
-    marginBottom:hp('5%'),
+    container: {
+    display:"flex",
+    flex:1,
+    backgroundColor: '#fff',   
+      },
+
+    form:{
+     display:"flex",
+     flex:1,
+   
+     justifyContent:'flex-end',
+      marginBottom:wp("15%"),
+    },
+
+  input:{
+    marginRight:wp('10%'),
+    marginLeft:wp('10%'),
+    marginBottom:wp('10%'),
+    },  
+
+
+  paramPlaylist:{  
+    backgroundColor: "#26a69a",
     marginRight:wp('7%'),
     marginLeft:wp('7%'),
-    borderRadius:wp('2%'),
-    height:hp('6.5%')
+    marginBottom:wp('70%'),
   },
-  input:{
-      backgroundColor:"#512da8"
-  }
+
+
+  button:{
+   marginRight:wp('10%'),
+   marginLeft:wp('10%'),
+},
+
 
   
 });
