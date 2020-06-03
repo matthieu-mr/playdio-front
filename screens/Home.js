@@ -7,21 +7,21 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default function Home(props) {
 
   // DISCOVER
-  var discoverRadio = [{name:"Radio Gaga", img:require("../assets/radio_template1.jpg"), musicType:["ROCK","POP"]}, {name:"Radio ZZ", img:require("../assets/radio_template2.jpg"), musicType:["R&B"]}, {name:"Radio F", img:require("../assets/radio_template3.jpg"), musicType:["FUNK"]}, {name:"Radio Xtreme", img:require("../assets/radio_template4.jpg"), musicType:["ELECTRO"]}];
+  var discoverRadio = [{name:"Radio Gaga", img:require("../assets/radio_template1.jpg"), musicType:["ROCK","POP"], url:"Playlist"}, {name:"Radio ZZ", img:require("../assets/radio_template2.jpg"), musicType:["R&B"], url:"Playlist"}, {name:"Radio F", img:require("../assets/radio_template3.jpg"), musicType:["FUNK"], url:"Playlist"}, {name:"Radio Xtreme", img:require("../assets/radio_template4.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
   var discoverRadioList = discoverRadio.map(function(radio, i) {
-    return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation}/>;
+    return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
 
   // MY RADIOS
-  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:[]}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"]}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"]}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"]}];
+  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:["addRadio"], url:'AddRadio'}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"], url:'Playlist'}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"], url:"Playlist"}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
   var myRadioList = myRadio.map(function(radio, i) {
-    return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation}/>;
+    return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
 
   // RADIOS OF MY COMMUNITY
-  var communityRadio = [{name:"Radio Xtreme", img:require("../assets/radio_template8.jpg"), musicType:["ELECTRO"]}, {name:"Radio FF", img:require("../assets/radio_template9.jpg"), musicType:["FUNK","POP"]}, {name:"Radio Japan", img:require("../assets/radio_template1.jpg"), musicType:["K-POP","POP"]}, {name:"Radio Jazz", img:require("../assets/radio_template2.jpg"), musicType:["JAZZ"]}, {name:"Radio Killer", img:require("../assets/radio_template3.jpg"), musicType:["ELECTRO"]}];
+  var communityRadio = [{name:"Radio Xtreme", img:require("../assets/radio_template8.jpg"), musicType:["ELECTRO"], url:"Playlist"}, {name:"Radio FF", img:require("../assets/radio_template9.jpg"), musicType:["FUNK","POP"], url:"Playlist"}, {name:"Radio Japan", img:require("../assets/radio_template1.jpg"), musicType:["K-POP","POP"], url:"Playlist"}, {name:"Radio Jazz", img:require("../assets/radio_template2.jpg"), musicType:["JAZZ"], url:"Playlist"}, {name:"Radio Killer", img:require("../assets/radio_template3.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
   var communityRadioList = communityRadio.map(function(radio, i) {
-    return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation}/>;
+    return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
 
   //CALLBACK
