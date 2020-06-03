@@ -34,7 +34,7 @@ export default function Home(props) {
           <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%')}}>Discover</Text>
           <Text style={{color:"#00838F", fontSize:hp('2%'), width:wp('25%'), marginTop:hp('1.5%')}}>See all</Text>
         </View>
-        <ScrollView style={{margin:0}} horizontal={true}>
+        <ScrollView horizontal={true}>
           {discoverRadioList}
         </ScrollView>
 
