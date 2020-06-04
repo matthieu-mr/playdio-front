@@ -4,9 +4,9 @@ import {ImageBackground,StyleSheet,View} from 'react-native';
 
 import {Button,Text,Icon,} from 'react-native-elements'
 import * as AuthSession from 'expo-auth-session';
-import getAuthorizationCode from '../screens/getAuthorizationCode';
-import getTokens from '../screens/getTokens';
-import getUserPlaylists from '../screens/getUserPlaylists';
+import getAuthorizationCode from '../screens/components/getAuthorizationCode';
+import getTokens from '../screens/components/getTokens';
+import getUserPlaylists from '../screens/components/getUserPlaylists';
 
 
 /* import * as Font from 'expo-font'; */
@@ -30,7 +30,12 @@ useEffect( ()=>{
     fontRoboto = 'Roboto'
   }
 },[])
-
+async function autoriseSpotify(){
+  var infoClientID = await fetch ('http://192.168.1.43:3000/autorisation')
+  var reponse = await infoClientID.json()
+  getTokens(reponse.clientId,reponse.redirectURI)
+  
+}
 
 
     return (
@@ -56,7 +61,7 @@ useEffect( ()=>{
       buttonStyle={styles.button}
       color="fff"
       title="Sign up with Spotify"
-      onPress={()=>{navigation.navigate("Home"); getAuthorizationCode()}}
+      onPress={()=>{navigation.navigate("Home"); autoriseSpotify()}}
       titleStyle={
         {color:"black",
         fontSize:20}

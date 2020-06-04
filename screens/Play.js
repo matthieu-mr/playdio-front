@@ -1,12 +1,13 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Image, Text, Slider } from 'react-native'
+import { Tooltip } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av'
 
 // ----------------------------------------
 // PLAYLIST TEMPLATE EXAMPLE
 
-const audioBookPlaylist = [
+const playlist = [
   {
     title: 'Hamlet - Act I',
     author: 'William Shakespeare',
@@ -75,7 +76,6 @@ export default class Play extends React.Component {
         staysActiveInBackground: true,
         playThroughEarpieceAndroid: true
       })
- 
       this.loadAudio()
     } catch (e) {
       console.log(e)
@@ -88,11 +88,11 @@ export default class Play extends React.Component {
     try {
       const playbackInstance = new Audio.Sound()
       const source = {
-        uri: audioBookPlaylist[currentIndex].uri
+        uri: playlist[currentIndex].uri
       }
       const status = {
         shouldPlay: isPlaying,
-        volume
+        volume: volume
       }
       playbackInstance.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)     
       await playbackInstance.loadAsync(source, status, false)
@@ -112,17 +112,16 @@ export default class Play extends React.Component {
   handlePlayPause = async () => {
     const { isPlaying, playbackInstance } = this.state
     isPlaying ? await playbackInstance.pauseAsync() : await playbackInstance.playAsync()
- 
     this.setState({
       isPlaying: !isPlaying
     })
   }
  
-    handlePreviousTrack = async () => {
+  handlePreviousTrack = async () => {
     let { playbackInstance, currentIndex } = this.state
     if (playbackInstance) {
       await playbackInstance.unloadAsync()
-      currentIndex < audioBookPlaylist.length - 1 ? (currentIndex -= 1) : (currentIndex = 0)
+      currentIndex > 0 ? (currentIndex -= 1) : (currentIndex = playlist.length - 1)
       this.setState({
         currentIndex
       })
@@ -134,7 +133,7 @@ export default class Play extends React.Component {
     let { playbackInstance, currentIndex } = this.state
     if (playbackInstance) {
       await playbackInstance.unloadAsync()
-      currentIndex < audioBookPlaylist.length - 1 ? (currentIndex += 1) : (currentIndex = 0)
+      currentIndex < playlist.length - 1 ? (currentIndex += 1) : (currentIndex = 0)
       this.setState({
         currentIndex
       })
@@ -147,39 +146,43 @@ export default class Play extends React.Component {
     const { playbackInstance, currentIndex } = this.state
     return playbackInstance ? (
       <View style={styles.trackInfo}>
-        <Text style={[styles.trackInfoText, styles.largeText]}>
-          {audioBookPlaylist[currentIndex].title}
+        <Text style={styles.artistName}>
+          {playlist[currentIndex].author}
         </Text>
-        <Text style={[styles.trackInfoText, styles.smallText]}>
-          {audioBookPlaylist[currentIndex].author}
-        </Text>
-        <Text style={[styles.trackInfoText, styles.smallText]}>
-          {audioBookPlaylist[currentIndex].source}
+        <Text style={styles.trackName}>
+          {playlist[currentIndex].title}
         </Text>
       </View>
     ) : null
   }
 
+ 
+
   // CALLBACK
   render() {
     return (
       <View style={styles.playView}>
-        <Image
-          style={styles.albumCover}
-          source={{ uri: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg' }}
-        />
-        <View style={styles.controls}>
-          <TouchableOpacity style={styles.control} onPress={this.handlePreviousTrack}>
-            <Image source={require('../assets/icons/backward.png')} style={styles.icons}/>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.control} onPress={this.handlePlayPause}>
-            {this.state.isPlaying ? (<Image source={require('../assets/icons/hold.png')} style={styles.icons}/>) : (<Image source={require('../assets/icons/play.png')} style={styles.icons}/>)}
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.control} onPress={this.handleNextTrack}>
-            <Image source={require('../assets/icons/forward.png')} style={styles.icons}/>
-          </TouchableOpacity>
+        <View style={styles.player}>
+          <Image
+            style={styles.albumCover}
+            source={{ uri: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg' }}
+          />
+          {this.renderFileInfo()}
+          <View style={styles.controls}>
+            <TouchableOpacity style={styles.control} onPress={this.handlePreviousTrack}>
+              <Image source={require('../assets/icons/backward.png')} style={styles.icons}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.control} onPress={this.handlePlayPause}>
+              {this.state.isPlaying ? (<Image source={require('../assets/icons/hold.png')} style={styles.icons}/>) : (<Image source={require('../assets/icons/play.png')} style={styles.icons}/>)}
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.control} onPress={this.handleNextTrack}>
+              <Image source={require('../assets/icons/forward.png')} style={styles.icons}/>
+            </TouchableOpacity>
+            <Tooltip backgroundColor='#E5E4E4' popover={<Text>Test</Text>}>
+              <Image source={require('../assets/icons/volume.png')} style={[styles.icons, styles.control]}/>
+            </Tooltip>
+          </View>
         </View>
-        {this.renderFileInfo()}
       </View>
     )
   }
@@ -194,30 +197,38 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center'
   },
+  player: {
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'#E5E4E4',
+    width:wp('100%'),
+    height:hp('45%')
+  },
   albumCover: {
     width:wp('80%'),
-    height:hp('40%')
+    height:hp('20%'),
+    margin:wp('6%')
   },
   trackInfo: {
-    padding: 40,
-    backgroundColor: '#fff'
+    width:wp('60%'),
+    justifyContent:'flex-start',
   },
-  trackInfoText: {
-    textAlign: 'center',
-    flexWrap: 'wrap',
-    color: '#550088'
+  artistName: {
+    flexWrap:'wrap',
+    fontSize:hp('2%'),
+    fontWeight:"bold",
+    color: '#383838'
   },
-  largeText: {
-    fontSize: 22
-  },
-  smallText: {
-    fontSize: 16
+  trackName: {
+    flexWrap:'wrap',
+    fontSize:hp('2%'),
+    color: '#383838'
   },
   controls: {
     flexDirection:'row'
   },
   control: {
-    margin:wp('8%')
+    margin:wp('6%')
   },
   icons: {
     width:wp('9.1%'), 

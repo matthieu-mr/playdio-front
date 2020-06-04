@@ -15,7 +15,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 
 import * as AuthSession from 'expo-auth-session';
-import spotifyCredentials from './screens/secrets';
+import spotifyCredentials from './screens/components/secrets';
 
 import Connect from './screens/connect'
 import SignUp from './screens/signUp'
@@ -24,7 +24,7 @@ import Playlist from './screens/Playlist';
 import Search from './screens/Search';
 import Play from './screens/Play';
 import AddRadio1 from './screens/CreateRadioStep1'
-
+import AddRadio2 from './screens/CreateRadioStep2'
 
 
 import {createStore, combineReducers} from 'redux';
@@ -33,6 +33,7 @@ import Login from './reducers/login'
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
 const store = createStore(combineReducers({Login}))
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
@@ -81,6 +82,7 @@ StackNavigator = createStackNavigator({
   Playlist: Playlist,
   Play:Play,
  AddRadio : AddRadio1,
+ AddRadio2 : AddRadio2,
   BottomNavigator:BottomNavigator
 }, 
 { 
