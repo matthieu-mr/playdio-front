@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, Image, Text, Slider } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
 import { Tooltip } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av'
+// import Slider from '@react-native-community/slider';
 
 // ----------------------------------------
 // PLAYLIST TEMPLATE EXAMPLE
@@ -183,6 +184,7 @@ export default class Play extends React.Component {
             </Tooltip>
           </View>
         </View>
+
       </View>
     )
   }
