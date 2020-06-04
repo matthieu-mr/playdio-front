@@ -30,7 +30,7 @@ useEffect( ()=>{
   }
 },[])
 async function autoriseSpotify(){
-  var infoClientID = await fetch ('http://192.168.1.43:3000/autorisation')
+  var infoClientID = await fetch ('http://192.168.0.25:3000/autorisation')
   var reponse = await infoClientID.json()
   getTokens(reponse.clientId,reponse.redirectURI,reponse.clientSecret)
   
@@ -44,7 +44,7 @@ async function autoriseSpotify(){
       <Button 
       title="continuer vers la Home"
       type="solid"
-      onPress={()=>{navigation.navigate("Home"); getUserPlaylists()} }
+      onPress={()=>{navigation.navigate("Home")} }
       />
       <Button
       iconRight

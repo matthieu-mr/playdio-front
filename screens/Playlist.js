@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
-import { Avatar, Badge, Icon, withBadge,Card,List,ListItem } from 'react-native-elements'
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
 
@@ -4925,7 +4925,9 @@ let playslistTrackList =[] ;
       <Text> Playlist</Text>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
-          <Icon type="entypo" color="#01737D" name="circle-with-plus" size='55' style={styles.avatar} />
+          <Image
+        style={{width: 50, height: 50}}
+        source={require('../assets/icons/add_blue.png')} />
             <View style={styles.avatar}>
               {avatarList}
             </View>
