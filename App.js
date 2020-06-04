@@ -15,7 +15,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 
 import * as AuthSession from 'expo-auth-session';
-import spotifyCredentials from './screens/secrets';
+import spotifyCredentials from './screens/components/secrets';
 
 import Connect from './screens/connect'
 import SignUp from './screens/signUp'
@@ -30,6 +30,7 @@ import Login from './reducers/login'
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
 const store = createStore(combineReducers({Login}))
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens

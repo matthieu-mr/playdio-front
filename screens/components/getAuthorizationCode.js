@@ -1,13 +1,14 @@
 import * as AuthSession from 'expo-auth-session';
-import spotifyCredentials from '../screens/secrets';
+import spotifyCredentials from './secrets';
 
 
 const scopesArr = ['user-modify-playback-state','user-read-currently-playing','user-read-playback-state','user-library-modify',
                    'user-library-read','playlist-read-private','playlist-read-collaborative','playlist-modify-public',
-                   'playlist-modify-private','user-read-recently-played','user-top-read'];
+                   'playlist-modify-private','user-read-recently-played','user-top-read','user-read-email'];
 const scopes = scopesArr.join(' ');
 
-const getAuthorizationCode = async () => {
+const getAuthorizationCode = async (clientId,redirectURI) => {
+
  try {
     const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
     const result = await AuthSession.startAsync({
@@ -15,16 +16,17 @@ const getAuthorizationCode = async () => {
         'https://accounts.spotify.com/authorize' +
         '?response_type=code' +
         '&client_id=' +
-        spotifyCredentials.clientId +
+        clientId +
         (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
         '&redirect_uri=' +
-        encodeURIComponent(redirectUrl),
+        encodeURIComponent(redirectURI),
     })
+    return result.params.code
   } catch (err) {
     console.error(err)
   }
-  console.log(code)
-  return result.params.code
+  
+  
 
 }
 

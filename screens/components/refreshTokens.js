@@ -1,6 +1,6 @@
 import * as AuthSession from 'expo-auth-session';
-import spotifyCredentials from '../screens/secrets'
-import getTokens from '../screens/getTokens'
+import spotifyCredentials from './secrets'
+import getTokens from './getTokens'
 
 
 const refreshTokens = async () => {

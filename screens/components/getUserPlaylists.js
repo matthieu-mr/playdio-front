@@ -1,4 +1,4 @@
-import getValidSPObj from '../screens/getValidSPObj'
+import getValidSPObj from './getValidSPObj'
 
 const getUserPlaylists = async () => {
     const sp = await getValidSPObj();
