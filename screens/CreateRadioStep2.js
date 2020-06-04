@@ -1,49 +1,36 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
-import { Avatar, Badge, Icon, withBadge,Card,List,ListItem } from 'react-native-elements'
+
+import { ListItem,Button,ButtonGroup } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 
+import police from '../screens/components/font';
 
-//  To toggle LTR/RTL uncomment the next line
-// I18nManager.allowRTL(true);
+import { TextField } from 'react-native-material-textfield';
 
-import AppleStyleSwipeableRow from './components/AppleStyleSwipeableRow';
-import GmailStyleSwipeableRow from './components/GmailStyleSwipeableRow';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-export default function Playlist(props) {
-/* const [listUser,setListUser]=useEffect() ;  */
+function CreateRadio2(props) {
 
+const [radioName, setRadioName] = useState()
 
-  let listTest = [
-    {name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-    {name:"John",url:"https://randomuser.me/api/portraits/men/40.jpg"},
-    {name:"albert",url:"https://randomuser.me/api/portraits/men/39.jpg"},
-    {name:"Moimeme",url:"https://randomuser.me/api/portraits/men/38.jpg"},
-    {name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-    {name:"John",url:"https://randomuser.me/api/portraits/men/40.jpg"},
-    {name:"albert",url:"https://randomuser.me/api/portraits/men/39.jpg"},
-    {name:"Moimeme",url:"https://randomuser.me/api/portraits/men/38.jpg"},
-    {name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-    {name:"John",url:"https://randomuser.me/api/portraits/men/40.jpg"},
-    {name:"albert",url:"https://randomuser.me/api/portraits/men/39.jpg"},
-    {name:"Moimeme",url:"https://randomuser.me/api/portraits/men/38.jpg"},
-  ]
+const [send, setSender] = useState(false);
 
 const quotes = [
-  { id: '0', text: 'It’s just a flesh wound.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
-  { id: '1', text: 'That is my least vulnerable spot.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
-  {id: '2',text: 'This building has to be at least…. three times bigger than this!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '3', text: 'I am serious. And don’t call me Shirley.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '4', text: 'Yeah, but I shoot with this hand.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '5', text: 'I’m just one stomach flu away from my goal weight.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
-  {id: '6',text:'I’m about to do to you what Limp Bizkit did to music in the late ’90s.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  {id: '7',text:'Martini. Gin, not vodka. Obviously. Stirred for 10 seconds while glancing at an unopened bottle of vermouth.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '8',text:'Greater good?’ I am your wife! I’m the greatest good you’re ever gonna get!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '9', text:'I feel comfortable using legal jargon in everyday life. [Someone catcalls her.] I object!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"
+    { id: '0', text: 'It’s just a flesh wound.',name:"david",url:"https://i.scdn.co/image/ab67706c0000da84c9db3330d884c134960db923" },
+    { id: '1', text: 'That is my least vulnerable spot.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
+    {id: '2',text: 'This building has to be at least…. three times bigger than this!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+    { id: '3', text: 'I am serious. And don’t call me Shirley.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+    { id: '4', text: 'Yeah, but I shoot with this hand.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+    { id: '5', text: 'I’m just one stomach flu away from my goal weight.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
+    {id: '6',text:'I’m about to do to you what Limp Bizkit did to music in the late ’90s.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+    {id: '7',text:'Martini. Gin, not vodka. Obviously. Stirred for 10 seconds while glancing at an unopened bottle of vermouth.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+    { id: '8',text:'Greater good?’ I am your wife! I’m the greatest good you’re ever gonna get!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
+    { id: '9', text:'I feel comfortable using legal jargon in everyday life. [Someone catcalls her.] I object!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"
+    },
+    {id: '10',text:'We get the warhead and we hold the world ransom for…. One million dollars.',
   },
-  {id: '10',text:'We get the warhead and we hold the world ransom for…. One million dollars.',
-},
-];
+  ];
 
   /* Example boody playlist spotify  */
   let playslistTrack =[
@@ -4899,38 +4886,76 @@ let playslistTrackList =[] ;
 
 
 
+/* Spotify : Get playlist informations */
 
-  /* ====> boucle avatar */
-  let avatarList = listTest.map ((item,i)=>{
-    return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
-  })
+  /* fff */
 
+
+
+
+/* Spotify : End Get playlist information */
+
+
+
+
+
+
+
+/*  recuperation des différents choix */
+ /*  gestion des mouvements */
+
+ const [idDel, setIdDel]= useState() ; 
+ const [ idAdd, setIdAdd] = useState() ;
+
+
+ /* futures fonction de gestion */
+ useEffect(() => {
+   console.log("change",idDel);
+   }, [idAdd]);
+
+
+   const buttons = ['Hello', 'World']
+   const [indexButton,setIndex]=useState([0])
   
-  /*  gestion des mouvements */
-
-  const [idDel, setIdDel]= useState() ; 
-  const [ idAdd, setIdAdd] = useState() ;
   
-
-
-  /* futures fonction de gestion */
-  useEffect(() => {
-    console.log("change",idDel);
-    }, [idAdd]);
-
   return (
+<View style={styles.container}>
 
-    <SafeAreaView style={styles.container}>
-      <Text> Playlist</Text>
-      {/* badge en haut de l'ecran */}
-          <ScrollView style={styles.scrollView} horizontal={true}>
-            <View style={styles.avatar}>
-              {avatarList}
-            </View>
-          </ScrollView>
 
+
+
+
+                {/*  "#c2185b" */}
+        
+                            <View style={styles.input}> 
+                            <Text> New Radio</Text>
+                            
+                            <TextField
+                                label={'Find a track'}
+                                highlightColor="#c2185b"
+                                onChangeText={ (value) => setRadioName(value) }
+                            
+                                />
+                            </View>
+
+                            <View>
+                                    <ButtonGroup
+                                    onPress={(e) => {alert('Simple Button pressed',e),setIndex(e) }}
+                                        selectedIndex={indexButton}
+                                        buttons={buttons}
+                                        containerStyle={{height: 40}}
+                                        selectedButtonStyle ={{
+                                            backgroundColor:"#00838F",
+                                        }}
+                                        />
+
+                            </View>
+
+                    <ScrollView>
     {/* liste des musiques */}
-            <FlatList
+                 <FlatList
+
+
                 data={playslistTrackList}
                 keyExtractor={item => item.id}
                 renderItem={({ item}) => (
@@ -4944,45 +4969,62 @@ let playslistTrackList =[] ;
                 ItemSeparatorComponent={() => <Separator />}
               />
 
-    {/*{musicList} */}
-          
-
-    </SafeAreaView>
-
+                    </ScrollView>
+         
+ 
+                <View style={styles.button}>
+                        <Button 
+                            title="Press me"
+                            onPress={() => alert('Simple Button pressed')}
+                            buttonStyle={{
+                                backgroundColor:"#00838F",
+                            }}
+                        />
+                 </View>
+  
+ </View>
   );
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+    container: {
+    display:"flex",
+    flex:1,
     backgroundColor: '#fff',   
-  },
-  scrollView: {
-    marginBottom:15,
-    marginHorizontal: 20,
+      },
+
+    form:{
+     display:"flex",
+     flex:1,
+
+      marginBottom:wp("15%"),
+    },
+
+  input:{
+    marginRight:wp('10%'),
+    marginLeft:wp('10%'),
+    marginBottom:wp('10%'),
+    },  
+
+
+  paramPlaylist:{  
+    backgroundColor: "#26a69a",
+    marginRight:wp('7%'),
+    marginLeft:wp('7%'),
+    marginBottom:wp('70%'),
   },
 
-  scrollViewscrollViewMusic: {
-    marginHorizontal: 20,
-    width:100,
-    flex: 1, marginLeft: 0, marginRight: 0
-  },
 
-  avatar: {
-    flex: 1,
-    flexDirection:"row",
-    padding:10,
-    marginLeft:10,
-    marginRight:10,
-  },
-  card: {
-    flex: 1,
-    flexDirection:"row",
-    padding:10,
-    marginLeft:10,
-    marginRight:10,
-  },
+  button:{
+   marginRight:wp('10%'),
+   marginLeft:wp('10%'),
+},
+
+
   
 });
+
+export default CreateRadio2
+
 

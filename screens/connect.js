@@ -45,7 +45,7 @@ async function autoriseSpotify(){
       <Button 
       title="continuer vers la Home"
       type="solid"
-      onPress={()=>navigation.navigate("Home")}
+      onPress={()=>{navigation.navigate("Home"); getUserPlaylists()} }
       />
       <Button
       iconRight

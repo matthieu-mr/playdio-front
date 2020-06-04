@@ -20,8 +20,6 @@ export default async function getTokens(clientId,redirectURI){
       }`,
     });
     const responseJson = await response.json();
-    console.log(responseJson.access_token)
-    console.log(responseJson)
     await fetch('http://192.168.1.43:3000/saveToken',{
       method:'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
