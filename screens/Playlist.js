@@ -4925,6 +4925,7 @@ let playslistTrackList =[] ;
       <Text> Playlist</Text>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
+          <Icon type="entypo" color="#01737D" name="circle-with-plus" size='55' style={styles.avatar} />
             <View style={styles.avatar}>
               {avatarList}
             </View>
@@ -4958,10 +4959,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',   
+    marginVertical: 0,
+    marginBottom:0,
   },
   scrollView: {
-    marginBottom:15,
+    marginBottom:20,
     marginHorizontal: 20,
+    paddingVertical: 0,
+    marginVertical: 20,
   },
 
   flatList: {
@@ -4980,9 +4985,21 @@ const styles = StyleSheet.create({
   avatar: {
     flex: 1,
     flexDirection:"row",
-    padding:30,
-    marginLeft:10,
+    padding:10,
     marginRight:10,
+    marginVertical: 0,
+    paddingVertical: 0,
+    marginBottom:20,
+  },
+
+  avatarbutton: {
+      flex: 1,
+      flexDirection:"row",
+      padding:30,
+      marginLeft:0,
+      marginRight:0,
+      marginVertical: 25,
+      paddingVertical: 0,
     
   },
   card: {
