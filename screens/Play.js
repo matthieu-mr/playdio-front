@@ -1,47 +1,60 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList } from 'react-native'
 import { Tooltip, Slider } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
+import ListItemSwap, { Separator } from './components/Swype';
 
 // ----------------------------------------
 // PLAYLIST TEMPLATE EXAMPLE
 
+
+
 const playlist = [
   {
+    id: 1,
     title: 'Sorry',
     author: 'Comfort Fit',
+    album: 'Not defined',
     source: 'Amazonaws',
     uri:
       'https://s3.amazonaws.com/exp-us-standard/audio/playlist-example/Comfort_Fit_-_03_-_Sorry.mp3',
     imageSource: 'https://i.ytimg.com/vi/JLElBAJL_mk/maxresdefault.jpg'
   },
   {
+    id: 2,
     title: 'Hamlet - Act II',
     author: 'William Shakespeare',
+    album: 'Not defined',
     source: 'Librivox',
     uri:
       'https://ia600204.us.archive.org/11/items/hamlet_0911_librivox/hamlet_act2_shakespeare.mp3',
     imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
   },
   {
+    id: 3,
     title: 'Hamlet - Act III',
     author: 'William Shakespeare',
+    album: 'Not defined',
     source: 'Librivox',
     uri: 'http://www.archive.org/download/hamlet_0911_librivox/hamlet_act3_shakespeare.mp3',
     imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
   },
   {
+    id: 4,
     title: 'Hamlet - Act IV',
     author: 'William Shakespeare',
+    album: 'Not defined',
     source: 'Librivox',
     uri:
       'https://ia800204.us.archive.org/11/items/hamlet_0911_librivox/hamlet_act4_shakespeare.mp3',
     imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
   },
   {
+    id: 5,
     title: 'Hamlet - Act V',
     author: 'William Shakespeare',
+    album: 'Not defined',
     source: 'Librivox',
     uri:
       'https://ia600204.us.archive.org/11/items/hamlet_0911_librivox/hamlet_act5_shakespeare.mp3',
@@ -49,12 +62,17 @@ const playlist = [
   }
 ]
 
+const playlistTracks = [];
+playlist.map((track,i)=>{ 
+  playlistTracks.push({id: track.id, name: track.title, text: track.album, url: track.imageSource});
+})  
 
 
 // ----------------------------------------
 // PLAY FUNCTION
 
 export default class Play extends React.Component {
+
 
   // INITIAL STATE
   state = {
@@ -66,6 +84,8 @@ export default class Play extends React.Component {
     isBuffering: false,
     isSeeking: false,
   }
+
+  
 
   // CONFIGURATION OF THE AUDIO COMPONENT
   async componentDidMount() {
@@ -210,6 +230,20 @@ export default class Play extends React.Component {
 
         </View>
 
+        <FlatList 
+          data={playlistTracks}
+          keyExtractor={item => item.id}
+          renderItem={({ item}) => (
+            <ListItemSwap style={styles.flatList}
+              {...item} 
+              onSwipeFromLeft={() => {alert('swiped from left!')}}
+              onSwipeFromRight={() => {alert('pressed right!')}}
+              
+            />
+          )}
+          ItemSeparatorComponent={() => <Separator />}
+        />
+
       </View>
     )
   }
@@ -277,6 +311,11 @@ const styles = StyleSheet.create({
   seekSlider: {
     width:wp('60%'), 
     height:hp('5%')
-  }
+  },
+  flatList: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    paddingVertical: 0,
+  },
 
 })
