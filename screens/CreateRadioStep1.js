@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch} from 'react-native';
 import { ListItem,Button } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
+import {connect} from 'react-redux';
+
 
 import police from '../screens/components/font';
 
@@ -18,6 +20,15 @@ const [send, setSender] = useState(false);
 
 
 console.log(radioName)
+
+let validPlaylist = ()=>{  
+        if (radioName){
+            props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly})
+            props.navigation.navigate('AddRadio2')
+        }else{
+            alert("The title of your playlist can't be empty")
+        }
+}
 
   return (
 <View style={styles.container}>
@@ -81,7 +92,7 @@ console.log(radioName)
                         <View style={styles.button}>
                         <Button 
                             title="Press me"
-                            onPress={()=>props.navigation.navigate("AddRadio2")}
+                            onPress={()=>validPlaylist()}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}
@@ -137,6 +148,21 @@ const styles = StyleSheet.create({
   
 });
 
-export default CreateRadio1
+
+function mapDispatchToProps(dispatch) {
+    return {
+      addplaylist: function(info) { 
+        dispatch( {type: 'addName',info }) 
+      }
+    }
+  }
+  
+  export default connect(
+      null, 
+      mapDispatchToProps
+  )(CreateRadio1);
+
+
+// export default CreateRadio1
 
 
