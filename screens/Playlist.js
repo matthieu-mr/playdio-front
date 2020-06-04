@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
+import Track from './components/Track';
 
 
 //  To toggle LTR/RTL uncomment the next line
@@ -91,8 +92,8 @@ const quotes = [
               />
 
     {/*{musicList} */}
-          
-
+    <Track
+ />
     </SafeAreaView>
 
   );
