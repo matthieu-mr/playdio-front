@@ -4885,23 +4885,933 @@ let playslistTrackList =[] ;
 /* Spotify : end Get All tracks from a playlist */
 
 
+/* Spotify : Get playlist informations */
+let listPlaylistFromSpotifiy = {
+    "href": "https://api.spotify.com/v1/users/1127664154/playlists?offset=0&limit=20",
+    "items": [
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/1Ts6GeiD5o29GYaYyFZZ4q"
+            },
+            "href": "https://api.spotify.com/v1/playlists/1Ts6GeiD5o29GYaYyFZZ4q",
+            "id": "1Ts6GeiD5o29GYaYyFZZ4q",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b273038f2f51ac3a4bd38dee58a6ab67616d0000b2731e0f8284a6b77f174bb58e77ab67616d0000b2734d86115c1bc917d78c7f0dbdab67616d0000b273ec71e12a22d3052e5f438445",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b273038f2f51ac3a4bd38dee58a6ab67616d0000b2731e0f8284a6b77f174bb58e77ab67616d0000b2734d86115c1bc917d78c7f0dbdab67616d0000b273ec71e12a22d3052e5f438445",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b273038f2f51ac3a4bd38dee58a6ab67616d0000b2731e0f8284a6b77f174bb58e77ab67616d0000b2734d86115c1bc917d78c7f0dbdab67616d0000b273ec71e12a22d3052e5f438445",
+                    "width": 60
+                }
+            ],
+            "name": "AKAppella",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MTEsOGIwZTJlNThlMzM0YjczODllOWMyNjZlZWQ3MjVjYTBhOGY3NzE0Mg==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/1Ts6GeiD5o29GYaYyFZZ4q/tracks",
+                "total": 10
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:1Ts6GeiD5o29GYaYyFZZ4q"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/1kMdO8eIX3AJgQlbtTRqsf"
+            },
+            "href": "https://api.spotify.com/v1/playlists/1kMdO8eIX3AJgQlbtTRqsf",
+            "id": "1kMdO8eIX3AJgQlbtTRqsf",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2730d446d11140e3cddbefcb25dab67616d0000b273a2f118f11ba8c400781a23fcab67616d0000b273b65d7723d530449ee39786f0ab67616d0000b273de9caec0e92afe49dabda35a",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2730d446d11140e3cddbefcb25dab67616d0000b273a2f118f11ba8c400781a23fcab67616d0000b273b65d7723d530449ee39786f0ab67616d0000b273de9caec0e92afe49dabda35a",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2730d446d11140e3cddbefcb25dab67616d0000b273a2f118f11ba8c400781a23fcab67616d0000b273b65d7723d530449ee39786f0ab67616d0000b273de9caec0e92afe49dabda35a",
+                    "width": 60
+                }
+            ],
+            "name": "Bossa",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MTksNWY2MjhmNWQ4NmMxZDc2Y2I0OWY1MjVlYmQ1MDkyOWNkZmM0OWVhMw==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/1kMdO8eIX3AJgQlbtTRqsf/tracks",
+                "total": 18
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:1kMdO8eIX3AJgQlbtTRqsf"
+        },
+        {
+            "collaborative": false,
+            "description": "Mellow jazz to stay focused or unwind.",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX2vYju3i0lNX"
+            },
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX2vYju3i0lNX",
+            "id": "37i9dQZF1DX2vYju3i0lNX",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://i.scdn.co/image/ab67706f00000002bf586e7899a59fe5988c48b4",
+                    "width": null
+                }
+            ],
+            "name": "Chilled Jazz",
+            "owner": {
+                "display_name": "Spotify",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/spotify"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify",
+                "id": "spotify",
+                "type": "user",
+                "uri": "spotify:user:spotify"
+            },
+            "primary_color": null,
+            "public": false,
+            "snapshot_id": "MTU5MTEwMDczMiwwMDAwMDA1MTAwMDAwMTcyNzRmZTc1YTUwMDAwMDE3MGM0OTZhZTBk",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX2vYju3i0lNX/tracks",
+                "total": 135
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:37i9dQZF1DX2vYju3i0lNX"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/1BuPtcowCGYMrjw9ZkE4O5"
+            },
+            "href": "https://api.spotify.com/v1/playlists/1BuPtcowCGYMrjw9ZkE4O5",
+            "id": "1BuPtcowCGYMrjw9ZkE4O5",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2731061524b7fe4e944c74173ebab67616d0000b2731c07868248885ea7d8376039ab67616d0000b27365e00cb777e7dc6afb575dedab67616d0000b273b61206f3153e9037a22dd32d",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2731061524b7fe4e944c74173ebab67616d0000b2731c07868248885ea7d8376039ab67616d0000b27365e00cb777e7dc6afb575dedab67616d0000b273b61206f3153e9037a22dd32d",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2731061524b7fe4e944c74173ebab67616d0000b2731c07868248885ea7d8376039ab67616d0000b27365e00cb777e7dc6afb575dedab67616d0000b273b61206f3153e9037a22dd32d",
+                    "width": 60
+                }
+            ],
+            "name": "Classic Chill",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MjEsYjlmNDk3ZTZlZjA5ZDE0MzNhOGM3ZmZjN2RiYTgxOTY4MTczMjU1Ng==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/1BuPtcowCGYMrjw9ZkE4O5/tracks",
+                "total": 19
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:1BuPtcowCGYMrjw9ZkE4O5"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/5SAeDWG1rCLdoY4yj0FaEC"
+            },
+            "href": "https://api.spotify.com/v1/playlists/5SAeDWG1rCLdoY4yj0FaEC",
+            "id": "5SAeDWG1rCLdoY4yj0FaEC",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2730bdce327ef51b0ecac1f1797ab67616d0000b273564b140043e21d94f0f79c09ab67616d0000b2736d138e3ced14eb7a266aa6d2ab67616d0000b273855f340a32265cf001077a15",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2730bdce327ef51b0ecac1f1797ab67616d0000b273564b140043e21d94f0f79c09ab67616d0000b2736d138e3ced14eb7a266aa6d2ab67616d0000b273855f340a32265cf001077a15",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2730bdce327ef51b0ecac1f1797ab67616d0000b273564b140043e21d94f0f79c09ab67616d0000b2736d138e3ced14eb7a266aa6d2ab67616d0000b273855f340a32265cf001077a15",
+                    "width": 60
+                }
+            ],
+            "name": "Hardouse",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MTAsYWRiOGU2NjY0NTc4YWRjZjU1NWNlMzBiZTlkN2EzNmEwMDYwMTUwMg==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/5SAeDWG1rCLdoY4yj0FaEC/tracks",
+                "total": 9
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:5SAeDWG1rCLdoY4yj0FaEC"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/3Yx9sZfK4K8JBV9yRd5gMM"
+            },
+            "href": "https://api.spotify.com/v1/playlists/3Yx9sZfK4K8JBV9yRd5gMM",
+            "id": "3Yx9sZfK4K8JBV9yRd5gMM",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2731319b036dcc379ac8643a4c9ab67616d0000b2732e2c2803f18f4dbe54936876ab67616d0000b273f507ddf8552ab13e5b3deea5b5d9bd07445bed63ffbd3b078ed664f51d10999f",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2731319b036dcc379ac8643a4c9ab67616d0000b2732e2c2803f18f4dbe54936876ab67616d0000b273f507ddf8552ab13e5b3deea5b5d9bd07445bed63ffbd3b078ed664f51d10999f",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2731319b036dcc379ac8643a4c9ab67616d0000b2732e2c2803f18f4dbe54936876ab67616d0000b273f507ddf8552ab13e5b3deea5b5d9bd07445bed63ffbd3b078ed664f51d10999f",
+                    "width": 60
+                }
+            ],
+            "name": "Soulful House Funky House & Classics Steve Adams Dic2018",
+            "owner": {
+                "display_name": "jhgahny",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/jhgahny"
+                },
+                "href": "https://api.spotify.com/v1/users/jhgahny",
+                "id": "jhgahny",
+                "type": "user",
+                "uri": "spotify:user:jhgahny"
+            },
+            "primary_color": null,
+            "public": false,
+            "snapshot_id": "MjAsNmQ3NmUxNjJlYTgwOWYzNjVhYzNkNTg0ZWZkNGE1NmYwN2YzNjBjYg==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/3Yx9sZfK4K8JBV9yRd5gMM/tracks",
+                "total": 19
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:3Yx9sZfK4K8JBV9yRd5gMM"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/3okbmaRxOgoCn36JVt7tVp"
+            },
+            "href": "https://api.spotify.com/v1/playlists/3okbmaRxOgoCn36JVt7tVp",
+            "id": "3okbmaRxOgoCn36JVt7tVp",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2732a51ba9d25ebff1de3032867ab67616d0000b273752be999fce3c3ea5ee48643ab67616d0000b27385f2f5754dedf35fd21edd7eab67616d0000b27398768b94fbe8ddda2dd87d9c",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2732a51ba9d25ebff1de3032867ab67616d0000b273752be999fce3c3ea5ee48643ab67616d0000b27385f2f5754dedf35fd21edd7eab67616d0000b27398768b94fbe8ddda2dd87d9c",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2732a51ba9d25ebff1de3032867ab67616d0000b273752be999fce3c3ea5ee48643ab67616d0000b27385f2f5754dedf35fd21edd7eab67616d0000b27398768b94fbe8ddda2dd87d9c",
+                    "width": 60
+                }
+            ],
+            "name": "Raygae",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MTEsMjY5MTg2Y2EwYzExZWZlMjFkNGRjZjExNWVhYjgwYThkNTAzNjdmNQ==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/3okbmaRxOgoCn36JVt7tVp/tracks",
+                "total": 10
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:3okbmaRxOgoCn36JVt7tVp"
+        },
+        {
+            "collaborative": false,
+            "description": "Only Glitch Hop, Dubstep and related madness.",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/4Y0aoy9l5vCbp4n2TOuYif"
+            },
+            "href": "https://api.spotify.com/v1/playlists/4Y0aoy9l5vCbp4n2TOuYif",
+            "id": "4Y0aoy9l5vCbp4n2TOuYif",
+            "images": [
+                {
+                    "height": null,
+                    "url": "https://i.scdn.co/image/ab67706c0000da84c9db3330d884c134960db923",
+                    "width": null
+                }
+            ],
+            "name": "Glitch Hop",
+            "owner": {
+                "display_name": "Max te Laak",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/bananakuba"
+                },
+                "href": "https://api.spotify.com/v1/users/bananakuba",
+                "id": "bananakuba",
+                "type": "user",
+                "uri": "spotify:user:bananakuba"
+            },
+            "primary_color": null,
+            "public": false,
+            "snapshot_id": "MzM3LDc4ZWNhYjZhNTBkZjkwYzI2MGU1ODBlNTljZjlhNTU2M2Y1M2FkOTA=",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/4Y0aoy9l5vCbp4n2TOuYif/tracks",
+                "total": 101
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:4Y0aoy9l5vCbp4n2TOuYif"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/6KbsN9Cfk6hHtnx4NiaWAS"
+            },
+            "href": "https://api.spotify.com/v1/playlists/6KbsN9Cfk6hHtnx4NiaWAS",
+            "id": "6KbsN9Cfk6hHtnx4NiaWAS",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2732e92f776279eaf45d14a33fdab67616d0000b2737a7e346587596ca71fa8f4a1ab67616d0000b273c30e3fe7ac8b94aa3d803fd1ab67616d0000b273f4e825f885daff79ad87859a",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2732e92f776279eaf45d14a33fdab67616d0000b2737a7e346587596ca71fa8f4a1ab67616d0000b273c30e3fe7ac8b94aa3d803fd1ab67616d0000b273f4e825f885daff79ad87859a",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2732e92f776279eaf45d14a33fdab67616d0000b2737a7e346587596ca71fa8f4a1ab67616d0000b273c30e3fe7ac8b94aa3d803fd1ab67616d0000b273f4e825f885daff79ad87859a",
+                    "width": 60
+                }
+            ],
+            "name": "favoris",
+            "owner": {
+                "display_name": "zackpathou",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/zackpathou"
+                },
+                "href": "https://api.spotify.com/v1/users/zackpathou",
+                "id": "zackpathou",
+                "type": "user",
+                "uri": "spotify:user:zackpathou"
+            },
+            "primary_color": null,
+            "public": false,
+            "snapshot_id": "MTU2LDBjMzAyOTk1MmYwNjNkMGVkNjJkM2Q3YWU5ZjEzNWY0N2Q3ZmZjMWM=",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/6KbsN9Cfk6hHtnx4NiaWAS/tracks",
+                "total": 106
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:6KbsN9Cfk6hHtnx4NiaWAS"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/1l8cbDtnfxs2fuI4r8MG2K"
+            },
+            "href": "https://api.spotify.com/v1/playlists/1l8cbDtnfxs2fuI4r8MG2K",
+            "id": "1l8cbDtnfxs2fuI4r8MG2K",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b27343237c122eb32ad0cba34b0aab67616d0000b2734e24f7d0cf3b58922d3a75d8ab67616d0000b2735843cc4417dc0ab7d130d011ab67616d0000b2738c4e95986c803791125e8991",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b27343237c122eb32ad0cba34b0aab67616d0000b2734e24f7d0cf3b58922d3a75d8ab67616d0000b2735843cc4417dc0ab7d130d011ab67616d0000b2738c4e95986c803791125e8991",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b27343237c122eb32ad0cba34b0aab67616d0000b2734e24f7d0cf3b58922d3a75d8ab67616d0000b2735843cc4417dc0ab7d130d011ab67616d0000b2738c4e95986c803791125e8991",
+                    "width": 60
+                }
+            ],
+            "name": "Classic old school",
+            "owner": {
+                "display_name": "zackpathou",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/zackpathou"
+                },
+                "href": "https://api.spotify.com/v1/users/zackpathou",
+                "id": "zackpathou",
+                "type": "user",
+                "uri": "spotify:user:zackpathou"
+            },
+            "primary_color": null,
+            "public": false,
+            "snapshot_id": "NjgsYzgwYTFjN2Q3ZTc1Yzc5OTZjMDZjNjU1OWVjNTZlYTk4OGMyYjQ0YQ==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/1l8cbDtnfxs2fuI4r8MG2K/tracks",
+                "total": 60
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:1l8cbDtnfxs2fuI4r8MG2K"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/54tjhPDK1w6mlJRvpowr6P"
+            },
+            "href": "https://api.spotify.com/v1/playlists/54tjhPDK1w6mlJRvpowr6P",
+            "id": "54tjhPDK1w6mlJRvpowr6P",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2736999d55e36b6b7a879b6396dab67616d0000b27369ff5ae6985c4e8e8d6f84ffab67616d0000b273dcd9fe1276c16fcdad98c50cab67616d0000b273f52048ccaec7f8e1550250c1",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2736999d55e36b6b7a879b6396dab67616d0000b27369ff5ae6985c4e8e8d6f84ffab67616d0000b273dcd9fe1276c16fcdad98c50cab67616d0000b273f52048ccaec7f8e1550250c1",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2736999d55e36b6b7a879b6396dab67616d0000b27369ff5ae6985c4e8e8d6f84ffab67616d0000b273dcd9fe1276c16fcdad98c50cab67616d0000b273f52048ccaec7f8e1550250c1",
+                    "width": 60
+                }
+            ],
+            "name": "HardElec",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MTcsMWMyMTk2MTUxMmY2MWZmYTcyNjQzMTJjNjNhODFmYjczY2FlOTVkOQ==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/54tjhPDK1w6mlJRvpowr6P/tracks",
+                "total": 13
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:54tjhPDK1w6mlJRvpowr6P"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/31uPWAtq1m0dRGLQwzVJpe"
+            },
+            "href": "https://api.spotify.com/v1/playlists/31uPWAtq1m0dRGLQwzVJpe",
+            "id": "31uPWAtq1m0dRGLQwzVJpe",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b27332b19ae70db57adf4d6ad4f4ab67616d0000b2734563b657db96a70b93449cefab67616d0000b27373295f477b9addaab4a4ba79ab67616d0000b273e2e82866210d3d452008f77f",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b27332b19ae70db57adf4d6ad4f4ab67616d0000b2734563b657db96a70b93449cefab67616d0000b27373295f477b9addaab4a4ba79ab67616d0000b273e2e82866210d3d452008f77f",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b27332b19ae70db57adf4d6ad4f4ab67616d0000b2734563b657db96a70b93449cefab67616d0000b27373295f477b9addaab4a4ba79ab67616d0000b273e2e82866210d3d452008f77f",
+                    "width": 60
+                }
+            ],
+            "name": "Elecfunky",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MjgsNTk4MzMzMDFmNDdiZDZlYzQ4NGQ1MDI5MzYwZGVmYjIxYjEwYzU0YQ==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/31uPWAtq1m0dRGLQwzVJpe/tracks",
+                "total": 26
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:31uPWAtq1m0dRGLQwzVJpe"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/0RfIGLD8VTUw3u6pG1wwjU"
+            },
+            "href": "https://api.spotify.com/v1/playlists/0RfIGLD8VTUw3u6pG1wwjU",
+            "id": "0RfIGLD8VTUw3u6pG1wwjU",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b27300961dc08e2e6241a504b694ab67616d0000b2736e5e97eec07fb328e4ba9fb9ab67616d0000b273972a2048dcdbd8a356dce361ab67616d0000b273e9a469e5e30e6150d6ceaee0",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b27300961dc08e2e6241a504b694ab67616d0000b2736e5e97eec07fb328e4ba9fb9ab67616d0000b273972a2048dcdbd8a356dce361ab67616d0000b273e9a469e5e30e6150d6ceaee0",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b27300961dc08e2e6241a504b694ab67616d0000b2736e5e97eec07fb328e4ba9fb9ab67616d0000b273972a2048dcdbd8a356dce361ab67616d0000b273e9a469e5e30e6150d6ceaee0",
+                    "width": 60
+                }
+            ],
+            "name": "C'est bon",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "NTYsMDRjYzRhZmQwYjQ5ZTZlZWIyNDZjMGFlZjI4YmQ4MGU1MjU5Y2MzYg==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/0RfIGLD8VTUw3u6pG1wwjU/tracks",
+                "total": 48
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:0RfIGLD8VTUw3u6pG1wwjU"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/6ZEQww4dDNJkIhvr2DzCZf"
+            },
+            "href": "https://api.spotify.com/v1/playlists/6ZEQww4dDNJkIhvr2DzCZf",
+            "id": "6ZEQww4dDNJkIhvr2DzCZf",
+            "images": [],
+            "name": "YouTube",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": false,
+            "snapshot_id": "MSwxZjRmMjNkMTRjOTExODY3ZTM3MGMwZWU4MmFlODRhNDgxYjU3Mzhm",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/6ZEQww4dDNJkIhvr2DzCZf/tracks",
+                "total": 0
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:6ZEQww4dDNJkIhvr2DzCZf"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/5rQkJyaKpu3m4OLBKMLpMv"
+            },
+            "href": "https://api.spotify.com/v1/playlists/5rQkJyaKpu3m4OLBKMLpMv",
+            "id": "5rQkJyaKpu3m4OLBKMLpMv",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b273381371cb8ce680d0dc324600ab67616d0000b2737f5ae966dfe207d5d2b5c025ab67616d0000b273ada8d00d23273a097e6df364ab67616d0000b273e2213d84fabb15100c425198",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b273381371cb8ce680d0dc324600ab67616d0000b2737f5ae966dfe207d5d2b5c025ab67616d0000b273ada8d00d23273a097e6df364ab67616d0000b273e2213d84fabb15100c425198",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b273381371cb8ce680d0dc324600ab67616d0000b2737f5ae966dfe207d5d2b5c025ab67616d0000b273ada8d00d23273a097e6df364ab67616d0000b273e2213d84fabb15100c425198",
+                    "width": 60
+                }
+            ],
+            "name": "Cool rock",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "ODMsMDc3YzM5NTE1NjVmM2RhMzkyNWE5NGMzNjhhNTg2ZDZjMDBkZTgwZg==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/5rQkJyaKpu3m4OLBKMLpMv/tracks",
+                "total": 75
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:5rQkJyaKpu3m4OLBKMLpMv"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/1mjmlCQUQqriLM1t5vnGJE"
+            },
+            "href": "https://api.spotify.com/v1/playlists/1mjmlCQUQqriLM1t5vnGJE",
+            "id": "1mjmlCQUQqriLM1t5vnGJE",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2731c61618483f2163cf11990f2ab67616d0000b2732d8f80850ebabdc86ea49c89ab67616d0000b2736b3463e7160d333ada4b175aab67616d0000b273bd3b9c3c98f7ec338afbca8f",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2731c61618483f2163cf11990f2ab67616d0000b2732d8f80850ebabdc86ea49c89ab67616d0000b2736b3463e7160d333ada4b175aab67616d0000b273bd3b9c3c98f7ec338afbca8f",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2731c61618483f2163cf11990f2ab67616d0000b2732d8f80850ebabdc86ea49c89ab67616d0000b2736b3463e7160d333ada4b175aab67616d0000b273bd3b9c3c98f7ec338afbca8f",
+                    "width": 60
+                }
+            ],
+            "name": "sportivation",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MTgsNjc1OGIwNWUwY2Q5ZTY0OTQzMzExYTQ2ODZmNjg0MjQ2YmExNjlmZA==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/1mjmlCQUQqriLM1t5vnGJE/tracks",
+                "total": 14
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:1mjmlCQUQqriLM1t5vnGJE"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/47pg3WJdfEcLckrsigmkUK"
+            },
+            "href": "https://api.spotify.com/v1/playlists/47pg3WJdfEcLckrsigmkUK",
+            "id": "47pg3WJdfEcLckrsigmkUK",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2733d9de37d9217f51dc24f1a53ab67616d0000b2739cd0a4328101c8a169b661f5ab67616d0000b273a057ec26a33fa43a774d3357ab67616d0000b273b80ecbfa6740408bfa9d3fe9",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2733d9de37d9217f51dc24f1a53ab67616d0000b2739cd0a4328101c8a169b661f5ab67616d0000b273a057ec26a33fa43a774d3357ab67616d0000b273b80ecbfa6740408bfa9d3fe9",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2733d9de37d9217f51dc24f1a53ab67616d0000b2739cd0a4328101c8a169b661f5ab67616d0000b273a057ec26a33fa43a774d3357ab67616d0000b273b80ecbfa6740408bfa9d3fe9",
+                    "width": 60
+                }
+            ],
+            "name": "us teck",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MjEsNTFlMjBiMDM4ZmM0ODQ3M2M1OTQzNTQwYzM3NmVhMjkxM2U4Zjc4Yg==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/47pg3WJdfEcLckrsigmkUK/tracks",
+                "total": 19
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:47pg3WJdfEcLckrsigmkUK"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/0OsrKbjSoNiNYjKL9ocegZ"
+            },
+            "href": "https://api.spotify.com/v1/playlists/0OsrKbjSoNiNYjKL9ocegZ",
+            "id": "0OsrKbjSoNiNYjKL9ocegZ",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b2730fddbfc5ffd38a79bfbc444bab67616d0000b2731cda3c101a0876e45725c009ab67616d0000b2734acc617cf4fd2eead7c88f96ab67616d0000b27352b9e0f6b4402ca315c606d2",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b2730fddbfc5ffd38a79bfbc444bab67616d0000b2731cda3c101a0876e45725c009ab67616d0000b2734acc617cf4fd2eead7c88f96ab67616d0000b27352b9e0f6b4402ca315c606d2",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b2730fddbfc5ffd38a79bfbc444bab67616d0000b2731cda3c101a0876e45725c009ab67616d0000b2734acc617cf4fd2eead7c88f96ab67616d0000b27352b9e0f6b4402ca315c606d2",
+                    "width": 60
+                }
+            ],
+            "name": "Electro swing",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "ODcsNjk3NWE0ZTUzZmEyNzRhMGQyN2JlM2FhZWE2MTVkMTUxMTAxMjFmZA==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/0OsrKbjSoNiNYjKL9ocegZ/tracks",
+                "total": 69
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:0OsrKbjSoNiNYjKL9ocegZ"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/1WH2z5a9oo9iU2nCTfHVDK"
+            },
+            "href": "https://api.spotify.com/v1/playlists/1WH2z5a9oo9iU2nCTfHVDK",
+            "id": "1WH2z5a9oo9iU2nCTfHVDK",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b27301a6faf91e207748e8e32e0aab67616d0000b273063fc4921a6d7fbac76e9bbaab67616d0000b2736ca5c90113b30c3c43ffb8f4ab67616d0000b273dd8a03138c7024a8478eed7e",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b27301a6faf91e207748e8e32e0aab67616d0000b273063fc4921a6d7fbac76e9bbaab67616d0000b2736ca5c90113b30c3c43ffb8f4ab67616d0000b273dd8a03138c7024a8478eed7e",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b27301a6faf91e207748e8e32e0aab67616d0000b273063fc4921a6d7fbac76e9bbaab67616d0000b2736ca5c90113b30c3c43ffb8f4ab67616d0000b273dd8a03138c7024a8478eed7e",
+                    "width": 60
+                }
+            ],
+            "name": "Undisputed",
+            "owner": {
+                "display_name": "Dan Somlo",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/dansomlo"
+                },
+                "href": "https://api.spotify.com/v1/users/dansomlo",
+                "id": "dansomlo",
+                "type": "user",
+                "uri": "spotify:user:dansomlo"
+            },
+            "primary_color": null,
+            "public": false,
+            "snapshot_id": "NzEsNTM3NTRhZjE5YmU5YmVhMGNlN2Q5NTFiZTAwNWMyMDA3ZmNjMTNhOQ==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/1WH2z5a9oo9iU2nCTfHVDK/tracks",
+                "total": 59
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:1WH2z5a9oo9iU2nCTfHVDK"
+        },
+        {
+            "collaborative": false,
+            "description": "",
+            "external_urls": {
+                "spotify": "https://open.spotify.com/playlist/6oOoGoYKQTdB0q2vwEMC9o"
+            },
+            "href": "https://api.spotify.com/v1/playlists/6oOoGoYKQTdB0q2vwEMC9o",
+            "id": "6oOoGoYKQTdB0q2vwEMC9o",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://mosaic.scdn.co/640/ab67616d0000b273777c5fdae315d921a3784f21ab67616d0000b273b30c8b93cef6fa26f8a7f17aab67616d0000b273f79ed09155e87ba56eeeea2dab67616d0000b273f81891d2e28007ef6b918acd",
+                    "width": 640
+                },
+                {
+                    "height": 300,
+                    "url": "https://mosaic.scdn.co/300/ab67616d0000b273777c5fdae315d921a3784f21ab67616d0000b273b30c8b93cef6fa26f8a7f17aab67616d0000b273f79ed09155e87ba56eeeea2dab67616d0000b273f81891d2e28007ef6b918acd",
+                    "width": 300
+                },
+                {
+                    "height": 60,
+                    "url": "https://mosaic.scdn.co/60/ab67616d0000b273777c5fdae315d921a3784f21ab67616d0000b273b30c8b93cef6fa26f8a7f17aab67616d0000b273f79ed09155e87ba56eeeea2dab67616d0000b273f81891d2e28007ef6b918acd",
+                    "width": 60
+                }
+            ],
+            "name": "Funk",
+            "owner": {
+                "display_name": "Matthieu Michon Rossel",
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/user/1127664154"
+                },
+                "href": "https://api.spotify.com/v1/users/1127664154",
+                "id": "1127664154",
+                "type": "user",
+                "uri": "spotify:user:1127664154"
+            },
+            "primary_color": null,
+            "public": true,
+            "snapshot_id": "MzQsM2NjZWNjM2MzZTU2MzJiZWFmNjNlNzdkYzA3ZmE3YWM0YzlmZGY3ZQ==",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/playlists/6oOoGoYKQTdB0q2vwEMC9o/tracks",
+                "total": 28
+            },
+            "type": "playlist",
+            "uri": "spotify:playlist:6oOoGoYKQTdB0q2vwEMC9o"
+        }
+    ],
+    "limit": 20,
+    "next": "https://api.spotify.com/v1/users/1127664154/playlists?offset=20&limit=20",
+    "offset": 0,
+    "previous": null,
+    "total": 33
+}
+
+
+// info globales
+let nbPlaylist = listPlaylistFromSpotifiy.total
+
+let listOfPlaylist =[] ;
+
+let infoplaylistGlobal = listPlaylistFromSpotifiy.items // recuperation de la liste de stracks
+let infoPlaylist = infoplaylistGlobal.map((info,i)=>{
+
+    let namePlaylist = info.name
+    let nbTracks = info.tracks.total
+    let spotifyId = info.id
+    let textDescr = nbTracks + " Tracks"
+    let imgPlaylist = 'https://image.freepik.com/vecteurs-libre/illustration-icone-application-musicale_53876-35882.jpg'
+    
+    if(info.images[0]){
+       // console.log(" ------------hello === ", i)
+       imgPlaylist = info.images[0].url
+    }
+   // console.log(namePlaylist)
+ listOfPlaylist.push({id:i,name:namePlaylist,text:textDescr,url:imgPlaylist,spotifyId:spotifyId})
+
+})
+
+
+
 
 /* Spotify : Get playlist informations */
 
-  /* fff */
 
 
-
-
-/* Spotify : End Get playlist information */
-
-
-
-
-
-
-
-/*  recuperation des différents choix */
  /*  gestion des mouvements */
 
  const [idDel, setIdDel]= useState() ; 
@@ -4956,7 +5866,7 @@ let playslistTrackList =[] ;
                  <FlatList
 
 
-                data={playslistTrackList}
+                data={listOfPlaylist}
                 keyExtractor={item => item.id}
                 renderItem={({ item}) => (
                   <ListItemSwap
