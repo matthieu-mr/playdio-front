@@ -5,11 +5,6 @@ import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
 
 
-//  To toggle LTR/RTL uncomment the next line
-// I18nManager.allowRTL(true);
-
-import AppleStyleSwipeableRow from './components/AppleStyleSwipeableRow';
-import GmailStyleSwipeableRow from './components/GmailStyleSwipeableRow';
 
 export default function Playlist(props) {
 /* const [listUser,setListUser]=useEffect() ;  */
