@@ -1,14 +1,13 @@
 import React,{useState} from 'react';
 import * as AuthSession from 'expo-auth-session';
 import { encode as btoa } from 'base-64';
-import spotifyCredentials from './secrets';
 import getAuthorizationCode from './getAuthorizationCode';
 
-export default async function getTokens(clientId,redirectURI){
+export default async function getTokens(clientId,redirectURI,clientSecret){
 
   try {
     const authorizationCode = await getAuthorizationCode(clientId,redirectURI)
-    const credsB64 = btoa(`${spotifyCredentials.clientId}:${spotifyCredentials.clientSecret}`);
+    const credsB64 = btoa(`${clientId}:${clientSecret}`);
     const response = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       headers: {
@@ -16,7 +15,7 @@ export default async function getTokens(clientId,redirectURI){
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: `grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${
-        spotifyCredentials.redirectUri
+        redirectURI
       }`,
     });
     const responseJson = await response.json();

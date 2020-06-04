@@ -1,5 +1,4 @@
 import * as AuthSession from 'expo-auth-session';
-import spotifyCredentials from './secrets';
 
 
 const scopesArr = ['user-modify-playback-state','user-read-currently-playing','user-read-playback-state','user-library-modify',
@@ -10,7 +9,6 @@ const scopes = scopesArr.join(' ');
 const getAuthorizationCode = async (clientId,redirectURI) => {
 
  try {
-    const redirectUrl = AuthSession.getRedirectUrl(); //this will be something like https://auth.expo.io/@your-username/your-app-slug
     const result = await AuthSession.startAsync({
       authUrl:
         'https://accounts.spotify.com/authorize' +
