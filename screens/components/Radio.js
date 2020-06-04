@@ -24,18 +24,16 @@ export default function Radio(props) {
         console.log("mon url",urlLien); 
 
   return (
-    <TouchableOpacity onPress={(urlLien) => props.navigation.navigate(props.url)      }>
-        <View style={{flex:1, justifyContent:"center"}}>
-          
+    <TouchableOpacity onPress={(urlLien) => props.navigation.navigate(props.url)}>
+        <View style={styles.cardView}>
             <Card 
-                containerStyle={{width: 150, height: 150, marginLeft:20, marginRight:0, marginTop:8, marginBottom:0, borderRadius:3, elevation:8, shadowOffset: { width: 10, height: 10 }, shadowColor: "grey", shadowOpacity: 1, shadowRadius: 20}}
+                containerStyle={styles.cardContainer}
                 image={props.img}
-                imageProps={{ style: {width: 150, height: 100} }}
+                imageProps={{style: styles.cardImage}}
                 >
-                <Text style={{width:150, height:50, fontSize:15, color:"#383838"}}>{props.radioName}</Text>
+                <Text style={styles.cardText}>{props.radioName}</Text>
             </Card>
-        
-          <View style={{flex:1, flexDirection:"row", justifyContent:"flex-start", marginTop:7, marginLeft:20, marginBottom:20}}>
+          <View style={styles.badgeContainer}>
             {badgeList}
           </View>
         </View>
@@ -58,6 +56,10 @@ const styles = StyleSheet.create({
     marginBottom:hp('0%'), 
     marginTop:hp('0%'), 
     padding:hp('0%')
+  },
+  cardView: {
+    flex:1, 
+    justifyContent:"center"
   },
   cardContainer: {
     width:wp('28%'), 
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   cardText: {
     width:wp('28%'), 
     height:hp('5%'), 
-    fontSize:hp('2%'),
+    fontSize:hp('1.5%'),
     color:"#383838"
   }, 
   badgeContainer: {
