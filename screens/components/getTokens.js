@@ -19,7 +19,14 @@ export default async function getTokens(clientId,redirectURI,clientSecret){
       }`,
     });
     const responseJson = await response.json();
+<<<<<<< HEAD
     await fetch('http://192.168.1.25:3000/saveToken',{
+=======
+//Matthieu  http://192.168.1.8
+
+
+    await fetch('http://192.168.1.8:3000/saveToken',{
+>>>>>>> 79d3a1a9a76ab5a02e479a465af6369c9bb0e83b
       method:'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `refreshToken=${responseJson.refresh_token}&accessToken=${responseJson.access_token}`

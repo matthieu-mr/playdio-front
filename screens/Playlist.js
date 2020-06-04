@@ -1,15 +1,10 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
-import { Avatar, Badge, Icon, withBadge,Card,List,ListItem } from 'react-native-elements'
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
 
 
-//  To toggle LTR/RTL uncomment the next line
-// I18nManager.allowRTL(true);
-
-import AppleStyleSwipeableRow from './components/AppleStyleSwipeableRow';
-import GmailStyleSwipeableRow from './components/GmailStyleSwipeableRow';
 
 export default function Playlist(props) {
 /* const [listUser,setListUser]=useEffect() ;  */
@@ -4925,6 +4920,9 @@ let playslistTrackList =[] ;
       <Text> Playlist</Text>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
+          <Image
+        style={{width: 50, height: 50}}
+        source={require('../assets/icons/add_blue.png')} />
             <View style={styles.avatar}>
               {avatarList}
             </View>
@@ -4958,10 +4956,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',   
+    marginVertical: 0,
+    marginBottom:0,
   },
   scrollView: {
-    marginBottom:15,
+    marginBottom:20,
     marginHorizontal: 20,
+    paddingVertical: 0,
+    marginVertical: 20,
   },
 
   flatList: {
@@ -4980,9 +4982,21 @@ const styles = StyleSheet.create({
   avatar: {
     flex: 1,
     flexDirection:"row",
-    padding:30,
-    marginLeft:10,
+    padding:10,
     marginRight:10,
+    marginVertical: 0,
+    paddingVertical: 0,
+    marginBottom:20,
+  },
+
+  avatarbutton: {
+      flex: 1,
+      flexDirection:"row",
+      padding:30,
+      marginLeft:0,
+      marginRight:0,
+      marginVertical: 25,
+      paddingVertical: 0,
     
   },
   card: {

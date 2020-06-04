@@ -1,6 +1,10 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "mariont",
+=======
+    "name": "dimox",
+>>>>>>> 79d3a1a9a76ab5a02e479a465af6369c9bb0e83b
     "slug": "Playdio",
     "platforms": [
       "ios",
