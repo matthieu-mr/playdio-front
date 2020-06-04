@@ -1,6 +1,10 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "dimox",
+=======
+    "name": "matthieumr", 
+>>>>>>> sync
     "slug": "Playdio",
     "platforms": [
       "ios",
