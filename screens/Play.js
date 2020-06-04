@@ -2,8 +2,9 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
 import { Tooltip } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Audio } from 'expo-av'
-// import Slider from '@react-native-community/slider';
+import { Audio } from 'expo-av';
+import { Slider } from 'react-native-elements';
+
 
 // ----------------------------------------
 // PLAYLIST TEMPLATE EXAMPLE
@@ -60,7 +61,7 @@ export default class Play extends React.Component {
     isPlaying: false,
     playbackInstance: null,
     currentIndex: 0,
-    volume: 1.0,
+    volume: 0.5,
     // Whenever the state of the Audio instance changes, isBuffering gets an update
     isBuffering: false
   }
@@ -142,6 +143,21 @@ export default class Play extends React.Component {
     }
   }
 
+  // Test Volume Marion
+  handleVolume = async (value) => {
+    let { playbackInstance, volume } = this.state
+    if (playbackInstance) {
+      await playbackInstance.setVolumeAsync(value)
+      this.setState({
+        volume: value
+      })
+    }
+  }
+
+  decimal = (x) => {
+    return Number.parseFloat(x).toFixed(1);
+  }
+
   // DISPLAY THE INFORMATION
   renderFileInfo() {
     const { playbackInstance, currentIndex } = this.state
@@ -184,7 +200,15 @@ export default class Play extends React.Component {
             </Tooltip>
           </View>
         </View>
-
+        <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
+          <Slider
+            value={0.5}
+            minimumValue={0}
+            maximumValue={1}
+            onValueChange={value => this.handleVolume({value})}
+          />
+          <Text>Value: {this.decimal(this.state.volume)}</Text>
+        </View>
       </View>
     )
   }
