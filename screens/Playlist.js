@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
+import Track from './components/Track';
 
 
 //  To toggle LTR/RTL uncomment the next line
@@ -4930,12 +4931,12 @@ let playslistTrackList =[] ;
           </ScrollView>
 
     {/* liste des musiques */}
-            <FlatList
+            <FlatList 
                 data={playslistTrackList}
                 keyExtractor={item => item.id}
                 renderItem={({ item}) => (
-                  <ListItemSwap
-                    {...item}
+                  <ListItemSwap style={styles.flatList}
+                    {...item} 
                     onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
                     onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
                     
@@ -4945,8 +4946,8 @@ let playslistTrackList =[] ;
               />
 
     {/*{musicList} */}
-          
-
+    <Track
+ />
     </SafeAreaView>
 
   );
@@ -4963,8 +4964,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
 
+  flatList: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    paddingVertical: 0,
+  },
+
+
   scrollViewscrollViewMusic: {
-    marginHorizontal: 20,
+    marginHorizontal: 0,
     width:100,
     flex: 1, marginLeft: 0, marginRight: 0
   },
@@ -4972,9 +4980,10 @@ const styles = StyleSheet.create({
   avatar: {
     flex: 1,
     flexDirection:"row",
-    padding:10,
+    padding:30,
     marginLeft:10,
     marginRight:10,
+    
   },
   card: {
     flex: 1,
@@ -4982,6 +4991,7 @@ const styles = StyleSheet.create({
     padding:10,
     marginLeft:10,
     marginRight:10,
+    
   },
   
 });

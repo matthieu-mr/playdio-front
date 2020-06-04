@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: 20,
   },
   text: {
     color: '#4a4a4a',
