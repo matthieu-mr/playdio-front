@@ -15,7 +15,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 
 import * as AuthSession from 'expo-auth-session';
-import spotifyCredentials from './screens/components/secrets';
+
 
 import Connect from './screens/connect'
 import SignUp from './screens/signUp'
