@@ -1,16 +1,19 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity,} from 'react-native';
 
 import { ListItem,Button,ButtonGroup } from 'react-native-elements'
-import ListItemSwap, { Separator } from './components/Swype';
+import SearchComponent, { Separator } from './components/SearchResult';
 
-import police from '../screens/components/font';
+import police from './components/font';
 
 import { TextField } from 'react-native-material-textfield';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {connect} from 'react-redux';
+
+
+
 
 function CreateRadio2(props) {
 
@@ -5085,32 +5088,26 @@ let affichageSearchSpotify = returnSpotifyItem.map((info,i)=>{
  const [ idAdd, setIdAdd] = useState() ;
 
 
- /* Affichage dynamique en fonction de l'ecran*/
-   const buttons = ['My Playlist', 'Search Sptofy']
-   const [indexButton,setIndex]=useState([0])
-
-   useEffect(() => {
-    console.log("change",indexButton);
-    if(indexButton===0){
-        setAffichage(listOfPlaylist)
-    }else{
-        setAffichage(resultFromSpotifyArray)
-        
-    }
-    }, [indexButton]);
 
 // fonction filtre
-let [affichagePlaylistDynamique,setAffichage]=useState([]); // recuperation de la playliste depuis le bouton
+
 
 const[search,setSearch]=useState("")
-const filteredPlaylist = affichagePlaylistDynamique.filter(function(item) {
+const filteredPlaylist = listOfPlaylist.filter(function(item) {
     //applying filter for the inserted text in search bar
     const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
     const textData = search.toUpperCase();
     return itemData.indexOf(textData) > -1;
     });
-  console.log("fromRedux",props.playlistRedux)  
-  
+
+    let validPlaylist = (idPlaylistItem)=>{  
+      //  props.addplaylist(idPlaylistItem)
+      console.log("hello"); 
+
+        //props.navigation.navigate('AddRadioEmpty')
+    
+    }
+    
   return (
 <View style={styles.container}>
 
@@ -5120,25 +5117,13 @@ const filteredPlaylist = affichagePlaylistDynamique.filter(function(item) {
                             <Text> New Radio</Text>
                             
                             <TextField
-                                label={'Find a track'}
+                                label={'Find a Playlist'}
                                 highlightColor="#c2185b"
                                 onChangeText={ (value) => setSearch(value) }
                             
                                 />
                             </View>
 
-                            <View>
-                                    <ButtonGroup
-                                    onPress={(e) => {alert('Simple Button pressed',e),setIndex(e) }}
-                                        selectedIndex={indexButton}
-                                        buttons={buttons}
-                                        containerStyle={{height: 40}}
-                                        selectedButtonStyle ={{
-                                            backgroundColor:"#00838F",
-                                        }}
-                                        />
-
-                            </View>
 
                     
     {/* liste des musiques */}
@@ -5148,14 +5133,19 @@ const filteredPlaylist = affichagePlaylistDynamique.filter(function(item) {
                 data={filteredPlaylist}
                 keyExtractor={item => item.id}
                 renderItem={({ item}) => (
-                  <ListItemSwap
+
+
+                  <SearchComponent
                     {...item}
-                    onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
-                    onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-                    
+                    navigation={props.navigation}
+                    //onPress={()=>{validPlaylist(props.spotifyId)}} 
                   />
+                       
+                
+
                 )}
                 ItemSeparatorComponent={() => <Separator />}
+               
               />
 
              
