@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
-import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image } from 'react-native-elements'
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
 import Profile from './components/Profile';
@@ -4918,8 +4918,19 @@ let playslistTrackList =[] ;
     }, [idAdd]);
 
   return (
-
     <SafeAreaView style={styles.container}>
+    <Header
+        rightComponent={<Avatar
+        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+      />}
+        containerStyle={{
+         backgroundColor: '#FFFFFF',
+         marginBottom: 0,
+         paddingBottom: 0,
+         paddingTop: 0
+
+  }}
+/>
       <Text> Playlist</Text>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
@@ -4957,10 +4968,12 @@ let playslistTrackList =[] ;
 
 const styles = StyleSheet.create({
   container: {
-    flex: hp('0.3%'),
+    flex: hp('0.5%'),
     backgroundColor: '#fff',   
     marginVertical: 0,
     marginBottom:0,
+    marginHorizontal: 0,
+    paddingVertical: 0,
   },
   scrollView: {
     marginBottom:hp('1%'),

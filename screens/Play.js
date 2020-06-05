@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView } from 'react-native'
-import { Tooltip, Slider } from 'react-native-elements';
+import { Tooltip, Slider, Header, Avatar } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
 // import TrackList, { Separator } from './components/TrackList';
@@ -200,7 +200,9 @@ export default class Play extends React.Component {
   render() {
     return (
       <View style={styles.playView}>
+      
         <View style={styles.header}>
+         
 
         </View>
         <View style={styles.flatlistViewTop}>

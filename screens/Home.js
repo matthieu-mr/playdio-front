@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, } from 'react-native';
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import Radio from './components/Radio';
 import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -27,8 +28,18 @@ export default function Home(props) {
   //CALLBACK
   return (
     <View style={styles.homeView}>
-       <Profile
- />
+       <Header
+  placement="left"
+  leftComponent={{ icon: 'menu', color: '#fff' }}
+  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+  rightComponent={<Avatar
+        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+      />}
+      containerStyle={{
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'space-around',
+  }}
+/>
       <ScrollView>
         <View style={styles.header}></View>
         <View style={styles.categories}>
