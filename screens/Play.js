@@ -269,44 +269,9 @@ export default function Play() {
   // ----------------------------------------
   // CALLBACK
 
-<<<<<<< HEAD
   return (
     <View style={styles.playView}>
       <View style={styles.header}>
-=======
-  render() {
-    return (
-      <View style={styles.playView}>
-      
-        <View style={styles.header}>
-         
-
-        </View>
-        <View style={styles.flatlistViewTop}>
-          <FlatList 
-            data={playlistTracks}
-            keyExtractor={item => item.id}
-            renderItem={({ item}) => (
-              <ListItemSwap style={styles.flatList}
-                {...item} 
-                onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
-                onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-                
-              />
-            )}
-            ItemSeparatorComponent={() => <Separator />}
-          />
-        </View>
-
-        <View style={styles.player}>
-
-          <Image
-            style={styles.albumCover}
-            source={{ uri: playlist[this.state.currentIndex].imageSource }}
-          />
-
-          {this.renderFileInfo()}
->>>>>>> dfda9ce43146f9f555a9e42e5883ff85517734b7
 
       </View>
       <View style={styles.flatlistViewTop}>
