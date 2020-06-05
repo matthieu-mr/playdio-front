@@ -72,8 +72,11 @@ playlist.map((track,i)=>{
 export default class Play extends React.Component {
 
 
-  // INITIAL STATE
+  isSeeking= false
+  shouldPlayAtEndOfSeek= false
 
+  // INITIAL STATE
+ // useState
   state = {
     isPlaying: false,
     playbackInstance: null,
@@ -81,13 +84,15 @@ export default class Play extends React.Component {
     volume: 0.5,
     // Whenever the state of the Audio instance changes, isBuffering gets an update
     isBuffering: false,
-    // test Marion Seek
-    isSeeking: false,
-    shouldPlayAtEndOfSeek: false,
+
+    // Seek
+    shouldPlay: false,
+    playbackInstancePosition: null,
+    playbackInstanceDuration: null,
   }
 
   // CONFIGURATION OF THE AUDIO COMPONENT
-
+ // useEffect
   async componentDidMount() {
     try {
       await Audio.setAudioModeAsync({
@@ -132,43 +137,48 @@ export default class Play extends React.Component {
     })
   }
 
-  // SEEK HANDLER TEST
+  // SEEK HANDLER
 
-  _onSeekSliderValueChange = value => {
-    if (this.playbackInstance != null && !this.state.isSeeking) {
-      this.state.isSeeking = true;
-      this.state.shouldPlayAtEndOfSeek = this.state.shouldPlay;
-      this.playbackInstance.pauseAsync();
+  onSeekSliderValueChange = value => {
+    const { shouldPlay, playbackInstance } = this.state
+    if (playbackInstance != null && !this.isSeeking) {
+      this.isSeeking = true;
+      this.shouldPlayAtEndOfSeek = shouldPlay;
+      playbackInstance.pauseAsync();
     }
   };
 
-  _onSeekSliderSlidingComplete = async value => {
-    if (this.playbackInstance != null) {
-      this.state.isSeeking = false;
-      const seekPosition = value * this.state.playbackInstanceDuration;
-      if (this.state.shouldPlayAtEndOfSeek) {
-        this.playbackInstance.playFromPositionAsync(seekPosition);
+  onSeekSliderSlidingComplete = async value => {
+    const { playbackInstance, playbackInstanceDuration } = this.state
+    if (playbackInstance != null) {
+      this.isSeeking = false;
+      const seekPosition = value * playbackInstanceDuration;
+      if (this.shouldPlayAtEndOfSeek) {
+        playbackInstance.playFromPositionAsync(seekPosition);
       } else {
-        this.playbackInstance.setPositionAsync(seekPosition);
+        playbackInstance.setPositionAsync(seekPosition);
       }
     }
   };
 
-  _getSeekSliderPosition() {
+  getSeekSliderPosition() {
+    const { playbackInstance, playbackInstancePosition, playbackInstanceDuration } = this.state
     if (
-      this.playbackInstance != null &&
-      this.state.playbackInstancePosition != null &&
-      this.state.playbackInstanceDuration != null
+      playbackInstance != null &&
+      playbackInstancePosition != null &&
+      playbackInstanceDuration != null
     ) {
       return (
-        this.state.playbackInstancePosition /
-        this.state.playbackInstanceDuration
+        playbackInstancePosition /
+        playbackInstanceDuration
       );
     }
     return 0;
   }
   
-  _getMMSSFromMillis(millis) {
+  // TIMESTAMP
+
+  getMMSSFromMillis(millis) {
     const totalSeconds = millis / 1000;
     const seconds = Math.floor(totalSeconds % 60);
     const minutes = Math.floor(totalSeconds / 60);
@@ -183,15 +193,15 @@ export default class Play extends React.Component {
     return padWithZero(minutes) + ":" + padWithZero(seconds);
   }
 
-  _getTimestamp() {
+  getTimestamp() {
     if (
-      this.playbackInstance != null &&
+      this.state.playbackInstance != null &&
       this.state.playbackInstancePosition != null &&
       this.state.playbackInstanceDuration != null
     ) {
-      return `${this._getMMSSFromMillis(
+      return `${this.getMMSSFromMillis(
         this.state.playbackInstancePosition
-      )} / ${this._getMMSSFromMillis(this.state.playbackInstanceDuration)}`;
+      )} / ${this.getMMSSFromMillis(this.state.playbackInstanceDuration)}`;
     }
     return "";
   }
@@ -295,13 +305,12 @@ export default class Play extends React.Component {
           {this.renderFileInfo()}
 
           <View style={styles.seekView}>
-            <Text style={styles.seekTime}>2.30</Text>
+            <Text style={styles.seekTime}>{this.getTimestamp()}</Text>
             <Slider
               style={styles.seekSlider}
-              value={this._getSeekSliderPosition()}
-              onValueChange={this._onSeekSliderValueChange}
-              onSlidingComplete={this._onSeekSliderSlidingComplete}
-              disabled={this.state.isLoading}
+              value={this.getSeekSliderPosition()}
+              onValueChange={this.onSeekSliderValueChange}
+              onSlidingComplete={this.onSeekSliderSlidingComplete}
             />
             <Text style={styles.seekTime}>3.30</Text>
           </View>
