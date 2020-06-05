@@ -12,42 +12,53 @@ import {
 // const { Swipeable } = GestureHandler;
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  text: {
-    color: '#4a4a4a',
-    fontSize: 15,
+    paddingHorizontal: hp('1%'),
+    paddingVertical: hp('1%'),
   },
   separator: {
-    flex: 1,
-    height: 1,
+    flex: hp('0.3%'),
+    height: hp('0.1%'),
     backgroundColor: '#e4e4e4',
-    marginLeft: 10,
+    marginLeft: hp('3%'),
   },
   leftAction: {
     backgroundColor: '#388e3c',
     justifyContent: 'center',
-    flex: 1,
+    flex: hp('0.3%'),
     
   },
   rightAction: {
     backgroundColor: '#dd2c00',
     justifyContent: 'center',
-    flex: 1,
+    flex: hp('0.3%'),
     alignItems: 'flex-end',
   },
   actionText: {
     color: '#fff',
     fontWeight: '600',
-    padding: 20,
+    padding: hp('7%'),
   },
+  listItem: {
+    height:hp('8%'),
+    paddingTop:hp('0%'),
+    paddingBottom:hp('0%')
+  },
+  title: {
+    fontSize:hp('2.2%'),
+    fontWeight: "bold",
+    color:"#3a3a3a"
+  },
+  subtitle: {
+    fontSize:hp('2%'),
+    color:"#3a3a3a"
+  }
 });
 
 export const Separator = () => <View style={styles.separator} />;
@@ -100,7 +111,9 @@ const ListItemSwap = ({id, text,name, url, onSwipeFromLeft, onSwipeFromRight}) =
     <View style={styles.container}>
 
       <ListItem
-
+      containerStyle={styles.listItem}
+      titleStyle={styles.title}
+      subtitleStyle={styles.subtitle}
       leftAvatar={{ source: { uri:url } }}
       title={name}
       subtitle={text}
