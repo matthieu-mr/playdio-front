@@ -20,11 +20,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     paddingHorizontal: hp('1%'),
-    paddingVertical: hp('0.0001%'),
-  },
-  text: {
-    color: '#4a4a4a',
-    fontSize: hp('5%'),
+    paddingVertical: hp('1%'),
   },
   separator: {
     flex: hp('0.3%'),
@@ -49,6 +45,20 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     padding: hp('7%'),
   },
+  listItem: {
+    height:hp('8%'),
+    paddingTop:hp('0%'),
+    paddingBottom:hp('0%')
+  },
+  title: {
+    fontSize:hp('2.2%'),
+    fontWeight: "bold",
+    color:"#3a3a3a"
+  },
+  subtitle: {
+    fontSize:hp('2%'),
+    color:"#3a3a3a"
+  }
 });
 
 export const Separator = () => <View style={styles.separator} />;
@@ -101,7 +111,9 @@ const ListItemSwap = ({id, text,name, url, onSwipeFromLeft, onSwipeFromRight}) =
     <View style={styles.container}>
 
       <ListItem
-
+      containerStyle={styles.listItem}
+      titleStyle={styles.title}
+      subtitleStyle={styles.subtitle}
       leftAvatar={{ source: { uri:url } }}
       title={name}
       subtitle={text}
