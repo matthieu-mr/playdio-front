@@ -17,7 +17,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {connect} from 'react-redux'
 
 function connectAPP({navigation,saveEmailUser}) {
- 
+
   var fontPermanentMarker =''
   var fontRoboto =''
   const [font,setFont]= useState(false)

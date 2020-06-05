@@ -75,7 +75,7 @@ return (
       />      
       <Input
       placeholder='password'
-      type='passord'
+      type='password'
       onChangeText={(value)=>setPassword(value)}
       />
       <Button
