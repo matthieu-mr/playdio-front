@@ -11,20 +11,27 @@ import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-ma
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-function CreateRadio1(props) {
+function AddRadioGetSpotify(props) {
 
-const [radioName, setRadioName] = useState()
+const [radioName, setRadioName] = useState("hi")
 const [isPrivate, setIsPrivate] = useState(false) ; 
 const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
 const [send, setSender] = useState(false);
 
 
-console.log(radioName)
 
-let validPlaylist = ()=>{  
+// redirection en fonction du choix user
+let validPlaylist = (target)=>{  
         if (radioName){
             props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly})
-            props.navigation.navigate('AddRadio2')
+            if (target=="empty"){
+              props.navigation.navigate('AddRadioEmpty')
+            
+            } else if (target == "spotify"){
+              props.navigation.navigate('AddRadioGetSpotify')
+              console.log("spotify")
+            }
+         //   props.navigation.navigate('AddRadio2')
         }else{
             alert("The title of your playlist can't be empty")
         }
@@ -91,8 +98,16 @@ let validPlaylist = ()=>{
  
                         <View style={styles.button}>
                         <Button 
-                            title="Press me"
-                            onPress={()=>validPlaylist()}
+                            title="Add From Spotify Playlist"
+                            onPress={()=>validPlaylist("spotify")}
+                            buttonStyle={{
+                                backgroundColor:"#00838F",
+                            }}
+                        />
+                              <Text> ble bla</Text>
+                        <Button 
+                            title="Add Empty Radio"
+                            onPress={()=>validPlaylist("empty")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}
@@ -160,7 +175,7 @@ function mapDispatchToProps(dispatch) {
   export default connect(
       null, 
       mapDispatchToProps
-  )(CreateRadio1);
+  )(AddRadioGetSpotify);
 
 
 // export default CreateRadio1
