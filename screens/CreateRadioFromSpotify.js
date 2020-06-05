@@ -918,6 +918,29 @@ let listPlaylistFromSpotifiy = {
     "total": 33
 }
 
+//Matthieu  http://192.168.1.8
+// IP Marion http://192.168.1.25
+//IP Ben http://192.168.1.43
+
+let idSpotify = 1127664154
+
+
+useEffect(()=>{
+    async function recupDonnée(){
+      var requestBDD = await fetch('http://192.168.1.8:3000//user-playlist',{
+        method:"POST",
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body:`idSpotify=${idSpotify}`
+      })
+      var reponse = await requestBDD.json()
+      setEmail(reponse.infoUser[0].email)
+    }
+    recupDonnée()
+  },[])
+  
+
+
+
 // info globales
 let nbPlaylist = listPlaylistFromSpotifiy.total
 
