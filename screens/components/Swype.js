@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     paddingHorizontal: hp('1%'),
-    paddingVertical: hp('0.2%'),
+    paddingVertical: hp('0.0001%'),
   },
   text: {
     color: '#4a4a4a',
