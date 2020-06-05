@@ -30,11 +30,14 @@ import AddRadio2 from './screens/CreateRadioStep2'
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import Login from './reducers/login'
+import PlaylistAdd from './reducers/playlist'
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-const store = createStore(combineReducers({Login}))
+
+//const store = createStore(combineReducers({wishList, token, selectedLang}))
+const store = createStore(combineReducers({Login,PlaylistAdd}))
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
   Home: Home,

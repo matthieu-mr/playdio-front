@@ -10,6 +10,8 @@ import { TextField } from 'react-native-material-textfield';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
+import {connect} from 'react-redux';
+
 function CreateRadio2(props) {
 
 const [radioName, setRadioName] = useState()
@@ -5084,7 +5086,7 @@ let affichageSearchSpotify = returnSpotifyItem.map((info,i)=>{
 
 
  /* Affichage dynamique en fonction de l'ecran*/
-   const buttons = ['Hello', 'World']
+   const buttons = ['My Playlist', 'Search Sptofy']
    const [indexButton,setIndex]=useState([0])
 
    useEffect(() => {
@@ -5107,7 +5109,7 @@ const filteredPlaylist = affichagePlaylistDynamique.filter(function(item) {
     const textData = search.toUpperCase();
     return itemData.indexOf(textData) > -1;
     });
-    
+  console.log("fromRedux",props.playlistRedux)  
   
   return (
 <View style={styles.container}>
@@ -5138,7 +5140,7 @@ const filteredPlaylist = affichagePlaylistDynamique.filter(function(item) {
 
                             </View>
 
-                    <ScrollView>
+                    
     {/* liste des musiques */}
                  <FlatList
 
@@ -5156,7 +5158,7 @@ const filteredPlaylist = affichagePlaylistDynamique.filter(function(item) {
                 ItemSeparatorComponent={() => <Separator />}
               />
 
-                    </ScrollView>
+             
          
  
                 <View style={styles.button}>
@@ -5211,7 +5213,15 @@ const styles = StyleSheet.create({
 
   
 });
+function mapStateToProps(state){
+    return {playlistRedux: state.PlaylistAdd, token:state.token}
+  }
+  
+  export default connect(
+    mapStateToProps, 
+    null
+  )(CreateRadio2);
 
-export default CreateRadio2
+//export default CreateRadio2
 
 
