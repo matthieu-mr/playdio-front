@@ -1,6 +1,8 @@
 console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
+import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-material-textfield';
+
 
 import {Button,Input} from 'react-native-elements'
 
@@ -15,7 +17,7 @@ function connectSignUp(props) {
 // IP Marion http://192.168.1.25
 //IP Ben http://192.168.1.43
 
-const [email,setEmail]=useState('')
+const [email,setEmail]=useState('email@email.com')
 const [firstName,setFirstName]=useState('')
 const [lastName,setLastName]=useState('')
 const [password,setPassword]=useState('')
@@ -53,39 +55,93 @@ AsyncStorage.setItem("user",JSON.stringify(storageUser))
 props.navigation.navigate("Home")
 }
 
+
 return (
-    <View style={{flex: 1}}>
-            <Input
-      placeholder=''
-      type='email'
-      />
-      <Input
-      placeholder='email'
-      value={email}
-      type='email'
+<View>
+  
+    <View style={styles.input}>
+      <Text style={{marginTop:50}}> Create Your musicAccounts</Text>
+      
+  
+      <TextField
+      label={email}
+      tintColor="#26a69a"
       onChangeText={(value)=>setEmail(value)}
       />
-      <Input
-      placeholder='firtName'
+      
+      <TextField
+      label={'firstName'}
+      tintColor="#26a69a"
       onChangeText={(value)=>setFirstName(value)}
-      />      
-      <Input
-      placeholder='lastName'
+      />  
+
+      <TextField
+      label={'lastName'}
+      tintColor="#26a69a"
       onChangeText={(value)=>setLastName(value)}
-      />      
-      <Input
-      placeholder='password'
-      type='passord'
+      />   
+
+      <TextField
+
+      label={'Password'}
+      tintColor="#26a69a"
+      secureTextEntry={true}
       onChangeText={(value)=>setPassword(value)}
       />
-      <Button
+
+
+      <Button           
+      buttonStyle={{
+              backgroundColor:"#00838F",
+          }}
       title="Sign up with email"
       type="solid"
       onPress={()=>signUp(email,firstName,lastName,password)}
       />
-    </View>
+      </View>
+
+</View>
+
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+  display:"flex",
+  flex:1,
+  backgroundColor: '#fff',   
+    },
+
+  form:{
+   display:"flex",
+   flex:1,
+   justifyContent:'flex-end',
+    marginBottom:wp("15%"),
+  },
+
+input:{
+  marginRight:wp('10%'),
+  marginLeft:wp('10%'),
+  marginBottom:wp('10%'),
+  },  
+
+
+paramPlaylist:{  
+  backgroundColor: "#26a69a",
+  marginRight:wp('7%'),
+  marginLeft:wp('7%'),
+  marginBottom:wp('70%'),
+},
+
+
+button:{
+  backgroundColor: "#26a69a",
+ marginRight:wp('10%'),
+ marginLeft:wp('10%'),
+},
+
+});
+
 
 function mapStateToProps(state) {
   return { emailStore : state.email }
