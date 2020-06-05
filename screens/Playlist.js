@@ -4971,16 +4971,13 @@ const styles = StyleSheet.create({
   flatList: {
     marginHorizontal: 0,
     marginVertical: 0,
-    paddingVertical: 0,
+    paddingVertical: 0
   },
-
-
   scrollViewscrollViewMusic: {
     marginHorizontal: 0,
     width:hp('33%'),
     flex: hp('0,33%'), marginLeft: 0, marginRight: 0
   },
-
   avatar: {
     flex: hp('0,33%'),
     flexDirection:"row",

@@ -1,9 +1,11 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView } from 'react-native'
 import { Tooltip, Slider } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
+// import TrackList, { Separator } from './components/TrackList';
 import ListItemSwap, { Separator } from './components/Swype';
+
 
 // ----------------------------------------
 // PLAYLIST TEMPLATE EXAMPLE
@@ -64,7 +66,7 @@ const playlist = [
 
 const playlistTracks = [];
 playlist.map((track,i)=>{ 
-  playlistTracks.push({id: track.id, name: track.title, text: track.album, url: track.imageSource});
+  playlistTracks.push({id: i, name: track.title, text: track.album, url: track.imageSource});
 })  
 
 
@@ -198,6 +200,25 @@ export default class Play extends React.Component {
   render() {
     return (
       <View style={styles.playView}>
+        <View style={styles.header}>
+
+        </View>
+        <View style={styles.flatlistViewTop}>
+          <FlatList 
+            data={playlistTracks}
+            keyExtractor={item => item.id}
+            renderItem={({ item}) => (
+              <ListItemSwap style={styles.flatList}
+                {...item} 
+                onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
+                onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+                
+              />
+            )}
+            ItemSeparatorComponent={() => <Separator />}
+          />
+        </View>
+
         <View style={styles.player}>
 
           <Image
@@ -230,19 +251,21 @@ export default class Play extends React.Component {
 
         </View>
 
-        <FlatList 
-          data={playlistTracks}
-          keyExtractor={item => item.id}
-          renderItem={({ item}) => (
-            <ListItemSwap style={styles.flatList}
-              {...item} 
-              onSwipeFromLeft={() => {alert('swiped from left!')}}
-              onSwipeFromRight={() => {alert('pressed right!')}}
-              
-            />
-          )}
-          ItemSeparatorComponent={() => <Separator />}
-        />
+        <View style={styles.flatlistViewBottom}>
+          <FlatList 
+            data={playlistTracks}
+            keyExtractor={item => item.id}
+            renderItem={({ item}) => (
+              <ListItemSwap style={styles.flatList}
+                {...item} 
+                onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
+                onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+                
+              />
+            )}
+            ItemSeparatorComponent={() => <Separator />}
+          />
+        </View>
 
       </View>
     )
@@ -257,6 +280,9 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'center'
+  },
+  header: {
+    height:hp('16%')
   },
   player: {
     alignItems:'center',
@@ -317,5 +343,13 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     paddingVertical: 0,
   },
+  flatlistViewTop: {
+    height:hp('10%'),
+    width:wp('100%')
+  },
+  flatlistViewBottom: {
+    width:wp('100%'),
+    height:hp('20%'),
+  }
 
 })

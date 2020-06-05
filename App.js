@@ -2,6 +2,7 @@ console.disableYellowBox = true;
 import React from 'react';
 import { View, Button } from 'react-native';
 import {createAppContainer } from 'react-navigation';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 // library icon
@@ -34,6 +35,7 @@ import PlaylistAdd from './reducers/playlist'
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
@@ -71,8 +73,9 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
       tabBarOptions: {
           activeTintColor: '#FFFFFF',        
           inactiveTintColor: '#FFFFFF',
-              style: {
-                  backgroundColor: '#00838F',
+          style: {
+              backgroundColor: '#00838F',
+              height:hp('9%')
   }
   },
   }

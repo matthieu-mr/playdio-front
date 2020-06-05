@@ -31,7 +31,7 @@ useEffect( ()=>{
 },[])
 async function autoriseSpotify(){
 
-  var infoClientID = await fetch ('http://192.168.0.25:3000/autorisation')
+  var infoClientID = await fetch ('http://192.168.1.25:3000/autorisation')
 
 
 // ip matthieu http://192.168.1.8

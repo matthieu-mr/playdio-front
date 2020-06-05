@@ -34,6 +34,21 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     padding: hp('6,5%'),
   },
+  listItem: {
+    height:hp('10%'),
+    paddingTop:hp('0%'),
+    paddingBottom:hp('0%')
+  },
+  title: {
+    fontSize:hp('2.2%'),
+    fontWeight: "bold",
+    color:"#3a3a3a"
+  },
+  subtitle: {
+    fontSize:hp('2%'),
+    color:"#3a3a3a"
+  }
+
 });
 
 export const Separator = () => <View style={styles.separator} />;
@@ -44,7 +59,9 @@ const Track = ({id, text,name, url}) => (
     <View style={styles.container}>
 
       <ListItem
-
+        containerStyle={styles.listItem}
+        titleStyle={styles.title}
+        subtitleStyle={styles.subtitle}
         leftElement={<Image
         style={{width: 40, height: 40}}
         source={{uri: 'https://img.cdandlp.com/2019/01/imgL/119431391.jpg'}}
