@@ -7,31 +7,32 @@ import {
   Animated,
   TouchableOpacity,
 } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-    borderWidth: 1,
+    paddingHorizontal: hp('3%'),
+    paddingVertical: hp('1%'),
+    borderWidth: hp('0.1%'),
     borderColor: "#C8C8C8",
   },
   text: {
     color: '#4a4a4a',
-    fontSize: 15,
+    fontSize: hp('5%'),
   },
   separator: {
-    flex: 1,
-    height: 1,
+    flex: hp('0,3%'),
+    height: hp('0,3%'),
     backgroundColor: '#e4e4e4',
-    marginLeft: 10,
+    marginLeft: hp('3%'),
   },
  
   actionText: {
     color: '#fff',
     fontWeight: '600',
-    padding: 20,
+    padding: hp('6,5%'),
   },
 });
 

@@ -12,41 +12,42 @@ import {
 // const { Swipeable } = GestureHandler;
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingHorizontal: hp('1%'),
+    paddingVertical: hp('0.2%'),
   },
   text: {
     color: '#4a4a4a',
-    fontSize: 15,
+    fontSize: hp('5%'),
   },
   separator: {
-    flex: 1,
-    height: 1,
+    flex: hp('0.3%'),
+    height: hp('0.1%'),
     backgroundColor: '#e4e4e4',
-    marginLeft: 10,
+    marginLeft: hp('3%'),
   },
   leftAction: {
     backgroundColor: '#388e3c',
     justifyContent: 'center',
-    flex: 1,
+    flex: hp('0.3%'),
     
   },
   rightAction: {
     backgroundColor: '#dd2c00',
     justifyContent: 'center',
-    flex: 1,
+    flex: hp('0.3%'),
     alignItems: 'flex-end',
   },
   actionText: {
     color: '#fff',
     fontWeight: '600',
-    padding: 20,
+    padding: hp('7%'),
   },
 });
 

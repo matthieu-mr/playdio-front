@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 
@@ -4955,16 +4956,16 @@ let playslistTrackList =[] ;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: hp('0.3%'),
     backgroundColor: '#fff',   
     marginVertical: 0,
     marginBottom:0,
   },
   scrollView: {
-    marginBottom:20,
-    marginHorizontal: 20,
+    marginBottom:hp('1%'),
+    marginHorizontal: hp('2%'),
     paddingVertical: 0,
-    marginVertical: 20,
+    marginVertical: hp('6%'),
   },
 
   flatList: {
@@ -4976,36 +4977,26 @@ const styles = StyleSheet.create({
 
   scrollViewscrollViewMusic: {
     marginHorizontal: 0,
-    width:100,
-    flex: 1, marginLeft: 0, marginRight: 0
+    width:hp('33%'),
+    flex: hp('0,33%'), marginLeft: 0, marginRight: 0
   },
 
   avatar: {
-    flex: 1,
+    flex: hp('0,33%'),
     flexDirection:"row",
-    padding:10,
-    marginRight:10,
+    padding:hp('3%'),
+    marginRight:hp('3%'),
     marginVertical: 0,
     paddingVertical: 0,
-    marginBottom:20,
+    marginBottom:hp('6%'),
   },
 
-  avatarbutton: {
-      flex: 1,
-      flexDirection:"row",
-      padding:30,
-      marginLeft:0,
-      marginRight:0,
-      marginVertical: 25,
-      paddingVertical: 0,
-    
-  },
   card: {
-    flex: 1,
+    flex: hp('0,33%'),
     flexDirection:"row",
-    padding:10,
-    marginLeft:10,
-    marginRight:10,
+    padding:hp('3%'),
+    marginLeft:hp('3%'),
+    marginRight:hp('3%'),
     
   },
   
