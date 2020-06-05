@@ -116,7 +116,7 @@ const ListItemSwap = ({id, text,name, url, onSwipeFromLeft, onSwipeFromRight}) =
       leftAvatar={{ source: { uri:url } }}
       title={name}
       subtitle={text}
-      rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" />}
+      rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" /> }
       rightIcon={<Icon type='font-awesome' name='heart' color= 'red'/> }
       
      
