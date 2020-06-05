@@ -1,8 +1,8 @@
 backend
 index.js
 
-ligne 8,8,10 : modifier les var client_id,client_secret,redirect_uri
-ligne 67 : modifer la var idSpotify avec votre id spotify
+ligne 8,8,10 : modifier les var client_id, client_secret, redirect_uri
+ligne 67 : modifer la var idSpotify avec votre id spotify (seulement quand on aura besoin)
 
 frontend
 

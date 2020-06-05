@@ -21,7 +21,7 @@ export default function Radio(props) {
   // CALLBACK & CARDS & Playlist 
   let urlLien = props.url[0]
   let conv = urlLien.toString() 
-        console.log("mon url",urlLien); 
+
 
   return (
     <TouchableOpacity onPress={(urlLien) => props.navigation.navigate(props.url)}>
