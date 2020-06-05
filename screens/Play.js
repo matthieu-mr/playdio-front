@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView } from 'react-native'
 import { Tooltip, Slider } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -60,60 +60,72 @@ const playlist = [
   }
 ]
 
-const playlistTracks = [];
-playlist.map((track,i)=>{ 
-  playlistTracks.push({id: i, name: track.title, text: track.album, url: track.imageSource});
-})  
+
 
 
 // ----------------------------------------
 // PLAY FUNCTION
 
-export default class Play extends React.Component {
+// Get my Spotify ID from the store
 
-
-  isSeeking= false
-  shouldPlayAtEndOfSeek= false
+export default function Play() {
 
   // INITIAL STATE
- // useState
-  state = {
-    isPlaying: false,
-    playbackInstance: null,
-    currentIndex: 0,
-    volume: 0.5,
-    // Whenever the state of the Audio instance changes, isBuffering gets an update
-    isBuffering: false,
 
-    // Seek
-    shouldPlay: false,
-    playbackInstancePosition: null,
-    playbackInstanceDuration: null,
-  }
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackInstance, setPlaybackInstance] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [volume, setVolume] = useState(0.5);
+  // Whenever the state of the Audio instance changes, isBuffering gets an update
+  const [isBuffering, setIsBuffering] = useState(false);
+  const [shouldPlay, setShouldPlay] = useState(false);
+  const [isSeeking, setIsSeeking] = useState(false);
+  const [shouldPlayAtEndOfSeek, setShouldPlayAtEndOfSeek] = useState(false);
+  const [playbackInstancePosition, setPlaybackInstancePosition] = useState(null);
+  const [playbackInstanceDuration, setPlaybackInstanceDuration] = useState(null);
+    
 
   // CONFIGURATION OF THE AUDIO COMPONENT
- // useEffect
-  async componentDidMount() {
-    try {
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: false,
-        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-        playsInSilentModeIOS: true,
-        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-        shouldDuckAndroid: true,
-        staysActiveInBackground: true,
-        playThroughEarpieceAndroid: true
-      })
-      this.loadAudio()
-    } catch (e) {
-      console.log(e)
+ 
+  useEffect( () => {
+    audioConfiguration = async () => {
+      try {
+        await Audio.setAudioModeAsync({ 
+          allowsRecordingIOS: false,
+          interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+          playsInSilentModeIOS: true,
+          interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+          shouldDuckAndroid: true,
+          staysActiveInBackground: true,
+          playThroughEarpieceAndroid: true
+        })
+        loadAudio()
+      } catch (e) {
+        console.log(e)
+      }  
     }
-  }
+    audioConfiguration();
+  }, []);
+
+  // CONVERSION OF THE PLAYLIST FORMAT
+
+  const playlistTop = [];
+  playlist.map((track,i)=>{ 
+    if(i < currentIndex) {
+      playlistTop.push({id: i, name: track.title, text: track.album, url: track.imageSource});
+    }
+  })
+
+  const playlistBottom = [];
+  playlist.map((track,i)=>{ 
+    if(i > currentIndex) {
+      playlistBottom.push({id: i, name: track.title, text: track.album, url: track.imageSource});
+    }
+  })  
 
   // LOADING OF AUDIO FILE
 
-  async loadAudio() {
-    const {currentIndex, isPlaying, volume} = this.state
+  loadAudio = async () => {
     try {
       const playbackInstance = new Audio.Sound()
       const source = {
@@ -123,37 +135,33 @@ export default class Play extends React.Component {
         shouldPlay: isPlaying,
         volume: volume
       }
-      playbackInstance.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate)     
+      playbackInstance.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)     
       await playbackInstance.loadAsync(source, status, false)
-      this.setState({playbackInstance})
-      } catch (e) {
-        console.log(e)
-      }
+      setPlaybackInstance(playbackInstance)
+    } catch (e) {
+      console.log(e)
+    }
   }
    
   onPlaybackStatusUpdate = status => {
-    this.setState({
-      isBuffering: status.isBuffering
-    })
+    setIsBuffering(status.isBuffering)
   }
 
   // SEEK HANDLER
 
   onSeekSliderValueChange = value => {
-    const { shouldPlay, playbackInstance } = this.state
-    if (playbackInstance != null && !this.isSeeking) {
-      this.isSeeking = true;
-      this.shouldPlayAtEndOfSeek = shouldPlay;
+    if (playbackInstance != null && !isSeeking) {
+      setIsSeeking(true);
+      setShouldPlayAtEndOfSeek(shouldPlay);
       playbackInstance.pauseAsync();
     }
   };
 
   onSeekSliderSlidingComplete = async value => {
-    const { playbackInstance, playbackInstanceDuration } = this.state
     if (playbackInstance != null) {
-      this.isSeeking = false;
+      setIsSeeking(false);
       const seekPosition = value * playbackInstanceDuration;
-      if (this.shouldPlayAtEndOfSeek) {
+      if (shouldPlayAtEndOfSeek) {
         playbackInstance.playFromPositionAsync(seekPosition);
       } else {
         playbackInstance.setPositionAsync(seekPosition);
@@ -161,8 +169,7 @@ export default class Play extends React.Component {
     }
   };
 
-  getSeekSliderPosition() {
-    const { playbackInstance, playbackInstancePosition, playbackInstanceDuration } = this.state
+  getSeekSliderPosition = () => {
     if (
       playbackInstance != null &&
       playbackInstancePosition != null &&
@@ -178,7 +185,7 @@ export default class Play extends React.Component {
   
   // TIMESTAMP
 
-  getMMSSFromMillis(millis) {
+  getMMSSFromMillis = (millis) => {
     const totalSeconds = millis / 1000;
     const seconds = Math.floor(totalSeconds % 60);
     const minutes = Math.floor(totalSeconds / 60);
@@ -193,60 +200,51 @@ export default class Play extends React.Component {
     return padWithZero(minutes) + ":" + padWithZero(seconds);
   }
 
-  getTimestamp() {
+  getTimestamp = () => {
     if (
-      this.state.playbackInstance != null &&
-      this.state.playbackInstancePosition != null &&
-      this.state.playbackInstanceDuration != null
+      playbackInstance != null &&
+      playbackInstancePosition != null &&
+      playbackInstanceDuration != null
     ) {
-      return `${this.getMMSSFromMillis(
-        this.state.playbackInstancePosition
-      )} / ${this.getMMSSFromMillis(this.state.playbackInstanceDuration)}`;
+      return `${getMMSSFromMillis(
+        playbackInstancePosition
+      )} / ${getMMSSFromMillis(playbackInstanceDuration)}`;
     }
     return "";
   }
 
+  
   // CONTROL HANDLERS
 
+  
   handlePlayPause = async () => {
-    const { isPlaying, playbackInstance } = this.state
-    isPlaying ? await playbackInstance.pauseAsync() : await playbackInstance.playAsync()
-    this.setState({
-      isPlaying: !isPlaying
-    })
+    if (playbackInstance) { 
+      isPlaying ? await playbackInstance.pauseAsync() : await playbackInstance.playAsync()
+      setIsPlaying(!isPlaying)
+    }
   }
+  
  
   handlePreviousTrack = async () => {
-    let { playbackInstance, currentIndex } = this.state
     if (playbackInstance) {
       await playbackInstance.unloadAsync()
-      currentIndex > 0 ? (currentIndex -= 1) : (currentIndex = playlist.length - 1)
-      this.setState({
-        currentIndex
-      })
-      this.loadAudio()
+      currentIndex > 0 ? (setCurrentIndex(currentIndex - 1)) : (setCurrentIndex(playlist.length - 1))
+      loadAudio()
     }
   }
  
   handleNextTrack = async () => {
-    let { playbackInstance, currentIndex } = this.state
     if (playbackInstance) {
       await playbackInstance.unloadAsync()
-      currentIndex < playlist.length - 1 ? (currentIndex += 1) : (currentIndex = 0)
-      this.setState({
-        currentIndex
-      })
-      this.loadAudio()
+      currentIndex < playlist.length - 1 ? (setCurrentIndex(currentIndex + 1)) : (setCurrentIndex(0))
+      loadAudio()
     }
   }
 
   handleVolume = async ({value}) => {
-    let { playbackInstance, volume } = this.state
     if (playbackInstance) {
       await playbackInstance.setVolumeAsync(value)
-      this.setState({
-        volume: value
-      })
+      setVolume(value)
     }
   }
   decimal = (x) => {
@@ -255,8 +253,7 @@ export default class Play extends React.Component {
 
   // DISPLAY THE INFORMATION
 
-  renderFileInfo() {
-    const { playbackInstance, currentIndex } = this.state
+  renderFileInfo = () => {
     return playbackInstance ? (
       <View style={styles.trackInfo}>
         <Text style={styles.artistName}>
@@ -269,88 +266,93 @@ export default class Play extends React.Component {
     ) : null
   }
 
- 
   // ----------------------------------------
   // CALLBACK
 
-  render() {
-    return (
-      <View style={styles.playView}>
-        <View style={styles.header}>
+  return (
+    <View style={styles.playView}>
+      <View style={styles.header}>
 
-        </View>
-        <View style={styles.flatlistViewTop}>
-          <FlatList 
-            data={playlistTracks}
-            keyExtractor={item => item.id}
-            renderItem={({ item}) => (
-              <ListItemSwap style={styles.flatList}
-                {...item} 
-                onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
-                onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-                
-              />
-            )}
-            ItemSeparatorComponent={() => <Separator />}
-          />
-        </View>
-
-        <View style={styles.player}>
-
-          <Image
-            style={styles.albumCover}
-            source={{ uri: playlist[this.state.currentIndex].imageSource }}
-          />
-
-          {this.renderFileInfo()}
-
-          <View style={styles.seekView}>
-            <Text style={styles.seekTime}>{this.getTimestamp()}</Text>
-            <Slider
-              style={styles.seekSlider}
-              value={this.getSeekSliderPosition()}
-              onValueChange={this.onSeekSliderValueChange}
-              onSlidingComplete={this.onSeekSliderSlidingComplete}
+      </View>
+      <View style={styles.flatlistViewTop}>
+        <FlatList 
+          data={playlistTop}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <ListItemSwap style={styles.flatList}
+              {...item} 
+              onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
+              onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+              
             />
-            <Text style={styles.seekTime}>3.30</Text>
-          </View>
+          )}
+          ItemSeparatorComponent={() => <Separator />}
+        />
+      </View>
 
-          <View style={styles.controls}>
-            <TouchableOpacity style={styles.control} onPress={this.handlePreviousTrack}>
-              <Image source={require('../assets/icons/backward.png')} style={styles.icons}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.control} onPress={this.handlePlayPause}>
-              {this.state.isPlaying ? (<Image source={require('../assets/icons/hold.png')} style={styles.icons}/>) : (<Image source={require('../assets/icons/play.png')} style={styles.icons}/>)}
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.control} onPress={this.handleNextTrack}>
-              <Image source={require('../assets/icons/forward.png')} style={styles.icons}/>
-            </TouchableOpacity>
-            <Tooltip width={wp('40%')} height={hp('15%')} backgroundColor='#E5E4E4' popover={<View><Slider value={this.state.volume} minimumValue={0} maximumValue={1} onValueChange={value => this.handleVolume({value})}/><Text>volume: {this.decimal(this.state.volume)*10}</Text></View>}>
-              <Image source={require('../assets/icons/volume.png')} style={[styles.icons, styles.control]}/>
-            </Tooltip>
-          </View>
+      <View style={styles.player}>
 
+        <Image
+          style={styles.albumCover}
+          source={{ uri: playlist[currentIndex].imageSource }}
+        />
+
+        {renderFileInfo()}
+
+        <View style={styles.seekView}>
+          
+          <Text style={styles.seekTime}>{getTimestamp()}</Text>
+          
+          <Slider
+            style={styles.seekSlider}
+            value={200} //getSeekSliderPosition()
+            onValueChange={() => onSeekSliderValueChange()}
+            onSlidingComplete={() => onSeekSliderSlidingComplete()}
+            thumbTintColor="#343434"
+            thumbStyle={{width:wp('4%'), height:hp('2.5%')}}
+          />
+          
+          <Text style={styles.seekTime}>3.30</Text>
         </View>
 
-        <View style={styles.flatlistViewBottom}>
-          <FlatList 
-            data={playlistTracks}
-            keyExtractor={item => item.id}
-            renderItem={({ item}) => (
-              <ListItemSwap style={styles.flatList}
-                {...item} 
-                onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
-                onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-                
-              />
-            )}
-            ItemSeparatorComponent={() => <Separator />}
-          />
+        <View style={styles.controls}>
+          
+          <TouchableOpacity style={styles.control} onPress={() => handlePreviousTrack()}>
+            <Image source={require('../assets/icons/backward.png')} style={styles.icons}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.control} onPress={() => handlePlayPause()}>
+            {isPlaying ? (<Image source={require('../assets/icons/hold.png')} style={styles.icons}/>) : (<Image source={require('../assets/icons/play.png')} style={styles.icons}/>)}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.control} onPress={() => handleNextTrack()}>
+            <Image source={require('../assets/icons/forward.png')} style={styles.icons}/>
+          </TouchableOpacity>
+          <Tooltip width={wp('40%')} height={hp('15%')} backgroundColor='#E5E4E4' popover={<View><Slider value={volume} minimumValue={0} maximumValue={1} onValueChange={value => handleVolume({value})}/><Text>volume: {decimal(volume)*10}</Text></View>}>
+            <Image source={require('../assets/icons/volume.png')} style={[styles.icons, styles.control]}/>
+          </Tooltip>
+          
         </View>
 
       </View>
-    )
-  }
+
+      <View style={styles.flatlistViewBottom}>
+        <FlatList 
+          data={playlistBottom}
+          keyExtractor={item => item.id}
+          renderItem={({ item}) => (
+            <ListItemSwap style={styles.flatList}
+              {...item} 
+              onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
+              onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+              
+            />
+          )}
+          ItemSeparatorComponent={() => <Separator />}
+        />
+      </View>
+
+    </View>
+  )
+  
 }
 
 // ----------------------------------------
