@@ -24,12 +24,7 @@ export default async function getTokens(clientId,redirectURI,clientSecret,props)
       }`,
     });
     const responseJson = await response.json();
-<<<<<<< HEAD
-
-    await fetch('http://192.168.0.25:3000/saveToken',{
-=======
     var requestbackend = await fetch('http://192.168.1.43:3000/saveToken',{
->>>>>>> 6d36a769de9a8a4a8df85656cb6105356802f5e6
 
 //Matthieu  http://192.168.1.8
 // IP Marion http://192.168.1.25
