@@ -77,8 +77,7 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
           activeTintColor: '#FFFFFF',        
           inactiveTintColor: '#FFFFFF',
           style: {
-              backgroundColor: '#00838F',
-              height:hp('9%')
+              backgroundColor: '#00838F'
   }
   },
   }
