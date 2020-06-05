@@ -14,9 +14,10 @@ import police from '../screens/components/font'
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
+import {connect} from 'react-redux'
 
-
-export default  function connect({navigation}) {
+function connectAPP({navigation,saveEmailUser}) {
+ 
   var fontPermanentMarker =''
   var fontRoboto =''
   const [font,setFont]= useState(false)
@@ -31,14 +32,19 @@ useEffect( ()=>{
 },[])
 async function autoriseSpotify(){
 
-  var infoClientID = await fetch ('http://192.168.1.25:3000/autorisation')
-
+  var infoClientID = await fetch ('http://192.168.1.43:3000/autorisation')
+  
 
 // ip matthieu http://192.168.1.8
 // IP Marion http://192.168.1.25
+// IP Ben http://192.168.1.43
 
   var reponse = await infoClientID.json()
-  getTokens(reponse.clientId,reponse.redirectURI,reponse.clientSecret)
+  
+  var infoUser =await getTokens(reponse.clientId,reponse.redirectURI,reponse.clientSecret)
+  
+  saveEmailUser(infoUser.userInfo.email)
+  navigation.navigate("SignUp")
 }
 
 
@@ -71,7 +77,7 @@ async function autoriseSpotify(){
         fontSize:20}
       }
       
-      /><Button
+      />{/* <Button
       buttonStyle={styles.button}
       title="Sign up with Deezer"
       type="solid"
@@ -79,7 +85,7 @@ async function autoriseSpotify(){
         {color:"black",
         fontSize:20}
       }
-      />
+      /> */}
       <Text style={styles.connectEmail}>Or do it later</Text>
       <Button
       buttonStyle={styles.button}
@@ -134,3 +140,20 @@ const styles = StyleSheet.create({
   } 
   
 });
+
+function mapDispatchToProps(dispatch) {
+  return {
+    saveEmailUser: function(email) { 
+      dispatch( {type: 'saveEmailUser', email: email }) 
+    }
+  }
+}
+
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectAPP)
+
+
+

@@ -17,8 +17,9 @@ import {createStackNavigator} from 'react-navigation-stack';
 import * as AuthSession from 'expo-auth-session';
 
 
-import Connect from './screens/connect'
+import ConnectAPP from './screens/connect'
 import SignUp from './screens/signUp'
+import getTokens from './screens/components/getTokens'
 import Home from './screens/Home';
 import Playlist from './screens/Playlist';
 import Search from './screens/Search';
@@ -29,7 +30,7 @@ import AddRadio2 from './screens/CreateRadioStep2'
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import Login from './reducers/login'
+import email from './reducers/email'
 import PlaylistAdd from './reducers/playlist'
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
@@ -37,7 +38,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
-const store = createStore(combineReducers({Login,PlaylistAdd}))
+const store = createStore(combineReducers({email,PlaylistAdd}))
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
   Home: Home,
@@ -80,8 +81,9 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
 
   
 StackNavigator = createStackNavigator({
-  Connect:Connect,
+  Connect:ConnectAPP,
   SignUp:SignUp,
+  getTokens:getTokens,
   Playlist: Playlist,
   Play:Play,
  AddRadio : AddRadio1,
