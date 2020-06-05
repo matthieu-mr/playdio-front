@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
+import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 

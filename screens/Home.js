@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Radio from './components/Radio';
+import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function Home(props) {
@@ -26,8 +27,9 @@ export default function Home(props) {
   //CALLBACK
   return (
     <View style={styles.homeView}>
+       <Profile
+ />
       <ScrollView>
-
         <View style={styles.header}></View>
         <View style={styles.categories}>
           <Text style={styles.categoryTitle}>Discover</Text>

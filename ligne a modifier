@@ -18,4 +18,7 @@ app.json
 
 ligne 3 : le name doit etre celui de votre compte expo
 
+signUp.js 
 
+ligne 20 : modifer le fetch avec votre IP
+ligne 36 : modifer le fetch avec votre IP

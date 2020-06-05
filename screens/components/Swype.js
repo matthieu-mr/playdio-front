@@ -96,9 +96,6 @@ const RightActions = (progress, dragX, onPress) => {
   );
 };
 
-
-
-
 const ListItemSwap = ({id, text,name, url, onSwipeFromLeft, onSwipeFromRight}) => (
   <Swipeable
     renderLeftActions={LeftActions}
@@ -108,6 +105,8 @@ const ListItemSwap = ({id, text,name, url, onSwipeFromLeft, onSwipeFromRight}) =
     onSwipeableRightOpen={onSwipeFromRight} 
 
   >
+
+
     <View style={styles.container}>
 
       <ListItem
@@ -117,8 +116,9 @@ const ListItemSwap = ({id, text,name, url, onSwipeFromLeft, onSwipeFromRight}) =
       leftAvatar={{ source: { uri:url } }}
       title={name}
       subtitle={text}
-      rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" />}
-      rightIcon={{ type: 'font-awesome', name: 'heart', color: 'red' }}
+      rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" /> }
+      rightIcon={<Icon type='font-awesome' name='heart' color= 'red'/> }
+      
      
       />
 
