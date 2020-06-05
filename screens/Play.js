@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView } from 'react-native'
-import { Tooltip, Slider } from 'react-native-elements';
+import { Tooltip, Slider, Header, Avatar } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
 import ListItemSwap, { Separator } from './components/Swype';
@@ -269,9 +269,44 @@ export default function Play() {
   // ----------------------------------------
   // CALLBACK
 
+<<<<<<< HEAD
   return (
     <View style={styles.playView}>
       <View style={styles.header}>
+=======
+  render() {
+    return (
+      <View style={styles.playView}>
+      
+        <View style={styles.header}>
+         
+
+        </View>
+        <View style={styles.flatlistViewTop}>
+          <FlatList 
+            data={playlistTracks}
+            keyExtractor={item => item.id}
+            renderItem={({ item}) => (
+              <ListItemSwap style={styles.flatList}
+                {...item} 
+                onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
+                onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+                
+              />
+            )}
+            ItemSeparatorComponent={() => <Separator />}
+          />
+        </View>
+
+        <View style={styles.player}>
+
+          <Image
+            style={styles.albumCover}
+            source={{ uri: playlist[this.state.currentIndex].imageSource }}
+          />
+
+          {this.renderFileInfo()}
+>>>>>>> dfda9ce43146f9f555a9e42e5883ff85517734b7
 
       </View>
       <View style={styles.flatlistViewTop}>
