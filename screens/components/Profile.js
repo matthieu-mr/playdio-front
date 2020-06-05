@@ -13,11 +13,10 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    paddingHorizontal: hp('3%'),
-    paddingVertical: hp('1%'),
-    borderWidth: hp('0.1%'),
+    paddingHorizontal: hp('20%'),
+    paddingVertical: hp('0.03%'),
+    borderWidth: hp('0.01%'),
     borderColor: "#C8C8C8",
-    height:hp('12%')
   },
   text: {
     color: '#4a4a4a',
@@ -29,6 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e4e4e4',
     marginLeft: hp('3%'),
   },
+ 
   actionText: {
     color: '#fff',
     fontWeight: '600',
@@ -37,7 +37,11 @@ const styles = StyleSheet.create({
   listItem: {
     height:hp('10%'),
     paddingTop:hp('0%'),
-    paddingBottom:hp('0%')
+    paddingBottom:hp('0%'),
+    paddingHorizontal: hp('0%'),
+    paddingVertical: hp('2%'),
+    marginLeft: hp('35%'),
+    marginTop: hp('2%'),
   },
   title: {
     fontSize:hp('2.2%'),
@@ -53,22 +57,15 @@ const styles = StyleSheet.create({
 
 export const Separator = () => <View style={styles.separator} />;
 
-
-
-const Track = ({id, text,name, url}) => (
+const Profile = ({id, text,name, url}) => (
     <View style={styles.container}>
 
       <ListItem
         containerStyle={styles.listItem}
-        titleStyle={styles.title}
-        subtitleStyle={styles.subtitle}
-        leftElement={<Image
-        style={{width:wp('16%'), height:hp('8%'), marginRight:wp('5%')}}
-        source={{uri: 'https://img.cdandlp.com/2019/01/imgL/119431391.jpg'}}
+        rightAvatar={<Avatar
+        style={{width: 40, height: 40}}
+        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
       />}
-      title='Stevie Wonder'
-      subtitle='Superstition'
-      rightIcon={{ type: 'font-awesome', name: 'play', color: 'black' }}
      
       />
 
@@ -76,4 +73,4 @@ const Track = ({id, text,name, url}) => (
   
 );
 
-export default Track;
+export default Profile;

@@ -1,9 +1,14 @@
 export default function(playlist =[],action){
-    if(action.type== 'addName'){
-        console.log("reduxxxxx",action.info)
-        
+    if(action.type== 'addName'){        
         return action.info
-    }else{
+
+    }else if(action.type == 'addInfoPlaylistSpotify'){
+        playlist.idSpotify=action.info
+        console.log("add from spotify",playlist)
+   
+        return playlist
+    }
+    else{
         return playlist
     }
 }
