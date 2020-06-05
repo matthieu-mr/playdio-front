@@ -3,14 +3,10 @@ import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView
 import { Tooltip, Slider } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
-// import TrackList, { Separator } from './components/TrackList';
 import ListItemSwap, { Separator } from './components/Swype';
-
 
 // ----------------------------------------
 // PLAYLIST TEMPLATE EXAMPLE
-
-
 
 const playlist = [
   {
@@ -77,6 +73,7 @@ export default class Play extends React.Component {
 
 
   // INITIAL STATE
+
   state = {
     isPlaying: false,
     playbackInstance: null,
@@ -84,12 +81,13 @@ export default class Play extends React.Component {
     volume: 0.5,
     // Whenever the state of the Audio instance changes, isBuffering gets an update
     isBuffering: false,
+    // test Marion Seek
     isSeeking: false,
+    shouldPlayAtEndOfSeek: false,
   }
 
-  
-
   // CONFIGURATION OF THE AUDIO COMPONENT
+
   async componentDidMount() {
     try {
       await Audio.setAudioModeAsync({
@@ -108,6 +106,7 @@ export default class Play extends React.Component {
   }
 
   // LOADING OF AUDIO FILE
+
   async loadAudio() {
     const {currentIndex, isPlaying, volume} = this.state
     try {
@@ -133,7 +132,72 @@ export default class Play extends React.Component {
     })
   }
 
+  // SEEK HANDLER TEST
+
+  _onSeekSliderValueChange = value => {
+    if (this.playbackInstance != null && !this.state.isSeeking) {
+      this.state.isSeeking = true;
+      this.state.shouldPlayAtEndOfSeek = this.state.shouldPlay;
+      this.playbackInstance.pauseAsync();
+    }
+  };
+
+  _onSeekSliderSlidingComplete = async value => {
+    if (this.playbackInstance != null) {
+      this.state.isSeeking = false;
+      const seekPosition = value * this.state.playbackInstanceDuration;
+      if (this.state.shouldPlayAtEndOfSeek) {
+        this.playbackInstance.playFromPositionAsync(seekPosition);
+      } else {
+        this.playbackInstance.setPositionAsync(seekPosition);
+      }
+    }
+  };
+
+  _getSeekSliderPosition() {
+    if (
+      this.playbackInstance != null &&
+      this.state.playbackInstancePosition != null &&
+      this.state.playbackInstanceDuration != null
+    ) {
+      return (
+        this.state.playbackInstancePosition /
+        this.state.playbackInstanceDuration
+      );
+    }
+    return 0;
+  }
+  
+  _getMMSSFromMillis(millis) {
+    const totalSeconds = millis / 1000;
+    const seconds = Math.floor(totalSeconds % 60);
+    const minutes = Math.floor(totalSeconds / 60);
+
+    const padWithZero = number => {
+      const string = number.toString();
+      if (number < 10) {
+        return "0" + string;
+      }
+      return string;
+    };
+    return padWithZero(minutes) + ":" + padWithZero(seconds);
+  }
+
+  _getTimestamp() {
+    if (
+      this.playbackInstance != null &&
+      this.state.playbackInstancePosition != null &&
+      this.state.playbackInstanceDuration != null
+    ) {
+      return `${this._getMMSSFromMillis(
+        this.state.playbackInstancePosition
+      )} / ${this._getMMSSFromMillis(this.state.playbackInstanceDuration)}`;
+    }
+    return "";
+  }
+
   // CONTROL HANDLERS
+
   handlePlayPause = async () => {
     const { isPlaying, playbackInstance } = this.state
     isPlaying ? await playbackInstance.pauseAsync() : await playbackInstance.playAsync()
@@ -180,6 +244,7 @@ export default class Play extends React.Component {
   }
 
   // DISPLAY THE INFORMATION
+
   renderFileInfo() {
     const { playbackInstance, currentIndex } = this.state
     return playbackInstance ? (
@@ -195,8 +260,9 @@ export default class Play extends React.Component {
   }
 
  
-
+  // ----------------------------------------
   // CALLBACK
+
   render() {
     return (
       <View style={styles.playView}>
@@ -230,7 +296,13 @@ export default class Play extends React.Component {
 
           <View style={styles.seekView}>
             <Text style={styles.seekTime}>2.30</Text>
-            <Slider style={styles.seekSlider} value={this.state.volume} minimumValue={0} maximumValue={0.9} onValueChange={value => this.handleVolume({value})}/>
+            <Slider
+              style={styles.seekSlider}
+              value={this._getSeekSliderPosition()}
+              onValueChange={this._onSeekSliderValueChange}
+              onSlidingComplete={this._onSeekSliderSlidingComplete}
+              disabled={this.state.isLoading}
+            />
             <Text style={styles.seekTime}>3.30</Text>
           </View>
 
@@ -282,24 +354,24 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   header: {
-    height:hp('16%')
+    height:hp('14%')
   },
   player: {
     alignItems:'center',
     justifyContent:'center',
     backgroundColor:'#E5E4E4',
     width:wp('100%'),
-    height:hp('45%')
+    height:hp('40%')
   },
   albumCover: {
     width:wp('80%'),
-    height:hp('20%'),
+    height:hp('17%'),
     marginTop:hp('2%')
   },
   trackInfo: {
     width:wp('60%'),
     justifyContent:'flex-start',
-    marginTop:hp('2%')
+    marginTop:hp('1%')
   },
   artistName: {
     flexWrap:'wrap',
@@ -349,7 +421,7 @@ const styles = StyleSheet.create({
   },
   flatlistViewBottom: {
     width:wp('100%'),
-    height:hp('20%'),
+    height:hp('33%')
   }
 
 })
