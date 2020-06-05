@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     paddingVertical: hp('1%'),
     borderWidth: hp('0.1%'),
     borderColor: "#C8C8C8",
+    height:hp('12%')
   },
   text: {
     color: '#4a4a4a',
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#e4e4e4',
     marginLeft: hp('3%'),
   },
- 
   actionText: {
     color: '#fff',
     fontWeight: '600',
@@ -63,7 +63,7 @@ const Track = ({id, text,name, url}) => (
         titleStyle={styles.title}
         subtitleStyle={styles.subtitle}
         leftElement={<Image
-        style={{width: 40, height: 40}}
+        style={{width:wp('16%'), height:hp('8%'), marginRight:wp('5%')}}
         source={{uri: 'https://img.cdandlp.com/2019/01/imgL/119431391.jpg'}}
       />}
       title='Stevie Wonder'
