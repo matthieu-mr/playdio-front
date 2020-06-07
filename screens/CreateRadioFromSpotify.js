@@ -33,6 +33,7 @@ const [playlistUser,setPlaylistUser] =useState();
 
 // requete BDD
 useEffect(()=>{
+  
     async function recupDonnée(){
       var requestBDD = await fetch('http://192.168.1.8:3000/user-playlist',{
         method:"POST",
@@ -73,6 +74,7 @@ useEffect(()=>{
      }else {
          console.log("----------------> ko")
      }
+
 
   },[playlistUser])
 

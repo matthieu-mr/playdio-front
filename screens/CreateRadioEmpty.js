@@ -12,19 +12,39 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {connect} from 'react-redux';
 
 function CreateRadioEmpty(props) {
+// setter recherche
+  const[search,setSearch]=useState("")
+  const [listToSearch,SetListToSearch] =useState();
 
+
+// Get info from back 
+const [listSong,setListSong] =useState();
+const [searchJSON,setSearchJson] =useState();
+
+// Setter playlist
+let listOfMusic =[] ;
+const[arrayMusic, setArrayMusic] =useState();
+
+
+// Setter search
+let listOfResult =[] ;
+const[arrayResult, setArrayResult] =useState();
+
+// Setter boutton
+const buttons = ['My Playlist', 'Search on Spotify']
+const [indexButton,setIndex]=useState(0)
 
 
  /*  ------------------------------- Recuperation playlist   ------------------------------- */   
-    const [listSong,setListSong] =useState();
+
     // requete BDD
     useEffect(()=>{
-        let idSpotify ="33"
+        let idplaylistSpotify ="6IQZC7SBVCNa4raN2O4tKt"
         async function recupDonnée(){
           var requestBDD = await fetch('http://192.168.1.8:3000/playlist-item',{
             method:"POST",
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body:`idSpotify=idSpotify`
+            body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
           })
           var reponse = await requestBDD.json()
         
@@ -35,9 +55,7 @@ function CreateRadioEmpty(props) {
       
 /*  add list music to array  */
 
-      let listOfMusic =[] ;
-      const[arrayMusic, setArrayMusic] =useState();
-     
+
       useEffect(()=>{
           if(listSong){ // attente de la reception du JSON
             let infoListSong = listSong.response.items
@@ -63,11 +81,10 @@ function CreateRadioEmpty(props) {
 
  /*  ------------------------------- Recuperation Recherche   ------------------------------- */   
 //  Resquest
- const [searchJSON,setSearchJson] =useState();
 
  useEffect(()=>{
  
-     let searchText = "6IQZC7SBVCNa4raN2O4tKt"
+     let searchText = search
  
      async function recupDonnée(){
        var requestBDD = await fetch('http://192.168.1.8:3000/user-search',{
@@ -80,11 +97,10 @@ function CreateRadioEmpty(props) {
       
      }
      recupDonnée()
-   },[])
+   },[setSearch])
 
 //  Mise en forme du resultat
-let listOfResult =[] ;
-const[arrayResult, setArrayResult] =useState();
+
 
 useEffect(()=>{
     if(searchJSON){ // attente de la reception du JSON
@@ -111,9 +127,6 @@ useEffect(()=>{
 
 /*  ajout du filtre  */
 
-const[search,setSearch]=useState("")
-const [listToSearch,SetListToSearch] =useState();
-
 
 let filteredSong=[] ;
     if(listToSearch){
@@ -129,13 +142,10 @@ let filteredSong=[] ;
        }
       
 
-/*  waiting for array playlist initialisation */
 
 
- /* Affichage dynamique en fonction de l'ecran*/
+ /* Affichage dynamique via button en fonction de l'ecran*/
 
- const buttons = ['My Playlist', 'Search on Spotify']
- const [indexButton,setIndex]=useState(0)
 
  useEffect(() => {
   console.log("change",indexButton);
