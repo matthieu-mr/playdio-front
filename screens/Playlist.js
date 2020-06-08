@@ -4926,10 +4926,26 @@ let playslistTrackList =[] ;
       />}
       containerStyle={{
     backgroundColor: 'white',
+    marginBottom: '4%',
   }}
 />
   
-      <Text>Playlist</Text>
+      <View
+      style={{
+        flexDirection: "row",
+        marginTop: "1%",
+
+      }}
+    >
+    <Text style={{
+        marginRight: '5%',
+        marginLeft: '5%',
+      }}>Playlist</Text>
+    <Icon style={{
+        marginRight: '5%',
+      }} type="entypo" color="#00838F" name="dots-three-horizontal" />
+    <Icon type="entypo" color="#00838F" name="share" />
+    </View>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
           <Image
@@ -4974,7 +4990,7 @@ const styles = StyleSheet.create({
     marginBottom:hp('1%'),
     marginHorizontal: hp('2%'),
    
-    marginVertical: hp('6%'),
+    marginVertical: hp('3%'),
   },
 
   flatList: {
