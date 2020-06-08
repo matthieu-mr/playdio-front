@@ -13,8 +13,8 @@ import {connect} from 'react-redux'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 function connectSignUp(props) {
   
-//Matthieu  http://192.168.1.8
-// IP Marion http://192.168.1.25
+//Matthieu  http://192.168.1.43
+// IP Marion http://192.168.1.43
 //IP Ben http://192.168.1.43
 
 const [email,setEmail]=useState('email@email.com')

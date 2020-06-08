@@ -63,7 +63,7 @@ const Profile = ({id, text,name, url}) => (
       <ListItem
         containerStyle={styles.listItem}
         rightAvatar={<Avatar
-        style={{width: 40, height: 40}}
+        style={{width: wp('10%'), height: hp('5%')}}
         rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
       />}
      
