@@ -5,6 +5,9 @@ import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
 import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo-font';
+import { useFonts, PermanentMarker} from '@use-expo/font'
 
 
 
@@ -4898,7 +4901,6 @@ let playslistTrackList =[] ;
 
 
 
-
   /* ====> boucle avatar */
   let avatarList = listTest.map ((item,i)=>{
     return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
@@ -4913,10 +4915,14 @@ let playslistTrackList =[] ;
 
 
   /* futures fonction de gestion */
-  useEffect(() => {
-    console.log("change",idDel);
-    }, [idAdd]);
-
+  
+    let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+  });
+ 
+  let fontSize = 24;
+  let paddingVertical = 6;
+  
   return (
       <View style={styles.container}>
       <Header
@@ -4937,12 +4943,10 @@ let playslistTrackList =[] ;
 
       }}
     >
-    <Text style={{
-        marginRight: '5%',
-        marginLeft: '5%',
-      }}>Playlist</Text>
+    <Text style={styles.categoryTitle}>
+      Playlist</Text>
     <Icon style={{
-        marginRight: '5%',
+        marginRight: '3%',
       }} type="entypo" color="#00838F" name="dots-three-horizontal" />
     <Icon type="entypo" color="#00838F" name="share" />
     </View>
@@ -4989,7 +4993,6 @@ const styles = StyleSheet.create({
   scrollView: {
     marginBottom:hp('1%'),
     marginHorizontal: hp('2%'),
-   
     marginVertical: hp('3%'),
   },
 
@@ -5019,6 +5022,14 @@ const styles = StyleSheet.create({
     padding:hp('3%'),
     marginLeft:hp('3%'),
     marginRight:hp('3%'),
+    
+  },
+  categoryTitle: {
+    color:"#383838", 
+    fontSize:hp('3%'), 
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker',
+    marginRight: '5%',
     
   },
   
