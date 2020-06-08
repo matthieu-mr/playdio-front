@@ -32,13 +32,8 @@ useEffect( ()=>{
 },[])
 async function autoriseSpotify(){
 
-<<<<<<< HEAD
-  var infoClientID = await fetch ('http://192.168.0.25:3000/autorisation')
-
-=======
   var infoClientID = await fetch ('http://192.168.1.43:3000/autorisation')
   
->>>>>>> 6d36a769de9a8a4a8df85656cb6105356802f5e6
 
 // ip matthieu http://192.168.1.8
 // IP Marion http://192.168.1.25
@@ -77,7 +72,7 @@ async function autoriseSpotify(){
       buttonStyle={styles.button}
       color="fff"
       title="Sign up with Spotify"
-      onPress={()=>{navigation.navigate("Home"); autoriseSpotify()}}
+      onPress={()=>{ autoriseSpotify()}}
       titleStyle={
         {color:"black",
         fontSize:20}
