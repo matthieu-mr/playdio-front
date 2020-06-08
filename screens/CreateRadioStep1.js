@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch} from 'react-native';
-import { ListItem,Button } from 'react-native-elements'
+import { ListItem,Button, Header, Avatar } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import {connect} from 'react-redux';
 
@@ -39,6 +39,15 @@ let validPlaylist = (target)=>{
 
   return (
 <View style={styles.container}>
+ <Header
+  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
+  rightComponent={<Avatar
+        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+      />}
+      containerStyle={{
+    backgroundColor: 'white',
+  }}
+/>
 
 
     <View style={styles.form}>

@@ -27,17 +27,15 @@ export default function Home(props) {
 
   //CALLBACK
   return (
-    <View style={styles.homeView}>
-       <Header
-  placement="left"
+    <View>
+<Header
   leftComponent={{ icon: 'menu', color: '#fff' }}
-  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
   rightComponent={<Avatar
         rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
       />}
       containerStyle={{
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
+    backgroundColor: 'white',
   }}
 />
       <ScrollView>
@@ -73,14 +71,11 @@ export default function Home(props) {
 
 // STYLES
 const styles = StyleSheet.create({
-  homeView: {
-    flex:1, 
+  homeView: { 
     alignItems:"center", 
     justifyContent:"flex-start"
   },
-  header: {
-    height:hp('6%')
-  },
+  
   categories: {
     flex:1, 
     flexDirection:"row", 

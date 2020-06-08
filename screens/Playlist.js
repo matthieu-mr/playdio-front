@@ -4918,20 +4918,18 @@ let playslistTrackList =[] ;
     }, [idAdd]);
 
   return (
-    <SafeAreaView style={styles.container}>
-    <Header
-        rightComponent={<Avatar
+      <View style={styles.container}>
+      <Header
+  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
+  rightComponent={<Avatar
         rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
       />}
-        containerStyle={{
-         backgroundColor: '#FFFFFF',
-         marginBottom: 0,
-         paddingBottom: 0,
-         paddingTop: 0
-
+      containerStyle={{
+    backgroundColor: 'white',
   }}
 />
-      <Text> Playlist</Text>
+  
+      <Text>Playlist</Text>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
           <Image
@@ -4960,7 +4958,7 @@ let playslistTrackList =[] ;
     {/*{musicList} */}
     <Track
  />
-    </SafeAreaView>
+    </View>
 
   );
 
@@ -4968,17 +4966,14 @@ let playslistTrackList =[] ;
 
 const styles = StyleSheet.create({
   container: {
-    flex: hp('0.5%'),
+    flex: 1,
     backgroundColor: '#fff',   
-    marginVertical: 0,
-    marginBottom:0,
-    marginHorizontal: 0,
-    paddingVertical: 0,
+ 
   },
   scrollView: {
     marginBottom:hp('1%'),
     marginHorizontal: hp('2%'),
-    paddingVertical: 0,
+   
     marginVertical: hp('6%'),
   },
 
