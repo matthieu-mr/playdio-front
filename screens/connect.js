@@ -10,7 +10,10 @@ import getTokens from '../screens/components/getTokens';
 
 /* import * as Font from 'expo-font'; */
 
-import police from '../screens/components/font'
+
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { useFonts, PermanentMarker, Roboto} from '@use-expo/font'
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
@@ -22,17 +25,11 @@ function connectAPP({navigation,saveEmailUser}) {
   var fontRoboto =''
   const [font,setFont]= useState(false)
 
-useEffect( ()=>{
-  police()
-  setFont(true);
-    if(font ==true){ 
-    fontPermanentMarker = 'PermanentMarker'
-    fontRoboto = 'Roboto'
-  }
-},[])
+
 async function autoriseSpotify(){
 
   var infoClientID = await fetch ('http://192.168.1.43:3000/autorisation')
+  
   
 
 // ip matthieu http://192.168.1.43
@@ -48,7 +45,11 @@ async function autoriseSpotify(){
   navigation.navigate("SignUp")
 }
 
-
+let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+  });
+  
     return (
     <ImageBackground source={require('../assets/image_connection.jpg')} style={styles.container}>
       <Text style={styles.title} >Playdio</Text>
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
     marginLeft:wp('25%'),
     color:"#fff",
     fontSize:wp('15%'),
+    /* fontFamily: 'PermanentMarker' */
     /* fontFamily:fontPermanentMarker */
   },
   text:{

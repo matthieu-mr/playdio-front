@@ -43,6 +43,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
+
 const store = createStore(combineReducers({email,PlaylistAdd}))
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens

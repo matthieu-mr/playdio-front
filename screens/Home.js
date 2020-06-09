@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView, } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import Radio from './components/Radio';
-import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { useFonts, PermanentMarker, Roboto} from '@use-expo/font'
 
 export default function Home(props) {
 
@@ -26,18 +28,24 @@ export default function Home(props) {
   })
 
   //CALLBACK
+  let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+  });
+ 
+  let fontSize = 24;
+  let paddingVertical = 6;
+  
   return (
-    <View style={styles.homeView}>
-       <Header
-  placement="left"
+    <View>
+<Header
   leftComponent={{ icon: 'menu', color: '#fff' }}
-  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
   rightComponent={<Avatar
         rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
       />}
       containerStyle={{
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
+    backgroundColor: 'white',
   }}
 />
       <ScrollView>
@@ -73,29 +81,31 @@ export default function Home(props) {
 
 // STYLES
 const styles = StyleSheet.create({
-  homeView: {
-    flex:1, 
+  homeView: { 
     alignItems:"center", 
-    justifyContent:"flex-start"
+    justifyContent:"flex-start",
+    fontFamily: 'Roboto',
   },
-  header: {
-    height:hp('6%')
-  },
+  
   categories: {
     flex:1, 
     flexDirection:"row", 
-    justifyContent:"space-between"
+    justifyContent:"space-between",
+    fontFamily: 'Roboto',
+
   },
   categoryTitle: {
     color:"#383838", 
     fontSize:hp('3%'), 
     width:wp('75%'), 
-    marginLeft:wp('7%')
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker'
   },
   categoryLink: {
     color:"#00838F", 
     fontSize:hp('2%'), 
     width:wp('25%'), 
-    marginTop:hp('1.5%')
+    marginTop:hp('1.5%'),
+    fontFamily: 'Roboto',
   }
 })

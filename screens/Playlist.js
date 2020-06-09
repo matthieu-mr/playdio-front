@@ -5,6 +5,9 @@ import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
 import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo-font';
+import { useFonts, PermanentMarker} from '@use-expo/font'
 
 
 
@@ -4909,7 +4912,7 @@ let avatarList = listTest.map((item, i) => {
 
 /*  gestion des mouvements */
 
-const [idDel, setIdDel] = useState();
+
 const [idAdd, setIdAdd] = useState();
 
 
@@ -4932,9 +4935,7 @@ return (
             />}
             containerStyle={{
                 backgroundColor: '#FFFFFF',
-                marginBottom: 0,
-                paddingBottom: 0,
-                paddingTop: 0
+
 
             }}
         />

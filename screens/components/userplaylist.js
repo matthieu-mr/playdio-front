@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useRef} from 'react';
 import { Avatar, Badge, Icon, withBadge, Card, ListItem } from 'react-native-elements'
 import {
     View,
@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Animated,
     TouchableOpacity,
+    Switch
 } from 'react-native';
 // import Swipeable from 'react-native-gesture-handler/Swipeable';
 // import { GestureHandler } from 'expo';
@@ -14,7 +15,7 @@ import {
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-
+export const Separator = () => <View style={styles.separator} />;
 
 const styles = StyleSheet.create({
     container: {
@@ -55,8 +56,6 @@ const styles = StyleSheet.create({
     }
 });
 
-export const Separator = () => <View style={styles.separator} />;
-
 
 const RightActions = (progress, dragX, onPress) => {
 
@@ -75,11 +74,56 @@ const RightActions = (progress, dragX, onPress) => {
     );
 };
 
-const ListItemSwap = ({ id, text,firstName, lastName, avatar, onSwipeFromLeft, onSwipeFromRight }) => (
-    <Swipeable
-        renderRightActions={RightActions}
-        onSwipeableRightOpen={onSwipeFromRight}
-    >
+
+
+
+
+
+const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlaylist,idUser,idDelete },props) =>{
+    
+    const [colorIcon,setColorIcon]=useState('#C0C0C0')
+    const [idDel, setIdDel] = useState();
+    async function changeGrade(idUser,namePlaylist){
+
+        if(colorIcon==='#796221'){
+            var requestBDD = await fetch('http://192.168.1.43:3000/userAdmin',{
+            method:"POST",
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=admin`
+        })
+        setColorIcon('#C0C0C0')
+        }else if(colorIcon==='#C0C0C0'){
+                var requestBDD = await fetch('http://192.168.1.43:3000/userAdmin',{
+                method:"POST",
+                headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=public`
+            })
+            setColorIcon('#796221')
+        }
+    }
+    const swipeableRef = useRef(null);
+
+    const deleteUser =async (item,idDelete,namePlaylist) => {
+        console.log(idDelete,namePlaylist)
+        var requestBDD = await fetch('http://192.168.1.43:3000/deleteUser',{
+                method:"POST",
+                headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                body:`idDelete=${idDelete}&namePlaylist=${namePlaylist}`
+            })
+        console.log("evenement", item)
+        props.deleteSong(item)
+
+    swipeableRef.current.close();
+}
+        
+    
+    return(
+        <Swipeable     
+            ref={swipeableRef}
+            renderRightActions={RightActions}
+         // onSwipeableRightOpen={props.onSwipeFromRight} 
+            onSwipeableRightOpen={() => {deleteUser(id,idDelete,namePlaylist),setIdDel(id)}} 
+            >
 
 
         <View style={styles.container}>
@@ -91,17 +135,20 @@ const ListItemSwap = ({ id, text,firstName, lastName, avatar, onSwipeFromLeft, o
                 leftAvatar={{ source: { uri: avatar } }}
                 title={firstName+' '+lastName}
                 subtitle={text}
-                /* rightIcon={
-                    <Switch
-                        value={isPlayingOnly}
-                        onValueChange={() => {
-                            setIsPlayingOnly(!isPlayingOnly);
-                        }}
-                    />} */
+                rightIcon={
+                <Icon
+                    name="ios-disc"
+                    size={40}
+                    color={colorIcon}
+                    type='ionicon'
+                    onPress={()=>{changeGrade(idUser,namePlaylist)}}
+                    />
+                    }
             />
         </View>
     </Swipeable>
 
-);
+);} 
+
 
 export default ListItemSwap;

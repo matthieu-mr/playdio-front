@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, FlatList, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, FlatList, TouchableHighlight,Swi } from 'react-native';
 import { Avatar, Badge, Icon, withBadge, Card, List, ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/userplaylist';
 import  {TextField}  from 'react-native-material-textfield';
@@ -8,33 +8,28 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 
 export default function selectUser(props) {
-/* const [listUser,setListUser]=useEffect() ;  */
-/* const [firstName,setFirstName]=useState('') */
+const [firstName,setFirstName]=useState('')
 const [userPlaylist,setUserPlaylist]=useState([])
 
 
+/* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
 useEffect(()=>{
-    checkUserPlaylist()
-},[])
-async function checkUserPlaylist(){
+    async function checkUserPlaylist(){
     var requestBDD = await fetch('http://192.168.1.43:3000/userListplaylist')
     var reponse = await requestBDD.json()
-    setUserPlaylist(reponse.userList)
-
+    var tableau = [...userPlaylist]
+        for(var i= 0 ; i<reponse.userList.userInfo.length;i++){
+        tableau.push({id:i,firstName:reponse.userList.userInfo[i].userID.firstName,lastName:reponse.userList.userInfo[i].userID.lastName,avatar:'https://randomuser.me/api/portraits/men/41.jpg',gradeType:reponse.userList.userInfo[i].gradeType,namePlaylist:reponse.userList.name,idUser:reponse.userList.userInfo[i].userID._id,idDelete:reponse.userList.userInfo[i]._id})
+        }
+        setUserPlaylist(tableau)
     }
-var user = []
+    checkUserPlaylist()
+},[])
 
-userPlaylist.foreach((elem,i)=>{
-    let firstName = elem.userID.firstName
-    let lastName = elem.userID.lastName
-    let avatar = 'https://randomuser.me/api/portraits/men/41.jpg'
-    let gradeType = elem.gradeType
-console.log(firstName)
-console.log(lastName)
-console.log(gradeType)
 
-    user.push({id:i,firstName:firstName,lastName:lastName,avatar:avatar,gradeType:gradeType})
-})
+
+
+
 
 
 
@@ -75,13 +70,13 @@ return (
         onChangeText={(value)=>setFirstName(value)}
         />
         <FlatList
-            data={user}
+            data={userPlaylist}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
                 <ListItemSwap style={styles.flatList}
                     {...item}
-                    onSwipeFromRight={() => { alert('pressed right!'); setIdDel(item.id) }}
-
+                    
+                    
                 />
             )}
             ItemSeparatorComponent={() => <Separator />}

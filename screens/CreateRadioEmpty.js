@@ -10,6 +10,10 @@ import { TextField } from 'react-native-material-textfield';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {connect} from 'react-redux';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { useFonts, PermanentMarker, Roboto} from '@use-expo/font'
+
 
 function CreateRadioEmpty(props) {
 // setter recherche
@@ -159,12 +163,15 @@ let filteredSong=[] ;
   });
 
 
-
+let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+  });
   return (
 <View style={styles.container}>
     
                         <View style={styles.input}> 
-                            <Text> New Radio</Text>
+                            <Text style={styles.categoryTitle}> New Radio</Text>
                             
                             <TextField
                                 label={'Find a song'}
@@ -257,7 +264,13 @@ const styles = StyleSheet.create({
    marginLeft:wp('10%'),
 },
 
-
+categoryTitle: {
+    color:"#383838", 
+    fontSize:hp('3%'), 
+    width:wp('75%'), 
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker'
+  },
   
 });
 function mapStateToProps(state){

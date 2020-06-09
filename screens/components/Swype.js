@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: hp('1%'),
     paddingVertical: hp('1%'),
+    fontFamily: 'Roboto',
   },
   separator: {
     flex: hp('0.3%'),
