@@ -3,9 +3,9 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch} from 'react-na
 import { ListItem,Button, Header, Avatar } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import {connect} from 'react-redux';
-import * as Font from 'expo-font';
+// import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { useFonts, PermanentMarker, Roboto} from '@use-expo/font'
+import { useFonts } from '@use-expo/font'
 
 import police from '../screens/components/font';
 
@@ -38,10 +38,6 @@ let validPlaylist = (target)=>{
             alert("The title of your playlist can't be empty")
         }
 }
-let [fontsLoaded] = useFonts({
-    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
-    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
-  });
  
   return (
 <View style={styles.container}>
@@ -67,7 +63,7 @@ let [fontsLoaded] = useFonts({
                     <View style={styles.input}> 
                     <Text style={styles.categoryTitle}> Create Your New Radio</Text>
                     
-                    <TextField
+                    <TextField 
                         label={'Playlist Name'}
                         tintColor="#26a69a"
                         onChangeText={ (value) => setRadioName(value) }
@@ -81,6 +77,10 @@ let [fontsLoaded] = useFonts({
                     <View style={styles.paramPlaylist}> 
                     <ListItem
                         title="private"
+                        titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                         subtitle="ajout en private"
                         //leftAvatar={{ source: { uri: item.avatar_url } }}
                         rightIcon={
@@ -95,6 +95,10 @@ let [fontsLoaded] = useFonts({
                         
                         <ListItem 
                         title="private"
+                        titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                         subtitle="ajout en private"
                         //leftAvatar={{ source: { uri: item.avatar_url } }}
                         rightIcon={
@@ -114,6 +118,10 @@ let [fontsLoaded] = useFonts({
                         <View style={styles.button}>
                         <Button 
                             title="Add From Spotify Playlist"
+                            titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                             onPress={()=>validPlaylist("spotify")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
@@ -122,6 +130,10 @@ let [fontsLoaded] = useFonts({
                               <Text> ble bla</Text>
                         <Button 
                             title="Add Empty Radio"
+                            titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                             onPress={()=>validPlaylist("empty")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",

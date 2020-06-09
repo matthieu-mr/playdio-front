@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, ScrollView, } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import Radio from './components/Radio';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import * as Font from 'expo-font';
+// import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { useFonts, PermanentMarker, Roboto} from '@use-expo/font'
+import { useFonts} from '@use-expo/font'
 
 export default function Home(props) {
 
@@ -26,15 +26,6 @@ export default function Home(props) {
   var communityRadioList = communityRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
-
-  //CALLBACK
-  let [fontsLoaded] = useFonts({
-    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
-    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
-  });
- 
-  let fontSize = 24;
-  let paddingVertical = 6;
   
   return (
     <View>
@@ -55,7 +46,7 @@ export default function Home(props) {
           <Text style={styles.categoryLink}>See all</Text>
         </View>
         <ScrollView horizontal={true}>
-          {discoverRadioList}
+          {discoverRadioList} 
         </ScrollView>
 
         <View style={styles.categories}>
@@ -84,15 +75,12 @@ const styles = StyleSheet.create({
   homeView: { 
     alignItems:"center", 
     justifyContent:"flex-start",
-    fontFamily: 'Roboto',
   },
   
   categories: {
     flex:1, 
     flexDirection:"row", 
     justifyContent:"space-between",
-    fontFamily: 'Roboto',
-
   },
   categoryTitle: {
     color:"#383838", 

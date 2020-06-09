@@ -10,9 +10,9 @@ import { TextField } from 'react-native-material-textfield';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {connect} from 'react-redux';
-import * as Font from 'expo-font';
+// import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { useFonts, PermanentMarker, Roboto} from '@use-expo/font'
+import { useFonts } from '@use-expo/font'
 
 
 function CreateRadioEmpty(props) {
@@ -163,10 +163,7 @@ let filteredSong=[] ;
   });
 
 
-let [fontsLoaded] = useFonts({
-    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
-    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
-  });
+
   return (
 <View style={styles.container}>
     
