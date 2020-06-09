@@ -169,6 +169,20 @@ console.log("front item",item)
 }
 
 
+let validPlaylist =async ()=>{
+  console.log("envoi en base")
+  let value =(props.playlistUser)
+  console.log("envoi", value)
+  var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
+    method:"POST",
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body:`value=${value}`
+  })
+  var reponse = await requestBDD.json()
+//   setSearchJson(reponse)
+
+}
+
 
   return (
 
