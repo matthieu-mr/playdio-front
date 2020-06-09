@@ -36,6 +36,7 @@ import {Provider} from 'react-redux';
 import email from './reducers/email'
 import PlaylistAdd from './reducers/playlist'
 
+
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { heightPercentageToDP } from 'react-native-responsive-screen';

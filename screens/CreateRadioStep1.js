@@ -18,18 +18,18 @@ const [isPrivate, setIsPrivate] = useState(false) ;
 const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
 const [send, setSender] = useState(false);
 
-
+let listMusic =[]
 
 // redirection en fonction du choix user
 let validPlaylist = (target)=>{  
         if (radioName){
-            props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly})
+            props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly,listMusic})
             if (target=="empty"){
               props.navigation.navigate('AddRadioEmpty')
             
             } else if (target == "spotify"){
               props.navigation.navigate('AddRadioGetSpotify')
-              console.log("spotify")
+            
             }
          //   props.navigation.navigate('AddRadio2')
         }else{
