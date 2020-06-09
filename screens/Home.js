@@ -39,13 +39,13 @@ export default function Home(props) {
     backgroundColor: 'white',
   }}
 />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.header}></View>
         <View style={styles.categories}>
           <Text style={styles.categoryTitle}>Discover</Text>
           <Text style={styles.categoryLink}>See all</Text>
         </View>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} indicatorStyle={'white'} >
           {discoverRadioList} 
         </ScrollView>
 
@@ -53,7 +53,7 @@ export default function Home(props) {
           <Text style={styles.categoryTitle}>My radios</Text>
           <Text style={styles.categoryLink}>See all</Text>
         </View>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} indicatorStyle={'white'}>
           {myRadioList}
         </ScrollView>
 
@@ -61,7 +61,7 @@ export default function Home(props) {
           <Text style={styles.categoryTitle}>Radios of my community</Text>
           <Text style={styles.categoryLink}>See all</Text>
         </View>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} indicatorStyle={'white'}>
           {communityRadioList}
         </ScrollView>
 
@@ -75,13 +75,20 @@ const styles = StyleSheet.create({
   homeView: { 
     alignItems:"center", 
     justifyContent:"flex-start",
+    backgroundColor: "white"
   },
   
   categories: {
     flex:1, 
     flexDirection:"row", 
     justifyContent:"space-between",
+    backgroundColor: "white"
   },
+
+  scrollView: {
+    backgroundColor: '#FFFFFF',
+  },
+
   categoryTitle: {
     color:"#383838", 
     fontSize:hp('3%'), 

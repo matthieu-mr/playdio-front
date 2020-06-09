@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     }, 
     shadowColor: "grey", 
     shadowOpacity: 1, 
-    shadowRadius:hp('7%')
+    shadowRadius:hp('2%')
   },
   cardImage: {
     width:wp('28%'), 
@@ -94,6 +94,6 @@ const styles = StyleSheet.create({
     justifyContent:"flex-start", 
     marginTop:hp('1%'), 
     marginLeft:wp('7%'), 
-    marginBottom:hp('7%')
+    marginBottom:hp('4%')
   }
 })

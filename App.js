@@ -45,6 +45,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 const store = createStore(combineReducers({email,PlaylistAdd}))
 
+
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
   Home: Home,
   Playlist: Playlist,
@@ -98,7 +99,9 @@ StackNavigator = createStackNavigator({
   BottomNavigator:BottomNavigator
 }, 
 { 
-  headerMode: 'none' 
+  headerMode: 'none',
+  
+   
 })
 
 const Navigation = createAppContainer(StackNavigator)
