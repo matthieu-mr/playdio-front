@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch} from 'react-native';
-import { ListItem,Button } from 'react-native-elements'
+import { ListItem,Button, Header, Avatar } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import {connect} from 'react-redux';
-
+// import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { useFonts } from '@use-expo/font'
 
 import police from '../screens/components/font';
 
@@ -36,9 +38,18 @@ let validPlaylist = (target)=>{
             alert("The title of your playlist can't be empty")
         }
 }
-
+ 
   return (
 <View style={styles.container}>
+ <Header
+  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
+  rightComponent={<Avatar
+        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+      />}
+      containerStyle={{
+    backgroundColor: 'white',
+  }}
+/>
 
 
     <View style={styles.form}>
@@ -50,9 +61,9 @@ let validPlaylist = (target)=>{
         
                   
                     <View style={styles.input}> 
-                    <Text> Create Your New Radio</Text>
+                    <Text style={styles.categoryTitle}> Create Your New Radio</Text>
                     
-                    <TextField
+                    <TextField 
                         label={'Playlist Name'}
                         tintColor="#26a69a"
                         onChangeText={ (value) => setRadioName(value) }
@@ -66,6 +77,10 @@ let validPlaylist = (target)=>{
                     <View style={styles.paramPlaylist}> 
                     <ListItem
                         title="private"
+                        titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                         subtitle="ajout en private"
                         //leftAvatar={{ source: { uri: item.avatar_url } }}
                         rightIcon={
@@ -80,6 +95,10 @@ let validPlaylist = (target)=>{
                         
                         <ListItem 
                         title="private"
+                        titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                         subtitle="ajout en private"
                         //leftAvatar={{ source: { uri: item.avatar_url } }}
                         rightIcon={
@@ -99,14 +118,23 @@ let validPlaylist = (target)=>{
                         <View style={styles.button}>
                         <Button 
                             title="Add From Spotify Playlist"
+                            titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                             onPress={()=>validPlaylist("spotify")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
+                                marginBottom: wp ('5%')
                             }}
                         />
-                              <Text> ble bla</Text>
+                              
                         <Button 
                             title="Add Empty Radio"
+                            titleStyle={
+                            {
+                            fontFamily:'Roboto'}
+                               }
                             onPress={()=>validPlaylist("empty")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
@@ -157,7 +185,16 @@ const styles = StyleSheet.create({
   button:{
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
+   marginBottom: wp('10%')
 },
+
+categoryTitle: {
+    color:"#383838", 
+    fontSize:hp('3%'), 
+    width:wp('75%'), 
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker'
+  },
 
 
   

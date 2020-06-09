@@ -10,6 +10,10 @@ import { TextField } from 'react-native-material-textfield';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {connect} from 'react-redux';
+// import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { useFonts } from '@use-expo/font'
+
 
 function CreateRadioEmpty(props) {
 // setter recherche
@@ -164,7 +168,7 @@ let filteredSong=[] ;
 <View style={styles.container}>
     
                         <View style={styles.input}> 
-                            <Text> New Radio</Text>
+                            <Text style={styles.categoryTitle}> New Radio</Text>
                             
                             <TextField
                                 label={'Find a song'}
@@ -255,9 +259,17 @@ const styles = StyleSheet.create({
   button:{
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
+   marginBottom:wp('20%'),
 },
 
-
+categoryTitle: {
+    color:"#383838", 
+    fontSize:hp('3%'), 
+    width:wp('75%'), 
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker',
+    marginTop: wp ('20%')
+  },
   
 });
 function mapStateToProps(state){

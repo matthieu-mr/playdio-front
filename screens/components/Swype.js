@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: hp('1%'),
     paddingVertical: hp('1%'),
+    fontFamily: 'Roboto',
   },
   separator: {
     flex: hp('0.3%'),
@@ -53,11 +54,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize:hp('2.2%'),
     fontWeight: "bold",
-    color:"#3a3a3a"
+    color:"#3a3a3a",
+    fontFamily: 'RobotoBold'
   },
   subtitle: {
     fontSize:hp('2%'),
-    color:"#3a3a3a"
+    color:"#3a3a3a",
+    fontFamily: 'Roboto'
   }
 });
 

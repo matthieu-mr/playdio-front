@@ -5,6 +5,9 @@ import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
 import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+// import * as Font from 'expo-font';
+import { AppLoading } from 'expo-font';
+import { useFonts} from '@use-expo/font'
 
 
 
@@ -4898,7 +4901,6 @@ let playslistTrackList =[] ;
 
 
 
-
   /* ====> boucle avatar */
   let avatarList = listTest.map ((item,i)=>{
     return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
@@ -4913,25 +4915,41 @@ let playslistTrackList =[] ;
 
 
   /* futures fonction de gestion */
-  useEffect(() => {
-    console.log("change",idDel);
-    }, [idAdd]);
-
+  
+    let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+  });
+ 
+  let fontSize = 24;
+  let paddingVertical = 6;
+  
   return (
-    <SafeAreaView style={styles.container}>
-    <Header
-        rightComponent={<Avatar
+      <View style={styles.container}>
+      <Header
+  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
+  rightComponent={<Avatar
         rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
       />}
-        containerStyle={{
-         backgroundColor: '#FFFFFF',
-         marginBottom: 0,
-         paddingBottom: 0,
-         paddingTop: 0
-
+      containerStyle={{
+    backgroundColor: 'white',
+    marginBottom: '4%',
   }}
 />
-      <Text> Playlist</Text>
+  
+      <View
+      style={{
+        flexDirection: "row",
+        marginTop: "1%",
+
+      }}
+    >
+    <Text style={styles.categoryTitle}>
+      Playlist</Text>
+    <Icon style={{
+        marginRight: '3%',
+      }} type="entypo" color="#00838F" name="dots-three-horizontal" />
+    <Icon type="entypo" color="#00838F" name="share" />
+    </View>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
           <Image
@@ -4960,7 +4978,7 @@ let playslistTrackList =[] ;
     {/*{musicList} */}
     <Track
  />
-    </SafeAreaView>
+    </View>
 
   );
 
@@ -4968,18 +4986,14 @@ let playslistTrackList =[] ;
 
 const styles = StyleSheet.create({
   container: {
-    flex: hp('0.5%'),
+    flex: 1,
     backgroundColor: '#fff',   
-    marginVertical: 0,
-    marginBottom:0,
-    marginHorizontal: 0,
-    paddingVertical: 0,
+ 
   },
   scrollView: {
     marginBottom:hp('1%'),
     marginHorizontal: hp('2%'),
-    paddingVertical: 0,
-    marginVertical: hp('6%'),
+    marginVertical: hp('3%'),
   },
 
   flatList: {
@@ -5008,6 +5022,14 @@ const styles = StyleSheet.create({
     padding:hp('3%'),
     marginLeft:hp('3%'),
     marginRight:hp('3%'),
+    
+  },
+  categoryTitle: {
+    color:"#383838", 
+    fontSize:hp('3%'), 
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker',
+    marginRight: '5%',
     
   },
   
