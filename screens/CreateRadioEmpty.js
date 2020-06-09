@@ -41,7 +41,7 @@ const [indexButton,setIndex]=useState(0)
     useEffect(()=>{
         let idplaylistSpotify ="6IQZC7SBVCNa4raN2O4tKt"
         async function recupDonnée(){
-          var requestBDD = await fetch('http://192.168.1.8:3000/playlist-item',{
+          var requestBDD = await fetch('http://192.168.1.25:3000/playlist-item',{
             method:"POST",
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
@@ -87,7 +87,7 @@ const [indexButton,setIndex]=useState(0)
      let searchText = search
  
      async function recupDonnée(){
-       var requestBDD = await fetch('http://192.168.1.8:3000/user-search',{
+       var requestBDD = await fetch('http://192.168.1.25:3000/user-search',{
          method:"POST",
          headers: {'Content-Type':'application/x-www-form-urlencoded'},
          body:`search_term=${searchText}`

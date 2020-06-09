@@ -1,77 +1,23 @@
-import React, {useState, useEffect} from 'react'
-import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView } from 'react-native'
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView, AsyncStorage } from 'react-native'
 import { Tooltip, Slider, Header, Avatar } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
 import ListItemSwap, { Separator } from './components/Swype';
 
-// ----------------------------------------
-// PLAYLIST TEMPLATE EXAMPLE
-
-const playlist = [
-  {
-    id: 1,
-    title: 'Sorry',
-    author: 'Comfort Fit',
-    album: 'Not defined',
-    source: 'Amazonaws',
-    uri:
-      'https://s3.amazonaws.com/exp-us-standard/audio/playlist-example/Comfort_Fit_-_03_-_Sorry.mp3',
-    imageSource: 'https://i.ytimg.com/vi/JLElBAJL_mk/maxresdefault.jpg'
-  },
-  {
-    id: 2,
-    title: 'Hamlet - Act II',
-    author: 'William Shakespeare',
-    album: 'Not defined',
-    source: 'Librivox',
-    uri:
-      'https://ia600204.us.archive.org/11/items/hamlet_0911_librivox/hamlet_act2_shakespeare.mp3',
-    imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
-  },
-  {
-    id: 3,
-    title: 'Hamlet - Act III',
-    author: 'William Shakespeare',
-    album: 'Not defined',
-    source: 'Librivox',
-    uri: 'http://www.archive.org/download/hamlet_0911_librivox/hamlet_act3_shakespeare.mp3',
-    imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
-  },
-  {
-    id: 4,
-    title: 'Hamlet - Act IV',
-    author: 'William Shakespeare',
-    album: 'Not defined',
-    source: 'Librivox',
-    uri:
-      'https://ia800204.us.archive.org/11/items/hamlet_0911_librivox/hamlet_act4_shakespeare.mp3',
-    imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
-  },
-  {
-    id: 5,
-    title: 'Hamlet - Act V',
-    author: 'William Shakespeare',
-    album: 'Not defined',
-    source: 'Librivox',
-    uri:
-      'https://ia600204.us.archive.org/11/items/hamlet_0911_librivox/hamlet_act5_shakespeare.mp3',
-    imageSource: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
-  }
-]
-
-
-
 
 // ----------------------------------------
 // PLAY FUNCTION
-
-// Get my Spotify ID from the store
 
 export default function Play() {
 
   // INITIAL STATE
 
+  // Raw playlist from Spotify
+  const [playlist, setPlaylist] = useState([]);
+  // const [token, setToken] = useState('');
+  // const [currentTrack, setCurrentTrack] = useState('');
+  // Player
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackInstance, setPlaybackInstance] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -83,9 +29,90 @@ export default function Play() {
   const [shouldPlayAtEndOfSeek, setShouldPlayAtEndOfSeek] = useState(false);
   const [playbackInstancePosition, setPlaybackInstancePosition] = useState(null);
   const [playbackInstanceDuration, setPlaybackInstanceDuration] = useState(null);
-    
 
-  // CONFIGURATION OF THE AUDIO COMPONENT
+  
+  // FETCH PLAYLIST  
+  
+  useEffect( () =>{
+    fetchSpotifyPlaylist = async () => {
+      var infoUser = await AsyncStorage.getItem('user');
+      var userData = JSON.parse(infoUser);
+      var idPlaylist = '37i9dQZF1DXbTxeAdrVG2l';
+
+      var request = await fetch('http://192.168.1.25:3000/play',{
+        method:"POST",
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body:`idSpotify=${userData.idSpotify}&idPlaylist=${idPlaylist}`
+      })
+      var rawResponse = await request.json();
+      var response = rawResponse.response;
+      // setToken(rawResponse.userAccessToken)
+      
+      var rawPlaylist = [];
+      for(var i=0; i<response.items.length; i++) {
+        rawPlaylist.push({
+          id: i, 
+          position: response.items[i].track.track_number, 
+          name: response.items[i].track.name, 
+          content: response.items[i].track.href, 
+          duration: response.items[i].track.duration_ms, 
+          artist: response.items[i].track.artists[0].name, 
+          image: response.items[i].track.album.images[0].url, 
+          album: response.items[i].track.album.name,
+          isrc: response.items[i].track.external_ids.isrc,
+          externalUrl: response.items[i].track.external_urls.spotify,
+          previewUrl: response.items[i].track.preview_url,
+          uri: response.items[i].track.uri
+        });
+      }
+      setPlaylist(rawPlaylist);
+
+    }
+    fetchSpotifyPlaylist()  
+  },[])
+
+
+  // FETCH CURRENT TRACK  
+
+  /*
+  useEffect( () =>{
+    fetchCurrentTrack = async () => {
+      var infoUser = await AsyncStorage.getItem('user')
+      var userData = JSON.parse(infoUser)
+      var currentTrackHref = playlist[currentIndex].content;
+      var request = await fetch('http://192.168.1.25:3000/play-track',{
+        method:"POST",
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body:`idSpotify=${userData.idSpotify}&currentTrack=${currentTrackHref}`
+      })
+      var response = await request.json();
+      setCurrentTrack({uri: response.currentTrack, headers: response.headers});
+      console.log({uri: response.currentTrack, headers: response.headers});
+    }
+    fetchCurrentTrack()  
+  },[currentIndex])
+
+  */
+
+
+  // TOP & BOTTOM PLAYLISTS
+
+  let playlistTop = [];
+  for(var i=0; i<playlist.length; i++) {
+    if(i < currentIndex) {
+      playlistTop.push({id: i, name: playlist[i].name, text: playlist[i].artist, url: playlist[i].image});
+    }
+  }
+
+  let playlistBottom = [];
+  for(var i=0; i<playlist.length; i++) {
+    if(i > currentIndex) {
+      playlistBottom.push({id: i, name: playlist[i].name, text: playlist[i].artist, url: playlist[i].image});
+    }
+  }
+  
+
+  // CONFIGURATION OF AUDIO COMPONENT
  
   useEffect( () => {
     audioConfiguration = async () => {
@@ -99,7 +126,7 @@ export default function Play() {
           staysActiveInBackground: true,
           playThroughEarpieceAndroid: true
         })
-        loadAudio()
+        // loadAudio()
       } catch (e) {
         console.log(e)
       }  
@@ -107,45 +134,42 @@ export default function Play() {
     audioConfiguration();
   }, []);
 
-  // CONVERSION OF THE PLAYLIST FORMAT
 
-  const playlistTop = [];
-  playlist.map((track,i)=>{ 
-    if(i < currentIndex) {
-      playlistTop.push({id: i, name: track.title, text: track.album, url: track.imageSource});
-    }
-  })
-
-  const playlistBottom = [];
-  playlist.map((track,i)=>{ 
-    if(i > currentIndex) {
-      playlistBottom.push({id: i, name: track.title, text: track.album, url: track.imageSource});
-    }
-  })  
-
-  // LOADING OF AUDIO FILE
+  // LOAD OF AUDIO FILE
 
   loadAudio = async () => {
     try {
-      const playbackInstance = new Audio.Sound()
-      const source = {
-        uri: playlist[currentIndex].uri
+      if(playlist.length > 0) {
+        const playbackInstanceNew = new Audio.Sound()
+        const source = {uri: playlist[currentIndex].previewUrl} 
+        const status = {
+          shouldPlay: isPlaying,
+          volume: volume,
+        }
+        playbackInstanceNew.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
+        await playbackInstanceNew.loadAsync(source, status, false)
+        setPlaybackInstance(playbackInstanceNew)
       }
-      const status = {
-        shouldPlay: isPlaying,
-        volume: volume
-      }
-      playbackInstance.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)     
-      await playbackInstance.loadAsync(source, status, false)
-      setPlaybackInstance(playbackInstance)
     } catch (e) {
       console.log(e)
     }
   }
-   
+  
+  useEffect( () => {
+    loadAudio();
+  }, [playlist]);
+
+
+  // AUDIO STATUS UPDATE
+
   onPlaybackStatusUpdate = status => {
-    setIsBuffering(status.isBuffering)
+    if(status.isLoaded) {
+      setIsBuffering(status.isBuffering)
+      setPlaybackInstancePosition(status.positionMillis)
+      setPlaybackInstanceDuration(status.durationMillis)
+    }
   }
+
 
   // SEEK HANDLER
 
@@ -183,6 +207,7 @@ export default function Play() {
     return 0;
   }
   
+
   // TIMESTAMP
 
   getMMSSFromMillis = (millis) => {
@@ -200,15 +225,22 @@ export default function Play() {
     return padWithZero(minutes) + ":" + padWithZero(seconds);
   }
 
-  getTimestamp = () => {
+  getTimestampLeft = () => {
     if (
       playbackInstance != null &&
-      playbackInstancePosition != null &&
+      playbackInstancePosition != null
+    ) {
+      return `${getMMSSFromMillis(playbackInstancePosition)}`;
+    }
+    return "";
+  }
+
+  getTimestampRight = () => {
+    if (
+      playbackInstance != null &&
       playbackInstanceDuration != null
     ) {
-      return `${getMMSSFromMillis(
-        playbackInstancePosition
-      )} / ${getMMSSFromMillis(playbackInstanceDuration)}`;
+      return `${getMMSSFromMillis(playbackInstanceDuration)}`;
     }
     return "";
   }
@@ -216,14 +248,12 @@ export default function Play() {
   
   // CONTROL HANDLERS
 
-  
   handlePlayPause = async () => {
     if (playbackInstance) { 
       isPlaying ? await playbackInstance.pauseAsync() : await playbackInstance.playAsync()
       setIsPlaying(!isPlaying)
     }
   }
-  
  
   handlePreviousTrack = async () => {
     if (playbackInstance) {
@@ -251,20 +281,22 @@ export default function Play() {
     return Number.parseFloat(x).toFixed(1);
   }
 
+
   // DISPLAY THE INFORMATION
 
   renderFileInfo = () => {
     return playbackInstance ? (
       <View style={styles.trackInfo}>
         <Text style={styles.artistName}>
-          {playlist[currentIndex].author}
+          {playlist[currentIndex].artist}
         </Text>
         <Text style={styles.trackName}>
-          {playlist[currentIndex].title}
+          {playlist[currentIndex].name}
         </Text>
       </View>
     ) : null
   }
+
 
   // ----------------------------------------
   // CALLBACK
@@ -272,47 +304,45 @@ export default function Play() {
   return (
     <View style={styles.playView}>
       <View style={styles.header}>
-
       </View>
+
       <View style={styles.flatlistViewTop}>
         <FlatList 
           data={playlistTop}
+          invertStickyHeaders={false}
           keyExtractor={item => item.id}
           renderItem={({item}) => (
             <ListItemSwap style={styles.flatList}
               {...item} 
-              onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
-              onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+              onSwipeFromLeft={() => {setIdAdd(item.id)}}
+              onSwipeFromRight={() => {setIdDel(item.id)}}
               
             />
           )}
           ItemSeparatorComponent={() => <Separator />}
         />
       </View>
-
+      
       <View style={styles.player}>
-
-        <Image
-          style={styles.albumCover}
-          source={{ uri: playlist[currentIndex].imageSource }}
-        />
-
+        
+        {playlist.length > 0 ? (<Image style={styles.albumCover} source={{ uri: playlist[currentIndex].image }}/>) : (<View></View>)}
+        
         {renderFileInfo()}
 
         <View style={styles.seekView}>
           
-          <Text style={styles.seekTime}>{getTimestamp()}</Text>
+          <Text style={styles.seekTime}>{getTimestampLeft()}</Text>
           
           <Slider
             style={styles.seekSlider}
-            value={200} //getSeekSliderPosition()
+            value={getSeekSliderPosition()}
             onValueChange={() => onSeekSliderValueChange()}
             onSlidingComplete={() => onSeekSliderSlidingComplete()}
             thumbTintColor="#343434"
             thumbStyle={{width:wp('4%'), height:hp('2.5%')}}
           />
           
-          <Text style={styles.seekTime}>3.30</Text>
+          <Text style={styles.seekTime}>{getTimestampRight()}</Text>
         </View>
 
         <View style={styles.controls}>
@@ -354,6 +384,7 @@ export default function Play() {
   )
   
 }
+
 
 // ----------------------------------------
 // STYLES

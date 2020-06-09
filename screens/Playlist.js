@@ -4901,7 +4901,7 @@ let playslistTrackList =[] ;
 
   /* ====> boucle avatar */
   let avatarList = listTest.map ((item,i)=>{
-    return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
+    return <Avatar key={i} rounded source={{uri: item.url}} size="medium" /> 
   })
 
   
