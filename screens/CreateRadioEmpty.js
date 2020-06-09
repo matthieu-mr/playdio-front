@@ -8,11 +8,6 @@ import police from '../screens/components/font';
 
 import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-material-textfield';
 
-import {connect} from 'react-redux';
-// import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
-import { useFonts } from '@use-expo/font'
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 function CreateRadioEmpty(props) {
@@ -176,16 +171,11 @@ console.log("front item",item)
 
   return (
 <View style={styles.container}>
-    
-                        <View style={styles.input}> 
-                            <Text style={styles.categoryTitle}> New Radio</Text>
-                            
-                            <TextField
-                                label={'Find a song'}
-                                highlightColor="#c2185b"
-                                onChangeText={ (value) => setSearch(value) }
-                                />
-                            </View>
+
+    <View style={styles.form}>
+                {/*  "#c2185b" */}
+                    <View style={styles.input}> 
+                    <Text> Create Your New Radio</Text>
                     
                     <TextField
                         label={'Playlist Name'}
@@ -284,17 +274,9 @@ const styles = StyleSheet.create({
   button:{
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
-   marginBottom:wp('20%'),
 },
 
-categoryTitle: {
-    color:"#383838", 
-    fontSize:hp('3%'), 
-    width:wp('75%'), 
-    marginLeft:wp('7%'),
-    fontFamily: 'PermanentMarker',
-    marginTop: wp ('20%')
-  },
+
   
 });
 
