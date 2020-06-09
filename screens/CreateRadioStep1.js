@@ -125,9 +125,10 @@ let validPlaylist = (target)=>{
                             onPress={()=>validPlaylist("spotify")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
+                                marginBottom: wp ('5%')
                             }}
                         />
-                              <Text> ble bla</Text>
+                              
                         <Button 
                             title="Add Empty Radio"
                             titleStyle={
@@ -184,6 +185,7 @@ const styles = StyleSheet.create({
   button:{
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
+   marginBottom: wp('10%')
 },
 
 categoryTitle: {
