@@ -303,6 +303,7 @@ export default function Play() {
 
   return (
     <View style={styles.playView}>
+    
       <View style={styles.header}>
       </View>
 
@@ -381,6 +382,7 @@ export default function Play() {
       </View>
 
     </View>
+    
   )
   
 }

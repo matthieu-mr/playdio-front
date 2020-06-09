@@ -10,7 +10,10 @@ import getTokens from '../screens/components/getTokens';
 
 /* import * as Font from 'expo-font'; */
 
-import police from '../screens/components/font'
+// import police from '../screens/components/font'
+
+import { AppLoading } from 'expo';
+import { useFonts } from '@use-expo/font';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
@@ -18,21 +21,21 @@ import {connect} from 'react-redux'
 
 function connectAPP({navigation,saveEmailUser}) {
  
-  var fontPermanentMarker =''
-  var fontRoboto =''
-  const [font,setFont]= useState(false)
+  // var fontPermanentMarker =''
+  // var fontRoboto =''
+  // const [font,setFont]= useState(false)
 
-useEffect( ()=>{
-  police()
-  setFont(true);
-    if(font ==true){ 
-    fontPermanentMarker = 'PermanentMarker'
-    fontRoboto = 'Roboto'
-  }
-},[])
+// useEffect( ()=>{
+//   police()
+//   setFont(true);
+//     if(font ==true){ 
+//     fontPermanentMarker = 'PermanentMarker'
+//     fontRoboto = 'Roboto'
+//   }
+// },[])
 async function autoriseSpotify(){
 
-  var infoClientID = await fetch ('http://192.168.1.25:3000/autorisation')
+  var infoClientID = await fetch ('http://192.168.0.25:3000/autorisation')
   
 
 // ip matthieu http://192.168.1.8
@@ -47,8 +50,14 @@ async function autoriseSpotify(){
   saveEmailUser(infoUser.userInfo.email)
   navigation.navigate("SignUp")
 }
-
-
+let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
+  });
+   if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
     return (
     <ImageBackground source={require('../assets/image_connection.jpg')} style={styles.container}>
       <Text style={styles.title} >Playdio</Text>
@@ -75,7 +84,8 @@ async function autoriseSpotify(){
       onPress={()=>{navigation.navigate("Home"); autoriseSpotify()}}
       titleStyle={
         {color:"black",
-        fontSize:20}
+        fontSize:20,
+        fontFamily:'Roboto'}
       }
       
       />{/* <Button
@@ -94,7 +104,7 @@ async function autoriseSpotify(){
       type="solid"
       titleStyle={
         {color:"black",
-        fontSize:20}
+        fontSize:20, fontFamily:'Roboto'}
 
       }
       onPress={()=>navigation.navigate("SignUp")}
@@ -102,6 +112,7 @@ async function autoriseSpotify(){
     </ImageBackground>
   );
 
+}
 }
 const styles = StyleSheet.create({
   container: {
@@ -113,7 +124,7 @@ const styles = StyleSheet.create({
     marginLeft:wp('25%'),
     color:"#fff",
     fontSize:wp('15%'),
-    /* fontFamily:fontPermanentMarker */
+    fontFamily: 'PermanentMarker'
   },
   text:{
     color:"#fff",
@@ -121,7 +132,7 @@ const styles = StyleSheet.create({
     marginRight:wp('7%'),
     fontSize:wp('4%'),
     marginBottom:hp('2%'),
-    /* fontFamily:fontRoboto */
+    fontFamily:'Roboto',
 
   },
   connectEmail:{
@@ -130,6 +141,7 @@ const styles = StyleSheet.create({
     fontSize:wp('4%'),
     marginBottom:hp('2%'),
     marginLeft:wp('7%'),
+    fontFamily:'Roboto',
   },
   button:{
     backgroundColor: "#fff",
@@ -137,7 +149,7 @@ const styles = StyleSheet.create({
     marginRight:wp('7%'),
     marginLeft:wp('7%'),
     borderRadius:wp('2%'),
-    height:hp('6.5%')
+    height:hp('6.5%'),
   } 
   
 });

@@ -1,42 +1,55 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet,  View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
-
-import { ListItem,Button,ButtonGroup,Text } from 'react-native-elements'
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,FlatList} from 'react-native';
+import { ListItem,Button,ButtonGroup } from 'react-native-elements'
+import {connect} from 'react-redux';
 import SearchComponent, { Separator } from './components/SearchResult';
-import police from './components/font';
 
-import { TextField } from 'react-native-material-textfield';
+import police from '../screens/components/font';
+
+import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-material-textfield';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-import {connect} from 'react-redux';
-
 function CreateRadioEmpty(props) {
-// setter recherche
-  const[search,setSearch]=useState("")
-  const [listToSearch,SetListToSearch] =useState();
 
-
-// Get info from back 
-const [listSong,setListSong] =useState();
-const [searchJSON,setSearchJson] =useState();
-
-// Setter playlist
-let listOfMusic =[] ;
-const[arrayMusic, setArrayMusic] =useState();
-
-
-// Setter search
-let listOfResult =[] ;
-const[arrayResult, setArrayResult] =useState();
-
-// Setter boutton
-const buttons = ['My Playlist', 'Search on Spotify']
-const [indexButton,setIndex]=useState(0)
-
+const [radioName, setRadioName] = useState("hi")
+const [isPrivate, setIsPrivate] = useState(false) ; 
+const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
+const [send, setSender] = useState(false);
 
  /*  ------------------------------- Recuperation playlist   ------------------------------- */   
 
+const[listMusicFromBack,setListSongFromBack]=useState()
+
+const [refresh,setRefresh]=useState(false)
+    // requete BDD
+    useEffect(()=>{
+      //Playlist courte
+      let idplaylistSpotify ="75T4RvRPamAz41Kebiq2HZ"
+
+      // playlistLongue
+     // let idplaylistSpotify ="1Ts6GeiD5o29GYaYyFZZ4q"
+
+      async function recupDonnée(){
+        var requestBDD = await fetch('http://192.168.1.8:3000/playlist-item',{
+          method:"POST",
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
+        })
+        var reponse = await requestBDD.json()
+       // console.log("reponse",reponse)
+        setListSongFromBack(reponse)
+        
+      }
+
+      recupDonnée()
+     
+    },[])
+
+const [listResultSpotify,setResultSpotify]=useState();
+
+
+<<<<<<< HEAD
     // requete BDD
     useEffect(()=>{
         let idplaylistSpotify ="6IQZC7SBVCNa4raN2O4tKt"
@@ -72,20 +85,40 @@ const [indexButton,setIndex]=useState(0)
                 listOfMusic.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type})
                 setArrayMusic(listOfMusic)
             })
+=======
+useEffect(()=>{
+  let infoListSong = listMusicFromBack // check si présente 
+>>>>>>> ad344a8f74ab9fd71b235b0d0687cf6fcc4b4abe
      
-          }else {
-              console.log("----------------> ko")
-          }
-       },[listSong])
+  if(infoListSong){
+    let recupInfo = listMusicFromBack.response.items
+        let mapArrayMusic = recupInfo.map((item,i)=>{
+                    
+          let nameTitle = item.track.name
+          let artist = item.track.artists[0].name
+          let idSpotify =item.track.id
+          let type = item.track.type
+          let img =item.track.album.images[0].url
+          let isrc = item.track.external_ids.isrc
+          let from = "playlistUser"
+          
+          props.addSong({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc,from:from})
+        })
+    }else {console.log("recup ko")}
+  },[listMusicFromBack])    
 
 
  /*  ------------------------------- Recuperation Recherche   ------------------------------- */   
 //  Resquest
 
- useEffect(()=>{
+
+// setter recherche
+const[search,setSearch]=useState("")
+const [searchJSON,setSearchJson]=useState()
+
+useEffect(()=>{
  
-     let searchText = search
- 
+<<<<<<< HEAD
      async function recupDonnée(){
        var requestBDD = await fetch('http://192.168.1.25:3000/user-search',{
          method:"POST",
@@ -100,125 +133,165 @@ const [indexButton,setIndex]=useState(0)
    },[setSearch])
 
 //  Mise en forme du resultat
+=======
+ let searchText = search
+  
+  async function recupDonnée(){
+    var requestBDD = await fetch('http://192.168.1.8:3000/user-search',{
+      method:"POST",
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body:`search_term=${searchText}`
+    })
+    var reponse = await requestBDD.json()
+     setSearchJson(reponse)
+   
+  }
+  recupDonnée()
+},[search])
+>>>>>>> ad344a8f74ab9fd71b235b0d0687cf6fcc4b4abe
 
+/*  add list music result from spotify to array  */
+
+let listOfResult=[]
+const [arrayResult,setArrayResult] =useState()
 
 useEffect(()=>{
-    if(searchJSON){ // attente de la reception du JSON
-      let infoResultArray = searchJSON.response.tracks.items
-     
-      /* recuperation des info json */
-      let mapArrayResult = infoResultArray.map((item,i)=>{
-                let nameTitle = item.name
-                let artist = item.artists[0].name
-                let idSpotify =item.id
-                let type = 'track'
-                let img =item.album.images[0].url
-                let isrc = item.external_ids.isrc
-
-       listOfResult.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc})
-       setArrayResult(listOfResult)
-      })
-
-    }else {
-        console.log("----------------> ko")
-    }
- },[searchJSON])
-
-
-/*  ajout du filtre  */
-
-
-let filteredSong=[] ;
-    if(listToSearch){
-        filteredSong= listToSearch.filter(function(item) {
-            //applying filter for the inserted text in search bar
-            const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
-            const textData = search.toUpperCase();
-            return itemData.indexOf(textData) > -1;
-            });
+  let info = searchJSON
+  
+  if(info){ // attente de la reception du JSON
     
-       }else{
-           console.log("<=====waiting ")
-       }
-      
+     let infoResultArray = searchJSON.response.tracks.items
+                /* recuperation des info json */
+            /* recuperation des info json */
+            let mapArrayResult = infoResultArray.map((item,i)=>{
+              let nameTitle = item.name
+              let artist = item.artists[0].name
+              let idSpotify =item.id
+              let type = 'track'
+              let img =item.album.images[0].url
+              let isrc = item.external_ids.isrc
+              let from = "search"
 
+      listOfResult.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc,from:from})
+      setArrayResult(listOfResult)
 
+      })
+  }else {
+      console.log("----------------> ko")
+  }
+},[searchJSON])
 
+// Setter boutton
+const buttons = ['My Playlist', 'Search on Spotify']
+const [indexButton,setIndex]=useState(0)
  /* Affichage dynamique via button en fonction de l'ecran*/
 
 
- useEffect(() => {
-  console.log("change",indexButton);
-    if(indexButton===0){
-      console.log("bouton 1")
-      SetListToSearch(arrayMusic)
-    }else{
-       console.log("bouton2")
-       SetListToSearch(arrayResult)
-    }
-  });
+ const [listToSearch,SetListToSearch] =useState();
+    useEffect(() => {
+      console.log("debut")
+      if(indexButton==0 || indexButton==3 ){
+         // console.log("redux1",props.playlistUser.listMusic)
+          SetListToSearch(props.playlistUser.listMusic)
+          setIndex(0)
+      }
+
+      else{
+        console.log("search")
+        SetListToSearch(arrayResult)
+      }
+    });
+
+/* let des fonctions  */
+
+
+let touch =()=>{
+  
+}
+
+const [arrayResultTest,setArrayResultTest] =useState(false)
+
+
+
+let swypeValue =(item)=>{
+  //console.log("swype du numéro",item)
+  //  props.deleteSong(item)
+console.log("front item",item)
+  setIndex(3)
+
+
+}
 
 
 
   return (
 <View style={styles.container}>
-    
-                        <View style={styles.input}> 
-                            <Text> New Radio</Text>
-                            
-                            <TextField
-                                label={'Find a song'}
-                                highlightColor="#c2185b"
-                                onChangeText={ (value) => setSearch(value) }
-                                />
-                            </View>
+
+    <View style={styles.form}>
+                {/*  "#c2185b" */}
+                    <View style={styles.input}> 
+                    <Text> Create Your New Radio</Text>
                     
+                    <TextField
+                        label={'Playlist Name'}
+                        tintColor="#26a69a"
+                        onChangeText={ (value) => setSearch(value) }
+                       
+                        />
 
-                            <View>
-                                    <ButtonGroup
-                                    onPress={(e) => {alert('Simple Button pressed',e),setIndex(e) }}
-                                        selectedIndex={indexButton}
-                                        buttons={buttons}
-                                        containerStyle={{height: 40}}
-                                        selectedButtonStyle ={{
-                                            backgroundColor:"#00838F",
-                                        }}
-                                        />
-
-                            </View>
+                    </View>
 
 
+                    <View>
+                          <ButtonGroup
+                            onPress={(e) => {setIndex(e) }}
+                            selectedIndex={indexButton}
+                            buttons={buttons}
+                            containerStyle={{height: 40}}
+                            selectedButtonStyle ={{
+                            backgroundColor:"#00838F",
+                              }}
+                            />
+
+                      </View>
+                   {/* liste des musiques */}
+              
     {/* liste des musiques */}
-        <FlatList
-            data={filteredSong}
-            keyExtractor={item => item.id}
-            renderItem={({ item}) => (
-            <SearchComponent
-                {...item}
-                navigation={props.navigation}
-                onPress={()=>{validPlaylist(props.spotifyId)}} 
-            />
-             
+            <FlatList
+              //  data={props.playlistUser.listMusic}
+                data={listToSearch}
+              // keyExtractor={item => item.id}
+              keyExtractor = { (item, index) => index.toString() } 
+              renderItem={({ item}) => (
+                <SearchComponent
+                    {...item}
 
+                   // onSwipeFromRight={() => {swypeValue(item.id);alert('swiped from left!')}}
+                   onSwipeFromRight={() => {swypeValue(item.index)}}
+                    onPress={touch()} 
 
-)}
-ItemSeparatorComponent={() => <Separator />}
+                    navigation={props.navigation}
+                  action = {"addtrack"}
+                />
+              )}
+              ItemSeparatorComponent={() => <Separator />}
+              />    
 
-/>    
+                        <View style={styles.button}>
 
-         
- 
-                <View style={styles.button}>
                         <Button 
-                            title="Press me"
-                            onPress={() => alert('Simple Button pressed')}
+                            title="Valider la playlist"
+                            onPress={()=>validPlaylist("empty")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}
                         />
-                 </View>
+                        </View>
   
- </View>
+             
+
+    </View>
+   </View>
   );
 
 }
@@ -233,7 +306,8 @@ const styles = StyleSheet.create({
     form:{
      display:"flex",
      flex:1,
-
+   
+     justifyContent:'flex-end',
       marginBottom:wp("15%"),
     },
 
@@ -260,15 +334,31 @@ const styles = StyleSheet.create({
 
   
 });
-function mapStateToProps(state){
-    return {playlistRedux: state.PlaylistAdd, token:state.token}
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addSong: function(info) { 
+      dispatch( {type: 'addSong',info }) 
+    },
+    deleteSong: function(info) { 
+      dispatch( {type: 'deleteSong',info }) 
+    },
+    
   }
+}
+
+function mapStateToProps(state) {
+  return { playlistUser: state.PlaylistAdd }
+}
   
-  export default connect(
-    mapStateToProps, 
-    null
+
+
+export default connect(
+  mapStateToProps, 
+    mapDispatchToProps
   )(CreateRadioEmpty);
 
-//export default CreateRadio2
+// export default CreateRadio1
 
 

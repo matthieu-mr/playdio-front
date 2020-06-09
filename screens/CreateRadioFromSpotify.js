@@ -12,6 +12,10 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 import {connect} from 'react-redux';
 
+// import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { useFonts } from '@use-expo/font'
+
 
 
 
@@ -97,15 +101,13 @@ let filteredPlaylist=[] ;
        console.log("<=====waiting ")
    }
  
- 
-    
   return (
 <View style={styles.container}>
 
                 {/*  "#c2185b" */}
         
                             <View style={styles.input}> 
-                            <Text> New Radio</Text>
+                            <Text style={styles.categoryTitle}> New Radio</Text>
                             
                             <TextField
                                 label={'Find a Playlist'}
@@ -179,9 +181,17 @@ const styles = StyleSheet.create({
   button:{
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
+   marginBottom:wp('20%'),
 },
 
-
+categoryTitle: {
+    color:"#383838", 
+    fontSize:hp('3%'), 
+    width:wp('75%'), 
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker',
+    marginTop: wp ('20%')
+  },
   
 });
 function mapStateToProps(state){

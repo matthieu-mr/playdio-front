@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView, } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import Radio from './components/Radio';
-import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+// import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { useFonts} from '@use-expo/font'
 
 export default function Home(props) {
 
@@ -24,37 +26,34 @@ export default function Home(props) {
   var communityRadioList = communityRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
-
-  //CALLBACK
+  
   return (
-    <View style={styles.homeView}>
-       <Header
-  placement="left"
+    <View>
+<Header
   leftComponent={{ icon: 'menu', color: '#fff' }}
-  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
   rightComponent={<Avatar
         rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
       />}
       containerStyle={{
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
+    backgroundColor: 'white',
   }}
 />
-      <ScrollView>
+      <ScrollView style={styles.scrollView}>
         <View style={styles.header}></View>
         <View style={styles.categories}>
           <Text style={styles.categoryTitle}>Discover</Text>
           <Text style={styles.categoryLink}>See all</Text>
         </View>
-        <ScrollView horizontal={true}>
-          {discoverRadioList}
+        <ScrollView horizontal={true} indicatorStyle={'white'} >
+          {discoverRadioList} 
         </ScrollView>
 
         <View style={styles.categories}>
           <Text style={styles.categoryTitle}>My radios</Text>
           <Text style={styles.categoryLink}>See all</Text>
         </View>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} indicatorStyle={'white'}>
           {myRadioList}
         </ScrollView>
 
@@ -62,7 +61,7 @@ export default function Home(props) {
           <Text style={styles.categoryTitle}>Radios of my community</Text>
           <Text style={styles.categoryLink}>See all</Text>
         </View>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} indicatorStyle={'white'}>
           {communityRadioList}
         </ScrollView>
 
@@ -73,29 +72,35 @@ export default function Home(props) {
 
 // STYLES
 const styles = StyleSheet.create({
-  homeView: {
-    flex:1, 
+  homeView: { 
     alignItems:"center", 
-    justifyContent:"flex-start"
+    justifyContent:"flex-start",
+    backgroundColor: "white"
   },
-  header: {
-    height:hp('6%')
-  },
+  
   categories: {
     flex:1, 
     flexDirection:"row", 
-    justifyContent:"space-between"
+    justifyContent:"space-between",
+    backgroundColor: "white"
   },
+
+  scrollView: {
+    backgroundColor: '#FFFFFF',
+  },
+
   categoryTitle: {
     color:"#383838", 
     fontSize:hp('3%'), 
     width:wp('75%'), 
-    marginLeft:wp('7%')
+    marginLeft:wp('7%'),
+    fontFamily: 'PermanentMarker'
   },
   categoryLink: {
     color:"#00838F", 
     fontSize:hp('2%'), 
     width:wp('25%'), 
-    marginTop:hp('1.5%')
+    marginTop:hp('1.5%'),
+    fontFamily: 'Roboto',
   }
 })
