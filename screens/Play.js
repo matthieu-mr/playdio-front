@@ -3,19 +3,19 @@ import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView
 import { Tooltip, Slider, Header, Avatar } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
-import ListItemSwap, { Separator } from './components/Swype';
+import ListItemSwap, { Separator } from './components/Song';
+import {connect} from 'react-redux';
+import ip from '../variables';
 
 // ----------------------------------------
 // PLAY FUNCTION
 
-export default function Play() {
+function Play(props) {
 
   // INITIAL STATE
 
   // Raw playlist from Spotify
   const [playlist, setPlaylist] = useState([]);
-  // const [token, setToken] = useState('');
-  // const [currentTrack, setCurrentTrack] = useState('');
   // Player
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackInstance, setPlaybackInstance] = useState(null);
@@ -29,9 +29,53 @@ export default function Play() {
   const [playbackInstancePosition, setPlaybackInstancePosition] = useState(null);
   const [playbackInstanceDuration, setPlaybackInstanceDuration] = useState(null);
 
+  // console.log(props.idPlay.radioId)
+  // console.log(props.idPlay.songId)
   
-  // FETCH PLAYLIST  
+  // FETCH PLAYLIST FROM DB
+
+  useEffect( () =>{
+      fetchPlaylist = async () => {
+
+        var infoUser = await AsyncStorage.getItem('user');
+        var userData = JSON.parse(infoUser);
+        
+        var request = await fetch(`${ip}/radio-playlist`,{
+          method:"POST",
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body:`userId=${userData.id}&radioId=${props.idPlay.radioId}`
+        })
+        var response = await request.json();
+        
+        var rawPlaylist = [];
+        for(var i=0; i<response.tracks.length; i++) {
+          rawPlaylist.push({
+            id: response.tracks[i]._id, 
+            name: response.tracks[i].name, 
+            artist: response.tracks[i].artist, 
+            album: response.tracks[i].album, 
+            image: response.tracks[i].image,
+            length: response.tracks[i].length,
+            position: response.tracks[i].position,
+            isrcID: response.tracks[i].isrcID,
+            upcID: response.tracks[i].upcID,
+            spotifyId: response.tracks[i].spotifyId,
+            href: response.tracks[i].href,
+            externalUrl: response.tracks[i].externalUrl,
+            previewUrl: response.tracks[i].previewUrl,
+            uri: response.tracks[i].uri,
+          });
+        }
+        setPlaylist(rawPlaylist);
+
+      }
+      fetchPlaylist()  
+  },[])
+
   
+  // FETCH PLAYLIST FROM SPOTIFY
+
+  /*
   useEffect( () =>{
     fetchSpotifyPlaylist = async () => {
       var infoUser = await AsyncStorage.getItem('user');
@@ -69,30 +113,7 @@ export default function Play() {
     }
     fetchSpotifyPlaylist()  
   },[])
-
-
-  // FETCH CURRENT TRACK  
-
-  /*
-  useEffect( () =>{
-    fetchCurrentTrack = async () => {
-      var infoUser = await AsyncStorage.getItem('user')
-      var userData = JSON.parse(infoUser)
-      var currentTrackHref = playlist[currentIndex].content;
-      var request = await fetch('http://192.168.1.25:3000/play-track',{
-        method:"POST",
-        headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body:`idSpotify=${userData.idSpotify}&currentTrack=${currentTrackHref}`
-      })
-      var response = await request.json();
-      setCurrentTrack({uri: response.currentTrack, headers: response.headers});
-      console.log({uri: response.currentTrack, headers: response.headers});
-    }
-    fetchCurrentTrack()  
-  },[currentIndex])
-
   */
-
 
   // TOP & BOTTOM PLAYLISTS
 
@@ -468,3 +489,12 @@ const styles = StyleSheet.create({
   }
 
 })
+
+function mapStateToProps(state) {
+  return { idPlay: state.play }
+}
+  
+export default connect(
+  mapStateToProps,
+  null
+)(Play);

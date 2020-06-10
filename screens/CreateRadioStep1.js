@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage} from 'react-native';
 import { ListItem,Button, Header, Avatar } from 'react-native-elements'
-import ListItemSwap, { Separator } from './components/Swype';
+import ListItemSwap, { Separator } from './components/Song';
 import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
