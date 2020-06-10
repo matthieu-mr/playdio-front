@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch} from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage} from 'react-native';
 import { ListItem,Button, Header, Avatar } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import {connect} from 'react-redux';
@@ -22,10 +22,25 @@ const [send, setSender] = useState(false);
 
 let listMusic =[]
 
+let [infoUserStorage,setInfoUserStorage]=useState();
+
+useEffect( () =>{
+let  fetchSpotifyPlaylist = async () => {
+    var infoUser = await AsyncStorage.getItem('user');
+    setInfoUserStorage(infoUser)
+console.log("affichage storage local",infoUser)
+}
+
+fetchSpotifyPlaylist() ;
+},[])
+
+
+
 // redirection en fonction du choix user
 let validPlaylist = (target)=>{  
         if (radioName){
-            props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly,listMusic})
+            props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly,listMusic,infoUser:infoUserStorage})
+
             if (target=="empty"){
               props.navigation.navigate('AddRadioEmpty')
             
@@ -54,7 +69,7 @@ let validPlaylist = (target)=>{
 
     <View style={styles.form}>
 
-        <SafeAreaView >
+ 
             <ScrollView >
 
                 {/*  "#c2185b" */}
@@ -115,6 +130,8 @@ let validPlaylist = (target)=>{
 
          
  
+  
+                        </ScrollView>
                         <View style={styles.button}>
                         <Button 
                             title="Add From Spotify Playlist"
@@ -128,7 +145,10 @@ let validPlaylist = (target)=>{
                                 marginBottom: wp ('5%')
                             }}
                         />
-                              
+                                
+             
+        
+        
                         <Button 
                             title="Add Empty Radio"
                             titleStyle={
@@ -141,11 +161,6 @@ let validPlaylist = (target)=>{
                             }}
                         />
                         </View>
-  
-             
-            </ScrollView>
-        </SafeAreaView>
-
  </View>
  </View>
   );

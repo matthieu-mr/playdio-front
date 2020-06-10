@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,FlatList} from 'react-native';
-import { ListItem,Button,ButtonGroup } from 'react-native-elements'
+import { ListItem,Button,ButtonGroup,Header,Avatar } from 'react-native-elements'
 import {connect} from 'react-redux';
 import SearchComponent, { Separator } from './components/SearchResult';
 
@@ -23,6 +23,7 @@ const[listMusicFromBack,setListSongFromBack]=useState()
 
 const [refresh,setRefresh]=useState(false)
     // requete BDD
+    console.log("envoi requete")
     useEffect(()=>{
       //Playlist courte
       let idplaylistSpotify ="75T4RvRPamAz41Kebiq2HZ"
@@ -39,7 +40,7 @@ const [refresh,setRefresh]=useState(false)
         var reponse = await requestBDD.json()
        // console.log("reponse",reponse)
         setListSongFromBack(reponse)
-        
+        console.log("recep requete",response)
       }
 
       recupDonnée()
@@ -49,45 +50,9 @@ const [refresh,setRefresh]=useState(false)
 const [listResultSpotify,setResultSpotify]=useState();
 
 
-    // requete BDD
-    useEffect(()=>{
-        let idplaylistSpotify ="6IQZC7SBVCNa4raN2O4tKt"
-        async function recupDonnée(){
-
-          var requestBDD = await fetch('http://192.168.1.43:3000/playlist-item',{
-
-
-            method:"POST",
-            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
-          })
-          var reponse = await requestBDD.json()
-        
-            setListSong(reponse)
-        }
-        recupDonnée()
-      },[])
-      
-/*  add list music to array  */
-
-
-      useEffect(()=>{
-          if(listSong){ // attente de la reception du JSON
-            let infoListSong = listSong.response.items
-          
-            /* recuperation des info json */
-            let mapArrayMusic = infoListSong.map((item,i)=>{
-                
-                let nameTitle = item.track.name
-                let artist = item.track.artists[0].name
-                let idSpotify =item.track.id
-                let type = item.track.type
-                let img =item.track.album.images[0].url
-                let isrc = item.track.external_ids.isrc
-                listOfMusic.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type})
-                setArrayMusic(listOfMusic)
-            })
-          }
+useEffect(()=>{
+  let infoListSong = listMusicFromBack // check si présente 
+     
   if(infoListSong){
     let recupInfo = listMusicFromBack.response.items
         let mapArrayMusic = recupInfo.map((item,i)=>{
@@ -115,21 +80,7 @@ const[search,setSearch]=useState("")
 const [searchJSON,setSearchJson]=useState()
 
 useEffect(()=>{
-  
-     async function recupDonnée(){
-
-       var requestBDD = await fetch('http://192.168.1.43:3000/user-search',{
-         method:"POST",
-         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-         body:`search_term=${searchText}`
-       })
-       var reponse = await requestBDD.json()
-        setSearchJson(reponse)
-      
-     }
-     recupDonnée()
-   },[setSearch])
-   useEffect(()=>{
+ 
  let searchText = search
   
   async function recupDonnée(){
@@ -169,7 +120,7 @@ useEffect(()=>{
 
       listOfResult.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc,from:from})
       setArrayResult(listOfResult)
-
+             
       })
   }else {
       console.log("----------------> ko")
@@ -218,17 +169,43 @@ console.log("front item",item)
 }
 
 
+let validPlaylist =async ()=>{
+  console.log("envoi en base")
+  let value =(props.playlistUser)
+  console.log("envoi", value)
+  var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
+    method:"POST",
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body:`value=${value}`
+  })
+  var reponse = await requestBDD.json()
+//   setSearchJson(reponse)
+
+}
+
 
   return (
+
 <View style={styles.container}>
 
     <View style={styles.form}>
                 {/*  "#c2185b" */}
                     <View style={styles.input}> 
                     <Text> Create Your New Radio</Text>
+                    <Header
+                          leftComponent={{ icon: 'menu', color: '#fff' }}
+                          centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
+                          rightComponent={<Avatar
+                                rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+                              />}
+                              containerStyle={{
+                            backgroundColor: 'white',
+                          }}
+                        />
+                       <Text style={styles.categoryTitle}> Add your favorite song</Text>
                     
                     <TextField
-                        label={'Playlist Name'}
+                        label={'Search a song'}
                         tintColor="#26a69a"
                         onChangeText={ (value) => setSearch(value) }
                        
@@ -303,7 +280,7 @@ const styles = StyleSheet.create({
      flex:1,
    
      justifyContent:'flex-end',
-      marginBottom:wp("15%"),
+      marginBottom:wp("5%"),
     },
 
   input:{
@@ -325,6 +302,14 @@ const styles = StyleSheet.create({
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
 },
+categoryTitle: {
+  color:"#383838", 
+  fontSize:hp('3%'), 
+  width:wp('75%'), 
+  marginLeft:wp('7%'),
+  fontFamily: 'PermanentMarker'
+},
+
 
 
   
@@ -355,5 +340,3 @@ export default connect(
   )(CreateRadioEmpty);
 
 // export default CreateRadio1
-
-

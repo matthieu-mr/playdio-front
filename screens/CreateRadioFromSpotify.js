@@ -107,7 +107,7 @@ let filteredPlaylist=[] ;
                 {/*  "#c2185b" */}
         
                             <View style={styles.input}> 
-                            <Text style={styles.categoryTitle}> New Radio</Text>
+                            <Text style={styles.categoryTitle}> Add Songs from spotify</Text>
                             
                             <TextField
                                 label={'Find a Playlist'}
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   button:{
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
-   marginBottom:wp('20%'),
+   marginBottom:wp('10%'),
 },
 
 categoryTitle: {

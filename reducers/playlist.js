@@ -15,7 +15,7 @@ export default function(playlist =[],action){
         return playlist
     }
     else if(action.type == 'deleteSong'){
-        console.log("deleteredux")
+        //console.log("deleteredux",playlist)
        
          let newPlaylist=playlist
 
