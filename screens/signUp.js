@@ -60,7 +60,7 @@ return (
 <View>
   
     <View style={styles.input}>
-      <Text style={{marginTop:50}}> Create Your musicAccounts</Text>
+      <Text style={{marginTop:50, fontFamily:'PermanentMarker'}}> Create Your Playdio Account</Text>
       
   
       <TextField
@@ -96,6 +96,9 @@ return (
           }}
       title="Sign up with email"
       type="solid"
+      titleStyle={
+        {fontFamily:'Roboto'}
+      }
       onPress={()=>signUp(email,firstName,lastName,password)}
       />
       </View>
@@ -123,6 +126,7 @@ input:{
   marginRight:wp('10%'),
   marginLeft:wp('10%'),
   marginBottom:wp('10%'),
+  
   },  
 
 
@@ -131,6 +135,7 @@ paramPlaylist:{
   marginRight:wp('7%'),
   marginLeft:wp('7%'),
   marginBottom:wp('70%'),
+  
 },
 
 

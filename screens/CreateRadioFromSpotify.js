@@ -12,9 +12,9 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 import {connect} from 'react-redux';
 
-import * as Font from 'expo-font';
+// import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import { useFonts, PermanentMarker, Roboto} from '@use-expo/font'
+import { useFonts } from '@use-expo/font'
 
 
 
@@ -101,11 +101,6 @@ let filteredPlaylist=[] ;
        console.log("<=====waiting ")
    }
  
- 
-    let [fontsLoaded] = useFonts({
-    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
-    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
-  });
   return (
 <View style={styles.container}>
 
@@ -186,6 +181,7 @@ const styles = StyleSheet.create({
   button:{
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
+   marginBottom:wp('20%'),
 },
 
 categoryTitle: {
@@ -193,7 +189,8 @@ categoryTitle: {
     fontSize:hp('3%'), 
     width:wp('75%'), 
     marginLeft:wp('7%'),
-    fontFamily: 'PermanentMarker'
+    fontFamily: 'PermanentMarker',
+    marginTop: wp ('20%')
   },
   
 });

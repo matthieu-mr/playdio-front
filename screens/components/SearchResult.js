@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState,useRef} from 'react';
 import { Avatar, Badge, Icon, withBadge,Card, ListItem } from 'react-native-elements'
 import {
   View,
@@ -13,6 +13,7 @@ import {
 import {connect} from 'react-redux';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 
 const styles = StyleSheet.create({
@@ -21,55 +22,143 @@ const styles = StyleSheet.create({
     paddingHorizontal: hp('1%'),
     paddingVertical: hp('0.0001%'),
   },
-  text: {
-    color: '#4a4a4a',
-    fontSize: hp('5%'),
-  },
+
   separator: {
     flex: hp('0.3%'),
     height: hp('0.1%'),
     backgroundColor: '#e4e4e4',
     marginLeft: hp('3%'),
   },
-  leftAction: {
-    backgroundColor: '#388e3c',
-    justifyContent: 'center',
-    flex: hp('0.3%'),
-    
-  },
+
+
   rightAction: {
     backgroundColor: '#dd2c00',
     justifyContent: 'center',
     flex: hp('0.3%'),
     alignItems: 'flex-end',
   },
-  actionText: {
+/*   actionText: {
     color: '#fff',
     fontWeight: '600',
-    padding: hp('7%'),
-  },
+
+  }, */
 });
 
 function SearchResultComponent(props) {
 
-  let validPlaylist = (idPlaylistItem)=>{  
-    props.addplaylist(idPlaylistItem)
-    props.navigation.navigate('AddRadioEmpty')
 
-}
+  let validPlaylist = (idPlaylistItem,type)=>{ 
+    if (type=="playlist"){
+      props.addplaylist(idPlaylistItem)
+      props.navigation.navigate('AddRadioEmpty')
 
-  return (
-   
-      <View style={styles.container}>
-        <ListItem
-          leftAvatar={{ source: { uri:props.url } }}
-          title={props.name}
-          subtitle={props.text}
-          onPress={()=>{validPlaylist(props.spotifyId)}} 
-        />
+    }else if(type=="track"){
+      let id=props.id
+      let name =props.name
+      let text =props.text
+      let url= props.url
+      let spotifyId = props.idSpotify
+      let type=props.type
+      let isrc = props.isrc
+      let ajoutObjet={id:id,name:name,text:text,url:url,spotifyId:spotifyId,type:type,isrc:isrc}
+
+      props.addSong(ajoutObjet)
+    }
+    console.log("hello fron component")
+} 
+
+
+
+
+let RightActions = (progress, dragX, onPress) => {
+
+  const scale = dragX.interpolate({
+    inputRange: [-100,0],
+    outputRange: [1,0],
+    extrapolate: 'clamp',
+  });
+
+    return (
+      <View style={styles.rightAction}>
+        <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
+        Delete none
+        
+        </Animated.Text>
       </View>
+    )
+  
+  
 
-  )
+};
+
+
+const[selected, setSelected]=useState(false);
+
+const swipeableRef = useRef(null);
+
+ const closeSwipeable = (item) => {
+   console.log("evenement", item)
+  props.deleteSong(item)
+
+  swipeableRef.current.close();
+}
+ 
+
+      if(selected && props.from =="search" ){
+        return (
+
+          <Swipeable     
+        ref={swipeableRef}
+          renderRightActions={RightActions}
+          onSwipeableRightOpen={() => {closeSwipeable(rops.id);props.id}} 
+          >
+            <View style={styles.container}>
+              <ListItem style={styles.actionText}
+                
+                leftAvatar={{ source: { uri:props.url }}}
+                linearGradientProps={{
+                  colors: ['#FFF', '#43a047'],
+                  start: { x: 1, y: 0.1 },
+                  end: { x: -2, y: 0.1 },
+                }}
+                title={props.name}
+                subtitle={props.text}
+                onPress={()=>{validPlaylist(props.spotifyId,props.type,props.index), setSelected(!selected)}} 
+                checkmark ={<Icon
+                  reverse
+                  name='ios-checkmark'
+                  type='ionicon'
+                  color='#43a047'
+                  size={18}
+                  reverse={true}
+         
+                />}
+
+              />
+              
+            </View>
+            </Swipeable>
+        )
+      }else{
+        return (
+          <Swipeable     
+          ref={swipeableRef}
+          renderRightActions={RightActions}
+         // onSwipeableRightOpen={props.onSwipeFromRight} 
+          onSwipeableRightOpen={() => {closeSwipeable(props.id),props.onSwipeFromRight()}} 
+          >
+            <View style={styles.container}>
+              <ListItem style={styles.actionText}
+                leftAvatar={{ source: { uri:props.url } }}
+                title={props.name}
+                subtitle={props.text}
+                onPress={()=>{validPlaylist(props.spotifyId,props.type), setSelected(!selected)}} 
+              />
+            </View>
+            </Swipeable>
+        )
+      }
+
 }
 
 
@@ -83,12 +172,25 @@ function mapDispatchToProps(dispatch) {
   return {
     addplaylist: function(info) { 
       dispatch( {type: 'addInfoPlaylistSpotify',info }) 
-    }
+    },
+    addSong: function(info) { 
+      dispatch( {type: 'addSong',info }) 
+    },
+    deleteSong: function(info) { 
+      dispatch( {type: 'deleteSong',info }) 
+    },
+    
   }
 }
 
+function mapStateToProps(state) {
+  return { playlistUser: state.PlaylistAdd }
+}
+  
+
+
 export default connect(
-    null, 
+  mapStateToProps, 
     mapDispatchToProps
 )(SearchResultComponent);
 
