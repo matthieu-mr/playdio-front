@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, FlatList, TouchableHighlight,Swi } from 'react-native';
-import { Avatar, Badge, Icon, withBadge, Card, List, ListItem, Image, Header } from 'react-native-elements'
+import { Avatar,ButtonGroup, Badge, Icon, withBadge, Card, List, ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/userplaylist';
 import  {TextField}  from 'react-native-material-textfield';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import ip from '../variables';
 
 
 export default function selectUser(props) {
 const [firstName,setFirstName]=useState('')
 const [userPlaylist,setUserPlaylist]=useState([])
-
+const[search,setSearch]=useState("")
+const [searchJSON,setSearchJson]=useState()
 
 /* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
 useEffect(()=>{
     async function checkUserPlaylist(){
-    var requestBDD = await fetch('http://192.168.1.43:3000/userListplaylist')
+    var requestBDD = await fetch(`${ip}/userListplaylist`)
     var reponse = await requestBDD.json()
     var tableau = [...userPlaylist]
         for(var i= 0 ; i<reponse.userList.userInfo.length;i++){
@@ -25,7 +26,22 @@ useEffect(()=>{
     }
     checkUserPlaylist()
 },[])
-
+useEffect(()=>{
+ 
+    let searchText = search
+     
+     /* async function recupDonnée(){
+       var requestBDD = await fetch(`${ip}/user-search`,{
+         method:"POST",
+         headers: {'Content-Type':'application/x-www-form-urlencoded'},
+         body:`search_term=${searchText}`
+       })
+       var reponse = await requestBDD.json()
+        setSearchJson(reponse)
+      
+     }
+     recupDonnée() */
+   },[search])
 
 
 
@@ -36,7 +52,7 @@ useEffect(()=>{
 
 
 async function userList(){
-    var requestBDD = await fetch('http://192.168.1.43:3000/userList',{
+    var requestBDD = await fetch(`${ip}/userList`,{
         method:"GET",
         body:`firstName=${firstName}`
     })
@@ -46,7 +62,25 @@ async function userList(){
 
 /* console.log(userPlaylist) */
 
+const buttons = ['My Playlist', 'Search on Spotify']
+const [indexButton,setIndex]=useState(0)
+ /* Affichage dynamique via button en fonction de l'ecran*/
 
+
+ const [listToSearch,SetListToSearch] =useState();
+    useEffect(() => {
+      console.log("debut")
+      if(indexButton==0 || indexButton==3 ){
+         // console.log("redux1",props.playlistUser.listMusic)
+          SetListToSearch(props.playlistUser.listMusic)
+          setIndex(0)
+      }
+
+      else{
+        console.log("search")
+        SetListToSearch(arrayResult)
+      }
+    });
 
 
 return (
@@ -64,12 +98,31 @@ return (
             }}
         />
         <Text> Radio ? users</Text>
-        <TextField
+{/*         <TextField
         label={'firsname'}
         tintColor="#26a69a"
         onChangeText={(value)=>setFirstName(value)}
         onSubmitEditing={()=>{props.navigation.navigate('SearchtUser')}}
-        />
+        /> */}
+                    <TextField
+                        label={'Search a song'}
+                        tintColor="#26a69a"
+                        onChangeText={ (value) => setSearch(value) }
+                       
+                        />
+                        
+                    <View>
+                          <ButtonGroup
+                            onPress={(e) => {setIndex(e) }}
+                            selectedIndex={indexButton}
+                            buttons={buttons}
+                            containerStyle={{height: 40}}
+                            selectedButtonStyle ={{
+                            backgroundColor:"#00838F",
+                              }}
+                            />
+
+                      </View>
         <FlatList
             data={userPlaylist}
             keyExtractor={item => item.id}

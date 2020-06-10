@@ -68,7 +68,7 @@ return (
         label={'firsname'}
         tintColor="#26a69a"
         onChangeText={(value)=>setFirstName(value)}
-        onEndEditing={}
+
         />
         <FlatList
             data={userPlaylist}
