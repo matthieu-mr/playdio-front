@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
@@ -15,39 +15,41 @@ export default function Playlist(props) {
 /* const [listUser,setListUser]=useEffect() ;  */
 
 
-  let listTest = [
-    {name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-    {name:"John",url:"https://randomuser.me/api/portraits/men/40.jpg"},
-    {name:"albert",url:"https://randomuser.me/api/portraits/men/39.jpg"},
-    {name:"Moimeme",url:"https://randomuser.me/api/portraits/men/38.jpg"},
-    {name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-    {name:"John",url:"https://randomuser.me/api/portraits/men/40.jpg"},
-    {name:"albert",url:"https://randomuser.me/api/portraits/men/39.jpg"},
-    {name:"Moimeme",url:"https://randomuser.me/api/portraits/men/38.jpg"},
-    {name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-    {name:"John",url:"https://randomuser.me/api/portraits/men/40.jpg"},
-    {name:"albert",url:"https://randomuser.me/api/portraits/men/39.jpg"},
-    {name:"Moimeme",url:"https://randomuser.me/api/portraits/men/38.jpg"},
-  ]
+let listTest = [
+    { name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { name: "John", url: "https://randomuser.me/api/portraits/men/40.jpg" },
+    { name: "albert", url: "https://randomuser.me/api/portraits/men/39.jpg" },
+    { name: "Moimeme", url: "https://randomuser.me/api/portraits/men/38.jpg" },
+    { name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { name: "John", url: "https://randomuser.me/api/portraits/men/40.jpg" },
+    { name: "albert", url: "https://randomuser.me/api/portraits/men/39.jpg" },
+    { name: "Moimeme", url: "https://randomuser.me/api/portraits/men/38.jpg" },
+    { name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { name: "John", url: "https://randomuser.me/api/portraits/men/40.jpg" },
+    { name: "albert", url: "https://randomuser.me/api/portraits/men/39.jpg" },
+    { name: "Moimeme", url: "https://randomuser.me/api/portraits/men/38.jpg" },
+]
 
 const quotes = [
-  { id: '0', text: 'It’s just a flesh wound.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
-  { id: '1', text: 'That is my least vulnerable spot.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
-  {id: '2',text: 'This building has to be at least…. three times bigger than this!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '3', text: 'I am serious. And don’t call me Shirley.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '4', text: 'Yeah, but I shoot with this hand.' ,name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '5', text: 'I’m just one stomach flu away from my goal weight.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg" },
-  {id: '6',text:'I’m about to do to you what Limp Bizkit did to music in the late ’90s.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  {id: '7',text:'Martini. Gin, not vodka. Obviously. Stirred for 10 seconds while glancing at an unopened bottle of vermouth.',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '8',text:'Greater good?’ I am your wife! I’m the greatest good you’re ever gonna get!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
-  { id: '9', text:'I feel comfortable using legal jargon in everyday life. [Someone catcalls her.] I object!',name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"
-  },
-  {id: '10',text:'We get the warhead and we hold the world ransom for…. One million dollars.',
-},
+    { id: '0', text: 'It’s just a flesh wound.', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '1', text: 'That is my least vulnerable spot.', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '2', text: 'This building has to be at least…. three times bigger than this!', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '3', text: 'I am serious. And don’t call me Shirley.', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '4', text: 'Yeah, but I shoot with this hand.', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '5', text: 'I’m just one stomach flu away from my goal weight.', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '6', text: 'I’m about to do to you what Limp Bizkit did to music in the late ’90s.', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '7', text: 'Martini. Gin, not vodka. Obviously. Stirred for 10 seconds while glancing at an unopened bottle of vermouth.', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    { id: '8', text: 'Greater good?’ I am your wife! I’m the greatest good you’re ever gonna get!', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg" },
+    {
+        id: '9', text: 'I feel comfortable using legal jargon in everyday life. [Someone catcalls her.] I object!', name: "david", url: "https://randomuser.me/api/portraits/men/41.jpg"
+    },
+    {
+        id: '10', text: 'We get the warhead and we hold the world ransom for…. One million dollars.',
+    },
 ];
 
-  /* Example boody playlist spotify  */
-  let playslistTrack =[
+/* Example boody playlist spotify  */
+let playslistTrack = [
     {
         "href": "https://api.spotify.com/v1/playlists/0RfIGLD8VTUw3u6pG1wwjU/tracks?offset=0&limit=100&market=fr",
         "items": [
@@ -4877,7 +4879,7 @@ const quotes = [
         "previous": null,
         "total": 48
     }
-  ]
+]
 
 
 /* Spotify : Get all tracks from a playlist */
@@ -4919,154 +4921,143 @@ useEffect( () =>{
 
 let infoplaylist = playslistTrack[0].items // recuperation de la liste de stracks
 
-let playslistTrackList =[] ;
- let playlist = infoplaylist.map ((info,i)=>{ // Boucle sur le nombre de track
-      let nameTrack = playslistTrack[0].items[i].track.name
-      let artistName = playslistTrack[0].items[i].track.artists[0].name
-      let albumName =playslistTrack[0].items[i].track.album.name
-      let nbTrack = playslistTrack[0].total
-      let imgPlaylist =playslistTrack[0].items[i].track.album.images[2].url 
+let playslistTrackList = [];
+let playlist = infoplaylist.map((info, i) => { // Boucle sur le nombre de track
+    let nameTrack = playslistTrack[0].items[i].track.name
+    let artistName = playslistTrack[0].items[i].track.artists[0].name
+    let albumName = playslistTrack[0].items[i].track.album.name
+    let nbTrack = playslistTrack[0].total
+    let imgPlaylist = playslistTrack[0].items[i].track.album.images[2].url
 
-    playslistTrackList.push({id:i,name:nameTrack,text:albumName,url:imgPlaylist})
+    playslistTrackList.push({ id: i, name: nameTrack, text: albumName, url: imgPlaylist })
 
 
-  })  
+})
 
 /* Spotify : end Get All tracks from a playlist */
 
 
 
-  /* ====> boucle avatar */
-  let avatarList = listTest.map ((item,i)=>{
-    return <Avatar key={i} rounded source={{uri: item.url}} size="medium" /> 
-  })
 
-  
-  /*  gestion des mouvements */
-
-  const [idDel, setIdDel]= useState() ; 
-  const [ idAdd, setIdAdd] = useState() ;
-  
+/* ====> boucle avatar */
+let avatarList = listTest.map((item, i) => {
+    return <Avatar key={i} rounded source={{ uri: item.url }} size="medium" />
+})
 
 
-  /* futures fonction de gestion */
-  
-    let [fontsLoaded] = useFonts({
-    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
-  });
- 
-  let fontSize = 24;
-  let paddingVertical = 6;
-  
-  return (
-      <View style={styles.container}>
-      <Header
-  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
-  rightComponent={<Avatar
-        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-      />}
-      containerStyle={{
-    backgroundColor: 'white',
-    marginBottom: '4%',
-  }}
-/>
-  
-      <View
-      style={{
-        flexDirection: "row",
-        marginTop: "1%",
+/*  gestion des mouvements */
 
-      }}
-    >
-    <Text style={styles.categoryTitle}>
-      Playlist</Text>
-    <Icon style={{
-        marginRight: '3%',
-      }} type="entypo" color="#00838F" name="dots-three-horizontal" />
-    <Icon type="entypo" color="#00838F" name="share" />
-    </View>
-      {/* badge en haut de l'ecran */}
-          <ScrollView style={styles.scrollView} horizontal={true}>
-          <Image
-        style={{width: 50, height: 50}}
-        source={require('../assets/icons/add_blue.png')} />
+
+const [idAdd, setIdAdd] = useState();
+
+
+
+/* futures fonction de gestion */
+useEffect(() => {
+
+}, [idAdd]);
+
+
+
+
+
+
+return (
+    <SafeAreaView style={styles.container}>
+        <Header
+            rightComponent={<Avatar
+                rounded source={{ uri: 'https://randomuser.me/api/portraits/men/41.jpg' }}
+            />}
+            containerStyle={{
+                backgroundColor: '#FFFFFF',
+
+
+            }}
+        />
+        <Text> Playlist</Text>
+        {/* badge en haut de l'ecran */}
+        <ScrollView style={styles.scrollView} horizontal={true}>
+            <TouchableHighlight
+            onPress={() => { props.navigation.navigate('SelectUser') }}
+            >
+                <Image
+                style={{ width: 50, height: 50 }}
+                source={require('../assets/icons/add_blue.png')}
+                />
+            </TouchableHighlight>
             <View style={styles.avatar}>
-              {avatarList}
+                {avatarList}
             </View>
-          </ScrollView>
+        </ScrollView>
 
-    {/* liste des musiques */}
-            <FlatList 
-                data={playslistTrackList}
-                keyExtractor={item => item.id}
-                renderItem={({ item}) => (
-                  <ListItemSwap style={styles.flatList}
-                    {...item} 
-                    onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
-                    onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-                    
-                  />
-                )}
-                ItemSeparatorComponent={() => <Separator />}
-              />
+        {/* liste des musiques */}
+        <FlatList
+            data={playslistTrackList}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+                <ListItemSwap style={styles.flatList}
+                    {...item}
+                    onSwipeFromLeft={() => { alert('swiped from left!'); setIdAdd(item.id) }}
+                    onSwipeFromRight={() => { alert('pressed right!'); setIdDel(item.id) }}
 
-    {/*{musicList} */}
-    <Track
- />
-    </View>
+                />
+            )}
+            ItemSeparatorComponent={() => <Separator />}
+        />
 
-  );
+        {/*{musicList} */}
+        <Track
+        />
+    </SafeAreaView>
+
+);
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',   
- 
-  },
-  scrollView: {
-    marginBottom:hp('1%'),
+container: {
+    flex: hp('0.5%'),
+    backgroundColor: '#fff',
+    marginVertical: 0,
+    marginBottom: 0,
+    marginHorizontal: 0,
+    paddingVertical: 0,
+},
+scrollView: {
+    marginBottom: hp('1%'),
     marginHorizontal: hp('2%'),
-    marginVertical: hp('3%'),
-  },
+    paddingVertical: 0,
+    marginVertical: hp('6%'),
+},
 
-  flatList: {
+flatList: {
     marginHorizontal: 0,
     marginVertical: 0,
     paddingVertical: 0
-  },
-  scrollViewscrollViewMusic: {
+},
+scrollViewscrollViewMusic: {
     marginHorizontal: 0,
-    width:hp('33%'),
+    width: hp('33%'),
     flex: hp('0,33%'), marginLeft: 0, marginRight: 0
-  },
-  avatar: {
+},
+avatar: {
     flex: hp('0,33%'),
-    flexDirection:"row",
-    padding:hp('3%'),
-    marginRight:hp('3%'),
+    flexDirection: "row",
+    padding: hp('3%'),
+    marginRight: hp('3%'),
     marginVertical: 0,
     paddingVertical: 0,
-    marginBottom:hp('6%'),
-  },
+    marginBottom: hp('6%'),
+},
 
-  card: {
+card: {
     flex: hp('0,33%'),
-    flexDirection:"row",
-    padding:hp('3%'),
-    marginLeft:hp('3%'),
-    marginRight:hp('3%'),
-    
-  },
-  categoryTitle: {
-    color:"#383838", 
-    fontSize:hp('3%'), 
-    marginLeft:wp('7%'),
-    fontFamily: 'PermanentMarker',
-    marginRight: '5%',
-    
-  },
-  
+    flexDirection: "row",
+    padding: hp('3%'),
+    marginLeft: hp('3%'),
+    marginRight: hp('3%'),
+
+},
+
 });
 
