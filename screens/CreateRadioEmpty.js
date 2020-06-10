@@ -24,8 +24,9 @@ const[listMusicFromBack,setListSongFromBack]=useState()
 
 const [refresh,setRefresh]=useState(false)
     // requete BDD
-    console.log("envoi requete")
+    
     useEffect(()=>{
+      console.log("envoi requete ----- L26")
       //Playlist courte
       let idplaylistSpotify ="75T4RvRPamAz41Kebiq2HZ"
 
@@ -41,7 +42,7 @@ const [refresh,setRefresh]=useState(false)
         var reponse = await requestBDD.json()
        // console.log("reponse",reponse)
         setListSongFromBack(reponse)
-        console.log("recep requete",response)
+       
       }
 
       recupDonnée()
@@ -120,6 +121,7 @@ useEffect(()=>{
               let from = "search"
 
       listOfResult.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc,from:from})
+      
       setArrayResult(listOfResult)
              
       })
@@ -170,17 +172,29 @@ console.log("front item",item)
 }
 
 
+const [searchJSONResultSend,setSearchJSONResultSend]=useState()
+
 let validPlaylist =async ()=>{
-  console.log("envoi en base")
-  let value =(props.playlistUser)
-  console.log("envoi", value)
-  var requestBDD = await fetch(`${ip}/radio-create`,{
-    method:"POST",
+
+  //props.playlistUser
+
+ let result = JSON.stringify(props.playlistUser);
+console.log(result)
+
+let resultEncoded = encodeURIComponent(result)
+
+
+
+  var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
+    method:'post',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
-    body:`value=${value}`
+    body:`resultat=${resultEncoded}`
   })
+
+
   var reponse = await requestBDD.json()
-//   setSearchJson(reponse)
+  console.log("response du back", reponse)
+  setSearchJSONResultSend(reponse)
 
 }
 
@@ -252,7 +266,7 @@ let validPlaylist =async ()=>{
 
                         <Button 
                             title="Valider la playlist"
-                            onPress={()=>validPlaylist("empty")}
+                            onPress={()=>validPlaylist()}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}
