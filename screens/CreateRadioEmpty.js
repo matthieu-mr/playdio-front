@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,FlatList} from 'react-native';
-import { ListItem,Button,ButtonGroup } from 'react-native-elements'
+import { ListItem,Button,ButtonGroup,Header,Avatar } from 'react-native-elements'
 import {connect} from 'react-redux';
 import SearchComponent, { Separator } from './components/SearchResult';
 
@@ -23,6 +23,7 @@ const[listMusicFromBack,setListSongFromBack]=useState()
 
 const [refresh,setRefresh]=useState(false)
     // requete BDD
+    console.log("envoi requete")
     useEffect(()=>{
       //Playlist courte
       let idplaylistSpotify ="75T4RvRPamAz41Kebiq2HZ"
@@ -39,7 +40,7 @@ const [refresh,setRefresh]=useState(false)
         var reponse = await requestBDD.json()
        // console.log("reponse",reponse)
         setListSongFromBack(reponse)
-        
+        console.log("recep requete",response)
       }
 
       recupDonnée()
@@ -119,7 +120,7 @@ useEffect(()=>{
 
       listOfResult.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc,from:from})
       setArrayResult(listOfResult)
-
+             
       })
   }else {
       console.log("----------------> ko")
@@ -168,17 +169,43 @@ console.log("front item",item)
 }
 
 
+let validPlaylist =async ()=>{
+  console.log("envoi en base")
+  let value =(props.playlistUser)
+  console.log("envoi", value)
+  var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
+    method:"POST",
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body:`value=${value}`
+  })
+  var reponse = await requestBDD.json()
+//   setSearchJson(reponse)
+
+}
+
 
   return (
+
 <View style={styles.container}>
 
     <View style={styles.form}>
                 {/*  "#c2185b" */}
                     <View style={styles.input}> 
                     <Text> Create Your New Radio</Text>
+                    <Header
+                          leftComponent={{ icon: 'menu', color: '#fff' }}
+                          centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
+                          rightComponent={<Avatar
+                                rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+                              />}
+                              containerStyle={{
+                            backgroundColor: 'white',
+                          }}
+                        />
+                       <Text style={styles.categoryTitle}> Add your favorite song</Text>
                     
                     <TextField
-                        label={'Playlist Name'}
+                        label={'Search a song'}
                         tintColor="#26a69a"
                         onChangeText={ (value) => setSearch(value) }
                        
@@ -253,7 +280,7 @@ const styles = StyleSheet.create({
      flex:1,
    
      justifyContent:'flex-end',
-      marginBottom:wp("15%"),
+      marginBottom:wp("5%"),
     },
 
   input:{
@@ -275,6 +302,14 @@ const styles = StyleSheet.create({
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
 },
+categoryTitle: {
+  color:"#383838", 
+  fontSize:hp('3%'), 
+  width:wp('75%'), 
+  marginLeft:wp('7%'),
+  fontFamily: 'PermanentMarker'
+},
+
 
 
   
@@ -305,5 +340,3 @@ export default connect(
   )(CreateRadioEmpty);
 
 // export default CreateRadio1
-
-
