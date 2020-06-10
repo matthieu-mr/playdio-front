@@ -86,14 +86,14 @@ const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlayl
     async function changeGrade(idUser,namePlaylist){
 
         if(colorIcon==='#796221'){
-            var requestBDD = await fetch('http://192.168.1.43:3000/userAdmin',{
+            var requestBDD = await fetch('http://192.168.1.25:3000/userAdmin',{
             method:"POST",
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=admin`
         })
         setColorIcon('#C0C0C0')
         }else if(colorIcon==='#C0C0C0'){
-                var requestBDD = await fetch('http://192.168.1.43:3000/userAdmin',{
+                var requestBDD = await fetch('http://192.168.1.25:3000/userAdmin',{
                 method:"POST",
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=public`
@@ -105,7 +105,7 @@ const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlayl
 
     const deleteUser =async (item,idDelete,namePlaylist) => {
         console.log(idDelete,namePlaylist)
-        var requestBDD = await fetch('http://192.168.1.43:3000/deleteUser',{
+        var requestBDD = await fetch('http://192.168.1.25:3000/deleteUser',{
                 method:"POST",
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body:`idDelete=${idDelete}&namePlaylist=${namePlaylist}`

@@ -15,7 +15,7 @@ const [userPlaylist,setUserPlaylist]=useState([])
 /* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
 useEffect(()=>{
     async function checkUserPlaylist(){
-    var requestBDD = await fetch('http://192.168.1.43:3000/userListplaylist')
+    var requestBDD = await fetch('http://192.168.1.25:3000/userListplaylist')
     var reponse = await requestBDD.json()
     var tableau = [...userPlaylist]
         for(var i= 0 ; i<reponse.userList.userInfo.length;i++){
@@ -36,7 +36,7 @@ useEffect(()=>{
 
 
 async function userList(){
-    var requestBDD = await fetch('http://192.168.1.43:3000/userList',{
+    var requestBDD = await fetch('http://192.168.1.25:3000/userList',{
         method:"GET",
         body:`firstName=${firstName}`
     })

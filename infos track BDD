@@ -1,3 +1,5 @@
+Infos à mettre dans la BDD pour chaque track
+
 position: object.track_number, 
 name: object.name, 
 length: object.duration_ms, 

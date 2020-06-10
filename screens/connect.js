@@ -39,7 +39,7 @@ async function autoriseSpotify(){
   
 
 // ip matthieu http://192.168.1.43
-// IP Marion http://192.168.1.43
+// IP Marion http://192.168.1.25
 // IP Ben http://192.168.1.43
 // IP Dim http://192.168.0.25
 
