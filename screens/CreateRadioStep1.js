@@ -15,19 +15,22 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 function AddRadioGetSpotify(props) {
 
-const [radioName, setRadioName] = useState("")
+const [radioName, setRadioName] = useState("test")
 const [isPrivate, setIsPrivate] = useState(false) ; 
 const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
 const [send, setSender] = useState(false);
 
 let listMusic =[]
 
-let [infoUserStorage,setInfoUserStorage]=useState();
+let [infoUserStorage,setInfoUserStorage]=useState([]);
 
 useEffect( () =>{
 let  fetchSpotifyPlaylist = async () => {
-    var infoUser = await AsyncStorage.getItem('user');
-    setInfoUserStorage(infoUser)
+
+    var infoUser = await AsyncStorage.getItem("user");
+    var infoRecup = JSON.parse(infoUser)
+    
+    setInfoUserStorage(infoRecup)
 console.log("affichage storage local",infoUser)
 }
 
