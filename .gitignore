@@ -61,3 +61,5 @@ typings/
 .next
 
 # projetplaydio 
+app.json
+variables.js

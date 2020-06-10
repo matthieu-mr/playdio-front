@@ -9,6 +9,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { AppLoading } from 'expo-font';
 import { useFonts} from '@use-expo/font'
 import ip from '../variables';
+import { ResponseError } from 'expo-auth-session/build/Errors';
 
 
 export default function Playlist(props) {
@@ -4886,6 +4887,9 @@ const quotes = [
 
 const [playlistRadio, setPlaylistRadio] = useState([]);
 
+// A modifier avec l'Id de la radio sur laquelle on clique en page Home
+var radioId = "5ee0d38703c25033102fce04"
+
 useEffect( () =>{
     fetchPlaylist = async () => {
 
@@ -4895,18 +4899,28 @@ useEffect( () =>{
       var request = await fetch(`${ip}/radio-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body:`userId=${userData.id}`
+        body:`userId=${userData.id}&radioId=${radioId}`
       })
       var response = await request.json();
+      console.log("response",response)
       
       var rawPlaylist = [];
-      for(var i=0; i<response[0].tracks.length; i++) {
+      for(var i=0; i<response.tracks.length; i++) {
         rawPlaylist.push({
-          id: response[0].tracks[i]._id, 
-          name: response[0].tracks[i].name, 
-          artist: response[0].tracks[i].artist, 
-          isrc: response[0].tracks[i].isrcID,
-          content: response[0].tracks[i].preview_url,
+          id: response.tracks[i]._id, 
+          name: response.tracks[i].name, 
+          artist: response.tracks[i].artist, 
+          album: response.tracks[i].album, 
+          image: response.tracks[i].image,
+          length: response.tracks[i].length,
+          position: response.tracks[i].position,
+          isrcID: response.tracks[i].isrcID,
+          upcID: response.tracks[i].upcID,
+          platformTrackID: response.tracks[i].platformTrackID,
+          href: response.tracks[i].href,
+          externalUrl: response.tracks[i].externalUrl,
+          previewUrl: response.tracks[i].previewUrl,
+          uri: response.tracks[i].uri,
         });
       }
       setPlaylistRadio(rawPlaylist);
@@ -4915,8 +4929,6 @@ useEffect( () =>{
     }
     fetchPlaylist()  
   },[])
-
-
 
 let infoplaylist = playslistTrack[0].items // recuperation de la liste de stracks
 
