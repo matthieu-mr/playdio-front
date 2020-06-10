@@ -5,7 +5,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { Audio } from 'expo-av';
 import ListItemSwap, { Separator } from './components/Swype';
 
-
 // ----------------------------------------
 // PLAY FUNCTION
 
@@ -311,7 +310,7 @@ export default function Play() {
         <FlatList 
           data={playlistTop}
           invertStickyHeaders={false}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({item}) => (
             <ListItemSwap style={styles.flatList}
               {...item} 
@@ -325,7 +324,7 @@ export default function Play() {
       </View>
       
       <View style={styles.player}>
-        
+
         {playlist.length > 0 ? (<Image style={styles.albumCover} source={{ uri: playlist[currentIndex].image }}/>) : (<View></View>)}
         
         {renderFileInfo()}
