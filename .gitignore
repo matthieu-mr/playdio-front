@@ -62,5 +62,3 @@ typings/
 
 # projetplaydio 
 app.json
-getTokens.js
-connect.js

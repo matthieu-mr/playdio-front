@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableHighlight } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
@@ -4952,9 +4952,14 @@ let playslistTrackList =[] ;
     </View>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
-          <Image
-        style={{width: 50, height: 50}}
-        source={require('../assets/icons/add_blue.png')} />
+          <TouchableHighlight
+            onPress={() => { props.navigation.navigate('SelectUser') }}
+            >
+                <Image
+                style={{ width: 50, height: 50 }}
+                source={require('../assets/icons/add_blue.png')}
+                />
+            </TouchableHighlight>
             <View style={styles.avatar}>
               {avatarList}
             </View>

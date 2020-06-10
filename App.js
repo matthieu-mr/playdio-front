@@ -30,7 +30,7 @@ import AddRadioGetSpotify from './screens/CreateRadioFromSpotify'
 import AddRadioEmpty from './screens/CreateRadioEmpty'
 import SearchResult from './screens/components/SearchResult'
 import SelectUser from './screens/selectUser'
-
+import SearchtUser from './screens/searchUser'
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
@@ -99,6 +99,7 @@ StackNavigator = createStackNavigator({
   AddRadioEmpty:AddRadioEmpty,
   SearchResult:SearchResult,
   SelectUser:SelectUser,
+  SearchtUser:SearchtUser,
   BottomNavigator:BottomNavigator
 }, 
 { 
