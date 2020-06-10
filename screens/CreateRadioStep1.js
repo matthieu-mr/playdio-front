@@ -15,7 +15,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 function AddRadioGetSpotify(props) {
 
-const [radioName, setRadioName] = useState("hi")
+const [radioName, setRadioName] = useState("")
 const [isPrivate, setIsPrivate] = useState(false) ; 
 const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
 const [send, setSender] = useState(false);
