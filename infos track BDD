@@ -1,4 +1,6 @@
-Infos à mettre dans la BDD pour chaque track
+********************************************************************************
+Infos à mettre dans la BDD pour chaque track (cf modèle radio.js) :
+********************************************************************************
 
 position: object.track_number, 
 name: object.name, 
@@ -6,16 +8,18 @@ length: object.duration_ms,
 artist: object.artists[0].name, 
 image: object.album.images[0].url, 
 album: object.album.name,
-idSpotify: object.id,
+platformTrackID: object.id,
 href: object.href, 
-isrc: external_ids.isrc,
 externalUrl: object.external_urls.spotify,
 previewUrl: object.preview_url,
 uri: object.uri,
-(clé étrangère) user_id
+isrcID: external_ids.isrc,
+upcID: (vide),
+(clé étrangère) userID: user_id,
 
 ********************************************************************************
-Format Spotify avec GET https://api.spotify.com/v1/tracks/2fuCquhmrzHpu5xcA1ci9x
+Format Spotify avec GET 
+(exemple ici : https://api.spotify.com/v1/tracks/2fuCquhmrzHpu5xcA1ci9x) :
 ********************************************************************************
 
 {
