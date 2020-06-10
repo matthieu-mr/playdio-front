@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,FlatList} from 
 import { ListItem,Button,ButtonGroup,Header,Avatar } from 'react-native-elements'
 import {connect} from 'react-redux';
 import SearchComponent, { Separator } from './components/SearchResult';
+import ip from '../variables';
 
 import police from '../screens/components/font';
 
@@ -33,7 +34,7 @@ const [refresh,setRefresh]=useState(false)
      // let idplaylistSpotify ="1Ts6GeiD5o29GYaYyFZZ4q"
 
       async function recupDonnée(){
-        var requestBDD = await fetch('http://192.168.1.8:3000/playlist-item',{
+        var requestBDD = await fetch(`${ip}/playlist-item`,{
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
@@ -85,7 +86,7 @@ useEffect(()=>{
  let searchText = search
   
   async function recupDonnée(){
-    var requestBDD = await fetch('http://192.168.1.8:3000/user-search',{
+    var requestBDD = await fetch(`${ip}/user-search`,{
       method:"POST",
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body:`search_term=${searchText}`
@@ -183,8 +184,6 @@ console.log(result)
 let resultEncoded = encodeURIComponent(result)
 
 
-
-console.log(`?x=${encodeURIComponent('test?')}`);
 
   var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
     method:'post',

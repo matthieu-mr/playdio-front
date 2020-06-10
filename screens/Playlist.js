@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList} from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Swype';
 import Track from './components/Track';
@@ -8,7 +8,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo-font';
 import { useFonts} from '@use-expo/font'
-
+import ip from '../variables';
 
 
 export default function Playlist(props) {
@@ -4881,6 +4881,42 @@ const quotes = [
 
 
 /* Spotify : Get all tracks from a playlist */
+
+/* Get a radio playlist from DB */
+
+const [playlistRadio, setPlaylistRadio] = useState([]);
+
+useEffect( () =>{
+    fetchPlaylist = async () => {
+
+      var infoUser = await AsyncStorage.getItem('user');
+      var userData = JSON.parse(infoUser);
+      
+      var request = await fetch(`${ip}/radio-playlist`,{
+        method:"POST",
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body:`userId=${userData.id}`
+      })
+      var response = await request.json();
+      
+      var rawPlaylist = [];
+      for(var i=0; i<response[0].tracks.length; i++) {
+        rawPlaylist.push({
+          id: response[0].tracks[i]._id, 
+          name: response[0].tracks[i].name, 
+          artist: response[0].tracks[i].artist, 
+          isrc: response[0].tracks[i].isrcID,
+          content: response[0].tracks[i].preview_url,
+        });
+      }
+      setPlaylistRadio(rawPlaylist);
+      console.log("rawPlaylist : ", rawPlaylist)
+
+    }
+    fetchPlaylist()  
+  },[])
+
+
 
 let infoplaylist = playslistTrack[0].items // recuperation de la liste de stracks
 
