@@ -4910,6 +4910,7 @@ useEffect( () =>{
         });
       }
       setPlaylistRadio(rawPlaylist);
+      console.log("rawPlaylist : ", rawPlaylist)
 
     }
     fetchPlaylist()  
