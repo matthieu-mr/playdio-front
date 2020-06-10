@@ -202,21 +202,24 @@ let resultEncoded = encodeURIComponent(result)
   return (
 
 <View style={styles.container}>
+    <Header
+      leftComponent={{ icon: 'menu', color: '#fff' }}
+      rightComponent={<Avatar
+            rounded 
+            source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+            size="small"
+          />}
+      containerStyle={{
+        backgroundColor: 'white', 
+        height:hp('10%')
+      }}
+    />
 
     <View style={styles.form}>
                 {/*  "#c2185b" */}
                     <View style={styles.input}> 
                     <Text> Create Your New Radio</Text>
-                    <Header
-                          leftComponent={{ icon: 'menu', color: '#fff' }}
-                          centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
-                          rightComponent={<Avatar
-                                rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-                              />}
-                              containerStyle={{
-                            backgroundColor: 'white',
-                          }}
-                        />
+                    
                        <Text style={styles.categoryTitle}> Add your favorite song</Text>
                     
                     <TextField

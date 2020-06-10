@@ -32,11 +32,9 @@ export default function Playlist(props) {
 
 
 
-// *************************************
 // Get a radio playlist from DB
 
 const [playlistRadio, setPlaylistRadio] = useState([]);
-
 
 
 
@@ -52,7 +50,7 @@ const [playlistRadio, setPlaylistRadio] = useState([]);
 
 
 // A modifier avec l'Id de la radio sur laquelle on clique en page Home
-var radioId = "5ee0d38703c25033102fce04"
+var radioId = "5ee10a5ee1ff3642d8f36a63"
 
 useEffect( () =>{
     fetchPlaylist = async () => {
@@ -125,16 +123,18 @@ playlistRadio.map((track,i)=>{
   
   return (
       <View style={styles.container}>
-      <Header
-  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
-  rightComponent={<Avatar
-        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-      />}
-      containerStyle={{
-    backgroundColor: 'white',
-    marginBottom: '4%',
-  }}
-/>
+        <Header
+            leftComponent={{ icon: 'menu', color: '#fff' }}
+            rightComponent={<Avatar
+                rounded 
+                source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+                size="small"
+                />}
+            containerStyle={{
+            backgroundColor: 'white', 
+            height:hp('10%')
+            }}
+        />
   
       <View
       style={{
@@ -169,7 +169,8 @@ playlistRadio.map((track,i)=>{
                     {...item} 
                     onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
                     onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-                    
+                    navigation={props.navigation}
+                    url="Play"
                   />
                 )}
                 ItemSeparatorComponent={() => <Separator />}

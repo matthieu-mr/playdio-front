@@ -54,7 +54,7 @@ const RightActions = (progress, dragX, onPress) => {
 };
 
 // Information:    
-// props = {id, text,name, url, onSwipeFromLeft, onSwipeFromRight, radioId} 
+// props = {id, text,name, url, onSwipeFromLeft, onSwipeFromRight, radioId, navigation, url}
 const ListItemSwap = (props) => (
   <Swipeable
     renderLeftActions={LeftActions}
@@ -75,7 +75,7 @@ const ListItemSwap = (props) => (
       subtitle={props.text}
       rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" /> }
       rightIcon={<Icon type='font-awesome' name='heart' color= 'red'/> }
-      onPress={ ()=>props.playSong(props.id, props.radioId) }
+      onPress={ ()=> {props.playSong(props.id, props.radioId); props.navigation.navigate(props.url) }}
       />
 
     </View>
