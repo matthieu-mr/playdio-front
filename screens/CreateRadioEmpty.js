@@ -49,46 +49,8 @@ const [refresh,setRefresh]=useState(false)
 const [listResultSpotify,setResultSpotify]=useState();
 
 
-<<<<<<< HEAD
-    // requete BDD
-    useEffect(()=>{
-        let idplaylistSpotify ="6IQZC7SBVCNa4raN2O4tKt"
-        async function recupDonnée(){
-          var requestBDD = await fetch('http://192.168.1.25:3000/playlist-item',{
-            method:"POST",
-            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
-          })
-          var reponse = await requestBDD.json()
-        
-            setListSong(reponse)
-        }
-        recupDonnée()
-      },[])
-      
-/*  add list music to array  */
-
-
-      useEffect(()=>{
-          if(listSong){ // attente de la reception du JSON
-            let infoListSong = listSong.response.items
-           
-            /* recuperation des info json */
-            let mapArrayMusic = infoListSong.map((item,i)=>{
-                
-                let nameTitle = item.track.name
-                let artist = item.track.artists[0].name
-                let idSpotify =item.track.id
-                let type = item.track.type
-                let img =item.track.album.images[0].url
-                let isrc = item.track.external_ids.isrc
-                listOfMusic.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type})
-                setArrayMusic(listOfMusic)
-            })
-=======
 useEffect(()=>{
   let infoListSong = listMusicFromBack // check si présente 
->>>>>>> ad344a8f74ab9fd71b235b0d0687cf6fcc4b4abe
      
   if(infoListSong){
     let recupInfo = listMusicFromBack.response.items
@@ -118,22 +80,6 @@ const [searchJSON,setSearchJson]=useState()
 
 useEffect(()=>{
  
-<<<<<<< HEAD
-     async function recupDonnée(){
-       var requestBDD = await fetch('http://192.168.1.25:3000/user-search',{
-         method:"POST",
-         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-         body:`search_term=${searchText}`
-       })
-       var reponse = await requestBDD.json()
-        setSearchJson(reponse)
-      
-     }
-     recupDonnée()
-   },[setSearch])
-
-//  Mise en forme du resultat
-=======
  let searchText = search
   
   async function recupDonnée(){
@@ -148,7 +94,6 @@ useEffect(()=>{
   }
   recupDonnée()
 },[search])
->>>>>>> ad344a8f74ab9fd71b235b0d0687cf6fcc4b4abe
 
 /*  add list music result from spotify to array  */
 

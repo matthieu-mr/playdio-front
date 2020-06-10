@@ -44,7 +44,8 @@ var resultServer =await userCreate.json()
 var storageUser = {
                     "email":resultServer.result[0].email,
                     "idSpotify":resultServer.result[0].musicAccounts[0].platfornUserID,
-                    "namePlatform":resultServer.result[0].musicAccounts[0].namePlatform
+                    "namePlatform":resultServer.result[0].musicAccounts[0].namePlatform,
+                    "id":resultServer.result[0]._id
                   }
 AsyncStorage.setItem("user",JSON.stringify(storageUser))
 
