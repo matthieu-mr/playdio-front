@@ -194,8 +194,6 @@ let validPlaylist =async ()=>{
                     <View style={styles.input}> 
                     <Text> Create Your New Radio</Text>
                     <Header
-                          leftComponent={{ icon: 'menu', color: '#fff' }}
-                          centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
                           rightComponent={<Avatar
                                 rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
                               />}

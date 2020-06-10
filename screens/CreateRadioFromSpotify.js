@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity,} from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity, Avatar} from 'react-native';
 
-import { ListItem,Button,ButtonGroup } from 'react-native-elements'
+import { ListItem,Button,ButtonGroup, Header } from 'react-native-elements'
 import SearchComponent, { Separator } from './components/SearchResult';
 import ip from '../variables';
 
@@ -103,10 +103,9 @@ let filteredPlaylist=[] ;
    }
  
   return (
+    
 <View style={styles.container}>
-
-                {/*  "#c2185b" */}
-        
+         
                             <View style={styles.input}> 
                             <Text style={styles.categoryTitle}> Add Songs from spotify</Text>
                             
@@ -144,7 +143,7 @@ let filteredPlaylist=[] ;
                             }}
                         />
                  </View>
-  
+
  </View>
   );
 
@@ -203,7 +202,3 @@ function mapStateToProps(state){
     mapStateToProps, 
     null
   )(CreateRadio2);
-
-//export default CreateRadio2
-
-
