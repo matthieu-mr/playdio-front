@@ -39,7 +39,7 @@ const [playlistUser,setPlaylistUser] =useState();
 useEffect(()=>{
   
     async function recupDonnée(){
-      var requestBDD = await fetch('http://192.168.1.43:3000/user-playlist',{
+      var requestBDD = await fetch('http://192.168.0.25:3000/user-playlist',{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body:`idSpotify=${idSpotify}`

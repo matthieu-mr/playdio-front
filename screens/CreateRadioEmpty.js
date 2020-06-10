@@ -32,7 +32,7 @@ const [refresh,setRefresh]=useState(false)
      // let idplaylistSpotify ="1Ts6GeiD5o29GYaYyFZZ4q"
 
       async function recupDonnée(){
-        var requestBDD = await fetch('http://192.168.1.8:3000/playlist-item',{
+        var requestBDD = await fetch('http://192.168.0.25:3000/playlist-item',{
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
@@ -84,7 +84,7 @@ useEffect(()=>{
  let searchText = search
   
   async function recupDonnée(){
-    var requestBDD = await fetch('http://192.168.1.8:3000/user-search',{
+    var requestBDD = await fetch('http://192.168.0.25:3000/user-search',{
       method:"POST",
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body:`search_term=${searchText}`
@@ -173,7 +173,7 @@ let validPlaylist =async ()=>{
   console.log("envoi en base")
   let value =(props.playlistUser)
   console.log("envoi", value)
-  var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
+  var requestBDD = await fetch('http://192.168.0.25:3000/radio-create',{
     method:"POST",
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body:`value=${value}`
