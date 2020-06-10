@@ -49,20 +49,42 @@ function SearchResultComponent(props) {
 
   let validPlaylist = (idPlaylistItem,type)=>{ 
     if (type=="playlist"){
-      props.addplaylist(idPlaylistItem)
+      props.addplaylist(props.spotifyId)
+    
       props.navigation.navigate('AddRadioEmpty')
 
     }else if(type=="track"){
-      let id=props.id
+/*       let id=props.position
       let name =props.name
       let text =props.text
       let url= props.url
       let spotifyId = props.idSpotify
       let type=props.type
       let isrc = props.isrc
+
+
       let ajoutObjet={id:id,name:name,text:text,url:url,spotifyId:spotifyId,type:type,isrc:isrc}
 
       props.addSong(ajoutObjet)
+
+ */
+
+      let nameTitle = props.name
+      let artist = props.artist
+      let idSpotify =props.idSpotify
+      let type = 'track'
+      let image =props.image
+      let isrc = props.isrcID
+      let album = props.album
+      let href =props.href
+      let externalUrl= props.externalUrl
+      let previewUrl= props.previewUrl
+      let uri= props.uri
+
+      let ajoutObjet={position:id,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
+      props.addSong(ajoutObjet)
+
+
     }
     console.log("hello fron component")
 } 
@@ -110,19 +132,20 @@ const swipeableRef = useRef(null);
           <Swipeable     
         ref={swipeableRef}
           renderRightActions={RightActions}
-          onSwipeableRightOpen={() => {closeSwipeable(rops.id);props.id}} 
+          onSwipeableRightOpen={() => {closeSwipeable(props.id);props.position}} 
           >
             <View style={styles.container}>
               <ListItem style={styles.actionText}
                 
-                leftAvatar={{ source: { uri:props.url }}}
+            
                 linearGradientProps={{
                   colors: ['#FFF', '#43a047'],
                   start: { x: 1, y: 0.1 },
                   end: { x: -2, y: 0.1 },
                 }}
+                leftAvatar={{ source: { uri:props.image } }}
                 title={props.name}
-                subtitle={props.text}
+                subtitle={`${props.artist} -- ${props.album}`} 
                 onPress={()=>{validPlaylist(props.spotifyId,props.type,props.index), setSelected(!selected)}} 
                 checkmark ={<Icon
                   reverse
@@ -139,7 +162,33 @@ const swipeableRef = useRef(null);
             </View>
             </Swipeable>
         )
-      }else{
+      }else if((props.type=="playlist")){
+        return (
+
+          <Swipeable     
+        ref={swipeableRef}
+          renderRightActions={RightActions}
+          onSwipeableRightOpen={() => {closeSwipeable(props.id);props.position}} 
+          >
+            <View style={styles.container}>
+              <ListItem style={styles.actionText}
+                leftAvatar={{ source: { uri:props.image } }}
+                title={props.name}
+                subtitle={props.artist} 
+                onPress={()=>{validPlaylist(props.spotifyId,props.type,props.index), setSelected(!selected)}} 
+              />
+              
+            </View>
+            </Swipeable>
+        )
+
+      }
+      
+      
+      
+      
+      
+      else{
         return (
           <Swipeable     
           ref={swipeableRef}
@@ -149,10 +198,10 @@ const swipeableRef = useRef(null);
           >
             <View style={styles.container}>
               <ListItem style={styles.actionText}
-                leftAvatar={{ source: { uri:props.url } }}
+                leftAvatar={{ source: { uri:props.image } }}
                 title={props.name}
-                subtitle={props.text}
-                onPress={()=>{validPlaylist(props.spotifyId,props.type), setSelected(!selected)}} 
+                subtitle={`${props.artist} -- ${props.album}`} 
+                onPress={()=>{setSelected(!selected)}} 
               />
             </View>
             </Swipeable>

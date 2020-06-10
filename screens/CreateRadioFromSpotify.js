@@ -72,7 +72,12 @@ useEffect(()=>{
              if(info.images[0]){ // if playlist have img
                 imgPlaylist = info.images[0].url
              }
-          listOfPlaylist.push({id:i,name:namePlaylist,text:textDescr,url:imgPlaylist,spotifyId:spotifyId,type:type})
+
+          listOfPlaylist.push({position:i,name:namePlaylist,artist:textDescr,image:imgPlaylist,spotifyId:spotifyId,type:type})
+
+    // listOfPlaylist.push({position:i,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
+   
+
           setArrayPlaylist(listOfPlaylist)
          })
 
