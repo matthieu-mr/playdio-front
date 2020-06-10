@@ -35,11 +35,12 @@ function connectAPP({navigation,saveEmailUser}) {
 // },[])
 async function autoriseSpotify(){
 
-  var infoClientID = await fetch ('http://192.168.1.8:3000/autorisation')
+  var infoClientID = await fetch ('http://192.168.1.43:3000/autorisation')
+  
   
 
-// ip matthieu http://192.168.1.8
-// IP Marion http://192.168.1.25
+// ip matthieu http://192.168.1.43
+// IP Marion http://192.168.1.43
 // IP Ben http://192.168.1.43
 // IP Dim http://192.168.0.25
 
@@ -81,7 +82,7 @@ let [fontsLoaded] = useFonts({
       buttonStyle={styles.button}
       color="fff"
       title="Sign up with Spotify"
-      onPress={()=>{navigation.navigate("Home"); autoriseSpotify()}}
+      onPress={()=>{ autoriseSpotify()}}
       titleStyle={
         {color:"black",
         fontSize:20,

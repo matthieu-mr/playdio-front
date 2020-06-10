@@ -27,8 +27,8 @@ const [send, setSender] = useState(false);
 
 /* Spotify : Get playlist informations */
 
-//Matthieu  http://192.168.1.8
-// IP Marion http://192.168.1.25
+//Matthieu  http://192.168.1.43
+// IP Marion http://192.168.1.43
 //IP Ben http://192.168.1.43
 
 let idSpotify = 1127664154
@@ -39,7 +39,7 @@ const [playlistUser,setPlaylistUser] =useState();
 useEffect(()=>{
   
     async function recupDonnée(){
-      var requestBDD = await fetch('http://192.168.1.25:3000/user-playlist',{
+      var requestBDD = await fetch('http://192.168.1.43:3000/user-playlist',{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body:`idSpotify=${idSpotify}`
