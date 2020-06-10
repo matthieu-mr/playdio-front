@@ -33,11 +33,7 @@ const [refresh,setRefresh]=useState(false)
      // let idplaylistSpotify ="1Ts6GeiD5o29GYaYyFZZ4q"
 
       async function recupDonnée(){
-<<<<<<< HEAD
-        var requestBDD = await fetch('http://192.168.0.25:3000/playlist-item',{
-=======
         var requestBDD = await fetch(`${ip}/playlist-item`,{
->>>>>>> 407606b024c9d734a8e3567c710053ff6b6c5522
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
