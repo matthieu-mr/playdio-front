@@ -6,7 +6,7 @@ import {Button,Text,Icon,} from 'react-native-elements'
 import * as AuthSession from 'expo-auth-session';
 import getAuthorizationCode from '../screens/components/getAuthorizationCode';
 import getTokens from '../screens/components/getTokens';
-
+import ip from '../variables';
 
 /* import * as Font from 'expo-font'; */
 
@@ -35,7 +35,7 @@ function connectAPP({navigation,saveEmailUser}) {
 // },[])
 async function autoriseSpotify(){
 
-  var infoClientID = await fetch ('http://192.168.1.25:3000/autorisation')
+  var infoClientID = await fetch (`${ip}/autorisation`)
   
 
 // ip matthieu http://192.168.1.43

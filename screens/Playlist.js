@@ -8,7 +8,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo-font';
 import { useFonts} from '@use-expo/font'
-
+import ip from '../variables';
 
 
 export default function Playlist(props) {
@@ -4892,7 +4892,7 @@ useEffect( () =>{
       var infoUser = await AsyncStorage.getItem('user');
       var userData = JSON.parse(infoUser);
       
-      var request = await fetch('http://192.168.1.25:3000/radio-playlist',{
+      var request = await fetch(`${ip}/radio-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body:`userId=${userData.id}`

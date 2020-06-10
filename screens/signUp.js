@@ -2,7 +2,7 @@ console.disableYellowBox = true;
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
 import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-material-textfield';
-
+import ip from '../variables';
 
 import {Button,Input} from 'react-native-elements'
 
@@ -23,7 +23,7 @@ const [lastName,setLastName]=useState('')
 const [password,setPassword]=useState('')
 useEffect(()=>{
   async function recupDonnée(){
-    var requestBDD = await fetch('http://192.168.1.25:3000/infoSignUp',{
+    var requestBDD = await fetch(`${ip}/infoSignUp`,{
       method:"POST",
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body:`email=${props.emailStore}`
@@ -35,7 +35,7 @@ useEffect(()=>{
 },[])
 
 async function signUp(email,firstName,lastName,password){
-  var userCreate = await fetch('http://192.168.1.25:3000/sign-up',{
+  var userCreate = await fetch(`${ip}/sign-up`,{
   method:"POST",
   headers: {'Content-Type':'application/x-www-form-urlencoded'},
   body:`email=${email}&firstName=${firstName}&lastName=${lastName}&password=${password}`

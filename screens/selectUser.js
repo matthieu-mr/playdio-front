@@ -4,7 +4,7 @@ import { Avatar, Badge, Icon, withBadge, Card, List, ListItem, Image, Header } f
 import ListItemSwap, { Separator } from './components/userplaylist';
 import  {TextField}  from 'react-native-material-textfield';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import ip from '../variables';
 
 
 export default function selectUser(props) {
@@ -15,7 +15,7 @@ const [userPlaylist,setUserPlaylist]=useState([])
 /* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
 useEffect(()=>{
     async function checkUserPlaylist(){
-    var requestBDD = await fetch('http://192.168.1.25:3000/userListplaylist')
+    var requestBDD = await fetch(`${ip}/userListplaylist`)
     var reponse = await requestBDD.json()
     var tableau = [...userPlaylist]
         for(var i= 0 ; i<reponse.userList.userInfo.length;i++){
@@ -36,7 +36,7 @@ useEffect(()=>{
 
 
 async function userList(){
-    var requestBDD = await fetch('http://192.168.1.25:3000/userList',{
+    var requestBDD = await fetch(`${ip}/userList`,{
         method:"GET",
         body:`firstName=${firstName}`
     })

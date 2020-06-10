@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpac
 
 import { ListItem,Button,ButtonGroup } from 'react-native-elements'
 import SearchComponent, { Separator } from './components/SearchResult';
+import ip from '../variables';
 
 import police from './components/font';
 
@@ -39,7 +40,7 @@ const [playlistUser,setPlaylistUser] =useState();
 useEffect(()=>{
   
     async function recupDonnée(){
-      var requestBDD = await fetch('http://192.168.1.25:3000/user-playlist',{
+      var requestBDD = await fetch(`${ip}/user-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body:`idSpotify=${idSpotify}`

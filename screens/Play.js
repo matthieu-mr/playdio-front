@@ -4,6 +4,7 @@ import { Tooltip, Slider, Header, Avatar } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
 import ListItemSwap, { Separator } from './components/Swype';
+import ip from '../variables';
 
 // ----------------------------------------
 // PLAY FUNCTION
@@ -38,7 +39,7 @@ export default function Play() {
       var userData = JSON.parse(infoUser);
       var idPlaylist = '37i9dQZF1DXbTxeAdrVG2l';
 
-      var request = await fetch('http://192.168.1.25:3000/play',{
+      var request = await fetch(`${ip}/play`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body:`idSpotify=${userData.idSpotify}&idPlaylist=${idPlaylist}`

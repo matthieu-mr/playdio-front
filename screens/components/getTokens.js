@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import * as AuthSession from 'expo-auth-session';
 import { encode as btoa } from 'base-64';
 import getAuthorizationCode from './getAuthorizationCode';
-
+import ip from '../../variables';
 
 
 
@@ -24,7 +24,7 @@ export default async function getTokens(clientId,redirectURI,clientSecret,props)
       }`,
     });
     const responseJson = await response.json();
-    var requestbackend = await fetch('http://192.168.1.25:3000/saveToken',{
+    var requestbackend = await fetch(`${ip}/saveToken`,{
 
 //Matthieu  http://192.168.1.8
 // IP Marion http://192.168.1.25
