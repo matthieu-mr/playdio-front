@@ -6,6 +6,7 @@ import { Audio } from 'expo-av';
 import ListItemSwap, { Separator } from './components/Song';
 import {connect} from 'react-redux';
 import ip from '../variables';
+import Profile from './components/Profile';
 
 // ----------------------------------------
 // PLAY FUNCTION
@@ -275,18 +276,8 @@ function Play(props) {
   return (
     <View style={{flex:1}}>
     
-      <Header
-        leftComponent={{ icon: 'menu', color: '#fff' }}
-        rightComponent={<Avatar
-            rounded 
-            source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-            size="small"
-            />}
-        containerStyle={{
-        backgroundColor: 'white', 
-        height:hp('10%')
-        }}
-      />
+      <Profile navigation={props.navigation}/>
+      
       <View style={styles.playView}>
 
         <View style={styles.flatlistViewTop}>
