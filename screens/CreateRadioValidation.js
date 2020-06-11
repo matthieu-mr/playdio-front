@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage, Share} from 'react-native';
-import { ListItem,Button, Header, Avatar} from 'react-native-elements'
+import { ListItem,Button, Header, Avatar,Icon} from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
@@ -16,23 +16,13 @@ import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-ma
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 function CreateRadioValidation(props) {
-let testLink = Linking.openURL('exp://w7-6rn.matthieumr.playdio-frontend.exp.direct:80');
 
-
-
-CreationLien=()=>{
-
-let monlien = Linking.makeUrl("AddRadioGetSpotify")
-
-}
-
-
-
-
-let share=async ()=>{
+  
+  
+let share= async ()=>{
         try {
             const result = await Share.share({
-              message: `J utilise playdio, test du share ^^  ${testLink}` 
+              message: `Join me on playdio` 
             });
       
             if (result.action === Share.sharedAction) {
@@ -47,27 +37,16 @@ let share=async ()=>{
           } catch (error) {
             alert(error.message);
           }
-    }
+    } 
     
+let CreationLien=()=>{
 
-// redirection en fonction du choix user
-let validPlaylist = (target)=>{  
-        if (radioName){
-            props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly,listMusic,infoUser:infoUserStorage})
-
-            if (target=="empty"){
-              props.navigation.navigate('AddRadioEmpty')
-            
-            } else if (target == "spotify"){
-              props.navigation.navigate('AddRadioGetSpotify')
-            
-            }
-         //   props.navigation.navigate('AddRadio2')
-        }else{
-            alert("The title of your playlist can't be empty")
-        }
+  props.addRadioId(props.playlistUser.urlPlaylist)
+  
+  props.navigation.navigate(`Playlist`)
 }
- 
+
+
   return (
 <View style={styles.container}>
       <Header
@@ -103,18 +82,30 @@ let validPlaylist = (target)=>{
 
                     <Text> Congrats  ! Your radio is on air</Text>
                     <Text> You can share it using the following links </Text>
+
+                    <View style={styles.buttonShare}>
                     <Button 
                             title="Share your playlist"
                             titleStyle={
                             {
-                            fontFamily:'Roboto'}
+                            fontFamily:'Roboto',
+                            color:'#517fa4'
+                              }
                                }
                             onPress={()=>share("empty")}
-                            buttonStyle={{
-                                backgroundColor:"#00838F",
-                            }}
+                            type="outline"
+                            icon={
+                              <Icon
+                                name='share-google'
+                                type='evilicon'
+                                color='#517fa4'
+                              />
+                              
+                            }
+                            iconRight
+                            
                         />
-
+                      </View>
                     </View>
 
 
@@ -126,7 +117,7 @@ let validPlaylist = (target)=>{
         
         
                         <Button 
-                            title="Add Empty Radio"
+                            title="Let's Rock"
                             titleStyle={
                             {
                             fontFamily:'Roboto'}
@@ -166,10 +157,10 @@ const styles = StyleSheet.create({
 
 
   paramPlaylist:{  
-    backgroundColor: "#26a69a",
+   
     marginRight:wp('7%'),
     marginLeft:wp('7%'),
-    marginBottom:wp('70%'),
+    
   },
 
 
@@ -177,6 +168,12 @@ const styles = StyleSheet.create({
    marginRight:wp('10%'),
    marginLeft:wp('10%'),
    marginBottom: wp('10%')
+},
+
+buttonShare:{
+  marginRight:wp('10%'),
+  marginLeft:wp('10%'),
+  marginTop: wp('20%')
 },
 
 categoryTitle: {
@@ -192,19 +189,21 @@ categoryTitle: {
 });
 
 
+function mapStateToProps(state) {
+  return { playlistUser: state.PlaylistAdd }
+}
+  
 function mapDispatchToProps(dispatch) {
-    return {
-      addplaylist: function(info) { 
-        dispatch( {type: 'addName',info }) 
-      }
+  return {
+    addRadioId: function(radioId) {
+        dispatch( {type: 'sendRadioId', radioId: radioId} )
     }
   }
-  
-  export default connect(
-      null, 
-      mapDispatchToProps
+}
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
   )(CreateRadioValidation);
-
 
 // export default CreateRadio1
 

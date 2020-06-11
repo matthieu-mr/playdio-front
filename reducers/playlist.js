@@ -8,7 +8,6 @@ export default function(playlist =[],action){
         return playlist
     }
 
-
     else if(action.type == 'addSong'){
       //console.log("ajout son", action.info)
         
@@ -24,6 +23,16 @@ export default function(playlist =[],action){
        // console.log(newPlaylist)
         return playlist
     }
+    else if(action.type == 'addUrl'){
+        console.log("ajout URL", action.info.idRadio)
+    
+        
+        playlist.urlPlaylist=action.info.idRadio
+
+       // console.log("redux playlist----------------",playlist)
+
+          return playlist
+      }
 
     else{
         return playlist

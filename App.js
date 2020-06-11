@@ -95,11 +95,12 @@ StackNavigator = createStackNavigator({
   getTokens:getTokens,
   Playlist: Playlist,
   Play:Play,
-  AddRadio : CreateRadioValidation,
+  AddRadio : AddRadio1,
   AddRadioGetSpotify : AddRadioGetSpotify,
   AddRadioEmpty:AddRadioEmpty,
   SearchResult:SearchResult,
   SelectUser:SelectUser,
+  CreateRadioValidation:CreateRadioValidation,
   BottomNavigator:BottomNavigator
 }, 
 { 

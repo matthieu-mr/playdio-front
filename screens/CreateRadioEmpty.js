@@ -208,7 +208,15 @@ let validPlaylist =async ()=>{
 
 
   var reponse = await requestBDD.json()
+  console.log("response du back", reponse)
+
   setSearchJSONResultSend(reponse)
+  props.addUrl(reponse)
+
+
+props.navigation.navigate('CreateRadioValidation')
+
+
 
 }
 
@@ -272,6 +280,7 @@ let validPlaylist =async ()=>{
                         <Button 
                             title="Save your Song"
                             onPress={()=>validPlaylist()}
+                            tintColor="#26a69a"
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}
@@ -341,6 +350,9 @@ function mapDispatchToProps(dispatch) {
     },
     deleteSong: function(info) { 
       dispatch( {type: 'deleteSong',info }) 
+    },
+    addUrl:function(info) { 
+      dispatch( {type: 'addUrl',info }) 
     },
     
   }

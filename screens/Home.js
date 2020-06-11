@@ -16,6 +16,18 @@ export default function Home(props) {
   const [myRadio, setMyRadio] = useState([]);
   const [communityRadio, setCommunityRadio] = useState([]);
 
+
+// ajouter données local Storage
+/* var storageUser = {
+  "email": "m.michon@yahoo.fr",
+  "idSpotify": "1127664154",
+  "namePlatform": "spotify",
+  "id": "5ee00cc69f32fc0ae27decac"
+}
+AsyncStorage.setItem("user",JSON.stringify(storageUser))
+ */
+
+
   useEffect( () =>{
       fetchRadio = async () => {
 
