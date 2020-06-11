@@ -14,8 +14,6 @@ export default function Home(props) {
   const [myRadio, setMyRadio] = useState([]);
   const [communityRadio, setCommunityRadio] = useState([]);
  
-  // A modifier avec l'Id de la radio sur laquelle on clique en page Home
-  var radioId = "5ee10a5ee1ff3642d8f36a63"
 
   useEffect( () =>{
       fetchRadio = async () => {
