@@ -57,7 +57,8 @@ const [listResultSpotify,setResultSpotify]=useState();
 
 useEffect(()=>{
   let infoListSong = listMusicFromBack // check si présente 
-     
+    let emplacement =3
+    
   if(infoListSong){
     let recupInfo = listMusicFromBack.response.items
         let mapArrayMusic = recupInfo.map((item,i)=>{
@@ -79,7 +80,7 @@ useEffect(()=>{
 
 
 
-          props.addSong({position:i,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
+          props.addSong({position:props.playlistUser.listMusic.length,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
         })
     }else {console.log("recup ko")}
   },[listMusicFromBack])    
@@ -115,12 +116,12 @@ useEffect(()=>{
 
 let listOfResult=[]
 const [arrayResult,setArrayResult] =useState()
-
+console.log("recup position from",props.playlistUser.listMusic.length)
 useEffect(()=>{
   let info = searchJSON
   
   if(info){ // attente de la reception du JSON
-    
+   
      let infoResultArray = searchJSON.response.tracks.items
                 /* recuperation des info json */
             /* recuperation des info json */
@@ -141,7 +142,7 @@ useEffect(()=>{
               let uri= item.uri
     
 
-      listOfResult.push({position:i,name:nameTitle,artist:artist,image:image,spotifyId:spotifyId,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
+      listOfResult.push({position:props.playlistUser.listMusic.length,name:nameTitle,artist:artist,image:image,spotifyId:spotifyId,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
       
       setArrayResult(listOfResult)
              

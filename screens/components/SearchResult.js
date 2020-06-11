@@ -48,7 +48,7 @@ function SearchResultComponent(props) {
 
 
   let validPlaylist = (idPlaylistItem,type)=>{
- 
+    console.log("recup position",props.playlistUser)
 
     if (type=="playlist"){
       
@@ -71,7 +71,7 @@ function SearchResultComponent(props) {
       props.addSong(ajoutObjet)
 
  */
-let id=props.position
+      let id=props.playlistUser.listMusic.length
       let nameTitle = props.name
       let artist = props.artist
       let idSpotify =props.spotifyId
@@ -83,9 +83,10 @@ let id=props.position
       let externalUrl= props.externalUrl
       let previewUrl= props.previewUrl
       let uri= props.uri
-      let from="playlistUserAdd"
+      let from="playlist"
 
-      let ajoutObjet={from:from,position:id,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
+      let ajoutObjet={from:from,position:props.playlistUser.listMusic.length,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
+    console.log(ajoutObjet)
       props.addSong(ajoutObjet)
 
 
@@ -116,15 +117,20 @@ let RightActions = (progress, dragX, onPress) => {
   
 
 };
-
+//console.log("recup position",props.playlistUser.listMusic.length)
 
 const[selected, setSelected]=useState(false);
 
 const swipeableRef = useRef(null);
 
  const closeSwipeable = (item) => {
- props.deleteSong(props.position)
-//console.log(props.position)
+
+
+
+
+let value =props.position-1
+console.log("recup item",value)
+props.deleteSong(value)
   swipeableRef.current.close();
 }
  
@@ -135,7 +141,7 @@ const swipeableRef = useRef(null);
           <Swipeable     
         ref={swipeableRef}
           renderRightActions={RightActions}
-          onSwipeableRightOpen={() => {closeSwipeable(props.id);props.position}} 
+          onSwipeableRightOpen={() => {closeSwipeable(props.position);props.position}} 
           >
             <View style={styles.container}>
               <ListItem style={styles.actionText}
@@ -194,7 +200,7 @@ const swipeableRef = useRef(null);
           ref={swipeableRef}
           renderRightActions={RightActions}
          // onSwipeableRightOpen={props.onSwipeFromRight} 
-          onSwipeableRightOpen={() => {closeSwipeable(props.index),props.onSwipeFromRight()}} 
+          onSwipeableRightOpen={() => {closeSwipeable(props.id),props.onSwipeFromRight()}} 
           >
             <View style={styles.container}>
               <ListItem style={styles.actionText}
