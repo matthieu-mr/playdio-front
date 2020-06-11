@@ -24,14 +24,12 @@ const[listMusicFromBack,setListSongFromBack]=useState()
 
 
 let idSpotify = props.playlistUser.infoUser.idSpotify
-console.log("recup redux radio spotify,",props.playlistUser.infoUser.idSpotify)
 
 const [refresh,setRefresh]=useState(false)
     // requete BDD
   
 
     useEffect(()=>{
-      console.log("recup radio empty",props.playlistUser.idSpotifPlaylist)
 
       //Playlist courte
       //let idplaylistSpotify =props.playlistUser.idSpotify
@@ -149,7 +147,7 @@ useEffect(()=>{
              
       })
   }else {
-      console.log("----------------> ko")
+      console.log("ko")
   }
 },[searchJSON])
 
@@ -187,7 +185,6 @@ const [arrayResultTest,setArrayResultTest] =useState(false)
 let swypeValue =(item)=>{
 
   //  props.deleteSong(item)
-console.log("front item",item)
   setIndex(3)
 
 
@@ -211,7 +208,6 @@ let validPlaylist =async ()=>{
 
 
   var reponse = await requestBDD.json()
-  console.log("response du back", reponse)
   setSearchJSONResultSend(reponse)
 
 }

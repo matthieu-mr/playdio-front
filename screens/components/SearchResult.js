@@ -48,7 +48,6 @@ function SearchResultComponent(props) {
 
 
   let validPlaylist = (idPlaylistItem,type)=>{
-    console.log("component info    ---------- ", props.type) 
 
     if (type=="playlist"){
       
@@ -86,12 +85,10 @@ let id=props.position
       let from=props.from
 
       let ajoutObjet={from:from,position:id,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
-    console.log(ajoutObjet)
       props.addSong(ajoutObjet)
 
 
     }
-    console.log("hello fron component")
 } 
 
 
@@ -124,7 +121,6 @@ const[selected, setSelected]=useState(false);
 const swipeableRef = useRef(null);
 
  const closeSwipeable = (item) => {
-   console.log("evenement", item)
   props.deleteSong(item)
 
   swipeableRef.current.close();

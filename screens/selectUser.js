@@ -16,10 +16,8 @@ const[search,setSearch]=useState("")
 const [resultUser,setResultUser]=useState('')
 const [playlistId,setPlaylistId]=useState('')
 
-console.log(props)
 /* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
 useEffect(()=>{
-    console.log(props.radioId)
     var tableau = []
     async function checkUserPlaylist(){
         var button="orchestra"

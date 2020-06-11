@@ -23,7 +23,7 @@ let testLink = Linking.openURL('exp://w7-6rn.matthieumr.playdio-frontend.exp.dir
 CreationLien=()=>{
 
 let monlien = Linking.makeUrl("AddRadioGetSpotify")
-    console.log(monlien)
+
 }
 
 

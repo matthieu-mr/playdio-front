@@ -56,8 +56,7 @@ const store = createStore(combineReducers({email,PlaylistAdd,songId, radioId,Del
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
   Home: Home,
   Playlist: Playlist,
-  Search: Search,
-  'Play (Test)': AddRadio1
+  Play: Play,
   },
   {
   defaultNavigationOptions: ({ navigation }) => ({ // creation des icônes
@@ -71,11 +70,7 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
       iconName = 'radio';
       return <MaterialCommunityIcons name="radio" size={24} color={tintColor} />
 
-      } else if (navigation.state.routeName == 'Search') {
-      iconName = 'ios-search';
-      return <Ionicons name={iconName} size={25} color={tintColor} />;
-
-      } else if (navigation.state.routeName == 'Play (Test)') {
+      } else if (navigation.state.routeName == 'Play') {
       iconName = 'ios-play';
       return <Ionicons name={iconName} size={25} color={tintColor} />;
       }
