@@ -54,13 +54,13 @@ const RightActions = (progress, dragX, onPress) => {
 };
 
 // Information:    
-// props = {id, text,name, url, onSwipeFromLeft, onSwipeFromRight, radioId, navigation, url}
+// props = {songId, text,name, url, onSwipeFromLeft, onSwipeFromRight, navigation, url}
 const ListItemSwap = (props) => (
   <Swipeable
     renderLeftActions={LeftActions}
     onSwipeableLeftOpen={props.onSwipeFromLeft,props.id}
   
-     renderRightActions={RightActions}
+    renderRightActions={RightActions}
     onSwipeableRightOpen={props.onSwipeFromRight} 
   >
 
@@ -75,7 +75,7 @@ const ListItemSwap = (props) => (
       subtitle={props.text}
       rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" /> }
       rightIcon={<Icon type='font-awesome' name='heart' color= 'red'/> }
-      onPress={ ()=> {props.playSong(props.id, props.radioId); props.navigation.navigate(props.url) }}
+      onPress={ ()=> {props.playSong(props.songId); props.navigation.navigate(props.url) }}
       />
 
     </View>
@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
   return {
-    playSong: function(id, radioId) {
-        dispatch( {type: 'play', songId: id, radioId: radioId} )
+    playSong: function(songId) {
+        dispatch( {type: 'play', songId: songId} )
     }
   }
 }

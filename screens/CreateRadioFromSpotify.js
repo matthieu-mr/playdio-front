@@ -32,7 +32,7 @@ const [send, setSender] = useState(false);
 // IP Marion http://192.168.1.25
 //IP Ben http://192.168.1.43
 
-let idSpotify = 1127664154
+let idSpotify = props.playlistUser.infoUser.idSpotify
 
 const [playlistUser,setPlaylistUser] =useState();
 
@@ -154,16 +154,8 @@ let filteredPlaylist=[] ;
                
               />
 
-                <View style={styles.button}>
-                        <Button 
-                            title="Press me"
-                            onPress={() => alert('Simple Button pressed')}
-                            buttonStyle={{
-                                backgroundColor:"#00838F",
-                            }}
-                        />
-                 </View>
 
+  
  </View>
   );
 
@@ -215,7 +207,7 @@ categoryTitle: {
   
 });
 function mapStateToProps(state){
-    return {playlistRedux: state.PlaylistAdd, token:state.token}
+    return {playlistUser: state.PlaylistAdd, token:state.token}
   }
   
   export default connect(
