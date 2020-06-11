@@ -40,7 +40,7 @@ var userExists = false
       setErrorsSignin(resultServer.error)
     }
   
-
+    console.log("resultServer",resultServer)
   if(userExists){
 
     var storageUser = {
