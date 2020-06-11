@@ -150,9 +150,14 @@ playlistRadio.map((track,i)=>{
     </View>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>
-          <Image
-        style={{width: 50, height: 50}}
-        source={require('../assets/icons/add_blue.png')} />
+          <TouchableHighlight
+            onPress={() => { props.navigation.navigate('SelectUser') }}
+            >
+                <Image
+                style={{ width: 50, height: 50 }}
+                source={require('../assets/icons/add_blue.png')}
+                />
+            </TouchableHighlight>
             <View style={styles.avatar}>
               {avatarList}
             </View>
