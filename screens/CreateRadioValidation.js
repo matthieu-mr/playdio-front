@@ -85,7 +85,7 @@ let CreationLien=()=>{
 
                     <View style={styles.buttonShare}>
                     <Button 
-                            title="Share your playlist"
+                            title="Share your playlist   "
                             titleStyle={
                             {
                             fontFamily:'Roboto',
@@ -117,7 +117,7 @@ let CreationLien=()=>{
         
         
                         <Button 
-                            title="Let's Rock"
+                            title="Let's Rock     "
                             titleStyle={
                             {
                             fontFamily:'Roboto'}
@@ -126,6 +126,15 @@ let CreationLien=()=>{
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}
+                            icon={
+                              <Icon
+                                name='playlist-add-check'
+                                type='material'
+                                color='#FFF'
+                              />
+                              
+                            }
+                            iconRight
                         />
                         </View>
  </View>
