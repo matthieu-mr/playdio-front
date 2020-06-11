@@ -3,7 +3,6 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import Track from './components/Track';
-import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo-font';
@@ -39,6 +38,7 @@ const [playlistRadio, setPlaylistRadio] = useState([]);
 const [radioId, setRadioId] = useState('');
 
 
+<<<<<<< HEAD
 // Si vous voulez voir les playlists s'afficher, décommentez et customisez le code suivant avec vos infos 
 //(idSpotify = users[i].platfornUserID, id = users[i]._id)
 // Cela permettra d'ajouter l'ID utilisateur dans le local Storage
@@ -52,6 +52,8 @@ const [radioId, setRadioId] = useState('');
 
 
 
+=======
+>>>>>>> 1862caeaa1f726af8cb44d7167ab4d53be825481
 useEffect( () =>{
   
     fetchPlaylist = async () => {

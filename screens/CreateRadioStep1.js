@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage} from 'react-native';
-import { ListItem,Button, Header, Avatar} from 'react-native-elements'
+import { ListItem,Button, Avatar} from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
@@ -62,19 +62,6 @@ let validPlaylist = (target)=>{
  
   return (
 <View style={styles.container}>
-      <Header
-        leftComponent={{ icon: 'menu', color: '#fff' }}
-        rightComponent={<Avatar
-              rounded 
-              source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-              size="small"
-            />}
-        containerStyle={{
-          backgroundColor: 'white', 
-          height:hp('10%')
-        }}
-      />
-
 
     <View style={styles.form}>
 

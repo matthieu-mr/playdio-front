@@ -1,76 +1,46 @@
-import React from 'react';
-import { Avatar, Badge, Icon, withBadge,Card, ListItem, Image } from 'react-native-elements'
-import {
-  View,
-  Text,
-  StyleSheet,
-  Animated,
-  TouchableOpacity,
-} from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { StyleSheet, Text, View, ScrollView, AsyncStorage, TouchableOpacity} from 'react-native';
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header,Overlay } from 'react-native-elements'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { AppLoading } from 'expo';
+import { useFonts} from '@use-expo/font'
 
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    paddingHorizontal: hp('20%'),
-    paddingVertical: hp('0.03%'),
-    borderWidth: hp('0.01%'),
-    borderColor: "#C8C8C8",
-  },
-  text: {
-    color: '#4a4a4a',
-    fontSize: hp('5%'),
-  },
-  separator: {
-    flex: hp('0,3%'),
-    height: hp('0,3%'),
-    backgroundColor: '#e4e4e4',
-    marginLeft: hp('3%'),
-  },
- 
-  actionText: {
-    color: '#fff',
-    fontWeight: '600',
-    padding: hp('6,5%'),
-  },
-  listItem: {
-    height:hp('10%'),
-    paddingTop:hp('0%'),
-    paddingBottom:hp('0%'),
-    paddingHorizontal: hp('0%'),
-    paddingVertical: hp('2%'),
-    marginLeft: hp('35%'),
-    marginTop: hp('2%'),
-  },
-  title: {
-    fontSize:hp('2.2%'),
-    fontWeight: "bold",
-    color:"#3a3a3a"
-  },
-  subtitle: {
-    fontSize:hp('2%'),
-    color:"#3a3a3a"
-  }
+export default function Profile(props) {
 
-});
+    const [visible, setVisible] = useState(false);
+    const toggleOverlay = () => {
+      setVisible(!visible);
+    };
 
-export const Separator = () => <View style={styles.separator} />;
+    let [fontsLoaded] = useFonts({
+        PermanentMarker: require("../../assets/fonts/PermanentMarker-Regular.ttf"),
+        Roboto: require("../../assets/fonts/Roboto-Regular.ttf"),
+        RobotoBold: require("../../assets/fonts/Roboto-Bold.ttf"),
+      });
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    } else { 
+        return(
+            <Header
+                rightComponent={<Avatar
+                    rounded 
+                    source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+                    size="small"
+                    onPress={() => toggleOverlay()}
+                    />}
+                containerStyle={{
+                backgroundColor: 'white', 
+                height:hp('10%')
+                }}
+            >
+                <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate("Connect")}>
+                        <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%'), fontFamily: 'PermanentMarker'}}>Deconnexion</Text>
+                    </TouchableOpacity>
+                </Overlay>
+            </Header>
+        )
+    }
 
-const Profile = ({id, text,name, url}) => (
-    <View style={styles.container}>
-
-      <ListItem
-        containerStyle={styles.listItem}
-        rightAvatar={<Avatar
-        style={{width: wp('10%'), height: hp('5%')}}
-        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-      />}
-     
-      />
-
-    </View>
-  
-);
-
-export default Profile;
+}

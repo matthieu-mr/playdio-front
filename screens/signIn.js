@@ -21,7 +21,7 @@ const [email,setEmail]=useState('email@email.com')
 const [password,setPassword]=useState('')
 const [signInEmail, setSignInEmail] = useState('')
 const [signInPassword, setSignInPassword] = useState('')
-const [userExists, setUserExists] = useState(false)
+// const [userExists, setUserExists] = useState(false)
 const [listErrorsSignin, setErrorsSignin] = useState([])
 
 async function signIn(email,password){
@@ -31,23 +31,31 @@ async function signIn(email,password){
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `emailFromFront=${email}&passwordFromFront=${password}`
     })
-
-    const body = await data.json()
-
-    if(body.result == true){
-      setUserExists(true)
+    
+    var userExists = false
+    var resultServer = await data.json()
+    if(resultServer.result == true){
+      userExists = true
     }  else {
-      setErrorsSignin(body.error)
+      setErrorsSignin(resultServer.error)
     }
-  }
-
+  
+    console.log("resultServer",resultServer)
   if(userExists){
+
+    var storageUser = {
+                    "email":resultServer.user.email,
+                    "idSpotify":resultServer.user.musicAccounts[0].platfornUserID,
+                    "namePlatform":resultServer.user.musicAccounts[0].namePlatform,
+                    "id":resultServer.user._id
+                  }
+
+      AsyncStorage.setItem("user",JSON.stringify(storageUser))
+ 
     return props.navigation.navigate("Home")
   }
-  var tabErrorsSignin = listErrorsSignin.map((error,i) => {
-    return(<p>{error}</p>)
-  })
-
+  }
+  
 return (
 <View>
   
@@ -68,7 +76,6 @@ return (
       secureTextEntry={true}
       onChangeText={(value)=>setPassword(value)}
       />
-{tabErrorsSignin}
 
       <Button           
       buttonStyle={{

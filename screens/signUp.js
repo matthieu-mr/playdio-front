@@ -60,10 +60,6 @@ AsyncStorage.setItem("user",JSON.stringify(storageUser))
 
 
 
-                /* recuperer les données du localstaorage */
-                /* AsyncStorage.getItem('user',function(error,data){
-                  var userData = JSON.parse(data)
-                }) */
 props.navigation.navigate("Home")
 }
 
