@@ -123,8 +123,8 @@ const[selected, setSelected]=useState(false);
 const swipeableRef = useRef(null);
 
  const closeSwipeable = (item) => {
-  props.deleteSong(item)
-
+ props.deleteSong(props.position)
+//console.log(props.position)
   swipeableRef.current.close();
 }
  
@@ -194,7 +194,7 @@ const swipeableRef = useRef(null);
           ref={swipeableRef}
           renderRightActions={RightActions}
          // onSwipeableRightOpen={props.onSwipeFromRight} 
-          onSwipeableRightOpen={() => {closeSwipeable(props.id),props.onSwipeFromRight()}} 
+          onSwipeableRightOpen={() => {closeSwipeable(props.index),props.onSwipeFromRight()}} 
           >
             <View style={styles.container}>
               <ListItem style={styles.actionText}
