@@ -202,7 +202,7 @@ let validPlaylist =async ()=>{
   let result = JSON.stringify(props.playlistUser);
 
   let resultEncoded = encodeURIComponent(result)
-  var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
+  var requestBDD = await fetch(`${ip}/radio-create`,{
     method:'post',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body:`resultat=${resultEncoded}`

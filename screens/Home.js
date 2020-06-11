@@ -86,7 +86,6 @@ AsyncStorage.setItem("user",JSON.stringify(storageUser))
   },[])
 
 
-
   // DISCOVER
   var discoverRadioList = discoverRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} radioId={radio.id} url={radio.url}/>;
