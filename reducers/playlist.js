@@ -4,9 +4,10 @@ export default function(playlist =[],action){
 
     }
     else if(action.type == 'addInfoPlaylistSpotify'){
-        playlist.idSpotify=action.info
+        playlist.idSpotifPlaylist=action.info
         return playlist
     }
+
 
     else if(action.type == 'addSong'){
      //   console.log("ajout son")

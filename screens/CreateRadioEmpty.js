@@ -23,25 +23,27 @@ const [send, setSender] = useState(false);
 const[listMusicFromBack,setListSongFromBack]=useState()
 
 
-
+let idSpotify = props.playlistUser.infoUser.idSpotify
+console.log("recup redux radio spotify,",props.playlistUser.infoUser.idSpotify)
 
 const [refresh,setRefresh]=useState(false)
     // requete BDD
   
 
     useEffect(()=>{
+      console.log("recup radio empty",props.playlistUser.idSpotifPlaylist)
 
       //Playlist courte
-      let idplaylistSpotify =props.playlistUser.idSpotify
+      //let idplaylistSpotify =props.playlistUser.idSpotify
 
       // playlistLongue
-     // let idplaylistSpotify ="1Ts6GeiD5o29GYaYyFZZ4q"
-
+      let idplaylistSpotify =props.playlistUser.idSpotifPlaylist
+      let userIdSpotify = props.playlistUser.infoUser.idSpotify
       async function recupDonnée(){
         var requestBDD = await fetch(`${ip}/playlist-item`,{
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
-          body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
+          body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}&idSpotify=${userIdSpotify}`
         })
         var reponse = await requestBDD.json()
         setListSongFromBack(reponse)
@@ -98,10 +100,11 @@ useEffect(()=>{
  let searchText = search
   
   async function recupDonnée(){
+    let userIdSpotify = props.playlistUser.infoUser.idSpotify
     var requestBDD = await fetch(`${ip}/user-search`,{
       method:"POST",
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body:`search_term=${searchText}`
+      body:`search_term=${searchText}&userId=${userIdSpotify}`
     })
     var reponse = await requestBDD.json()
      setSearchJson(reponse)
@@ -285,7 +288,7 @@ let validPlaylist =async ()=>{
                         <View style={styles.button}>
 
                         <Button 
-                            title="Valider la playlist"
+                            title="Save your Song"
                             onPress={()=>validPlaylist()}
                             buttonStyle={{
                                 backgroundColor:"#00838F",

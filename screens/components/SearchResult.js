@@ -49,6 +49,7 @@ function SearchResultComponent(props) {
 
   let validPlaylist = (idPlaylistItem,type)=>{ 
     if (type=="playlist"){
+      console.log("component info", props.spotifyId)
       props.addplaylist(props.spotifyId)
     
       props.navigation.navigate('AddRadioEmpty')
