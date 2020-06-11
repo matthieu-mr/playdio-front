@@ -177,8 +177,7 @@ playlistRadio.map((track,i)=>{
               />
 
     {/*{musicList} */}
-    <Track
- />
+    {/*<Track/>*/}
     </View>
 
   );
