@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage} from 'react-native';
 import { ListItem,Button, Avatar} from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
+import Profile from './components/Profile';
 import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -62,6 +63,8 @@ let validPlaylist = (target)=>{
   return (
 <View style={styles.container}>
 
+<Profile navigation={props.navigation}/>
+
     <View style={styles.form}>
 
  
@@ -74,7 +77,7 @@ let validPlaylist = (target)=>{
                     <Text style={styles.categoryTitle}> Create Your New Radio</Text>
                     
                     <TextField 
-                        label={'Playlist Name'}
+                        label={'Radio Name'}
                         tintColor="#26a69a"
                         onChangeText={ (value) => setRadioName(value) }
                        

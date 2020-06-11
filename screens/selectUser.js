@@ -95,7 +95,7 @@ return (
             <View style={styles.input}> 
             <Text style={styles.categoryTitle}> Radio orchestra</Text>
                     <TextField
-                        label={'Search a song'}
+                        label={'Search a person'}
                         tintColor="#26a69a"
                         onChangeText={ (value) => setSearch(value) }
                         

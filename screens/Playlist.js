@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage, TouchableHighlight } from 'react-native';
-import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header,Overlay } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import Track from './components/Track';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -105,6 +105,25 @@ playlistRadio.map((track,i)=>{
  
   let fontSize = 24;
   let paddingVertical = 6;
+
+  // Delete radio
+
+  var deleteRadio = async () => {
+
+    var request = await fetch(`${ip}/radio-delete`,{
+      method:"POST",
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body:`radioId=${props.radioId}`
+    })
+    var response = await request.json();
+  }
+
+  const [visible, setVisible] = useState(false);
+    const toggleOverlay = () => {
+      setVisible(!visible);
+    };
+
+  // Callback
   
   return (
       <View style={styles.container}>
@@ -117,12 +136,21 @@ playlistRadio.map((track,i)=>{
 
       }}
     >
-    <Text style={styles.categoryTitle}>
-      Playlist</Text>
-    <Icon style={{
-        marginRight: '3%',
-      }} type="entypo" color="#00838F" name="dots-three-horizontal" />
+    <Text style={styles.categoryTitle}> Playlist</Text>
+    <TouchableOpacity onPress={() => toggleOverlay()}>
+      <Icon style={{marginRight: '3%'}} type="entypo" color="#00838F" name="dots-three-horizontal" />
+    </TouchableOpacity>
     <Icon type="entypo" color="#00838F" name="share" />
+
+    <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+      <TouchableOpacity onPress={() => {deleteRadio(), toggleOverlay()}}>
+          <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%'), fontFamily: 'PermanentMarker'}}>Delete Radio</Text>
+      </TouchableOpacity>
+    </Overlay>
+
+
+
+
     </View>
       {/* badge en haut de l'ecran */}
           <ScrollView style={styles.scrollView} horizontal={true}>

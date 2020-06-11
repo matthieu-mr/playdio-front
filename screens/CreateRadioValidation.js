@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage, Share} from 'react-native';
 import { ListItem,Button, Header, Avatar,Icon} from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
+import Profile from './components/Profile';
 import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -49,18 +50,8 @@ let CreationLien=()=>{
 
   return (
 <View style={styles.container}>
-      <Header
-        leftComponent={{ icon: 'menu', color: '#fff' }}
-        rightComponent={<Avatar
-              rounded 
-              source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-              size="small"
-            />}
-        containerStyle={{
-          backgroundColor: 'white', 
-          height:hp('10%')
-        }}
-      />
+
+  <Profile navigation={props.navigation}/>  
 
 
     <View style={styles.form}>

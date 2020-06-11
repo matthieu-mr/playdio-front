@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,FlatList} from 
 import { ListItem,Button,ButtonGroup,Avatar } from 'react-native-elements'
 import {connect} from 'react-redux';
 import SearchComponent, { Separator } from './components/SearchResult';
+import Profile from './components/Profile';
 import ip from '../variables';
 
 import police from '../screens/components/font';
@@ -224,6 +225,8 @@ props.navigation.navigate('CreateRadioValidation')
   return (
 
 <View style={styles.container}>
+  
+  <Profile navigation={props.navigation}/>
 
     <View style={styles.form}>
                 {/*  "#c2185b" */}

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpac
 
 import { ListItem,Button,ButtonGroup, Avatar } from 'react-native-elements'
 import SearchComponent, { Separator } from './components/SearchResult';
+import Profile from './components/Profile';
 import ip from '../variables';
 
 import police from './components/font';
@@ -110,7 +111,8 @@ let filteredPlaylist=[] ;
     
 <View style={styles.container}>
 
-  
+  <Profile navigation={props.navigation}/>
+
   <View style={styles.form}>
                 {/*  "#c2185b" */}
         
