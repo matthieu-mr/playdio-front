@@ -1,11 +1,13 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage} from 'react-native';
-import { ListItem,Button, Avatar} from 'react-native-elements'
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage, Share} from 'react-native';
+import { ListItem,Button, Header, Avatar} from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font'
+import * as Linking from 'expo-linking';
+
 
 import police from '../screens/components/font';
 
@@ -13,34 +15,40 @@ import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-ma
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-function AddRadioGetSpotify(props) {
-
-const [radioName, setRadioName] = useState()
-const [isPrivate, setIsPrivate] = useState(false) ; 
-const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
-const [send, setSender] = useState(false);
-
-let listMusic =[]
-
-let [infoUserStorage,setInfoUserStorage]=useState([]);
+function CreateRadioValidation(props) {
+let testLink = Linking.openURL('exp://w7-6rn.matthieumr.playdio-frontend.exp.direct:80');
 
 
 
+CreationLien=()=>{
 
-useEffect( () =>{
-let  fetchSpotifyPlaylist = async () => {
-
-    var infoUser = await AsyncStorage.getItem("user");
-    var infoRecup = JSON.parse(infoUser)
-    
-    setInfoUserStorage(infoRecup)
-    console.log("affichage storage local",infoUser)
+let monlien = Linking.makeUrl("AddRadioGetSpotify")
+    console.log(monlien)
 }
 
-fetchSpotifyPlaylist() ;
-},[])
 
 
+
+let share=async ()=>{
+        try {
+            const result = await Share.share({
+              message: `J utilise playdio, test du share ^^  ${testLink}` 
+            });
+      
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+          } catch (error) {
+            alert(error.message);
+          }
+    }
+    
 
 // redirection en fonction du choix user
 let validPlaylist = (target)=>{  
@@ -62,6 +70,19 @@ let validPlaylist = (target)=>{
  
   return (
 <View style={styles.container}>
+      <Header
+        leftComponent={{ icon: 'menu', color: '#fff' }}
+        rightComponent={<Avatar
+              rounded 
+              source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+              size="small"
+            />}
+        containerStyle={{
+          backgroundColor: 'white', 
+          height:hp('10%')
+        }}
+      />
+
 
     <View style={styles.form}>
 
@@ -72,53 +93,26 @@ let validPlaylist = (target)=>{
         
                   
                     <View style={styles.input}> 
-                    <Text style={styles.categoryTitle}> Create Your New Radio</Text>
+                    <Text style={styles.categoryTitle}> Your Radio is on Air</Text>
                     
-                    <TextField 
-                        label={'Playlist Name'}
-                        tintColor="#26a69a"
-                        onChangeText={ (value) => setRadioName(value) }
-                       
-                        />
-               
                     </View>
                
             
 
                     <View style={styles.paramPlaylist}> 
-                    <ListItem
-                        title="Private Radio"
-                        titleStyle={
+
+                    <Text> Congrats  ! Your radio is on air</Text>
+                    <Text> You can share it using the following links </Text>
+                    <Button 
+                            title="Share your playlist"
+                            titleStyle={
                             {
                             fontFamily:'Roboto'}
                                }
-                        subtitle="The others users won't be able to find your playlist"
-                        //leftAvatar={{ source: { uri: item.avatar_url } }}
-                        rightIcon={
-                            <Switch
-                            value={isPrivate}
-                            onValueChange={() => {
-                                setIsPrivate(!isPrivate);
+                            onPress={()=>share("empty")}
+                            buttonStyle={{
+                                backgroundColor:"#00838F",
                             }}
-                        />
-                        }
-                        />
-                        
-                        <ListItem 
-                        title="Only Live"
-                        titleStyle={
-                            {
-                            fontFamily:'Roboto'}
-                               }
-                        subtitle="The others users won't be able to launch the playlist by themself "
-                        //leftAvatar={{ source: { uri: item.avatar_url } }}
-                        rightIcon={
-                            <Switch
-                                value={isPlayingOnly}
-                                onValueChange={() => {
-                                    setIsPlayingOnly(!isPlayingOnly);
-                                }}
-                            />}
                         />
 
                     </View>
@@ -129,20 +123,6 @@ let validPlaylist = (target)=>{
   
                         </ScrollView>
                         <View style={styles.button}>
-                        <Button 
-                            title="Add From Spotify Playlist"
-                            titleStyle={
-                            {
-                            fontFamily:'Roboto'}
-                               }
-                            onPress={()=>validPlaylist("spotify")}
-                            buttonStyle={{
-                                backgroundColor:"#00838F",
-                                marginBottom: wp ('5%')
-                            }}
-                        />
-                                
-             
         
         
                         <Button 
@@ -151,7 +131,7 @@ let validPlaylist = (target)=>{
                             {
                             fontFamily:'Roboto'}
                                }
-                            onPress={()=>validPlaylist("empty")}
+                            onPress={()=>CreationLien("empty")}
                             buttonStyle={{
                                 backgroundColor:"#00838F",
                             }}
@@ -223,7 +203,7 @@ function mapDispatchToProps(dispatch) {
   export default connect(
       null, 
       mapDispatchToProps
-  )(AddRadioGetSpotify);
+  )(CreateRadioValidation);
 
 
 // export default CreateRadio1

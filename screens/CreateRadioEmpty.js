@@ -224,8 +224,6 @@ let validPlaylist =async ()=>{
     <View style={styles.form}>
                 {/*  "#c2185b" */}
                     <View style={styles.input}> 
-                    <Text> Create Your New Radio</Text>
-                    
                        <Text style={styles.categoryTitle}> Add your favorite song</Text>
                     
                     <TextField
