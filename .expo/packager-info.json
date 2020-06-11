@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 43814,
-  "expoServerNgrokUrl": "https://w7-6rn.matthieumr.playdio-frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.w7-6rn.matthieumr.playdio-frontend.exp.direct",
-  "ngrokPid": 43864,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
