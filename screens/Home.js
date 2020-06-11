@@ -98,7 +98,7 @@ export default function Home(props) {
   return (
     <View>
 
-      <Profile navigation={props.navigation} url="Connect"/>
+      {/* <Profile navigation={props.navigation} url="Connect"/> */}
 
       <ScrollView style={styles.scrollView}>
 
