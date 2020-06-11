@@ -31,8 +31,8 @@ async function signIn(email,password){
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `emailFromFront=${email}&passwordFromFront=${password}`
     })
-
-var userExists = false
+    
+    var userExists = false
     var resultServer = await data.json()
     if(resultServer.result == true){
       userExists = true
