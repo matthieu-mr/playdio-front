@@ -25,7 +25,6 @@ function connectAPP({navigation,saveEmailUser}) {
                   var userData = JSON.parse(data)
                   if (userData !== null) {
       // We have data!!
-      console.log("ok", userData);
      navigation.navigate("Home")
     }
 
