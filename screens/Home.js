@@ -8,6 +8,7 @@ import { AppLoading } from 'expo';
 import { useFonts} from '@use-expo/font'
 import ip from '../variables';
 
+
 export default function Home(props) {
 
   const [discoverRadio, setDiscoverRadio] = useState([]);
@@ -90,22 +91,40 @@ export default function Home(props) {
   var communityRadioList = communityRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} radioId={radio.id} url={radio.url}/>;
   })
-  
+
+  const [visible, setVisible] = useState(false);
+  var popup = () => {
+    setVisible(!visible);
+  }
+
+  let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
+  });
+   if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
   return (
     <View>
+
       <Header
-        leftComponent={{ icon: 'menu', color: '#fff' }}
         rightComponent={<Avatar
               rounded 
               source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
               size="small"
+              onPress={() => {console.log("Works!"), {popup}}}
             />}
         containerStyle={{
           backgroundColor: 'white', 
           height:hp('10%')
         }}
+        
       />
       <ScrollView style={styles.scrollView}>
+      <Overlay isVisible={visible} onBackdropPress={popup}>
+        <Text>Hello from Overlay!</Text>
+      </Overlay>
         <View style={styles.header}></View>
         <View style={styles.categories}>
           <Text style={styles.categoryTitle}>Discover</Text>
@@ -134,7 +153,7 @@ export default function Home(props) {
       </ScrollView>
     </View>
   );
-}
+}}
 
 // STYLES
 const styles = StyleSheet.create({

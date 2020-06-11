@@ -20,6 +20,7 @@ import * as AuthSession from 'expo-auth-session';
 
 import ConnectAPP from './screens/connect'
 import SignUp from './screens/signUp'
+import SignIn from './screens/signIn'
 import getTokens from './screens/components/getTokens'
 import Home from './screens/Home';
 import Playlist from './screens/Playlist';
@@ -95,6 +96,7 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
 StackNavigator = createStackNavigator({
   Connect:ConnectAPP,
   SignUp:SignUp,
+  SignIn:SignIn,
   getTokens:getTokens,
   Playlist: Playlist,
   Play:Play,
