@@ -1,19 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function App() {
   return (
     <View>
-    <Header
-  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
-  rightComponent={<Avatar
-        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-      />}
-      containerStyle={{
-    backgroundColor: 'white',
-  }}
-/>
+       <Header
+            leftComponent={{ icon: 'menu', color: '#fff' }}
+            rightComponent={<Avatar
+                rounded 
+                source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+                size="small"
+                />}
+            containerStyle={{
+            backgroundColor: 'white', 
+            height:hp('10%')
+            }}
+        />
       <Text>welcome search</Text>
     </View>
   );

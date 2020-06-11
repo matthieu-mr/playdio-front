@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { Avatar, Badge, Icon, withBadge,Card, ListItem } from 'react-native-elements'
 import {
   View,
@@ -14,6 +15,73 @@ import {
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+
+
+
+export const Separator = () => <View style={styles.separator} />;
+
+const LeftActions = (progress, dragX, onPress) => {
+
+  const scale = dragX.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, 1],
+    extrapolate: 'clamp',
+  });
+  return (
+    <View style={styles.leftAction}>
+      <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
+      Add
+      </Animated.Text>
+    </View>
+  );
+};
+
+const RightActions = (progress, dragX, onPress) => {
+
+  const scale = dragX.interpolate({
+    inputRange: [-100,0],
+    outputRange: [1,0],
+    extrapolate: 'clamp',
+  });
+
+  return (
+    <View style={styles.rightAction}>
+      <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
+      Delete
+      </Animated.Text>
+    </View>
+  );
+};
+
+// Information:    
+// props = {id, text,name, url, onSwipeFromLeft, onSwipeFromRight, radioId, navigation, url}
+const ListItemSwap = (props) => (
+  <Swipeable
+    renderLeftActions={LeftActions}
+    onSwipeableLeftOpen={props.onSwipeFromLeft,props.id}
+  
+     renderRightActions={RightActions}
+    onSwipeableRightOpen={props.onSwipeFromRight} 
+  >
+
+    <View style={styles.container}>
+
+      <ListItem
+      containerStyle={styles.listItem}
+      titleStyle={styles.title}
+      subtitleStyle={styles.subtitle}
+      leftAvatar={{ source: { uri:props.url } }}
+      title={props.name}
+      subtitle={props.text}
+      rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" /> }
+      rightIcon={<Icon type='font-awesome' name='heart' color= 'red'/> }
+      onPress={ ()=> {props.playSong(props.id, props.radioId); props.navigation.navigate(props.url) }}
+      />
+
+    </View>
+  </Swipeable>
+  
+);
 
 
 const styles = StyleSheet.create({
@@ -64,70 +132,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export const Separator = () => <View style={styles.separator} />;
 
-const LeftActions = (progress, dragX, onPress) => {
+function mapDispatchToProps(dispatch) {
+  return {
+    playSong: function(id, radioId) {
+        dispatch( {type: 'play', songId: id, radioId: radioId} )
+    }
+  }
+}
 
-  const scale = dragX.interpolate({
-    inputRange: [0, 100],
-    outputRange: [0, 1],
-    extrapolate: 'clamp',
-  });
-  return (
-    <View style={styles.leftAction}>
-      <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
-      Add
-      </Animated.Text>
-    </View>
-  );
-};
-
-const RightActions = (progress, dragX, onPress) => {
-
-  const scale = dragX.interpolate({
-    inputRange: [-100,0],
-    outputRange: [1,0],
-    extrapolate: 'clamp',
-  });
-
-  return (
-    <View style={styles.rightAction}>
-      <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
-      Delete
-      </Animated.Text>
-    </View>
-  );
-};
-
-const ListItemSwap = ({id, text,name, url, onSwipeFromLeft, onSwipeFromRight}) => (
-  <Swipeable
-    renderLeftActions={LeftActions}
-    onSwipeableLeftOpen={onSwipeFromLeft,id}
-  
-     renderRightActions={RightActions}
-    onSwipeableRightOpen={onSwipeFromRight} 
-
-  >
-
-
-    <View style={styles.container}>
-
-      <ListItem
-      containerStyle={styles.listItem}
-      titleStyle={styles.title}
-      subtitleStyle={styles.subtitle}
-      leftAvatar={{ source: { uri:url } }}
-      title={name}
-      subtitle={text}
-      rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" /> }
-      rightIcon={<Icon type='font-awesome' name='heart' color= 'red'/> }
-      
-     
-      />
-
-    </View>
-  </Swipeable>
-  
-);
-
-export default ListItemSwap;
+export default connect(
+    null,
+    mapDispatchToProps
+)(ListItemSwap);

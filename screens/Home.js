@@ -16,7 +16,7 @@ export default function Home(props) {
   })
 
   // MY RADIOS
-  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:["addRadio"], url:'AddRadio'}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"], url:'Playlist'}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"], url:"Playlist"}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
+  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:[], url:'AddRadio'}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"], url:'Playlist'}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"], url:"Playlist"}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
   var myRadioList = myRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
@@ -29,16 +29,18 @@ export default function Home(props) {
   
   return (
     <View>
-<Header
-  leftComponent={{ icon: 'menu', color: '#fff' }}
-  centerComponent={{ text: 'Playdio', style: { color: '#00838F' } }}
-  rightComponent={<Avatar
-        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-      />}
-      containerStyle={{
-    backgroundColor: 'white',
-  }}
-/>
+      <Header
+        leftComponent={{ icon: 'menu', color: '#fff' }}
+        rightComponent={<Avatar
+              rounded 
+              source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+              size="small"
+            />}
+        containerStyle={{
+          backgroundColor: 'white', 
+          height:hp('10%')
+        }}
+      />
       <ScrollView style={styles.scrollView}>
         <View style={styles.header}></View>
         <View style={styles.categories}>
