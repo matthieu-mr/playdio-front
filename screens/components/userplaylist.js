@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react';
+import React,{useState,useRef, useEffect} from 'react';
 import { Avatar, Badge, Icon, withBadge, Card, ListItem } from 'react-native-elements'
 import {
     View,
@@ -15,6 +15,7 @@ import ip from '../../variables';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {connect} from 'react-redux'
 
 export const Separator = () => <View style={styles.separator} />;
 
@@ -80,17 +81,27 @@ const RightActions = (progress, dragX, onPress) => {
 
 
 
-const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlaylist,idUser,idDelete },props) =>{
-    
-    const [colorIcon,setColorIcon]=useState('#C0C0C0')
+const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlaylist,idUser,idDelete,playlistId,button,delUser},props) =>{
+console.log(delUser)
+    const[selected, setSelected]=useState(false);
+    const [colorIcon,setColorIcon]=useState()
     const [idDel, setIdDel] = useState();
+    const [indice,setIndice] = useState()
+    
+useEffect(()=>{
+    if(gradeType==='composer'){
+        setColorIcon('#C0C0C0')
+    }else{
+        setColorIcon('#796221')
+    }
+},[id])
     async function changeGrade(idUser,namePlaylist){
-
+        console.log(namePlaylist)
         if(colorIcon==='#796221'){
             var requestBDD = await fetch(`${ip}/userAdmin`,{
             method:"POST",
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=admin`
+            body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=composer`
         })
         setColorIcon('#C0C0C0')
         }else if(colorIcon==='#C0C0C0'){
@@ -102,54 +113,118 @@ const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlayl
             setColorIcon('#796221')
         }
     }
-    const swipeableRef = useRef(null);
 
+    const swipeableRef = useRef(null);
     const deleteUser =async (item,idDelete,namePlaylist) => {
-        console.log(idDelete,namePlaylist)
+        if(gradeType){
         var requestBDD = await fetch(`${ip}/deleteUser`,{
                 method:"POST",
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body:`idDelete=${idDelete}&namePlaylist=${namePlaylist}`
             })
-        console.log("evenement", item)
-        props.deleteSong(item)
+            /* swipeableRef.current.close(); */
+            delUser(idDelete)
+        }
 
-    swipeableRef.current.close();
 }
-        
+
+
+
+
+const addUser = async function (idUser,playlistId){
+    if(!gradeType){
+        var requestBDD = await fetch(`${ip}/addUser`,{
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        method:"POST",
+        body:`idUser=${idUser}&playlistId=${playlistId}`
+    })
+    }
     
+}
+
+
+/* const closeSwipeable = (item) => {
+   console.log("evenement", item)
+props.deleteSong(item)
+
+  
+} */
+if(button==='search'&& selected){
     return(
-        <Swipeable     
-            ref={swipeableRef}
-            renderRightActions={RightActions}
-         // onSwipeableRightOpen={props.onSwipeFromRight} 
-            onSwipeableRightOpen={() => {deleteUser(id,idDelete,namePlaylist),setIdDel(id)}} 
-            >
-
-
         <View style={styles.container}>
-
             <ListItem
+            linearGradientProps={{
+                colors: ['#FFF', '#43a047'],
+                start: { x: 1, y: 0.1 },
+                end: { x: -2, y: 0.1 },
+              }}
+                onPress={()=>addUser(idUser,playlistId)}
                 containerStyle={styles.listItem}
                 titleStyle={styles.title}
                 subtitleStyle={styles.subtitle}
                 leftAvatar={{ source: { uri: avatar } }}
                 title={firstName+' '+lastName}
                 subtitle={text}
-                rightIcon={
-                <Icon
-                    name="ios-disc"
-                    size={40}
-                    color={colorIcon}
-                    type='ionicon'
-                    onPress={()=>{changeGrade(idUser,namePlaylist)}}
-                    />
-                    }
             />
         </View>
-    </Swipeable>
+)
+}else if(button==='search'){
+    return(
+        <View style={styles.container}>
+            <ListItem
+                onPress={()=>{addUser(idUser,playlistId),setSelected(!selected)}}
+                containerStyle={styles.listItem}
+                titleStyle={styles.title}
+                subtitleStyle={styles.subtitle}
+                leftAvatar={{ source: { uri: avatar } }}
+                title={firstName+' '+lastName}
+                subtitle={text}
+            />
+        </View>
+)
+}else{
+    
+        return(
+            <Swipeable     
+                ref={swipeableRef}
+                renderRightActions={RightActions}
+                onSwipeableRightOpen={() => {deleteUser(id,idDelete,namePlaylist),setIdDel(id)}} 
+                >
+            <View style={styles.container}>
+                <ListItem
+                    containerStyle={styles.listItem}
+                    titleStyle={styles.title}
+                    subtitleStyle={styles.subtitle}
+                    leftAvatar={{ source: { uri: avatar } }}
+                    title={firstName+' '+lastName}
+                    subtitle={text}
+                    rightIcon={
+                    <Icon
+                        name="ios-disc"
+                        size={40}
+                        color={colorIcon}
+                        type='ionicon'
+                        onPress={()=>{changeGrade(idUser,namePlaylist)}}
+                        />
+                        }
+                />
+            </View>
+        </Swipeable>
+    )
+}
+    ;} 
 
-);} 
-
-
-export default ListItemSwap;
+    function mapDispatchToProps(dispatch) {
+        return {
+            delUser: function(user) { 
+            dispatch( {type: 'delete', delUser: user }) 
+          }
+        }
+      }
+      
+      
+      export default connect(
+        null,
+        mapDispatchToProps
+      )(ListItemSwap)
+      

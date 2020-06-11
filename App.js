@@ -30,13 +30,14 @@ import AddRadioGetSpotify from './screens/CreateRadioFromSpotify'
 import AddRadioEmpty from './screens/CreateRadioEmpty'
 import SearchResult from './screens/components/SearchResult'
 import SelectUser from './screens/selectUser'
-import SearchtUser from './screens/searchUser'
+
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import play from './reducers/play'
 import email from './reducers/email'
 import PlaylistAdd from './reducers/playlist'
+import DeleteUser from './reducers/deleteUser'
 
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
@@ -46,7 +47,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
 
-const store = createStore(combineReducers({email,PlaylistAdd,play}))
+const store = createStore(combineReducers({email,PlaylistAdd,play,DeleteUser}))
 
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
@@ -100,7 +101,6 @@ StackNavigator = createStackNavigator({
   AddRadioEmpty:AddRadioEmpty,
   SearchResult:SearchResult,
   SelectUser:SelectUser,
-  SearchtUser:SearchtUser,
   BottomNavigator:BottomNavigator
 }, 
 { 
