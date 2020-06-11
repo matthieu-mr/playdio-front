@@ -35,7 +35,7 @@ export default function Profile(props) {
                 }}
             >
                 <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-                    <TouchableOpacity onPress={props.navigation.navigate(props.url)}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate("Connect")}>
                         <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%'), fontFamily: 'PermanentMarker'}}>Deconnexion</Text>
                     </TouchableOpacity>
                 </Overlay>
