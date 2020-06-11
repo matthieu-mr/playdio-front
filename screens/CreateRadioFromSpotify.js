@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity} from 'react-native';
 
-import { ListItem,Button,ButtonGroup, Avatar, Header } from 'react-native-elements'
+import { ListItem,Button,ButtonGroup, Avatar } from 'react-native-elements'
 import SearchComponent, { Separator } from './components/SearchResult';
 import ip from '../variables';
 
@@ -16,7 +16,6 @@ import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font'
-
 
 
 
@@ -111,19 +110,8 @@ let filteredPlaylist=[] ;
     
 <View style={styles.container}>
 
-    <Header
-      leftComponent={{ icon: 'menu', color: '#fff' }}
-      rightComponent={<Avatar
-            rounded 
-            source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-            size="small"
-          />}
-      containerStyle={{
-        backgroundColor: 'white', 
-        height:hp('10%')
-      }}
-    />
-
+  
+  <View style={styles.form}>
                 {/*  "#c2185b" */}
         
                             <View style={styles.input}> 
@@ -154,56 +142,58 @@ let filteredPlaylist=[] ;
                
               />
 
-
+  </View>
   
  </View>
   );
 
 }
 
+
 const styles = StyleSheet.create({
-    container: {
-    display:"flex",
-    flex:1,
-    backgroundColor: '#fff',   
-      },
-
-    form:{
-     display:"flex",
-     flex:1,
-
-      marginBottom:wp("15%"),
+  container: {
+  display:"flex",
+  flex:1,
+  backgroundColor: '#fff',   
     },
 
-  input:{
-    marginRight:wp('10%'),
-    marginLeft:wp('10%'),
-    marginBottom:wp('10%'),
-    },  
-
-
-  paramPlaylist:{  
-    backgroundColor: "#26a69a",
-    marginRight:wp('7%'),
-    marginLeft:wp('7%'),
-    marginBottom:wp('70%'),
+  form:{
+   display:"flex",
+   flex:1,
+ 
+   justifyContent:'flex-end',
+    marginBottom:wp("15%"),
   },
 
+input:{
+  marginRight:wp('10%'),
+  marginLeft:wp('10%'),
+  marginBottom:wp('10%'),
+  },  
 
-  button:{
-   marginRight:wp('10%'),
-   marginLeft:wp('10%'),
-   marginBottom:wp('10%'),
+
+paramPlaylist:{  
+  backgroundColor: "#26a69a",
+  marginRight:wp('7%'),
+  marginLeft:wp('7%'),
+  marginBottom:wp('70%'),
+},
+
+
+button:{
+ marginRight:wp('10%'),
+ marginLeft:wp('10%'),
+ marginBottom: wp('10%')
 },
 
 categoryTitle: {
-    color:"#383838", 
-    fontSize:hp('3%'), 
-    width:wp('75%'), 
-    marginLeft:wp('7%'),
-    fontFamily: 'PermanentMarker',
-    marginTop: wp ('20%')
-  },
+  color:"#383838", 
+  fontSize:hp('3%'), 
+  width:wp('75%'), 
+  marginLeft:wp('7%'),
+  fontFamily: 'PermanentMarker'
+},
+
   
 });
 function mapStateToProps(state){

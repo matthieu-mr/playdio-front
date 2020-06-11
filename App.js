@@ -31,6 +31,7 @@ import AddRadioGetSpotify from './screens/CreateRadioFromSpotify'
 import AddRadioEmpty from './screens/CreateRadioEmpty'
 import SearchResult from './screens/components/SearchResult'
 import SelectUser from './screens/selectUser'
+import CreateRadioValidation from './screens/CreateRadioValidation'
 
 
 import {createStore, combineReducers} from 'redux';
@@ -41,7 +42,6 @@ import PlaylistAdd from './reducers/playlist'
 import DeleteUser from './reducers/deleteUser'
 import songId from './reducers/play';
 import radioId from './reducers/radio';
-
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -57,7 +57,7 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
   Home: Home,
   Playlist: Playlist,
   Search: Search,
-  'Play (Test)': Play
+  'Play (Test)': AddRadio1
   },
   {
   defaultNavigationOptions: ({ navigation }) => ({ // creation des icônes
@@ -100,7 +100,7 @@ StackNavigator = createStackNavigator({
   getTokens:getTokens,
   Playlist: Playlist,
   Play:Play,
-  AddRadio : AddRadio1,
+  AddRadio : CreateRadioValidation,
   AddRadioGetSpotify : AddRadioGetSpotify,
   AddRadioEmpty:AddRadioEmpty,
   SearchResult:SearchResult,

@@ -47,15 +47,17 @@ const styles = StyleSheet.create({
 function SearchResultComponent(props) {
 
 
-  let validPlaylist = (idPlaylistItem,type)=>{ 
+  let validPlaylist = (idPlaylistItem,type)=>{
+    console.log("component info    ---------- ", props.type) 
+
     if (type=="playlist"){
-      console.log("component info", props.spotifyId)
+      
       props.addplaylist(props.spotifyId)
     
       props.navigation.navigate('AddRadioEmpty')
 
-    }else if(type=="track"){
-/*       let id=props.position
+    }else if(props.form=="search"){
+/*     let id=props.position
       let name =props.name
       let text =props.text
       let url= props.url
@@ -69,10 +71,10 @@ function SearchResultComponent(props) {
       props.addSong(ajoutObjet)
 
  */
-
+let id=props.position
       let nameTitle = props.name
       let artist = props.artist
-      let idSpotify =props.idSpotify
+      let idSpotify =props.spotifyId
       let type = 'track'
       let image =props.image
       let isrc = props.isrcID
@@ -81,8 +83,10 @@ function SearchResultComponent(props) {
       let externalUrl= props.externalUrl
       let previewUrl= props.previewUrl
       let uri= props.uri
+      let from=props.from
 
-      let ajoutObjet={position:id,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
+      let ajoutObjet={from:from,position:id,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
+    console.log(ajoutObjet)
       props.addSong(ajoutObjet)
 
 
@@ -186,9 +190,6 @@ const swipeableRef = useRef(null);
       }
       
       
-      
-      
-      
       else{
         return (
           <Swipeable     
@@ -202,7 +203,7 @@ const swipeableRef = useRef(null);
                 leftAvatar={{ source: { uri:props.image } }}
                 title={props.name}
                 subtitle={`${props.artist} -- ${props.album}`} 
-                onPress={()=>{setSelected(!selected)}} 
+                onPress={()=>{validPlaylist(props.spotifyId,props.type,props.index), setSelected(!selected)}} 
               />
             </View>
             </Swipeable>

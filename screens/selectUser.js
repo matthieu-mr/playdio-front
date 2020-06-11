@@ -29,7 +29,7 @@ useEffect(()=>{
         body:`playlistID=${props.radioId}`
     })
     var reponse = await requestBDD.json()
-    console.log(reponse)
+
 
         for(var i= 0 ; i<reponse.userList.userInfo.length;i++){
         tableau.push({id:i,firstName:reponse.userList.userInfo[i].userID.firstName,lastName:reponse.userList.userInfo[i].userID.lastName,avatar:'https://randomuser.me/api/portraits/men/41.jpg',gradeType:reponse.userList.userInfo[i].gradeType,namePlaylist:reponse.userList.name,idUser:reponse.userList.userInfo[i].userID._id,idDelete:reponse.userList.userInfo[i]._id,playlistId:reponse.userList._id,button:button})
@@ -40,7 +40,7 @@ useEffect(()=>{
     }
     checkUserPlaylist()
 },[indexButton])
-console.log(userPlaylist)
+
 useEffect(()=>{
     var tableau = []
     let searchText = search
@@ -72,6 +72,7 @@ useEffect(()=>{
     else{
         SetListToSearch(resultUser)
         setIndex(1)
+        setSearch()
 
     }
     });
@@ -92,15 +93,16 @@ return (
 
             }}
         />
-        <Text> Radio ? users</Text>
 
+            <View style={styles.input}> 
+            <Text style={styles.categoryTitle}> Radio orchestra</Text>
                     <TextField
                         label={'Search a song'}
                         tintColor="#26a69a"
                         onChangeText={ (value) => setSearch(value) }
-                       
-                        />
                         
+                        />
+            </View>            
                     <View>
                           <ButtonGroup
                             onPress={(e) => {setIndex(e) }}
@@ -130,50 +132,47 @@ return (
 }
 
 const styles = StyleSheet.create({
-container: {
-    flex: hp('0.5%'),
-    backgroundColor: '#fff',
-    marginVertical: 0,
-    marginBottom: 0,
-    marginHorizontal: 0,
-    paddingVertical: 0,
-},
-scrollView: {
-    marginBottom: hp('1%'),
-    marginHorizontal: hp('2%'),
-    paddingVertical: 0,
-    marginVertical: hp('6%'),
-},
-
-flatList: {
-    marginHorizontal: 0,
-    marginVertical: 0,
-    paddingVertical: 0
-},
-scrollViewscrollViewMusic: {
-    marginHorizontal: 0,
-    width: hp('33%'),
-    flex: hp('0,33%'), marginLeft: 0, marginRight: 0
-},
-avatar: {
-    flex: hp('0,33%'),
-    flexDirection: "row",
-    padding: hp('3%'),
-    marginRight: hp('3%'),
-    marginVertical: 0,
-    paddingVertical: 0,
-    marginBottom: hp('6%'),
-},
-
-card: {
-    flex: hp('0,33%'),
-    flexDirection: "row",
-    padding: hp('3%'),
-    marginLeft: hp('3%'),
-    marginRight: hp('3%'),
-
-},
-
+    container: {
+        display:"flex",
+        flex:1,
+        backgroundColor: '#fff',   
+          },
+    
+        form:{
+         display:"flex",
+         flex:1,
+       
+         justifyContent:'flex-end',
+          marginBottom:wp("5%"),
+        },
+    
+      input:{
+        marginRight:wp('10%'),
+        marginLeft:wp('10%'),
+        marginBottom:wp('10%'),
+        },  
+    
+    
+      paramPlaylist:{  
+        backgroundColor: "#26a69a",
+        marginRight:wp('7%'),
+        marginLeft:wp('7%'),
+        marginBottom:wp('70%'),
+      },
+    
+    
+      button:{
+       marginRight:wp('10%'),
+       marginLeft:wp('10%'),
+    },
+    categoryTitle: {
+      color:"#383838", 
+      fontSize:hp('3%'), 
+      width:wp('75%'), 
+      marginLeft:wp('7%'),
+      fontFamily: 'PermanentMarker'
+    },
+  
 });
 
 function mapStateToProps(state) {

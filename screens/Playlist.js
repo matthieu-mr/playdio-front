@@ -3,7 +3,6 @@ import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import Track from './components/Track';
-import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo-font';
@@ -44,22 +43,19 @@ const [radioId, setRadioId] = useState('');
 // Cela permettra d'ajouter l'ID utilisateur dans le local Storage
 // **************************************************************************************
 
-var personalData = {"email":"dimitri.brahim@gmail.com","idSpotify":"dimdimou","namePlatform":"spotify","id":"5ee09f829aba3efe4b68eba4"}
-AsyncStorage.setItem("user", JSON.stringify(personalData))
+ var personalData = {"email":"m.michon@yahoo.fr","idSpotify":"1127664154","namePlatform":"spotify","id":"5ee00cc69f32fc0ae27decac"}
+ AsyncStorage.setItem("user", JSON.stringify(personalData))
 
 // **************************************************************************************
 
 
 useEffect( () =>{
     fetchPlaylist = async () => {
-
-      var infoUser = await AsyncStorage.getItem('user');
-      var userData = JSON.parse(infoUser);
       
       var request = await fetch(`${ip}/radio-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body:`userId=${userData.id}&radioId=${props.radioId}`
+        body:`radioId=${props.radioId}`
       })
       var response = await request.json();
       
@@ -180,8 +176,7 @@ playlistRadio.map((track,i)=>{
               />
 
     {/*{musicList} */}
-    <Track
- />
+    {/*<Track/>*/}
     </View>
 
   );

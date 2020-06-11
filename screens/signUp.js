@@ -58,6 +58,8 @@ if(resultServer.result[0].musicAccounts.lenght<0){
 AsyncStorage.setItem("user",JSON.stringify(storageUser))
 }
 
+
+
 props.navigation.navigate("Home")
 }
 
