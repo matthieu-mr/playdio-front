@@ -28,9 +28,6 @@ function Play(props) {
   const [shouldPlayAtEndOfSeek, setShouldPlayAtEndOfSeek] = useState(false);
   const [playbackInstancePosition, setPlaybackInstancePosition] = useState(null);
   const [playbackInstanceDuration, setPlaybackInstanceDuration] = useState(null);
-
-  // console.log(props.idPlay.radioId)
-  // console.log(props.idPlay.songId)
   
   // FETCH PLAYLIST FROM DB
 
@@ -43,7 +40,7 @@ function Play(props) {
         var request = await fetch(`${ip}/radio-playlist`,{
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
-          body:`userId=${userData.id}&radioId=${props.idPlay.radioId}`
+          body:`userId=${userData.id}&radioId=${props.radioId}`
         })
         var response = await request.json();
         
@@ -67,7 +64,7 @@ function Play(props) {
           });
         }
         setPlaylist(rawPlaylist);
-        setCurrentIndex(props.idPlay.songId);
+        setCurrentIndex(props.songId);
       }
       fetchPlaylist()  
   },[])
@@ -460,7 +457,7 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-  return { idPlay: state.play }
+  return { songId: state.songId, radioId: state.radioId }
 }
   
 export default connect(

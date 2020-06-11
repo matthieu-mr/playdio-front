@@ -35,9 +35,10 @@ import CreateRadioValidation from './screens/CreateRadioValidation'
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import play from './reducers/play'
-import email from './reducers/email'
-import PlaylistAdd from './reducers/playlist'
+import songId from './reducers/play';
+import email from './reducers/email';
+import PlaylistAdd from './reducers/playlist';
+import radioId from './reducers/radio';
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -46,7 +47,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
 
-const store = createStore(combineReducers({email,PlaylistAdd,play}))
+const store = createStore(combineReducers({email,PlaylistAdd,songId, radioId}))
 
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens

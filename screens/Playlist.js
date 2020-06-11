@@ -10,9 +10,10 @@ import { AppLoading } from 'expo-font';
 import { useFonts} from '@use-expo/font'
 import ip from '../variables';
 import { ResponseError } from 'expo-auth-session/build/Errors';
+import {connect} from 'react-redux';
 
 
-export default function Playlist(props) {
+function Playlist(props) {
 /* const [listUser,setListUser]=useEffect() ;  */
 
   let listTest = [
@@ -35,7 +36,7 @@ export default function Playlist(props) {
 // Get a radio playlist from DB
 
 const [playlistRadio, setPlaylistRadio] = useState([]);
-
+const [radioId, setRadioId] = useState('');
 
 
 // Si vous voulez voir les playlists s'afficher, décommentez et customisez le code suivant avec vos infos 
@@ -49,9 +50,6 @@ const [playlistRadio, setPlaylistRadio] = useState([]);
 // **************************************************************************************
 
 
-// A modifier avec l'Id de la radio sur laquelle on clique en page Home
-var radioId = "5ee10a5ee1ff3642d8f36a63"
-
 useEffect( () =>{
     fetchPlaylist = async () => {
 
@@ -61,7 +59,7 @@ useEffect( () =>{
       var request = await fetch(`${ip}/radio-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body:`userId=${userData.id}&radioId=${radioId}`
+        body:`userId=${userData.id}&radioId=${props.radioId}`
       })
       var response = await request.json();
       
@@ -88,14 +86,14 @@ useEffect( () =>{
 
     }
     fetchPlaylist()  
-},[])
+},[props.radioId])
 
 
 // Display of the playlist flatlist
 
 let playlist = [];
 playlistRadio.map((track,i)=>{
-    playlist.push({id: i, name: track.name, text: track.artist, url: track.image, radioId: radioId});
+    playlist.push({songId: i, name: track.name, text: track.artist, url: track.image, radioId: props.radioId});
 })
 
 
@@ -235,3 +233,12 @@ const styles = StyleSheet.create({
   },
   
 });
+
+function mapStateToProps(state) {
+  return { radioId: state.radioId }
+}
+  
+export default connect(
+  mapStateToProps,
+  null
+)(Playlist);
