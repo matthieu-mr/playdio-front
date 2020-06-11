@@ -1,10 +1,7 @@
-export default function(play = {}, action) {
+export default function(songId = "", action) {
     if(action.type === 'play') {
-      var playCopy = {...play};
-      playCopy.songId = action.songId;
-      playCopy.radioId = action.radioId;
-      return playCopy;
+      return action.songId;
     } else {
-      return play;
+      return songId;
     }
   }
