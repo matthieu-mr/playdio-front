@@ -10,6 +10,7 @@ import { useFonts} from '@use-expo/font'
 import ip from '../variables';
 import { ResponseError } from 'expo-auth-session/build/Errors';
 import {connect} from 'react-redux';
+import Profile from './components/Profile';
 
 
 function Playlist(props) {
@@ -107,18 +108,7 @@ playlistRadio.map((track,i)=>{
   
   return (
       <View style={styles.container}>
-        <Header
-            leftComponent={{ icon: 'menu', color: '#fff' }}
-            rightComponent={<Avatar
-                rounded 
-                source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-                size="small"
-                />}
-            containerStyle={{
-            backgroundColor: 'white', 
-            height:hp('10%')
-            }}
-        />
+      <Profile navigation={props.navigation}/>
   
       <View
       style={{
