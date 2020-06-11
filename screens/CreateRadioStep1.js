@@ -24,6 +24,9 @@ let listMusic =[]
 
 let [infoUserStorage,setInfoUserStorage]=useState([]);
 
+
+
+
 useEffect( () =>{
 let  fetchSpotifyPlaylist = async () => {
 
@@ -31,7 +34,7 @@ let  fetchSpotifyPlaylist = async () => {
     var infoRecup = JSON.parse(infoUser)
     
     setInfoUserStorage(infoRecup)
-console.log("affichage storage local",infoUser)
+    console.log("affichage storage local",infoUser)
 }
 
 fetchSpotifyPlaylist() ;
