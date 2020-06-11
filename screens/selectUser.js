@@ -19,15 +19,17 @@ const [playlistId,setPlaylistId]=useState('')
 console.log(props)
 /* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
 useEffect(()=>{
+    console.log(props.radioId)
     var tableau = []
     async function checkUserPlaylist(){
         var button="orchestra"
     var requestBDD = await fetch(`${ip}/userListplaylist`,{
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         method:"POST",
-        body:`playlistID=${props.idPlay.radioId}`
+        body:`playlistID=${props.radioId}`
     })
     var reponse = await requestBDD.json()
+    console.log(reponse)
 
         for(var i= 0 ; i<reponse.userList.userInfo.length;i++){
         tableau.push({id:i,firstName:reponse.userList.userInfo[i].userID.firstName,lastName:reponse.userList.userInfo[i].userID.lastName,avatar:'https://randomuser.me/api/portraits/men/41.jpg',gradeType:reponse.userList.userInfo[i].gradeType,namePlaylist:reponse.userList.name,idUser:reponse.userList.userInfo[i].userID._id,idDelete:reponse.userList.userInfo[i]._id,playlistId:reponse.userList._id,button:button})
@@ -37,8 +39,8 @@ useEffect(()=>{
         
     }
     checkUserPlaylist()
-},[indexButton,props.deleteUser])
-
+},[indexButton])
+console.log(userPlaylist)
 useEffect(()=>{
     var tableau = []
     let searchText = search
@@ -75,7 +77,7 @@ useEffect(()=>{
     });
 
 
-console.log(indexButton)
+
 return (
     <View style={styles.container}>
         <Header
@@ -175,7 +177,7 @@ card: {
 });
 
 function mapStateToProps(state) {
-    return { idPlay: state.play,deleteUser:state.deleteUser }
+    return { radioId: state.radioId,deleteUser:state.deleteUser }
   }
     
   export default connect(

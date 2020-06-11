@@ -82,7 +82,7 @@ const RightActions = (progress, dragX, onPress) => {
 
 
 const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlaylist,idUser,idDelete,playlistId,button,delUser},props) =>{
-console.log(delUser)
+
     const[selected, setSelected]=useState(false);
     const [colorIcon,setColorIcon]=useState()
     const [idDel, setIdDel] = useState();
@@ -96,7 +96,7 @@ useEffect(()=>{
     }
 },[id])
     async function changeGrade(idUser,namePlaylist){
-        console.log(namePlaylist)
+
         if(colorIcon==='#796221'){
             var requestBDD = await fetch(`${ip}/userAdmin`,{
             method:"POST",

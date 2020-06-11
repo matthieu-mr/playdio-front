@@ -3,8 +3,9 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
 import { Badge } from 'native-base';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {connect} from 'react-redux';
 
-export default function Radio(props) {
+function Radio(props) {
 
   // BADGES
   var badgeList = props.musicType.map((type,i) => {
@@ -19,16 +20,17 @@ export default function Radio(props) {
   })
 
   // CALLBACK & CARDS & Playlist 
-  let urlLien = props.url[0]
+  /*let urlLien = props.url[0]
   let conv = urlLien.toString() 
+  urlLien était mis dans le () du onPress*/
 
 
   return (
-    <TouchableOpacity onPress={(urlLien) => props.navigation.navigate(props.url)}>
+    <TouchableOpacity onPress={() => {props.navigation.navigate(props.url), props.addRadioId(props.radioId)}}>
         <View style={styles.cardView}>
             <Card 
                 containerStyle={styles.cardContainer}
-                image={props.img}
+                image={{uri: props.img}}
                 imageProps={{style: styles.cardImage}}
                 >
                 <Text style={styles.cardText}>{props.radioName}</Text>
@@ -97,3 +99,16 @@ const styles = StyleSheet.create({
     marginBottom:hp('4%')
   }
 })
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addRadioId: function(radioId) {
+        dispatch( {type: 'sendRadioId', radioId: radioId} )
+    }
+  }
+}
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Radio);
