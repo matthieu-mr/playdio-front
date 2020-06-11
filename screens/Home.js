@@ -14,7 +14,6 @@ export default function Home(props) {
   const [discoverRadio, setDiscoverRadio] = useState([]);
   const [myRadio, setMyRadio] = useState([]);
   const [communityRadio, setCommunityRadio] = useState([]);
- 
 
   useEffect( () =>{
       fetchRadio = async () => {

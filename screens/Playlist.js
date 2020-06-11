@@ -52,14 +52,11 @@ const [radioId, setRadioId] = useState('');
 
 useEffect( () =>{
     fetchPlaylist = async () => {
-
-      var infoUser = await AsyncStorage.getItem('user');
-      var userData = JSON.parse(infoUser);
       
       var request = await fetch(`${ip}/radio-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body:`userId=${userData.id}&radioId=${props.radioId}`
+        body:`radioId=${props.radioId}`
       })
       var response = await request.json();
       
