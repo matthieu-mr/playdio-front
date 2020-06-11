@@ -34,9 +34,11 @@ import SelectUser from './screens/selectUser'
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
+import play from './reducers/play'
+import email from './reducers/email'
+import PlaylistAdd from './reducers/playlist'
+import DeleteUser from './reducers/deleteUser'
 import songId from './reducers/play';
-import email from './reducers/email';
-import PlaylistAdd from './reducers/playlist';
 import radioId from './reducers/radio';
 
 
@@ -47,7 +49,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
 
-const store = createStore(combineReducers({email,PlaylistAdd,songId, radioId}))
+const store = createStore(combineReducers({email,PlaylistAdd,songId, radioId,DeleteUser,play}))
 
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens

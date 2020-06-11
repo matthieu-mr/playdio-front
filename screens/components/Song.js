@@ -60,7 +60,7 @@ const ListItemSwap = (props) => (
     renderLeftActions={LeftActions}
     onSwipeableLeftOpen={props.onSwipeFromLeft,props.id}
   
-     renderRightActions={RightActions}
+    renderRightActions={RightActions}
     onSwipeableRightOpen={props.onSwipeFromRight} 
   >
 
