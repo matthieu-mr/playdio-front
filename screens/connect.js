@@ -1,6 +1,6 @@
 console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
-import {ImageBackground,StyleSheet,View} from 'react-native';
+import {ImageBackground,StyleSheet,View, AsyncStorage} from 'react-native';
 
 import {Button,Text,Icon,} from 'react-native-elements'
 import * as AuthSession from 'expo-auth-session';
@@ -20,6 +20,16 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {connect} from 'react-redux'
 
 function connectAPP({navigation,saveEmailUser}) {
+
+  AsyncStorage.getItem('user',function(error,data){
+                  var userData = JSON.parse(data)
+                  if (userData !== null) {
+      // We have data!!
+      console.log("ok", userData);
+     navigation.navigate("Home")
+    }
+
+                })
  
   // var fontPermanentMarker =''
   // var fontRoboto =''
@@ -108,6 +118,19 @@ let [fontsLoaded] = useFonts({
 
       }
       onPress={()=>navigation.navigate("SignUp")}
+      />
+
+      <Text style={styles.connectEmail}>Sign In</Text>
+      <Button
+      buttonStyle={styles.button}
+      title="Sign in with email"
+      type="solid"
+      titleStyle={
+        {color:"black",
+        fontSize:20, fontFamily:'Roboto'}
+
+      }
+      onPress={()=>navigation.navigate("SignIn")}
       />
     </ImageBackground>
   );

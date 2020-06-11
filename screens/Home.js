@@ -1,13 +1,16 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView, } from 'react-native';
-import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'
+import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header, Overlay } from 'react-native-elements'
 import Radio from './components/Radio';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts} from '@use-expo/font'
 
+
 export default function Home(props) {
+
+
 
   // DISCOVER
   var discoverRadio = [{name:"Radio Gaga", img:require("../assets/radio_template1.jpg"), musicType:["ROCK","POP"], url:"Playlist"}, {name:"Radio ZZ", img:require("../assets/radio_template2.jpg"), musicType:["R&B"], url:"Playlist"}, {name:"Radio F", img:require("../assets/radio_template3.jpg"), musicType:["FUNK"], url:"Playlist"}, {name:"Radio Xtreme", img:require("../assets/radio_template4.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
@@ -16,7 +19,7 @@ export default function Home(props) {
   })
 
   // MY RADIOS
-  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:["addRadio"], url:'AddRadio'}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"], url:'Playlist'}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"], url:"Playlist"}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
+  var myRadio = [{name:"New radio", img:require("../assets/plus_image.png"), musicType:[], url:'AddRadio'}, {name:"Radio K", img:require("../assets/radio_template5.jpg"), musicType:["K-POP"], url:'Playlist'}, {name:"Radio Pop Attitude", img:require("../assets/radio_template6.jpg"), musicType:["POP","RAP"], url:"Playlist"}, {name:"Radio Fesnoz", img:require("../assets/radio_template7.jpg"), musicType:["ELECTRO"], url:"Playlist"}];
   var myRadioList = myRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
@@ -26,18 +29,40 @@ export default function Home(props) {
   var communityRadioList = communityRadio.map(function(radio, i) {
     return <Radio key={i} radioName={radio.name} img={radio.img} musicType={radio.musicType} navigation={props.navigation} url={radio.url}/>;
   })
-  
+
+  const [visible, setVisible] = useState(false);
+  var popup = () => {
+    setVisible(!visible);
+  }
+
+  let [fontsLoaded] = useFonts({
+    PermanentMarker: require("../assets/fonts/PermanentMarker-Regular.ttf"),
+    Roboto: require("../assets/fonts/Roboto-Regular.ttf"),
+    RobotoBold: require("../assets/fonts/Roboto-Bold.ttf"),
+  });
+   if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
   return (
     <View>
-<Header
-  rightComponent={<Avatar
-        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-      />}
-      containerStyle={{
-    backgroundColor: 'white',
-  }}
-/>
+
+      <Header
+        rightComponent={<Avatar
+              rounded 
+              source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+              size="small"
+              onPress={() => {console.log("Works!"), {popup}}}
+            />}
+        containerStyle={{
+          backgroundColor: 'white', 
+          height:hp('10%')
+        }}
+        
+      />
       <ScrollView style={styles.scrollView}>
+      <Overlay isVisible={visible} onBackdropPress={popup}>
+        <Text>Hello from Overlay!</Text>
+      </Overlay>
         <View style={styles.header}></View>
         <View style={styles.categories}>
           <Text style={styles.categoryTitle}>Discover</Text>
@@ -66,7 +91,7 @@ export default function Home(props) {
       </ScrollView>
     </View>
   );
-}
+}}
 
 // STYLES
 const styles = StyleSheet.create({

@@ -22,13 +22,17 @@ const [send, setSender] = useState(false);
 
 const[listMusicFromBack,setListSongFromBack]=useState()
 
+
+
+
 const [refresh,setRefresh]=useState(false)
     // requete BDD
-    
+  
+
     useEffect(()=>{
-      console.log("envoi requete ----- L26")
+
       //Playlist courte
-      let idplaylistSpotify ="75T4RvRPamAz41Kebiq2HZ"
+      let idplaylistSpotify =props.playlistUser.idSpotify
 
       // playlistLongue
      // let idplaylistSpotify ="1Ts6GeiD5o29GYaYyFZZ4q"
@@ -40,11 +44,10 @@ const [refresh,setRefresh]=useState(false)
           body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}`
         })
         var reponse = await requestBDD.json()
-       // console.log("reponse",reponse)
         setListSongFromBack(reponse)
        
       }
-
+     
       recupDonnée()
      
     },[])
@@ -63,11 +66,20 @@ useEffect(()=>{
           let artist = item.track.artists[0].name
           let idSpotify =item.track.id
           let type = item.track.type
-          let img =item.track.album.images[0].url
+          let image =item.track.album.images[0].url
           let isrc = item.track.external_ids.isrc
+
           let from = "playlistUser"
-          
-          props.addSong({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc,from:from})
+
+          let album = item.track.album.name
+          let href =item.track.href
+          let externalUrl= item.track.external_urls.spotify
+          let previewUrl= item.track.preview_url
+          let uri= item.track.uri
+
+
+
+          props.addSong({position:i,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
         })
     }else {console.log("recup ko")}
   },[listMusicFromBack])    
@@ -112,15 +124,23 @@ useEffect(()=>{
                 /* recuperation des info json */
             /* recuperation des info json */
             let mapArrayResult = infoResultArray.map((item,i)=>{
+
               let nameTitle = item.name
               let artist = item.artists[0].name
-              let idSpotify =item.id
+              let spotifyId =item.id
               let type = 'track'
-              let img =item.album.images[0].url
+              let image =item.album.images[0].url
               let isrc = item.external_ids.isrc
               let from = "search"
 
-      listOfResult.push({id:i,name:nameTitle,text:artist,url:img,spotifyId:idSpotify,type:type,isrc:isrc,from:from})
+              let album = item.album.name
+              let href =item.href
+              let externalUrl= item.external_urls.spotify
+              let previewUrl= item.preview_url
+              let uri= item.uri
+    
+
+      listOfResult.push({position:i,name:nameTitle,artist:artist,image:image,spotifyId:spotifyId,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
       
       setArrayResult(listOfResult)
              
@@ -138,15 +158,14 @@ const [indexButton,setIndex]=useState(0)
 
  const [listToSearch,SetListToSearch] =useState();
     useEffect(() => {
-      console.log("debut")
+     
       if(indexButton==0 || indexButton==3 ){
-         // console.log("redux1",props.playlistUser.listMusic)
           SetListToSearch(props.playlistUser.listMusic)
           setIndex(0)
       }
 
       else{
-        console.log("search")
+       
         SetListToSearch(arrayResult)
       }
     });
@@ -163,7 +182,7 @@ const [arrayResultTest,setArrayResultTest] =useState(false)
 
 
 let swypeValue =(item)=>{
-  //console.log("swype du numéro",item)
+
   //  props.deleteSong(item)
 console.log("front item",item)
   setIndex(3)
@@ -178,13 +197,9 @@ let validPlaylist =async ()=>{
 
   //props.playlistUser
 
- let result = JSON.stringify(props.playlistUser);
-console.log(result)
+  let result = JSON.stringify(props.playlistUser);
 
-let resultEncoded = encodeURIComponent(result)
-
-
-
+  let resultEncoded = encodeURIComponent(result)
   var requestBDD = await fetch('http://192.168.1.8:3000/radio-create',{
     method:'post',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -202,19 +217,24 @@ let resultEncoded = encodeURIComponent(result)
   return (
 
 <View style={styles.container}>
+    <Header
+      leftComponent={{ icon: 'menu', color: '#fff' }}
+      rightComponent={<Avatar
+            rounded 
+            source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+            size="small"
+          />}
+      containerStyle={{
+        backgroundColor: 'white', 
+        height:hp('10%')
+      }}
+    />
 
     <View style={styles.form}>
                 {/*  "#c2185b" */}
                     <View style={styles.input}> 
                     <Text> Create Your New Radio</Text>
-                    <Header
-                          rightComponent={<Avatar
-                                rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-                              />}
-                              containerStyle={{
-                            backgroundColor: 'white',
-                          }}
-                        />
+                    
                        <Text style={styles.categoryTitle}> Add your favorite song</Text>
                     
                     <TextField
@@ -253,7 +273,7 @@ let resultEncoded = encodeURIComponent(result)
 
                    // onSwipeFromRight={() => {swypeValue(item.id);alert('swiped from left!')}}
                    onSwipeFromRight={() => {swypeValue(item.index)}}
-                    onPress={touch()} 
+                    onPress={touch(item.index)} 
 
                     navigation={props.navigation}
                   action = {"addtrack"}

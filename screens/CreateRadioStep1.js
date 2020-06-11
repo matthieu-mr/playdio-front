@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage} from 'react-native';
-import { ListItem,Button, Header, Avatar } from 'react-native-elements'
-import ListItemSwap, { Separator } from './components/Swype';
+import { ListItem,Button, Header, Avatar} from 'react-native-elements'
+import ListItemSwap, { Separator } from './components/Song';
 import {connect} from 'react-redux';
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
@@ -15,19 +15,22 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 function AddRadioGetSpotify(props) {
 
-const [radioName, setRadioName] = useState("")
+const [radioName, setRadioName] = useState("test")
 const [isPrivate, setIsPrivate] = useState(false) ; 
 const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
 const [send, setSender] = useState(false);
 
 let listMusic =[]
 
-let [infoUserStorage,setInfoUserStorage]=useState();
+let [infoUserStorage,setInfoUserStorage]=useState([]);
 
 useEffect( () =>{
 let  fetchSpotifyPlaylist = async () => {
-    var infoUser = await AsyncStorage.getItem('user');
-    setInfoUserStorage(infoUser)
+
+    var infoUser = await AsyncStorage.getItem("user");
+    var infoRecup = JSON.parse(infoUser)
+    
+    setInfoUserStorage(infoRecup)
 console.log("affichage storage local",infoUser)
 }
 
@@ -56,14 +59,18 @@ let validPlaylist = (target)=>{
  
   return (
 <View style={styles.container}>
- <Header
-  rightComponent={<Avatar
-        rounded source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-      />}
-      containerStyle={{
-    backgroundColor: 'white',
-  }}
-/>
+      <Header
+        leftComponent={{ icon: 'menu', color: '#fff' }}
+        rightComponent={<Avatar
+              rounded 
+              source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+              size="small"
+            />}
+        containerStyle={{
+          backgroundColor: 'white', 
+          height:hp('10%')
+        }}
+      />
 
 
     <View style={styles.form}>

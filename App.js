@@ -20,6 +20,7 @@ import * as AuthSession from 'expo-auth-session';
 
 import ConnectAPP from './screens/connect'
 import SignUp from './screens/signUp'
+import SignIn from './screens/signIn'
 import getTokens from './screens/components/getTokens'
 import Home from './screens/Home';
 import Playlist from './screens/Playlist';
@@ -34,6 +35,7 @@ import SelectUser from './screens/selectUser'
 
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
+import play from './reducers/play'
 import email from './reducers/email'
 import PlaylistAdd from './reducers/playlist'
 
@@ -45,7 +47,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
 
-const store = createStore(combineReducers({email,PlaylistAdd}))
+const store = createStore(combineReducers({email,PlaylistAdd,play}))
 
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
@@ -91,6 +93,7 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
 StackNavigator = createStackNavigator({
   Connect:ConnectAPP,
   SignUp:SignUp,
+  SignIn:SignIn,
   getTokens:getTokens,
   Playlist: Playlist,
   Play:Play,

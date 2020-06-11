@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity, Avatar} from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity} from 'react-native';
 
-import { ListItem,Button,ButtonGroup, Header } from 'react-native-elements'
+import { ListItem,Button,ButtonGroup, Avatar, Header } from 'react-native-elements'
 import SearchComponent, { Separator } from './components/SearchResult';
 import ip from '../variables';
 
@@ -72,7 +72,12 @@ useEffect(()=>{
              if(info.images[0]){ // if playlist have img
                 imgPlaylist = info.images[0].url
              }
-          listOfPlaylist.push({id:i,name:namePlaylist,text:textDescr,url:imgPlaylist,spotifyId:spotifyId,type:type})
+
+          listOfPlaylist.push({position:i,name:namePlaylist,artist:textDescr,image:imgPlaylist,spotifyId:spotifyId,type:type})
+
+    // listOfPlaylist.push({position:i,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
+   
+
           setArrayPlaylist(listOfPlaylist)
          })
 
@@ -105,7 +110,22 @@ let filteredPlaylist=[] ;
   return (
     
 <View style={styles.container}>
-         
+
+    <Header
+      leftComponent={{ icon: 'menu', color: '#fff' }}
+      rightComponent={<Avatar
+            rounded 
+            source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+            size="small"
+          />}
+      containerStyle={{
+        backgroundColor: 'white', 
+        height:hp('10%')
+      }}
+    />
+
+                {/*  "#c2185b" */}
+        
                             <View style={styles.input}> 
                             <Text style={styles.categoryTitle}> Add Songs from spotify</Text>
                             

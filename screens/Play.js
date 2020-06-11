@@ -3,19 +3,19 @@ import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView
 import { Tooltip, Slider, Header, Avatar } from 'react-native-elements';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Audio } from 'expo-av';
-import ListItemSwap, { Separator } from './components/Swype';
+import ListItemSwap, { Separator } from './components/Song';
+import {connect} from 'react-redux';
+import ip from '../variables';
 
 // ----------------------------------------
 // PLAY FUNCTION
 
-export default function Play() {
+function Play(props) {
 
   // INITIAL STATE
 
   // Raw playlist from Spotify
   const [playlist, setPlaylist] = useState([]);
-  // const [token, setToken] = useState('');
-  // const [currentTrack, setCurrentTrack] = useState('');
   // Player
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackInstance, setPlaybackInstance] = useState(null);
@@ -29,69 +29,48 @@ export default function Play() {
   const [playbackInstancePosition, setPlaybackInstancePosition] = useState(null);
   const [playbackInstanceDuration, setPlaybackInstanceDuration] = useState(null);
 
+  // console.log(props.idPlay.radioId)
+  // console.log(props.idPlay.songId)
   
-  // FETCH PLAYLIST  
-  
-  useEffect( () =>{
-    fetchSpotifyPlaylist = async () => {
-      var infoUser = await AsyncStorage.getItem('user');
-      var userData = JSON.parse(infoUser);
-      var idPlaylist = '37i9dQZF1DXbTxeAdrVG2l';
+  // FETCH PLAYLIST FROM DB
 
-      var request = await fetch('http://192.168.1.25:3000/play',{
-        method:"POST",
-        headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body:`idSpotify=${userData.idSpotify}&idPlaylist=${idPlaylist}`
-      })
-      var rawResponse = await request.json();
-      var response = rawResponse.response;
-      // setToken(rawResponse.userAccessToken)
-      
-      var rawPlaylist = [];
-      for(var i=0; i<response.items.length; i++) {
-        rawPlaylist.push({
-          id: i, 
-          position: response.items[i].track.track_number, 
-          name: response.items[i].track.name, 
-          content: response.items[i].track.href, 
-          duration: response.items[i].track.duration_ms, 
-          artist: response.items[i].track.artists[0].name, 
-          image: response.items[i].track.album.images[0].url, 
-          album: response.items[i].track.album.name,
-          isrc: response.items[i].track.external_ids.isrc,
-          externalUrl: response.items[i].track.external_urls.spotify,
-          previewUrl: response.items[i].track.preview_url,
-          uri: response.items[i].track.uri
-        });
+  useEffect( () =>{
+      fetchPlaylist = async () => {
+
+        var infoUser = await AsyncStorage.getItem('user');
+        var userData = JSON.parse(infoUser);
+        
+        var request = await fetch(`${ip}/radio-playlist`,{
+          method:"POST",
+          headers: {'Content-Type':'application/x-www-form-urlencoded'},
+          body:`userId=${userData.id}&radioId=${props.idPlay.radioId}`
+        })
+        var response = await request.json();
+        
+        var rawPlaylist = [];
+        for(var i=0; i<response.tracks.length; i++) {
+          rawPlaylist.push({
+            id: response.tracks[i]._id, 
+            name: response.tracks[i].name, 
+            artist: response.tracks[i].artist, 
+            album: response.tracks[i].album, 
+            image: response.tracks[i].image,
+            length: response.tracks[i].length,
+            position: response.tracks[i].position,
+            isrcID: response.tracks[i].isrcID,
+            upcID: response.tracks[i].upcID,
+            spotifyId: response.tracks[i].spotifyId,
+            href: response.tracks[i].href,
+            externalUrl: response.tracks[i].externalUrl,
+            previewUrl: response.tracks[i].previewUrl,
+            uri: response.tracks[i].uri,
+          });
+        }
+        setPlaylist(rawPlaylist);
+        setCurrentIndex(props.idPlay.songId);
       }
-      setPlaylist(rawPlaylist);
-
-    }
-    fetchSpotifyPlaylist()  
+      fetchPlaylist()  
   },[])
-
-
-  // FETCH CURRENT TRACK  
-
-  /*
-  useEffect( () =>{
-    fetchCurrentTrack = async () => {
-      var infoUser = await AsyncStorage.getItem('user')
-      var userData = JSON.parse(infoUser)
-      var currentTrackHref = playlist[currentIndex].content;
-      var request = await fetch('http://192.168.1.25:3000/play-track',{
-        method:"POST",
-        headers: {'Content-Type':'application/x-www-form-urlencoded'},
-        body:`idSpotify=${userData.idSpotify}&currentTrack=${currentTrackHref}`
-      })
-      var response = await request.json();
-      setCurrentTrack({uri: response.currentTrack, headers: response.headers});
-      console.log({uri: response.currentTrack, headers: response.headers});
-    }
-    fetchCurrentTrack()  
-  },[currentIndex])
-
-  */
 
 
   // TOP & BOTTOM PLAYLISTS
@@ -168,7 +147,6 @@ export default function Play() {
       setPlaybackInstanceDuration(status.durationMillis)
     }
   }
-
 
   // SEEK HANDLER
 
@@ -301,85 +279,97 @@ export default function Play() {
   // CALLBACK
 
   return (
-    <View style={styles.playView}>
+    <View style={{flex:1}}>
     
-      <View style={styles.header}>
-      </View>
+      <Header
+        leftComponent={{ icon: 'menu', color: '#fff' }}
+        rightComponent={<Avatar
+            rounded 
+            source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
+            size="small"
+            />}
+        containerStyle={{
+        backgroundColor: 'white', 
+        height:hp('10%')
+        }}
+      />
+      <View style={styles.playView}>
 
-      <View style={styles.flatlistViewTop}>
-        <FlatList 
-          data={playlistTop}
-          invertStickyHeaders={false}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({item}) => (
-            <ListItemSwap style={styles.flatList}
-              {...item} 
-              onSwipeFromLeft={() => {setIdAdd(item.id)}}
-              onSwipeFromRight={() => {setIdDel(item.id)}}
-              
-            />
-          )}
-          ItemSeparatorComponent={() => <Separator />}
-        />
-      </View>
-      
-      <View style={styles.player}>
-
-        {playlist.length > 0 ? (<Image style={styles.albumCover} source={{ uri: playlist[currentIndex].image }}/>) : (<View></View>)}
-        
-        {renderFileInfo()}
-
-        <View style={styles.seekView}>
-          
-          <Text style={styles.seekTime}>{getTimestampLeft()}</Text>
-          
-          <Slider
-            style={styles.seekSlider}
-            value={getSeekSliderPosition()}
-            onValueChange={() => onSeekSliderValueChange()}
-            onSlidingComplete={() => onSeekSliderSlidingComplete()}
-            thumbTintColor="#343434"
-            thumbStyle={{width:wp('4%'), height:hp('2.5%')}}
+        <View style={styles.flatlistViewTop}>
+          <FlatList 
+            data={playlistTop}
+            invertStickyHeaders={false}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item}) => (
+              <ListItemSwap style={styles.flatList}
+                {...item} 
+                onSwipeFromLeft={() => {setIdAdd(item.id)}}
+                onSwipeFromRight={() => {setIdDel(item.id)}}
+                
+              />
+            )}
+            ItemSeparatorComponent={() => <Separator />}
           />
-          
-          <Text style={styles.seekTime}>{getTimestampRight()}</Text>
         </View>
+        
+        <View style={styles.player}>
 
-        <View style={styles.controls}>
+          {playlist.length > 0 ? (<Image style={styles.albumCover} source={{ uri: playlist[currentIndex].image }}/>) : (<View></View>)}
           
-          <TouchableOpacity style={styles.control} onPress={() => handlePreviousTrack()}>
-            <Image source={require('../assets/icons/backward.png')} style={styles.icons}/>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.control} onPress={() => handlePlayPause()}>
-            {isPlaying ? (<Image source={require('../assets/icons/hold.png')} style={styles.icons}/>) : (<Image source={require('../assets/icons/play.png')} style={styles.icons}/>)}
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.control} onPress={() => handleNextTrack()}>
-            <Image source={require('../assets/icons/forward.png')} style={styles.icons}/>
-          </TouchableOpacity>
-          <Tooltip width={wp('40%')} height={hp('15%')} backgroundColor='#E5E4E4' popover={<View><Slider value={volume} minimumValue={0} maximumValue={1} onValueChange={value => handleVolume({value})}/><Text>volume: {decimal(volume)*10}</Text></View>}>
-            <Image source={require('../assets/icons/volume.png')} style={[styles.icons, styles.control]}/>
-          </Tooltip>
-          
-        </View>
+          {renderFileInfo()}
 
-      </View>
-
-      <View style={styles.flatlistViewBottom}>
-        <FlatList 
-          data={playlistBottom}
-          keyExtractor={item => item.id}
-          renderItem={({ item}) => (
-            <ListItemSwap style={styles.flatList}
-              {...item} 
-              onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
-              onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-              
+          <View style={styles.seekView}>
+            
+            <Text style={styles.seekTime}>{getTimestampLeft()}</Text>
+            
+            <Slider
+              style={styles.seekSlider}
+              value={getSeekSliderPosition()}
+              onValueChange={() => onSeekSliderValueChange()}
+              onSlidingComplete={() => onSeekSliderSlidingComplete()}
+              thumbTintColor="#343434"
+              thumbStyle={{width:wp('4%'), height:hp('2.5%')}}
             />
-          )}
-          ItemSeparatorComponent={() => <Separator />}
-        />
-      </View>
+            
+            <Text style={styles.seekTime}>{getTimestampRight()}</Text>
+          </View>
 
+          <View style={styles.controls}>
+            
+            <TouchableOpacity style={styles.control} onPress={() => handlePreviousTrack()}>
+              <Image source={require('../assets/icons/backward.png')} style={styles.icons}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.control} onPress={() => handlePlayPause()}>
+              {isPlaying ? (<Image source={require('../assets/icons/hold.png')} style={styles.icons}/>) : (<Image source={require('../assets/icons/play.png')} style={styles.icons}/>)}
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.control} onPress={() => handleNextTrack()}>
+              <Image source={require('../assets/icons/forward.png')} style={styles.icons}/>
+            </TouchableOpacity>
+            <Tooltip width={wp('40%')} height={hp('15%')} backgroundColor='#E5E4E4' popover={<View><Slider value={volume} minimumValue={0} maximumValue={1} onValueChange={value => handleVolume({value})}/><Text>volume: {decimal(volume)*10}</Text></View>}>
+              <Image source={require('../assets/icons/volume.png')} style={[styles.icons, styles.control]}/>
+            </Tooltip>
+            
+          </View>
+
+        </View>
+
+        <View style={styles.flatlistViewBottom}>
+          <FlatList 
+            data={playlistBottom}
+            keyExtractor={item => item.id}
+            renderItem={({ item}) => (
+              <ListItemSwap style={styles.flatList}
+                {...item} 
+                onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
+                onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
+                
+              />
+            )}
+            ItemSeparatorComponent={() => <Separator />}
+          />
+        </View>
+
+      </View>
     </View>
     
   )
@@ -404,11 +394,11 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     backgroundColor:'#E5E4E4',
     width:wp('100%'),
-    height:hp('40%')
+    height:hp('35%')
   },
   albumCover: {
     width:wp('80%'),
-    height:hp('17%'),
+    height:hp('12%'),
     marginTop:hp('2%')
   },
   trackInfo: {
@@ -468,3 +458,12 @@ const styles = StyleSheet.create({
   }
 
 })
+
+function mapStateToProps(state) {
+  return { idPlay: state.play }
+}
+  
+export default connect(
+  mapStateToProps,
+  null
+)(Play);
