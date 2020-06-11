@@ -40,12 +40,12 @@ const [radioId, setRadioId] = useState('');
 
 
 // Si vous voulez voir les playlists s'afficher, décommentez et customisez le code suivant avec vos infos 
-// (idSpotify = users[i].platfornUserID, id = users[i]._id)
+(idSpotify = users[i].platfornUserID, id = users[i]._id)
 // Cela permettra d'ajouter l'ID utilisateur dans le local Storage
 // **************************************************************************************
 
-// var personalData = {"email":"marion.toutant@gmail.com","idSpotify":"20jsoqg4lepva2a9osvyqwg1a","namePlatform":"spotify","id":"5eda54934b437a052471a86c"}
-// AsyncStorage.setItem("user", JSON.stringify(personalData))
+var personalData = {"email":"dimitri.brahim@gmail.com","idSpotify":"dimdimou","namePlatform":"spotify","id":"5ee09f829aba3efe4b68eba4"}
+AsyncStorage.setItem("user", JSON.stringify(personalData))
 
 // **************************************************************************************
 

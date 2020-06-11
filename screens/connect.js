@@ -26,6 +26,7 @@ function connectAPP({navigation,saveEmailUser}) {
                   if (userData !== null) {
       // We have data!!
       console.log("ok", userData);
+      // AsyncStorage.removeItem("user")
      navigation.navigate("Home")
     }
 

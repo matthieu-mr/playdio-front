@@ -41,18 +41,23 @@ async function signUp(email,firstName,lastName,password){
   body:`email=${email}&firstName=${firstName}&lastName=${lastName}&password=${password}`
 })
 var resultServer =await userCreate.json()
-var storageUser = {
+console.log(resultServer)
+if(resultServer.result[0].musicAccounts.lenght<0){
+  var storageUser = {
                     "email":resultServer.result[0].email,
                     "idSpotify":resultServer.result[0].musicAccounts[0].platfornUserID,
                     "namePlatform":resultServer.result[0].musicAccounts[0].namePlatform,
                     "id":resultServer.result[0]._id
                   }
+      AsyncStorage.setItem("user",JSON.stringify(storageUser))
+}else{
+  var storageUser = {
+    "email":resultServer.result[0].email,
+    "id":resultServer.result[0]._id
+  }
 AsyncStorage.setItem("user",JSON.stringify(storageUser))
+}
 
-                /* recuperer les données du localstaorage */
-                /* AsyncStorage.getItem('user',function(error,data){
-                  var userData = JSON.parse(data)
-                }) */
 props.navigation.navigate("Home")
 }
 
