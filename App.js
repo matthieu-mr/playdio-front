@@ -57,7 +57,7 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
   Home: Home,
   Playlist: Playlist,
   Search: Search,
-  'Play (Test)': Play
+  'Play (Test)': AddRadio1
   },
   {
   defaultNavigationOptions: ({ navigation }) => ({ // creation des icônes

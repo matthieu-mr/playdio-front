@@ -44,7 +44,7 @@ const [radioId, setRadioId] = useState('');
 // Cela permettra d'ajouter l'ID utilisateur dans le local Storage
 // **************************************************************************************
 
- var personalData = {"email":"marion.toutant@gmail.com","idSpotify":"20jsoqg4lepva2a9osvyqwg1a","namePlatform":"spotify","id":"5eda54934b437a052471a86c"}
+ var personalData = {"email":"m.michon@yahoo.fr","idSpotify":"1127664154","namePlatform":"spotify","id":"5ee00cc69f32fc0ae27decac"}
  AsyncStorage.setItem("user", JSON.stringify(personalData))
 
 // **************************************************************************************

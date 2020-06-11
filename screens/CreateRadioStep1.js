@@ -100,12 +100,12 @@ let validPlaylist = (target)=>{
 
                     <View style={styles.paramPlaylist}> 
                     <ListItem
-                        title="private"
+                        title="Private Radio"
                         titleStyle={
                             {
                             fontFamily:'Roboto'}
                                }
-                        subtitle="ajout en private"
+                        subtitle="The others users won't be able to find your playlist"
                         //leftAvatar={{ source: { uri: item.avatar_url } }}
                         rightIcon={
                             <Switch
@@ -118,12 +118,12 @@ let validPlaylist = (target)=>{
                         />
                         
                         <ListItem 
-                        title="private"
+                        title="Only Live"
                         titleStyle={
                             {
                             fontFamily:'Roboto'}
                                }
-                        subtitle="ajout en private"
+                        subtitle="The others users won't be able to launch the playlist by themself "
                         //leftAvatar={{ source: { uri: item.avatar_url } }}
                         rightIcon={
                             <Switch
