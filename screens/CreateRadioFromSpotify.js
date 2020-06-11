@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity} from 'react-native';
 
-import { ListItem,Button,ButtonGroup, Avatar, Header } from 'react-native-elements'
+import { ListItem,Button,ButtonGroup, Avatar } from 'react-native-elements'
 import SearchComponent, { Separator } from './components/SearchResult';
 import ip from '../variables';
 
@@ -110,19 +110,6 @@ let filteredPlaylist=[] ;
   return (
     
 <View style={styles.container}>
-
-    <Header
-      leftComponent={{ icon: 'menu', color: '#fff' }}
-      rightComponent={<Avatar
-            rounded 
-            source={{uri: 'https://randomuser.me/api/portraits/men/41.jpg'}}
-            size="small"
-          />}
-      containerStyle={{
-        backgroundColor: 'white', 
-        height:hp('10%')
-      }}
-    />
 
                 {/*  "#c2185b" */}
         
