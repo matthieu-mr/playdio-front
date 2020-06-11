@@ -48,7 +48,7 @@ function SearchResultComponent(props) {
 
 
   let validPlaylist = (idPlaylistItem,type)=>{
-    console.log("component info    ---------- ", props.type) 
+ 
 
     if (type=="playlist"){
       
@@ -56,7 +56,7 @@ function SearchResultComponent(props) {
     
       props.navigation.navigate('AddRadioEmpty')
 
-    }else if(props.form=="search"){
+    }else if(props.from=="search"){
 /*     let id=props.position
       let name =props.name
       let text =props.text
@@ -91,7 +91,7 @@ let id=props.position
 
 
     }
-    console.log("hello fron component")
+  
 } 
 
 
@@ -124,7 +124,7 @@ const[selected, setSelected]=useState(false);
 const swipeableRef = useRef(null);
 
  const closeSwipeable = (item) => {
-   console.log("evenement", item)
+
   props.deleteSong(item)
 
   swipeableRef.current.close();

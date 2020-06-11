@@ -130,7 +130,7 @@ let filteredPlaylist=[] ;
                             
                             <TextField
                                 label={'Find a Playlist'}
-                                highlightColor="#c2185b"
+                                tintColor="#26a69a"
                                 onChangeText={ (value) => setSearch(value) }
                                 />
                             </View>

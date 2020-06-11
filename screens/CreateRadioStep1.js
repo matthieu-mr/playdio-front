@@ -15,7 +15,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 function AddRadioGetSpotify(props) {
 
-const [radioName, setRadioName] = useState()
+const [radioName, setRadioName] = useState("a")
 const [isPrivate, setIsPrivate] = useState(false) ; 
 const [isPlayingOnly, setIsPlayingOnly] = useState(false) ; 
 const [send, setSender] = useState(false);
@@ -48,8 +48,8 @@ let validPlaylist = (target)=>{
             props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly,listMusic,infoUser:infoUserStorage})
 
             if (target=="empty"){
-              props.navigation.navigate('AddRadioEmpty')
-            
+            // props.navigation.navigate('AddRadioEmpty')
+              props.navigation.navigate('CreateRadioValidation')
             } else if (target == "spotify"){
               props.navigation.navigate('AddRadioGetSpotify')
             
@@ -169,6 +169,10 @@ let validPlaylist = (target)=>{
                                 backgroundColor:"#00838F",
                             }}
                         />
+
+
+
+                        
                         </View>
  </View>
  </View>
