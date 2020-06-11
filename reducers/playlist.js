@@ -10,7 +10,7 @@ export default function(playlist =[],action){
 
 
     else if(action.type == 'addSong'){
-     //   console.log("ajout son")
+      //console.log("ajout son", action.info)
         
         playlist.listMusic.push(action.info)
         return playlist
