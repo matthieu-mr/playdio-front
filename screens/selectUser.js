@@ -10,15 +10,15 @@ import ip from '../variables';
 export default function selectUser(props) {
 const [firstName,setFirstName]=useState('')
 const [userPlaylist,setUserPlaylist]=useState([])
-const[search,setSearch]=useState("")
-const [searchJSON,setSearchJson]=useState()
 
 /* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
+
 useEffect(()=>{
+    var tableau = [...userPlaylist]
     async function checkUserPlaylist(){
     var requestBDD = await fetch(`${ip}/userListplaylist`)
     var reponse = await requestBDD.json()
-    var tableau = [...userPlaylist]
+    
         for(var i= 0 ; i<reponse.userList.userInfo.length;i++){
         tableau.push({id:i,firstName:reponse.userList.userInfo[i].userID.firstName,lastName:reponse.userList.userInfo[i].userID.lastName,avatar:'https://randomuser.me/api/portraits/men/41.jpg',gradeType:reponse.userList.userInfo[i].gradeType,namePlaylist:reponse.userList.name,idUser:reponse.userList.userInfo[i].userID._id,idDelete:reponse.userList.userInfo[i]._id})
         }
@@ -26,60 +26,48 @@ useEffect(()=>{
     }
     checkUserPlaylist()
 },[])
+
+
+const[search,setSearch]=useState("")
+const [resultUser,setResultUser]=useState('')
 useEffect(()=>{
- 
+    var tableau = []
     let searchText = search
-     
-     /* async function recupDonnée(){
-       var requestBDD = await fetch(`${ip}/user-search`,{
-         method:"POST",
-         headers: {'Content-Type':'application/x-www-form-urlencoded'},
-         body:`search_term=${searchText}`
-       })
-       var reponse = await requestBDD.json()
-        setSearchJson(reponse)
-      
-     }
-     recupDonnée() */
-   },[search])
+    
+        async function userSearch(){
+        if(searchText){    
+        var requestBDD = await fetch(`${ip}/userList`,{
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            method:"POST",
+            body:`firstName=${searchText}`
+        })
+        var reponse = await requestBDD.json()
+        console.log('rererererer',reponse)
+        for(var i= 0 ; i<reponse.userList.length;i++){
+            tableau.push({id:i,firstName:reponse.userList[i].firstName,lastName:reponse.userList[i].lastName,avatar:'https://randomuser.me/api/portraits/men/41.jpg',idUser:reponse.userList[i]._id})
+            }
+        setResultUser(tableau) 
+    }
+    }
+    
+    userSearch() 
+    },[search])
 
-
-
-
-
-
-
-
-
-async function userList(){
-    var requestBDD = await fetch(`${ip}/userList`,{
-        method:"GET",
-        body:`firstName=${firstName}`
-    })
-    var reponse = await requestBDD.json()
-
-}
-
-/* console.log(userPlaylist) */
-
-const buttons = ['My Playlist', 'Search on Spotify']
+const buttons = ['Playlist orchestra', 'Find your new musician']
 const [indexButton,setIndex]=useState(0)
- /* Affichage dynamique via button en fonction de l'ecran*/
 
 
- const [listToSearch,SetListToSearch] =useState();
+
+const [listToSearch,SetListToSearch] =useState();
     useEffect(() => {
-      console.log("debut")
-      if(indexButton==0 || indexButton==3 ){
-         // console.log("redux1",props.playlistUser.listMusic)
-          SetListToSearch(props.playlistUser.listMusic)
-          setIndex(0)
-      }
+    if(indexButton==0 || indexButton==3 ){
+        SetListToSearch(userPlaylist)
+        setIndex(0)
+    }
 
-      else{
-        console.log("search")
-        SetListToSearch(arrayResult)
-      }
+    else{
+        SetListToSearch(resultUser)
+    }
     });
 
 
@@ -98,12 +86,7 @@ return (
             }}
         />
         <Text> Radio ? users</Text>
-{/*         <TextField
-        label={'firsname'}
-        tintColor="#26a69a"
-        onChangeText={(value)=>setFirstName(value)}
-        onSubmitEditing={()=>{props.navigation.navigate('SearchtUser')}}
-        /> */}
+
                     <TextField
                         label={'Search a song'}
                         tintColor="#26a69a"
@@ -124,7 +107,7 @@ return (
 
                       </View>
         <FlatList
-            data={userPlaylist}
+            data={listToSearch}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
                 <ListItemSwap style={styles.flatList}
