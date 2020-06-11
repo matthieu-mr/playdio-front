@@ -83,7 +83,7 @@ let id=props.position
       let externalUrl= props.externalUrl
       let previewUrl= props.previewUrl
       let uri= props.uri
-      let from=props.from
+      let from="playlistUserAdd"
 
       let ajoutObjet={from:from,position:id,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
       props.addSong(ajoutObjet)

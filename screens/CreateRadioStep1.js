@@ -47,8 +47,13 @@ let validPlaylist = (target)=>{
             props.addplaylist({name:radioName,isPrivate:isPrivate,isPlayingOnly,isPlayingOnly,listMusic,infoUser:infoUserStorage})
 
             if (target=="empty"){
+<<<<<<< HEAD
              props.navigation.navigate('AddRadioEmpty')
             // props.navigation.navigate('CreateRadioValidation')
+=======
+            props.navigation.navigate('AddRadioEmpty')
+             // props.navigation.navigate('CreateRadioValidation')
+>>>>>>> 620dcb647c1eafc0cafc0d887e486d77699602b0
             } else if (target == "spotify"){
               props.navigation.navigate('AddRadioGetSpotify')
             
