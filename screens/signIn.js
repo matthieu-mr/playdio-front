@@ -40,7 +40,6 @@ async function signIn(email,password){
       setErrorsSignin(resultServer.error)
     }
   
-    console.log("resultServer",resultServer)
   if(userExists){
 
     var storageUser = {

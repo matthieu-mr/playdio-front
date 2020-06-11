@@ -81,7 +81,7 @@ useEffect(()=>{
          })
 
      }else {
-         console.log("----------------> ko")
+         console.log(" ko")
      }
 
 
@@ -103,7 +103,7 @@ let filteredPlaylist=[] ;
         });
 
    }else{
-       console.log("<=====waiting ")
+       console.log("waiting ")
    }
  
   return (

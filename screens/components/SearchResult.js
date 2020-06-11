@@ -86,7 +86,6 @@ let id=props.position
       let from="playlistUserAdd"
 
       let ajoutObjet={from:from,position:id,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
-    console.log(ajoutObjet)
       props.addSong(ajoutObjet)
 
 
@@ -124,7 +123,6 @@ const[selected, setSelected]=useState(false);
 const swipeableRef = useRef(null);
 
  const closeSwipeable = (item) => {
-
   props.deleteSong(item)
 
   swipeableRef.current.close();

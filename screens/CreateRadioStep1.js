@@ -34,7 +34,6 @@ let  fetchSpotifyPlaylist = async () => {
     var infoRecup = JSON.parse(infoUser)
     
     setInfoUserStorage(infoRecup)
-    console.log("affichage storage local",infoUser)
 }
 
 fetchSpotifyPlaylist() ;

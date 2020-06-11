@@ -41,7 +41,7 @@ async function signUp(email,firstName,lastName,password){
   body:`email=${email}&firstName=${firstName}&lastName=${lastName}&password=${password}`
 })
 var resultServer =await userCreate.json()
-console.log(resultServer)
+
 if(resultServer.result[0].musicAccounts.lenght<0){
   var storageUser = {
                     "email":resultServer.result[0].email,
