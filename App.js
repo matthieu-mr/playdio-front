@@ -30,6 +30,7 @@ import AddRadioGetSpotify from './screens/CreateRadioFromSpotify'
 import AddRadioEmpty from './screens/CreateRadioEmpty'
 import SearchResult from './screens/components/SearchResult'
 import SelectUser from './screens/selectUser'
+import CreateRadioValidation from './screens/CreateRadioValidation'
 
 
 import {createStore, combineReducers} from 'redux';
@@ -37,7 +38,6 @@ import {Provider} from 'react-redux';
 import play from './reducers/play'
 import email from './reducers/email'
 import PlaylistAdd from './reducers/playlist'
-
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -95,7 +95,7 @@ StackNavigator = createStackNavigator({
   getTokens:getTokens,
   Playlist: Playlist,
   Play:Play,
-  AddRadio : AddRadio1,
+  AddRadio : CreateRadioValidation,
   AddRadioGetSpotify : AddRadioGetSpotify,
   AddRadioEmpty:AddRadioEmpty,
   SearchResult:SearchResult,

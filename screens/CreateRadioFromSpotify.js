@@ -19,7 +19,6 @@ import { useFonts } from '@use-expo/font'
 
 
 
-
 function CreateRadio2(props) {
 
 const [radioName, setRadioName] = useState()
@@ -122,7 +121,7 @@ let filteredPlaylist=[] ;
         height:hp('10%')
       }}
     />
-
+  <View style={styles.form}>
                 {/*  "#c2185b" */}
         
                             <View style={styles.input}> 
@@ -153,56 +152,58 @@ let filteredPlaylist=[] ;
                
               />
 
-
+  </View>
   
  </View>
   );
 
 }
 
+
 const styles = StyleSheet.create({
-    container: {
-    display:"flex",
-    flex:1,
-    backgroundColor: '#fff',   
-      },
-
-    form:{
-     display:"flex",
-     flex:1,
-
-      marginBottom:wp("15%"),
+  container: {
+  display:"flex",
+  flex:1,
+  backgroundColor: '#fff',   
     },
 
-  input:{
-    marginRight:wp('10%'),
-    marginLeft:wp('10%'),
-    marginBottom:wp('10%'),
-    },  
-
-
-  paramPlaylist:{  
-    backgroundColor: "#26a69a",
-    marginRight:wp('7%'),
-    marginLeft:wp('7%'),
-    marginBottom:wp('70%'),
+  form:{
+   display:"flex",
+   flex:1,
+ 
+   justifyContent:'flex-end',
+    marginBottom:wp("15%"),
   },
 
+input:{
+  marginRight:wp('10%'),
+  marginLeft:wp('10%'),
+  marginBottom:wp('10%'),
+  },  
 
-  button:{
-   marginRight:wp('10%'),
-   marginLeft:wp('10%'),
-   marginBottom:wp('10%'),
+
+paramPlaylist:{  
+  backgroundColor: "#26a69a",
+  marginRight:wp('7%'),
+  marginLeft:wp('7%'),
+  marginBottom:wp('70%'),
+},
+
+
+button:{
+ marginRight:wp('10%'),
+ marginLeft:wp('10%'),
+ marginBottom: wp('10%')
 },
 
 categoryTitle: {
-    color:"#383838", 
-    fontSize:hp('3%'), 
-    width:wp('75%'), 
-    marginLeft:wp('7%'),
-    fontFamily: 'PermanentMarker',
-    marginTop: wp ('20%')
-  },
+  color:"#383838", 
+  fontSize:hp('3%'), 
+  width:wp('75%'), 
+  marginLeft:wp('7%'),
+  fontFamily: 'PermanentMarker'
+},
+
   
 });
 function mapStateToProps(state){
