@@ -71,11 +71,11 @@ let [fontsLoaded] = useFonts({
     <ImageBackground source={require('../assets/image_connection.jpg')} style={styles.container}>
       <Text style={styles.title} >Playdio</Text>
       <Text style={styles.text}>Connect with your favorite platform to enjoy your friends your entire library</Text>
-      <Button 
-      title="continuer vers la Home"
-      type="solid"
-      onPress={()=>{navigation.navigate("Home")} }
-      />
+           {/* <Button 
+            title="continuer vers la Home"
+            type="solid"
+            onPress={()=>{navigation.navigate("Home")} }
+           /> */}
       <Button
       iconRight
       icon={<Icon

@@ -75,7 +75,7 @@ const ListItemSwap = (props) => (
       subtitle={props.text}
       rightElement={<Icon type="entypo" color="#C8C8C8" name="dots-three-vertical" /> }
       rightIcon={<Icon type='font-awesome' name='heart' color= 'red'/> }
-      onPress={ ()=> {props.playSong(props.songId); props.navigation.navigate(props.url) }}
+      onPress={ ()=> {props.playSong(props.songId); props.navigation.navigate(props.urlNavigation) }}
       />
 
     </View>

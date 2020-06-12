@@ -83,7 +83,6 @@ playlistRadio.map((track,i)=>{
     playlist.push({songId: i, name: track.name, text: track.artist, url: track.image, radioId: props.radioId});
 })
 
-
   /* ====> boucle avatar */
   let avatarList = listTest.map ((item,i)=>{
     return <Avatar key={i} rounded source={{uri: item.url}}size="medium" /> 
@@ -143,7 +142,7 @@ playlistRadio.map((track,i)=>{
     <Icon type="entypo" color="#00838F" name="share" />
 
     <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-      <TouchableOpacity onPress={() => {deleteRadio(), toggleOverlay()}}>
+      <TouchableOpacity onPress={() => {deleteRadio(), toggleOverlay(), props.onDeleteRadio()}}>
           <Text style={{color:"#383838", fontSize:hp('3%'), width:wp('75%'), marginLeft:wp('7%'), fontFamily: 'PermanentMarker'}}>Delete Radio</Text>
       </TouchableOpacity>
     </Overlay>
@@ -177,7 +176,7 @@ playlistRadio.map((track,i)=>{
                     onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
                     onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
                     navigation={props.navigation}
-                    url="Play"
+                    urlNavigation="Play"
                   />
                 )}
                 ItemSeparatorComponent={() => <Separator />}
@@ -246,7 +245,15 @@ function mapStateToProps(state) {
   return { radioId: state.radioId }
 }
   
+function mapDispatchToProps(dispatch) {
+  return {
+    onDeleteRadio: function() {
+        dispatch( {type: 'deleteRadio'} )
+    }
+  }
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Playlist);

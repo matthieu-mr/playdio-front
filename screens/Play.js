@@ -65,7 +65,7 @@ function Play(props) {
         setCurrentIndex(props.songId);
       }
       fetchPlaylist()  
-  },[])
+  },[props.radioId, props.songId])
 
 
   // TOP & BOTTOM PLAYLISTS
@@ -73,14 +73,14 @@ function Play(props) {
   let playlistTop = [];
   for(var i=0; i<playlist.length; i++) {
     if(i < currentIndex) {
-      playlistTop.push({id: i, name: playlist[i].name, text: playlist[i].artist, url: playlist[i].image});
+      playlistTop.push({songId: i, name: playlist[i].name, text: playlist[i].artist, url: playlist[i].image});
     }
   }
 
   let playlistBottom = [];
   for(var i=0; i<playlist.length; i++) {
     if(i > currentIndex) {
-      playlistBottom.push({id: i, name: playlist[i].name, text: playlist[i].artist, url: playlist[i].image});
+      playlistBottom.push({songId: i, name: playlist[i].name, text: playlist[i].artist, url: playlist[i].image});
     }
   }
   
@@ -290,7 +290,8 @@ function Play(props) {
                 {...item} 
                 onSwipeFromLeft={() => {setIdAdd(item.id)}}
                 onSwipeFromRight={() => {setIdDel(item.id)}}
-                
+                navigation={props.navigation}
+                urlNavigation="Play"
               />
             )}
             ItemSeparatorComponent={() => <Separator />}
@@ -347,7 +348,8 @@ function Play(props) {
                 {...item} 
                 onSwipeFromLeft={() => {alert('swiped from left!');setIdAdd(item.id)}}
                 onSwipeFromRight={() => {alert('pressed right!');setIdDel(item.id)}}
-                
+                navigation={props.navigation}
+                urlNavigation="Play"
               />
             )}
             ItemSeparatorComponent={() => <Separator />}

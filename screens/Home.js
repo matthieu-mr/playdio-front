@@ -8,24 +8,14 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { AppLoading } from 'expo';
 import { useFonts} from '@use-expo/font'
 import ip from '../variables';
+import {connect} from 'react-redux';
 
 
-export default function Home(props) {
+function Home(props) {
 
   const [discoverRadio, setDiscoverRadio] = useState([]);
   const [myRadio, setMyRadio] = useState([]);
   const [communityRadio, setCommunityRadio] = useState([]);
-
-
-// ajouter données local Storage
-/* var storageUser = {
-  "email": "m.michon@yahoo.fr",
-  "idSpotify": "1127664154",
-  "namePlatform": "spotify",
-  "id": "5ee00cc69f32fc0ae27decac"
-}
-AsyncStorage.setItem("user",JSON.stringify(storageUser))
- */
 
 
   useEffect( () =>{
@@ -83,7 +73,7 @@ AsyncStorage.setItem("user",JSON.stringify(storageUser))
 
       }
       fetchRadio()  
-  },[])
+  },[props.deleteRadio])
 
 
   // DISCOVER
@@ -177,3 +167,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
   }
 })
+
+function mapStateToProps(state) {
+  return { deleteRadio: state.deleteRadio }
+}
+  
+export default connect(
+  mapStateToProps,
+  null
+)(Home);

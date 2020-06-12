@@ -42,6 +42,7 @@ import PlaylistAdd from './reducers/playlist'
 import DeleteUser from './reducers/deleteUser'
 import songId from './reducers/play';
 import radioId from './reducers/radio';
+import deleteRadio from './reducers/deleteRadio';
 
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -50,7 +51,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 //const store = createStore(combineReducers({wishList, token, selectedLang}))
 
-const store = createStore(combineReducers({email,PlaylistAdd,songId, radioId,DeleteUser,play}))
+const store = createStore(combineReducers({email,PlaylistAdd,songId, radioId,DeleteUser,play, deleteRadio}))
 
 
 var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec les liens
