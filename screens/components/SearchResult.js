@@ -125,7 +125,7 @@ const swipeableRef = useRef(null);
 
  const closeSwipeable = (item) => {
 
-let value =props.position-1
+let value =props.position
 console.log("recup item",value)
 props.deleteSong(value)
   swipeableRef.current.close();
